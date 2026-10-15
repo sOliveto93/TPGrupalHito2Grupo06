@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-
+<head>
+    <meta charset="UTF-8">
+    <title>Epicentro Gourmet - Inicio</title>
+</head>
 <body>
     
 
@@ -10,6 +13,26 @@
             <div class="container">
                 <h1>Bienvenido al TFI</h1>
                 <p class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</p>
+                <table border="1">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Temporada</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="f : ${festivales}">
+                        <td th:text="${f.id}">1</td>
+                        <td th:text="${f.nombre}">Festival</td>
+                        <td th:text="${f.temporada}">PRIMAVERA</td>
+                        <td th:text="${f.fechaInicio}">2026-10-01</td>
+                        <td th:text="${f.fechaFin}">2026-10-20</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
