@@ -38,7 +38,7 @@ VALUES (1, 500.00, 10.00, 5000.00, 100000.00, 150000.00, 2000.00, 50000.00, 1000
 -- =====================================================
 -- 2. CARGA DE FESTIVALES
 -- =====================================================
-INSERT INTO `festival` (`id`, `nombre`, `temporada`, `fecha_incio`, `fecha_fin`, `costos_id`)
+INSERT INTO `festival` (`id`, `nombre`, `temporada`, fecha_inicio, `fecha_fin`, `costos_id`)
 VALUES (1, 'Festival Gourmet Primavera', 'PRIMAVERA', '2026-10-01', '2026-10-20', 1),
        (2, 'Beer & Food Fest Verano', 'VERANO', '2026-12-01', '2026-12-15', 2);
 -- =====================================================
