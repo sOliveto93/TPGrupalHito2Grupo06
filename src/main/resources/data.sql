@@ -38,7 +38,7 @@ VALUES (1, 500.00, 10.00, 5000.00, 100000.00, 150000.00, 2000.00, 50000.00, 1000
 -- =====================================================
 -- 2. CARGA DE FESTIVALES
 -- =====================================================
-INSERT INTO `festival` (`id`, `nombre`, `temporada`, `fecha_incio`, `fecha_fin`, `costos_id`)
+INSERT INTO `festival` (`id`, `nombre`, `temporada`, fecha_inicio, `fecha_fin`, `costos_id`)
 VALUES (1, 'Festival Gourmet Primavera', 'PRIMAVERA', '2026-10-01', '2026-10-20', 1),
        (2, 'Beer & Food Fest Verano', 'VERANO', '2026-12-01', '2026-12-15', 2);
 -- =====================================================
@@ -58,12 +58,12 @@ VALUES (1, 'admin', 'admin@gmail.com', '$2a$10$RzFQ8VQWqT.fdjiQEF9QsOOHTxXoVCPYb
 
 -- Rol del Administrador del sistema
 INSERT INTO `usuario_rol` (`id`, `usuario_id`, `rol`, `created_at`, `updated_at`)
-VALUES (1, 1, 'ADMIN', NOW(), NOW());
+VALUES (1, 1, 'ROLE_ADMINISTRADOR', NOW(), NOW());
 
 -- =====================================================
 -- 4. CARGA DE STAFF / PERSONAL
 -- =====================================================
-INSERT INTO `staff` (`id`, `usuario_id`, `name`, `apelido`, `dni`, `fecha_nac`, `fecha_ingreso`, `activo`, `fecha_baja`,
+INSERT INTO `staff` (`id`, `usuario_id`, `name`, apellido, `dni`, `fecha_nac`, `fecha_ingreso`, `activo`, `fecha_baja`,
                      `unidad_venta_id`)
 VALUES (1, 2, 'Carlos', 'Ríos', '30111222', '1985-05-12', '2020-03-01', 1, NULL, NULL),
        (2, 3, 'Ana', 'Martínez', '32333444', '1988-08-20', '2021-06-15', 1, NULL, NULL),

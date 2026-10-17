@@ -37,7 +37,7 @@ public class Festival {
     @Enumerated (EnumType.STRING)
     private Temporada temporada;
 
-    private LocalDate fechaIncio;
+    private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
     @OneToMany(mappedBy = "festival")

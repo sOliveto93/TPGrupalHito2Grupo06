@@ -38,6 +38,7 @@ public class Usuario {
 
 	@Column (name = "email",nullable = false, length = 60)
 	private String email;
+	@Column(name = "enabled", nullable = false)
 	private boolean enabled;
 
 	@CreationTimestamp
