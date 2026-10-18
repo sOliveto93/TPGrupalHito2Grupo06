@@ -8,12 +8,22 @@
 
 <h2>Registrar Unidad de Venta y Responsable</h2>
 
-<!-- Cartel de Error si falla la registración -->
-<div th:if="${error}" style="color: red;">
+<div th:if="${error}" style="color: red; margin-bottom: 15px;">
     <strong th:text="${error}">Ocurrió un error al procesar el registro.</strong>
 </div>
 
+<div th:if="${exito}" style="color: green; margin-bottom: 15px;">
+    <strong th:text="${exito}"></strong>
+</div>
+
 <form th:action="@{/registro-unidad/guardar}" th:object="${registroDto}" method="post">
+
+    <div th:if="${#fields.hasErrors('*')}" style="color: red; margin-bottom: 15px;">
+        <strong>Errores de validación:</strong>
+        <ul>
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+        </ul>
+    </div>
 
     <h3>1. Datos de la Unidad de Venta</h3>
 
@@ -48,7 +58,6 @@
         </select>
     </p>
 
-    <!-- Campos para Food Truck -->
     <div id="camposFoodTruck">
         <p>
             <label>Patente:</label><br>
@@ -61,7 +70,6 @@
         </p>
     </div>
 
-    <!-- Campos para Puesto Desarmable -->
     <div id="camposPuesto" style="display: none;">
         <p>
             <label>Cantidad de Carpas:</label><br>
@@ -93,6 +101,11 @@
     <p>
         <label>Fecha Nacimiento:</label><br>
         <input type="date" th:field="*{fechaNac}" required>
+    </p>
+
+    <p>
+        <label>Fecha de Ingreso:</label><br>
+        <input type="date" th:field="*{fechaIngreso}" required>
     </p>
 
     <h3>3. Credenciales de Usuario</h3>
@@ -154,9 +167,9 @@
         }
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const form = document.querySelector("form");
-        form.addEventListener("submit", function(e) {
+        form.addEventListener("submit", function (e) {
             const pass = document.getElementById("inputPassword").value;
             const confirmPass = document.getElementById("inputConfirmPassword").value;
             const errorSpan = document.getElementById("passError");

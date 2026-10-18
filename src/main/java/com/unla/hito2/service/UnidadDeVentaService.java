@@ -52,8 +52,21 @@ public class UnidadDeVentaService{
         if (edad<18){
             throw new Exception("El Usuario debe ser mayor de edad");
         }
+        if (dto.getFechaIngreso().isBefore(dto.getFechaNac())) {
+            throw new Exception("La fecha de ingreso no puede ser anterior a la fecha de nacimiento.");
+        }
         if(!festivalRepository.existsById(dto.getFestivalId())){
             throw new Exception("El festival no existe");
+        }
+
+        if ("FOOD_TRUCK".equalsIgnoreCase(dto.getTipoUnidad())) {
+            if (dto.getPatente() == null || dto.getPatente().trim().isEmpty()) {
+                throw new Exception("La patente es obligatoria para las unidades de tipo Food Truck.");
+            }
+            String patenteClean = dto.getPatente().trim().toUpperCase();
+            if (!patenteClean.matches("^[A-Z]{2}\\d{3}[A-Z]{2}$") && !patenteClean.matches("^[A-Z]{3}\\d{3}$")) {
+                throw new Exception("El formato de la patente no es válido (Ejemplos válidos: AA123CD o ABC123).");
+            }
         }
 
         Festival festival = festivalRepository.findById(dto.getFestivalId()).get();
