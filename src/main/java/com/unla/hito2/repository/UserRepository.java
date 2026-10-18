@@ -11,4 +11,7 @@ import com.unla.hito2.entity.Usuario;
 public interface UserRepository extends JpaRepository<Usuario, Long> {
     @Query("SELECT u FROM Usuario u JOIN FETCH u.usuarioRoles WHERE u.username = (:username)")
     public abstract Usuario findByUsernameAndFetchUsuarioRolesEagerly(@Param("username") String username);
+
+
+    boolean existsByEmail(String email);
 }

@@ -33,7 +33,7 @@ public class Staff {
     private Long id;
 
     private String name;
-    private String apelido;
+    private String apellido;
     private String dni;
     private LocalDate fechaNac;
     private LocalDate fechaIngreso;

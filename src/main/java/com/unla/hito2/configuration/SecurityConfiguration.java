@@ -30,14 +30,24 @@ public class SecurityConfiguration {
 	}
 
 	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
 				.csrf(AbstractHttpConfigurer::disable)
 				.cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/css/*", "/imgs/*", "/js/*",  "/api/v1/**","/").permitAll();
+
+					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/api/v1/**", "/", "/registro-unidad/**").permitAll();
+
 					auth.anyRequest().authenticated();
 				})
+				.formLogin(form -> form
+						.defaultSuccessUrl("/", true)
+						.permitAll()
+				)
+				.logout(logout -> logout
+						.logoutSuccessUrl("/")
+						.permitAll()
+				)
 				.build();
 	}
 
