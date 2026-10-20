@@ -29,6 +29,9 @@ public class UserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		com.unla.hito2.entity.Usuario user = userRepository.findByUsernameAndFetchUsuarioRolesEagerly(username);
+		if (user == null) {
+			throw new UsernameNotFoundException("Usuario o contraseña incorrectos para: " + username);
+		}
 		return buildUser(user, buildGrantedAuthorities(user.getUsuarioRoles()));
 	}
 

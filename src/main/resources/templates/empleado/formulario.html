@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Alta de Empleado</title>
+</head>
+<body>
+
+<h2>Alta de Empleado</h2>
+
+<!--/*@thymesVar id="exito" type="java.lang.String"*/-->
+<!--/*@thymesVar id="error" type="java.lang.String"*/-->
+<p th:if="${exito}" th:text="${exito}" style="color: green;"></p>
+<p th:if="${error}" th:text="${error}" style="color: red;"></p>
+
+<!--/*@thymesVar id="empleadoDto" type="com.unla.hito2.dto.EmpleadoDto"*/-->
+<!--/*@thymesVar id="categorias" type="com.unla.hito2.Enum.CategoriaCocina[]"*/-->
+<!--/*@thymesVar id="turnos" type="com.unla.hito2.Enum.Turno[]"*/-->
+<form th:action="@{/empleado/alta}" th:object="${empleadoDto}" method="post">
+
+    <div>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" th:field="*{name}" />
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+
+    <div>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" th:field="*{apellido}" />
+        <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></span>
+    </div>
+
+    <div>
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" th:field="*{dni}" />
+        <span th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></span>
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    </div>
+
+    <div>
+        <label for="fechaNac">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNac" th:field="*{fechaNac}" />
+        <span th:if="${#fields.hasErrors('fechaNac')}" th:errors="*{fechaNac}"></span>
+    </div>
+
+    <div>
+        <label for="fechaIngreso">Fecha de Ingreso:</label>
+        <input type="date" id="fechaIngreso" th:field="*{fechaIngreso}" />
+        <span th:if="${#fields.hasErrors('fechaIngreso')}" th:errors="*{fechaIngreso}"></span>
+    </div>
+
+    <div>
+        <label for="tipoEmpleado">Tipo de Empleado:</label>
+        <select id="tipoEmpleado" th:field="*{tipoEmpleado}" onchange="actualizarCampos()">
+            <option value="">-- Seleccionar --</option>
+            <option value="COCINERO">Cocinero</option>
+            <option value="CAJERO">Cajero</option>
+        </select>
+        <span th:if="${#fields.hasErrors('tipoEmpleado')}" th:errors="*{tipoEmpleado}"></span>
+    </div>
+
+    <div id="divCategoria" style="display: none; margin-top: 10px;">
+        <label for="categoria">Categoría de Cocina:</label>
+        <select id="categoria" th:field="*{categoria}">
+            <option value="">-- Seleccionar Categoría --</option>
+            <option th:each="cat : ${categorias}" th:value="${cat}" th:text="${cat}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></span>
+    </div>
+
+    <div id="divTurno" style="display: none; margin-top: 10px;">
+        <label for="turno">Turno de Caja:</label>
+        <select id="turno" th:field="*{turno}">
+            <option value="">-- Seleccionar Turno --</option>
+            <option th:each="t : ${turnos}" th:value="${t}" th:text="${t}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('turno')}" th:errors="*{turno}"></span>
+    </div>
+
+    <br>
+    <button type="submit">Registrar Empleado</button>
+</form>
+
+<script>
+    function actualizarCampos() {
+        const tipo = document.getElementById("tipoEmpleado").value;
+        const divCategoria = document.getElementById("divCategoria");
+        const selectCategoria = document.getElementById("categoria");
+        const divTurno = document.getElementById("divTurno");
+        const selectTurno = document.getElementById("turno");
+
+        if (tipo === "COCINERO") {
+            divCategoria.style.display = "block";
+            selectCategoria.disabled = false;
+
+            divTurno.style.display = "none";
+            selectTurno.value = "";
+            selectTurno.disabled = true;
+        } else if (tipo === "CAJERO") {
+            divTurno.style.display = "block";
+            selectTurno.disabled = false;
+
+            divCategoria.style.display = "none";
+            selectCategoria.value = "";
+            selectCategoria.disabled = true;
+        } else {
+            divCategoria.style.display = "none";
+            selectCategoria.value = "";
+            selectCategoria.disabled = true;
+
+            divTurno.style.display = "none";
+            selectTurno.value = "";
+            selectTurno.disabled = true;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", actualizarCampos);
+</script>
+
+</body>
+</html>

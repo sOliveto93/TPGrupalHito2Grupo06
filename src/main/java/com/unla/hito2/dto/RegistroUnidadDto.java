@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class RegistroUnidadDto  {
 
     //atributos de la unidad
