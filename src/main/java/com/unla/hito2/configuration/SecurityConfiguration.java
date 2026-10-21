@@ -36,11 +36,12 @@ public class SecurityConfiguration {
 				.cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
 
-					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/api/v1/**", "/", "/registro-unidad/**").permitAll();
+					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/", "/login").permitAll();
 					auth.requestMatchers("/empleado/**").hasRole("RESPONSABLE");
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(form -> form
+					.loginPage("/login")
 						.defaultSuccessUrl("/", true)
 						.permitAll()
 				)

@@ -1,45 +1,65 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Epicentro Gourmet - Inicio</title>
-</head>
-<body>
+<lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<main class="container py-4">
-    <!-- Hero Section -->
-    <div class="hero-section text-center">
-        <div class="container">
+    <head>
+        <meta charset="UTF-8">
+        <title>Epicentro Gourmet - Inicio</title>
+        <link rel="stylesheet" th:href="@{/css/home.css}">
+    </head>
+
+    <body>
+        <header class="header">
+            
+                    <!-- Usuario autenticado -->
+                    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                        <button type="submit">Cerrar sesión</button>
+                    </form>
+
+                    <!-- Usuario sin loguear -->
+                     <form sec:authorize="isAnonymous()" th:action="@{/login}" method="post">
+                        <button type="submit">Iniciar Sesion</button>
+                    </form>
+                   
             <h1>Bienvenido al TFI</h1>
-            <p class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</p>
-            <table border="1">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Temporada</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="f : ${festivales}">
-                    <td th:text="${f.id}">1</td>
-                    <td th:text="${f.nombre}">Festival</td>
-                    <td th:text="${f.temporada}">PRIMAVERA</td>
-                    <td th:text="${f.fechaInicio}">2026-10-01</td>
-                    <td th:text="${f.fechaFin}">2026-10-20</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <a th:href="@{/registro-unidad}" class="btn btn-primary">
-                Registrar Unidad de Venta
-            </a>
-        </div>
-    </div>
-</main>
 
-</body>
-</html>
+        </header>
+        <main class="container py-4">
+
+            <div class="hero-section text-center">
+
+                
+                <div class="container">
+                    
+                    <p class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</p>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Temporada</th>
+                                <th>Inicio</th>
+                                <th>Fin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="f : ${festivales}">
+                                <td th:text="${f.id}">1</td>
+                                <td th:text="${f.nombre}">Festival</td>
+                                <td th:text="${f.temporada}">PRIMAVERA</td>
+                                <td th:text="${f.fechaInicio}">2026-10-01</td>
+                                <td th:text="${f.fechaFin}">2026-10-20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <a th:href="@{/registro-unidad}" class="btn btn-primary">
+                        Registrar Unidad de Venta
+                    </a>
+                </div>
+            </div>
+        </main>
+
+    </body>
+
+    </html>
