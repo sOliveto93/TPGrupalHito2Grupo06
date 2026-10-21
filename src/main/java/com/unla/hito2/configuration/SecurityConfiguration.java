@@ -38,6 +38,7 @@ public class SecurityConfiguration {
 
 					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/", "/login").permitAll();
 					auth.requestMatchers("/empleado/**").hasRole("RESPONSABLE");
+					 auth.requestMatchers("/registro-unidad/**").hasAnyRole("RESPONSABLE", "ADMINISTRADOR");
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(form -> form
@@ -49,6 +50,9 @@ public class SecurityConfiguration {
 						.logoutSuccessUrl("/")
 						.permitAll()
 				)
+				.exceptionHandling(exception -> exception
+    				.accessDeniedPage("/403")
+)
 				.build();
 	}
 
