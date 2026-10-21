@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidades de Venta - Epicentro Gourmet</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>Unidades de Venta</h1>
+        <a th:href="@{/}" class="btn btn-primary">Volver al inicio</a>
+    </header>
+
+    <main class="main">
+
+        <h2>Unidades registradas en el festival</h2>
+
+        <!-- Mensaje cuando no hay unidades -->
+        <div th:if="${#lists.isEmpty(lista)}">
+            <p>No hay unidades de venta registradas para este festival.</p>
+        </div>
+
+        <!-- Listado de unidades -->
+        <div class="festivales" th:unless="${#lists.isEmpty(lista)}">
+
+            <div class="card" th:each="unidad : ${lista}">
+
+                <h3 th:text="${unidad.nombreComercial}">Nombre comercial</h3>
+
+                <p>
+                    <strong>Código:</strong>
+                    <span th:text="${unidad.codigo}"></span>
+                </p>
+
+                <p>
+                    <strong>Superficie:</strong>
+                    <span th:text="${unidad.superficie}"></span> m²
+                </p>
+
+                <p>
+                    <strong>Responsable:</strong>
+                    <span th:if="${unidad.responsable != null}"
+                          th:text="${unidad.responsable.name + ' ' + unidad.responsable.apellido}">
+                    </span>
+                    <span th:unless="${unidad.responsable != null}">
+                        Sin responsable asignado
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Empleados:</strong>
+                    <span th:text="${#sets.size(unidad.empleados)}"></span>
+                </p>
+
+                <p>
+                    <strong>Platos:</strong>
+                    <span th:text="${#sets.size(unidad.platos)}"></span>
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

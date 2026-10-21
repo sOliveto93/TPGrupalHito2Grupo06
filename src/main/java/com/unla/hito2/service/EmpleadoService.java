@@ -68,7 +68,7 @@ public class EmpleadoService {
         }
         return sb.toString();
     }
-
+    @Transactional
     public void registrarEmpleado(EmpleadoDto dto, UnidadDeVenta unidadDeVenta) throws Exception {
         validarEmpleado(dto);
 
@@ -84,6 +84,8 @@ public class EmpleadoService {
         UsuarioRol usuarioRol = new UsuarioRol();
         usuarioRol.setUsuario(usuario);
         usuarioRol.setRol(Rol.ROLE_EMPLEADO);
+        
+        usuarioRolRepository.save(usuarioRol);
 
         if ("COCINERO".equalsIgnoreCase(dto.getTipoEmpleado())) {
             Cocinero cocinero = new Cocinero();
