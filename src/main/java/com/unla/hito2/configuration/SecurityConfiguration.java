@@ -37,7 +37,7 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(auth -> {
 
 					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/api/v1/**", "/", "/registro-unidad/**").permitAll();
-
+					auth.requestMatchers("/empleado/**").hasRole("RESPONSABLE");
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(form -> form

@@ -1,0 +1,44 @@
+package com.unla.hito2.dto;
+
+import com.unla.hito2.Enum.CategoriaCocina;
+import com.unla.hito2.Enum.Turno;
+import com.unla.hito2.entity.UnidadDeVenta;
+import com.unla.hito2.entity.Usuario;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class EmpleadoDto {
+
+    @NotBlank
+    private String name;
+    @NotBlank
+    private String apellido;
+    @NotBlank(message = "El DNI es obligatorio")
+    private String dni;
+    @NotNull
+    private LocalDate fechaNac;
+    @NotNull
+    private LocalDate fechaIngreso;
+    @NotBlank
+    private String tipoEmpleado;
+    //atributos de usuario
+    @NotBlank(message = "El correo electrónico es obligatorio")
+    private String email;
+
+    //atributos de cajero
+    private Turno turno;
+
+    //atributos de cocinero
+    private CategoriaCocina categoria;
+}

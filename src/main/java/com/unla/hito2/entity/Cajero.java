@@ -21,5 +21,4 @@ public class Cajero extends Staff{
     
     @Enumerated (EnumType.STRING)
     private Turno turno;
-    
 }

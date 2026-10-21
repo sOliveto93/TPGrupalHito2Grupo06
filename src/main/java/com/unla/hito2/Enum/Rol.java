@@ -4,5 +4,4 @@ public enum Rol {
     ROLE_ADMINISTRADOR,
     ROLE_RESPONSABLE,
     ROLE_EMPLEADO
-
 }

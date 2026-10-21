@@ -63,10 +63,14 @@ public class UnidadDeVentaService{
             if (dto.getPatente() == null || dto.getPatente().trim().isEmpty()) {
                 throw new Exception("La patente es obligatoria para las unidades de tipo Food Truck.");
             }
-            String patenteClean = dto.getPatente().trim().toUpperCase();
-            if (!patenteClean.matches("^[A-Z]{2}\\d{3}[A-Z]{2}$") && !patenteClean.matches("^[A-Z]{3}\\d{3}$")) {
-                throw new Exception("El formato de la patente no es válido (Ejemplos válidos: AA123CD o ABC123).");
+            String patenteClean = dto.getPatente().replaceAll("[\\s-]", "").toUpperCase();
+            boolean tradicional = patenteClean.matches("^[A-Z]{3}\\d{3}$");      // ABC123
+            boolean mercosur    = patenteClean.matches("^[A-Z]{2}\\d{3}[A-Z]{2}$"); // AA123CD
+
+            if (!tradicional && !mercosur) {
+                throw new Exception("Formato inválido: la patente debe ser ABC123 (tradicional) o AA123CD (Mercosur).");
             }
+            dto.setPatente(patenteClean);
         }
 
         Festival festival = festivalRepository.findById(dto.getFestivalId()).get();
@@ -82,7 +86,6 @@ public class UnidadDeVentaService{
             usuarioRol.setUsuario(usuario);
             usuarioRol.setRol(Rol.ROLE_RESPONSABLE);
             usuarioRolRepository.save(usuarioRol);
-
 
             Staff responsable = new Staff();
             responsable.setName(dto.getNombre());
@@ -113,10 +116,12 @@ public class UnidadDeVentaService{
             unidad.setResponsable(responsable);
             unidad.setFestival(festival);
 
-
             return unidadDeVentaRepository.save(unidad);
 
-
+    }
+    public UnidadDeVenta buscarPorResponsable(String identificador) throws Exception {
+        return unidadDeVentaRepository.findByResponsable(identificador)
+                .orElseThrow(() -> new Exception("No se encontró una Unidad de Venta asociada al usuario: " + identificador));
     }
 }
 

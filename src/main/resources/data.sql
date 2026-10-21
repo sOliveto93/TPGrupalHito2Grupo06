@@ -47,9 +47,9 @@ VALUES (1, 'Festival Gourmet Primavera', 'PRIMAVERA', '2026-10-01', '2026-10-20'
 -- =====================================================
 INSERT INTO `usuario` (`id`, `username`, `email`, `password`, `enabled`, `created_at`, `updated_at`)
 VALUES (1, 'admin', 'admin@gmail.com', '$2a$10$RzFQ8VQWqT.fdjiQEF9QsOOHTxXoVCPYb/NH7i2XKr.oX1k6dlW7G', 1, NOW(), NOW()),
-       (2, 'resp_burger', 'carlos@gmail.com', '$2a$10$0tGFv6jvDUX44yPbLkXSDOHuprjaOKfun54NyqamDK.dcsUEYbmUC', 1, NOW(),
+       (2, 'resp_burger', 'carlos@gmail.com', '$2a$10$cLEq9GWWX91MqKqQkmz1ke/i/tbp.qBdeXRSs/2LC2Zr9I7iJRTfm', 1, NOW(),
         NOW()),
-       (3, 'resp_puesto', 'ana@gmail.com', '$2a$10$qnpFjOeyB3sHzlbc8UPNYOvH05V5krzk5KY27XM2PPiXuOk3vl8L2', 1, NOW(),
+       (3, 'resp_puesto', 'ana@gmail.com', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xD0m1bC.iJqGvT6i', 1, NOW(),
         NOW()),
        (4, 'juan_cajero', 'nicoperez@gmail.com', '$2a$10$XlRcPD5QEPNYfC98ZRtehubLUhE.hkspQ6oCu3kvgCC0JTLDI9n.O', 1,
         NOW(), NOW()),
@@ -58,7 +58,8 @@ VALUES (1, 'admin', 'admin@gmail.com', '$2a$10$RzFQ8VQWqT.fdjiQEF9QsOOHTxXoVCPYb
 
 -- Rol del Administrador del sistema
 INSERT INTO `usuario_rol` (`id`, `usuario_id`, `rol`, `created_at`, `updated_at`)
-VALUES (1, 1, 'ROLE_ADMINISTRADOR', NOW(), NOW());
+VALUES (1, 1, 'ROLE_ADMINISTRADOR', NOW(), NOW()),
+       (2, 2, 'ROLE_RESPONSABLE', NOW(), NOW());
 
 -- =====================================================
 -- 4. CARGA DE STAFF / PERSONAL
@@ -132,3 +133,4 @@ INSERT INTO `liquidacion_de_haberes` (`id`, `empleado_id`, `festival_id`, `fecha
                                       `dias_festival`, `sueldo`, `adicional_aplicado`, `factor_aplicado`, `total`)
 VALUES (1, 3, 1, '2026-10-20',
         20, 100000.00, 20000.00, 1.00, 120000.00);
+
