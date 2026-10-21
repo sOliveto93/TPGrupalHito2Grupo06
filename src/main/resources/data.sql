@@ -47,20 +47,22 @@ VALUES (1, 'Festival Gourmet Primavera', 'PRIMAVERA', '2026-10-01', '2026-10-20'
 -- =====================================================
 INSERT INTO `usuario` (`id`, `username`, `email`, `password`, `enabled`, `created_at`, `updated_at`)
 VALUES (1, 'admin', 'admin@gmail.com', '$2a$10$RzFQ8VQWqT.fdjiQEF9QsOOHTxXoVCPYb/NH7i2XKr.oX1k6dlW7G', 1, NOW(), NOW()),
-       (2, 'resp_burger', 'carlos@gmail.com', '$2a$10$cLEq9GWWX91MqKqQkmz1ke/i/tbp.qBdeXRSs/2LC2Zr9I7iJRTfm', 1, NOW(),
+       (2, 'resp_burger', 'carlos@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(),
         NOW()),
-       (3, 'resp_puesto', 'ana@gmail.com', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xD0m1bC.iJqGvT6i', 1, NOW(),
+       (3, 'resp_puesto', 'ana@gmail.com', '$2a$10$rIS5FuCO1WNim36pDg.l.uLUhnqpADWjZM/sp1v8azwiG5z2h2Fjq', 1, NOW(),
         NOW()),
-       (4, 'juan_cajero', 'nicoperez@gmail.com', '$2a$10$XlRcPD5QEPNYfC98ZRtehubLUhE.hkspQ6oCu3kvgCC0JTLDI9n.O', 1,
+       (4, 'juan_cajero', 'nicoperez@gmail.com', '$2a$10$wysNFQ5CG6BzoGgYli8DOu9RD9m1oU.es33eRuxfo7aY4iJzYMrry', 1,
         NOW(), NOW()),
-       (5, 'maria_chef', 'oscarruina@gmail.com', '$2a$10$EebqSsuNUtcmn0rFjlA0tOdF/9yr6BNN4TFV5yVCPNRwysJjdN8li', 1,
+       (5, 'maria_chef', 'oscarruina@gmail.com', '$2a$10$vqLPPp.UsUIz5FgKJmgxjOU5VziUIARlkuBNLJO/Hj415vUFIHlly', 1,
         NOW(), NOW());
 
 -- Rol del Administrador del sistema
 INSERT INTO `usuario_rol` (`id`, `usuario_id`, `rol`, `created_at`, `updated_at`)
 VALUES (1, 1, 'ROLE_ADMINISTRADOR', NOW(), NOW()),
-       (2, 2, 'ROLE_RESPONSABLE', NOW(), NOW());
-
+       (2, 2, 'ROLE_RESPONSABLE', NOW(), NOW()),
+       (3, 3, 'ROLE_EMPLEADO', NOW(), NOW()),
+       (4, 4, 'ROLE_EMPLEADO', NOW(), NOW()),
+       (5, 5, 'ROLE_EMPLEADO', NOW(), NOW());
 -- =====================================================
 -- 4. CARGA DE STAFF / PERSONAL
 -- =====================================================

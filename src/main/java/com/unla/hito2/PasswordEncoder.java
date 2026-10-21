@@ -6,7 +6,7 @@ public class PasswordEncoder {
 
     public static void main(String[] args) {
         BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-        System.out.println(pe.encode("admin"));
-        System.out.println(pe.matches("admin","$2a$10$OfyDnRmBCriZqW7ntAf.Fu9LDAZH.oW3dGck8gQktTYiaU41lRHza"));
+        System.out.println(pe.encode("oscarruina@gmail.com"));
+        System.out.println(pe.matches("oscarruina@gmail.com","$2a$10$vqLPPp.UsUIz5FgKJmgxjOU5VziUIARlkuBNLJO/Hj415vUFIHlly"));
     }
 }

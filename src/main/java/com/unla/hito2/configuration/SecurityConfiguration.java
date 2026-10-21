@@ -36,11 +36,13 @@ public class SecurityConfiguration {
 				.cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
 
-					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/api/v1/**", "/", "/registro-unidad/**").permitAll();
+					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/", "/login").permitAll();
 					auth.requestMatchers("/empleado/**").hasRole("RESPONSABLE");
+					 auth.requestMatchers("/registro-unidad/**").hasAnyRole("RESPONSABLE", "ADMINISTRADOR");
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(form -> form
+					.loginPage("/login")
 						.defaultSuccessUrl("/", true)
 						.permitAll()
 				)
@@ -48,6 +50,9 @@ public class SecurityConfiguration {
 						.logoutSuccessUrl("/")
 						.permitAll()
 				)
+				.exceptionHandling(exception -> exception
+    				.accessDeniedPage("/403")
+)
 				.build();
 	}
 
