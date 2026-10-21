@@ -1,7 +1,10 @@
 package com.unla.hito2.controller;
 
+import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.entity.Festival;
 import com.unla.hito2.service.FestivalService;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +25,7 @@ public class HomeController {
     @GetMapping
     public ModelAndView home() {
         ModelAndView modelo = new ModelAndView("index");
-        List<Festival> lista = festivalService.traerTodos();
+        List<FestivalDto> lista = festivalService.traerTodos();
         modelo.addObject("festivales", lista);
         return modelo;
     }

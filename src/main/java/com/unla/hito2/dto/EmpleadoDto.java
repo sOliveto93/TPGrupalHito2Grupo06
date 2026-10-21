@@ -2,9 +2,7 @@ package com.unla.hito2.dto;
 
 import com.unla.hito2.Enum.CategoriaCocina;
 import com.unla.hito2.Enum.Turno;
-import com.unla.hito2.entity.UnidadDeVenta;
-import com.unla.hito2.entity.Usuario;
-import jakarta.persistence.*;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
