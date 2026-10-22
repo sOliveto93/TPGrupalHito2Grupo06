@@ -38,7 +38,9 @@ public class SecurityConfiguration {
 
 					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/", "/login").permitAll();
 					auth.requestMatchers("/empleado/**").hasRole("RESPONSABLE");
-					 auth.requestMatchers("/registro-unidad/**").hasAnyRole("RESPONSABLE", "ADMINISTRADOR");
+					auth.requestMatchers("/registro-unidad/**").hasAnyRole("RESPONSABLE", "ADMINISTRADOR");
+					auth.requestMatchers("/contabilidad/liquidacion-sueldo/**").hasAnyRole("EMPLEADO", "RESPONSABLE", "ADMINISTRADOR");
+					auth.requestMatchers("/contabilidad/**").hasAnyRole("RESPONSABLE", "ADMINISTRADOR");
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(form -> form
