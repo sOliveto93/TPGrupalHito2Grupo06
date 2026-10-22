@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -14,4 +15,6 @@ public interface UnidadDeVentaRepository extends JpaRepository<UnidadDeVenta,Lon
     @Query("SELECT u FROM UnidadDeVenta u WHERE u.responsable.usuario.username = :identificador OR u.responsable.usuario.email = :identificador")
     Optional<UnidadDeVenta> findByResponsable(@Param("identificador") String identificador);
     Optional<UnidadDeVenta> findByResponsableUsuarioEmail(String email);
+    @Query("SELECT u FROM UnidadDeVenta u WHERE u.festival.id = :id")
+    List<UnidadDeVenta> findByFestivalId(@Param("id") Long id);
 }

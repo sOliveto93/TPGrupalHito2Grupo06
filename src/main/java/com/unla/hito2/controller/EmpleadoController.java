@@ -7,6 +7,8 @@ import com.unla.hito2.entity.UnidadDeVenta;
 import com.unla.hito2.service.EmpleadoService;
 import com.unla.hito2.service.UnidadDeVentaService;
 import jakarta.validation.Valid;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/empleado")
+@PreAuthorize("hasRole('EMPLEADO')")
 public class EmpleadoController {
 
     private final EmpleadoService empleadoService;
