@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear pedido</title>
+</head>
+
+<body>
+
+    <h1>Crear pedido</h1>
+
+    <h2 th:text="${pedidoAlta.nombreUnidadDeVenta}">
+        Unidad de venta
+    </h2>
+
+    <form th:action="@{/pedido/alta}" method="post">
+
+        <input type="hidden" name="idUnidadDeVenta" th:value="${pedidoAlta.idUnidadDeVenta}">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Plato</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="plato, iter : ${pedidoAlta.platos}">
+                    <td th:text="${plato.nombre}">Nombre del plato</td>
+
+                    <td th:text="${plato.precio}">0.00</td>
+
+                    <td>
+                        <input type="hidden" th:name="|detalles[${iter.index}].platoId|" th:value="${plato.id}">
+
+                        <input type="number" th:name="|detalles[${iter.index}].cantidad|" value="0" min="0">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="submit">Crear pedido</button>
+
+    </form>
+
+</body>
+
+</html>

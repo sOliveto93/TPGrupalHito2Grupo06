@@ -11,10 +11,13 @@ import java.util.Optional;
 @Repository
 public interface UnidadDeVentaRepository extends JpaRepository<UnidadDeVenta,Long> {
 
+  
     boolean existsByCodigo(String codigo);
     @Query("SELECT u FROM UnidadDeVenta u WHERE u.responsable.usuario.username = :identificador OR u.responsable.usuario.email = :identificador")
     Optional<UnidadDeVenta> findByResponsable(@Param("identificador") String identificador);
     Optional<UnidadDeVenta> findByResponsableUsuarioEmail(String email);
     @Query("SELECT u FROM UnidadDeVenta u WHERE u.festival.id = :id")
     List<UnidadDeVenta> findByFestivalId(@Param("id") Long id);
+    Optional<UnidadDeVenta> findByEmpleados_Usuario_Username(String username);
+    Optional<UnidadDeVenta> findByResponsable_Usuario_Username(String username);
 }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos de la unidad de venta</title>
+</head>
+<body>
+
+    <h1>Pedidos de la unidad de venta</h1>
+
+    <a th:href="@{/pedido/alta}">
+        Crear pedido
+    </a>
+
+    <p th:if="${listaPedidos == null or listaPedidos.isEmpty()}">
+        Todavía no hay pedidos registrados.
+    </p>
+
+    <section th:each="pedido : ${listaPedidos}">
+        <hr>
+
+        <h2>
+            Pedido #
+            <span th:text="${pedido.id}">1</span>
+        </h2>
+
+        <p>
+            Fecha:
+            <span th:text="${pedido.fechaHora}"></span>
+        </p>
+
+        <h3>Detalles</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Plato</th>
+                    <th>Cantidad</th>
+                    <th>Precio unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="detalle : ${pedido.detalles}">
+                    <td th:text="${detalle.nombrePlato}"></td>
+                    <td th:text="${detalle.cantidad}"></td>
+                    <td th:text="${detalle.precioUnitario}"></td>
+                    <td th:text="${detalle.subtotal}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            Total:
+            <strong th:text="${pedido.total}"></strong>
+        </p>
+    </section>
+
+</body>
+</html>

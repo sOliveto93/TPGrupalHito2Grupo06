@@ -28,14 +28,19 @@
                 <h1 class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</h1>
             </section>
             <div class="">
-                <button>
+                <div sec:authorize="hasRole('ADMINISTRADOR')">
                     <a th:href="@{/unidad-venta/registro-unidad}" class="btn btn-primary">
                         Registrar Unidad de Venta
                     </a>
-                </button>
+                </div>
+                <div sec:authorize="hasRole('EMPLEADO')">
+                    <a th:href="@{/pedido/alta}" class="btn btn-primary">
+                        Crear pedido
+                    </a>
+                </div>
 
             </div>
-            <div class="festivales">
+                       <div class="festivales">
                 <div th:each="f : ${festivales}" class="card">
                     <p>
                         <span th:text="${f.nombre}"></span>
@@ -55,10 +60,13 @@
                         Fecha de fin:
                         <span th:text="${f.fechaFin}"></span>
                     </p>
-                    <a th:href="@{/unidad-venta/unidad-venta-por-festival(id=${f.id})}"
-                        class="btn btn-primary">
-                        Mostrar unidades de venta
-                    </a>
+
+                    <div sec:authorize="hasRole('ADMINISTRADOR')">
+                        <a th:href="@{/unidad-venta/unidad-venta-por-festival(id=${f.id})}"
+                           class="btn btn-primary">
+                            Mostrar unidades de venta
+                        </a>
+                    </div>
                 </div>
             </div>
         </main>
