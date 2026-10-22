@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Alta de Plato</title>
+</head>
+<body>
+
+<h1>Alta de Plato</h1>
+
+<p th:if="${exito}" th:text="${exito}" style="color: green;"></p>
+
+<p th:if="${error}" th:text="${error}" style="color: red;"></p>
+
+<form th:action="@{/plato/alta}"
+      th:object="${altaPlatoDto}"
+      method="post">
+
+    <div th:if="${#fields.hasErrors('*')}" style="color: red;">
+        <ul>
+            <li th:each="err : ${#fields.errors('*')}"
+                th:text="${err}"></li>
+        </ul>
+    </div>
+
+    <p>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" required>
+    </p>
+
+    <p>
+        <label for="precio">Precio de venta:</label>
+        <input type="number" id="precio" th:field="*{precio}"
+               step="0.01" min="0.01" required>
+    </p>
+
+    <p>
+        <label for="costo">Costo de producción:</label>
+        <input type="number" id="costo" th:field="*{costo}"
+               step="0.01" min="0" required>
+    </p>
+
+    <button type="submit">Registrar plato</button>
+    <a th:href="@{/}">Volver al inicio</a>
+</form>
+
+
+</body>
+</html>
