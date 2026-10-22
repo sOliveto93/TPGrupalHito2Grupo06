@@ -76,9 +76,13 @@ public class PedidoService {
                 throw new IllegalArgumentException(
                         "El ID del plato no es valido");
             }
-            if (cantidad <= 0) {
+            if (cantidad < 0) {
                 throw new IllegalArgumentException(
-                        "La cantidad debe ser mayor que cero");
+                        "La cantidad no puede ser negativa");
+            }
+
+            if(cantidad == 0){
+                continue;
             }
 
             if (platosProcesados.containsKey(current.getPlatoId())) {
@@ -87,6 +91,11 @@ public class PedidoService {
             } else {
                 platosProcesados.put(current.getPlatoId(), current.getCantidad());
             }
+        }
+
+        if (platosProcesados.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Debés seleccionar al menos un plato con cantidad mayor que cero.");
         }
 
         for (Map.Entry<Long, Integer> currentId : platosProcesados.entrySet()) {

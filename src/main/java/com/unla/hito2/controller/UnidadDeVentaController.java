@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/unidad-venta")
-@PreAuthorize("hasAnyRole('RESPONSABLE', 'ADMINISTRADOR')")
+@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 public class UnidadDeVentaController {
 
     private final UnidadDeVentaService unidadDeVentaService;
@@ -56,7 +56,8 @@ public class UnidadDeVentaController {
         try {
             unidadDeVentaService.registrarUnidadConResponsable(dto);
             redirect.addFlashAttribute("exito", "¡Unidad de Venta y Responsable registrados con éxito!");
-            return "redirect:/registro-unidad";
+            return "redirect:/unidad-venta/registro-unidad";
+
         } catch (Exception e) {
             // Captura las excepciones tiradas por el Service (DNI repetido, menor de edad, etc.)
             model.addAttribute("error", e.getMessage());
