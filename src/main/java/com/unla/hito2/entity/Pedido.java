@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +35,9 @@ public class Pedido {
     @JoinColumn(name = "unidad_venta_id", nullable = false)
     private UnidadDeVenta unidadDeVenta;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido",
+        cascade = CascadeType.ALL
+    )
     private  List<DetallePedido> detalles=new ArrayList<>();
 
 }

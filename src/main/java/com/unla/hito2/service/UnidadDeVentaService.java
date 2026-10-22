@@ -1,7 +1,6 @@
 package com.unla.hito2.service;
 
 import com.unla.hito2.Enum.Rol;
-import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.dto.RegistroUnidadDto;
 import com.unla.hito2.dto.UnidadDeVentaDto;
 import com.unla.hito2.entity.*;
@@ -131,6 +130,14 @@ public class UnidadDeVentaService {
                 .orElseThrow(() -> new Exception(
                         "No se encontró una Unidad de Venta asociada al usuario: " + identificador));
     }
+
+    public UnidadDeVenta buscarPorEmpleado(String username) throws Exception {
+    return unidadDeVentaRepository
+            .findByEmpleados_Usuario_Username(username)
+            .orElseThrow(() -> new Exception(
+                    "No se encontró una unidad de venta para el empleado: " + username
+            ));
+}
 
     public List<UnidadDeVentaDto> buscarPorFestival(Long id) {
         List<UnidadDeVenta> lista = unidadDeVentaRepository.findByFestivalId(id);
