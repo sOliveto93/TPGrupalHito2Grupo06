@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/empleado")
-@PreAuthorize("hasRole('EMPLEADO')")
+@PreAuthorize("hasRole('RESPONSABLE')")
 public class EmpleadoController {
 
     private final EmpleadoService empleadoService;
