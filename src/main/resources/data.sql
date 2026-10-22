@@ -51,7 +51,7 @@ VALUES (1, 'admin', 'admin@gmail.com', '$2a$10$RzFQ8VQWqT.fdjiQEF9QsOOHTxXoVCPYb
         NOW()),
        (3, 'resp_puesto', 'ana@gmail.com', '$2a$10$rIS5FuCO1WNim36pDg.l.uLUhnqpADWjZM/sp1v8azwiG5z2h2Fjq', 1, NOW(),
         NOW()),
-       (4, 'juan_cajero', 'nicoperez@gmail.com', '$2a$10$wysNFQ5CG6BzoGgYli8DOu9RD9m1oU.es33eRuxfo7aY4iJzYMrry', 1,
+       (4, 'juan_cajero', 'nicoperez@gmail.com', '$2a$10$cENPqtKpKgykc8ns6gdhbe8RxWDJO2qJfSrJ.xLdRDrtPzmdhpsjm', 1,
         NOW(), NOW()),
        (5, 'maria_chef', 'oscarruina@gmail.com', '$2a$10$vqLPPp.UsUIz5FgKJmgxjOU5VziUIARlkuBNLJO/Hj415vUFIHlly', 1,
         NOW(), NOW());
@@ -134,5 +134,7 @@ VALUES (1, 3, 1, 1,
 INSERT INTO `liquidacion_de_haberes` (`id`, `empleado_id`, `festival_id`, `fecha`,
                                       `dias_festival`, `sueldo`, `adicional_aplicado`, `factor_aplicado`, `total`)
 VALUES (1, 3, 1, '2026-10-20',
-        20, 100000.00, 20000.00, 1.00, 120000.00);
+        20, 100000.00, 20000.00, 1.00, 120000.00),
+        (2, 4, 1, '2026-10-20', 15, 100000.00, 150000.00, 1.00, 250000.00),
+        (3, 1, 1, '2026-10-20', 20, 100000.00, 50000.00, 1.10, 165000.00);
 
