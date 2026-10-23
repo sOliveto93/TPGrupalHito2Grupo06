@@ -65,6 +65,7 @@ public class PedidoController {
     }
 
     @GetMapping("/alta")
+     @PreAuthorize("hasAnyRole('RESPONSABLE','EMPLEADO')")
     public ModelAndView mostrarFormulario(Authentication authentication) throws Exception {
         // admin no puede crear pedidos porque no tiene asociado una unidad de venta
         // consultar si queremos lo pueda hacer.

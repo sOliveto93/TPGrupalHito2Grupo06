@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epicentro Gourmet - Inicio</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/filtros.css}">
+</head>
+
+<body>
+    <header class="header">
+        <a th:href="@{/}" class="brand">Epicentro Gourmet</a>
+
+        <div class="header-actions">
+            <a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-outline">
+                Iniciar sesión
+            </a>
+
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline">
+                    Cerrar sesión
+                </button>
+            </form>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="page-heading">
+
+            <h1>Festivales</h1>
+            <p class="subtitle">
+                Consultá los festivales activos y próximos,
+                sus fechas y las unidades de venta disponibles.
+            </p>
+        </section>
+        <form th:action="@{/festival/filtro}" method="get" class="filters">
+            <div class="filter-field">
+                <label for="nombre">Nombre del festival</label>
+                <input type="text" id="nombre" name="nombre" th:value="${filtroNombre}" placeholder="Buscar por nombre">
+            </div>
+
+            <div class="filter-field">
+                <label for="temporada">Temporada</label>
+                <input type="text" id="temporada" name="temporada" th:value="${filtroTemporada}"
+                    placeholder="Ej. Verano 2026">
+            </div>
+
+            <div class="filter-field">
+                <label for="estado">Estado</label>
+                <select id="estado" name="estado">
+                    <option value="">Todos</option>
+                    <option value="ACTIVO" th:selected="${filtroEstado == 'ACTIVO'}">Activo</option>
+                    <option value="PRÓXIMO" th:selected="${filtroEstado == 'PRÓXIMO'}">Próximo</option>
+                    <option value="FINALIZADO" th:selected="${filtroEstado == 'FINALIZADO'}">Finalizado</option>
+                </select>
+            </div>
+
+            <div class="filter-field">
+                <label for="fechaInicio">Desde</label>
+                <input type="date" id="fechaInicio" name="fechaInicio" th:value="${filtroFechaInicio}">
+            </div>
+
+            <div class="filter-field">
+                <label for="fechaFin">Hasta</label>
+                <input type="date" id="fechaFin" name="fechaFin" th:value="${filtroFechaFin}">
+            </div>
+
+            <div class="filter-actions">
+    <button type="submit" class="btn btn-primary">
+        Filtrar
+    </button>
+
+    <a th:href="@{/festival/filtro}" class="btn btn-outline btn-clear">
+        <span aria-hidden="true">↺</span>
+        Limpiar
+    </a>
+</div>
+        </form>
+        <section class="table-container">
+            <div class="table-heading">
+                <h2>Listado de festivales</h2>
+                <span class="counter" th:text="${#lists.size(festivales)} + ' festivales'">
+                </span>
+            </div>
+
+            <div class="table-scroll">
+
+                <table th:if="${!#lists.isEmpty(festivales)}">
+                    <thead>
+                        <tr>
+                            <th>Festival</th>
+                            <th>Temporada</th>
+                            <th>Fecha de inicio</th>
+                            <th>Fecha de fin</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="f : ${festivales}">
+                            <td class="festival-name" th:text="${f.nombre}"></td>
+
+                            <td th:text="${f.temporada}"></td>
+
+                            <td th:text="${#temporals.format(f.fechaInicio, 'dd/MM/yyyy')}"></td>
+
+                            <td th:text="${#temporals.format(f.fechaFin, 'dd/MM/yyyy')}"></td>
+
+                            <td>
+                                <span class="status" th:classappend="${f.estado == 'ACTIVO'} ? ' status-active' :
+                                (${f.estado == 'PRÓXIMO'} ? ' status-upcoming' : ' status-finished')"
+                                    th:text="${f.estado}">
+                                </span>
+                            </td>
+
+                            <td>
+                                <a th:href="@{/unidad-venta/unidad-venta-por-festival(id=${f.id})}"
+                                    class="btn btn-primary">
+                                    Ver unidades
+                                </a>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+                <div th:if="${#lists.isEmpty(festivales)}">
+                    <p colspan="6" class="empty-state">
+                        No hay festivales que coincidan con los filtros.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        Epicentro Gourmet · Sistema de gestión de festivales
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Epicentro Gourmet - Inicio</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+
+<body>
+    <header class="header">
+
+        <!-- Usuario autenticado -->
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+
+        <!-- Usuario sin loguear -->
+        <form sec:authorize="isAnonymous()" th:action="@{/login}" method="get">
+            <button type="submit">Iniciar Sesion</button>
+        </form>
+
+        <h1>Bienvenido al TFI</h1>
+
+    </header>
+    <main class="main">
+        <section>
+            <h1 class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</h1>
+        </section>
+        <div class="">
+         
+            <div sec:authorize="hasRole('EMPLEADO')">
+                <a th:href="@{/pedido/alta}" class="btn btn-primary">
+                    Crear pedido
+                </a>
+            </div>
+
+        </div>
+
+        <section sec:authorize="hasRole('RESPONSABLE')">
+            <h2>Mi unidad de venta</h2>
+
+            <p th:if="${errorUnidad}" th:text="${errorUnidad}"></p>
+
+            <div th:if="${miUnidad != null}">
+                <p>
+                    Nombre:
+                    <span th:text="${miUnidad.nombreComercial}"></span>
+                </p>
+                <p>
+                    Código:
+                    <span th:text="${miUnidad.codigo}"></span>
+                </p>
+                <p>
+                    Superficie:
+                    <span th:text="${miUnidad.superficie}"></span> m²
+                </p>
+
+                <form th:action="@{/pedido/getPedidos-unidad-venta}" method="get">
+                    <input type="hidden" name="id" th:value="${miUnidad.id}">
+                    <button type="submit">Ver pedidos de mi unidad</button>
+                </form>
+
+                <form th:action="@{/empleado/alta}" method="get">
+                    <button type="submit">Dar de alta un empleado</button>
+                </form>
+
+                <form th:action="@{/plato/alta}" method="get">
+                    <button type="submit"> Dar de alta un plato</button>
+                </form>
+            </div>
+        </section>
+
+       
+    </main>
+
+</body>
+
+</html>

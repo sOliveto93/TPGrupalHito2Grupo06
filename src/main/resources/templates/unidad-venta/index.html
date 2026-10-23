@@ -8,11 +8,11 @@
 <body>
 
     <h1>Pedidos de la unidad de venta</h1>
-
+<div sec:authorize="hasAnyRole('EMPLEADO', 'RESPONSABLE')">
     <a th:href="@{/pedido/alta}">
         Crear pedido
     </a>
-
+    </div>
     <p th:if="${listaPedidos == null or listaPedidos.isEmpty()}">
         Todavía no hay pedidos registrados.
     </p>
