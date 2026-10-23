@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 32px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    color: #263238;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.header h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    color: #1f2937;
+}
+
+.subtitle {
+    margin: 0;
+    color: #64748b;
+}
+
+.username {
+    font-weight: bold;
+    color: #334155;
+}
+
+.btn {
+    display: inline-block;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-back {
+    background-color: #475569;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #334155;
+}
+
+.card {
+    padding: 24px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.07);
+}
+
+.card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+thead {
+    background-color: #1e3a5f;
+    color: white;
+}
+
+th,
+td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+th {
+    font-weight: 600;
+}
+
+tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.amount {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.total {
+    font-weight: bold;
+    color: #166534;
+}
+
+.empty {
+    padding: 24px;
+    text-align: center;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    color: #64748b;
+}
+
+.download {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.download:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 16px;
+    }
+
+    .header h1 {
+        font-size: 23px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+}

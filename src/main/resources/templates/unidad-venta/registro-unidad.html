@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Unidad de Venta | Epicentro Gourmet</title>
+    <link rel="stylesheet" th:href="@{/css/registro-unidad.css}">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-content">
+            <a th:href="@{/}" class="brand">
+                <span class="brand-icon">EG</span>
+                <span class="brand-text">
+                    <strong>EPICENTRO</strong>
+                    <small>GOURMET</small>
+                </span>
+            </a>
+
+            <a th:href="@{/}" class="btn-home">
+                <span aria-hidden="true">←</span>
+                Volver al inicio
+            </a>
+        </div>
+    </header>
+
+    <main class="page-container">
+
+        <div class="page-heading">
+            <span class="page-eyebrow">GESTIÓN DE FESTIVALES</span>
+            <h1>Registrar Unidad de Venta</h1>
+            <p>Completá los datos de la unidad y de su responsable.</p>
+        </div>
+
+        <!-- Mensajes de resultado -->
+        <div th:if="${error}" class="alert alert-error">
+            <strong th:text="${error}">
+                Ocurrió un error al procesar el registro.
+            </strong>
+        </div>
+
+        <div th:if="${exito}" class="alert alert-success">
+            <strong th:text="${exito}"></strong>
+        </div>
+
+        <form th:action="@{/unidad-venta/guardar}"
+              th:object="${registroDto}"
+              method="post">
+
+            <!-- Errores de validación -->
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
+                <strong>Errores de validación:</strong>
+                <ul>
+                    <li th:each="err : ${#fields.errors('*')}"
+                        th:text="${err}">
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 1. Unidad de venta -->
+            <h3>1. Datos de la Unidad de Venta</h3>
+
+            <p>
+                <label for="festivalId">Festival:</label><br>
+                <select th:field="*{festivalId}" id="festivalId" required>
+                    <option value="" disabled>Seleccione un Festival</option>
+                    <option th:each="f : ${festivales}"
+                            th:value="${f.id}"
+                            th:text="${f.nombre}">
+                    </option>
+                </select>
+            </p>
+
+            <p>
+                <label for="nombreComercial">Nombre Comercial:</label><br>
+                <input type="text"
+                       th:field="*{nombreComercial}"
+                       id="nombreComercial"
+                       placeholder="Ej: La Hamburguesería"
+                       required>
+            </p>
+
+            <p>
+                <label for="inputCodigo">Código Único (10 caracteres):</label><br>
+                <input type="text"
+                       id="inputCodigo"
+                       th:field="*{codigo}"
+                       maxlength="10"
+                       placeholder="Ej: FT12345678"
+                       required>
+            </p>
+
+            <p>
+                <label for="superficie">Superficie (m²):</label><br>
+                <input type="number"
+                       step="0.01"
+                       th:field="*{superficie}"
+                       id="superficie"
+                       min="0.01"
+                       placeholder="Ej: 15.5"
+                       required>
+            </p>
+
+            <p>
+                <label for="tipoUnidadSelect">Tipo de Unidad:</label><br>
+                <select th:field="*{tipoUnidad}"
+                        id="tipoUnidadSelect"
+                        onchange="toggleCamposTipo()">
+                    <option value="FOOD_TRUCK">Food Truck</option>
+                    <option value="PUESTO">Puesto Desarmable</option>
+                </select>
+            </p>
+
+            <!-- Campos específicos del Food Truck -->
+            <div id="camposFoodTruck" class="conditional-fields">
+                <p>
+                    <label for="patente">Patente:</label><br>
+                    <input type="text"
+                           th:field="*{patente}"
+                           id="patente"
+                           placeholder="Ej: AA123CD">
+                </p>
+
+                <p>
+                    <label>
+                        <input type="checkbox"
+                               th:field="*{requiereElectricidad}">
+                        Requiere Conexión Eléctrica
+                    </label>
+                </p>
+            </div>
+
+            <!-- Campos específicos del puesto -->
+            <div id="camposPuesto"
+                 class="conditional-fields"
+                 style="display: none;">
+
+                <p>
+                    <label for="cantidadCarpas">Cantidad de Carpas:</label><br>
+                    <input type="number"
+                           th:field="*{cantidadCarpas}"
+                           id="cantidadCarpas"
+                           min="1"
+                           placeholder="Ej: 2">
+                </p>
+
+                <p>
+                    <label for="tiempoMontajeMinutos">
+                        Tiempo de Montaje (minutos):
+                    </label><br>
+                    <input type="number"
+                           th:field="*{tiempoMontajeMinutos}"
+                           id="tiempoMontajeMinutos"
+                           min="0"
+                           placeholder="Ej: 45">
+                </p>
+            </div>
+
+            <!-- 2. Responsable -->
+            <h3>2. Datos del Responsable (Staff)</h3>
+
+            <p>
+                <label for="nombre">Nombre:</label><br>
+                <input type="text"
+                       th:field="*{nombre}"
+                       id="nombre"
+                       placeholder="Ej: Carlos"
+                       required>
+            </p>
+
+            <p>
+                <label for="apellido">Apellido:</label><br>
+                <input type="text"
+                       th:field="*{apellido}"
+                       id="apellido"
+                       placeholder="Ej: Ríos"
+                       required>
+            </p>
+
+            <p>
+                <label for="dni">DNI:</label><br>
+                <input type="text"
+                       th:field="*{dni}"
+                       id="dni"
+                       placeholder="Ej: 30111222"
+                       required>
+            </p>
+
+            <p>
+                <label for="fechaNac">Fecha de Nacimiento:</label><br>
+                <input type="date"
+                       th:field="*{fechaNac}"
+                       id="fechaNac"
+                       required>
+            </p>
+
+            <p>
+                <label for="fechaIngreso">Fecha de Ingreso:</label><br>
+                <input type="date"
+                       th:field="*{fechaIngreso}"
+                       id="fechaIngreso"
+                       required>
+            </p>
+
+            <!-- 3. Credenciales -->
+            <h3>3. Credenciales de Usuario</h3>
+
+            <p>
+                <label for="email">Email (Usuario):</label><br>
+                <input type="email"
+                       th:field="*{email}"
+                       id="email"
+                       placeholder="Ej: carlos.rios@gmail.com"
+                       required>
+            </p>
+
+            <p>
+                <label for="inputPassword">Contraseña:</label><br>
+                <input type="password"
+                       id="inputPassword"
+                       th:field="*{password}"
+                       placeholder="••••••••"
+                       required>
+                <button type="button"
+                        class="btn-password"
+                        onclick="togglePassword('inputPassword', this)">
+                    Mostrar
+                </button>
+            </p>
+
+            <p>
+                <label for="inputConfirmPassword">
+                    Repetir Contraseña:
+                </label><br>
+                <input type="password"
+                       id="inputConfirmPassword"
+                       placeholder="••••••••"
+                       required>
+                <button type="button"
+                        class="btn-password"
+                        onclick="togglePassword('inputConfirmPassword', this)">
+                    Mostrar
+                </button>
+                <span id="passError" class="password-error" hidden>
+                    Las contraseñas no coinciden.
+                </span>
+            </p>
+
+            <!-- Acciones -->
+            <div class="form-actions">
+                <a th:href="@{/}" class="btn-cancelar">Cancelar</a>
+                <button type="submit" class="btn-submit">
+                    Registrar Unidad
+                </button>
+            </div>
+
+        </form>
+    </main>
+
+    <script>
+        function toggleCamposTipo() {
+            const tipo = document.getElementById("tipoUnidadSelect").value;
+            const foodTruck = document.getElementById("camposFoodTruck");
+            const puesto = document.getElementById("camposPuesto");
+            const inputCodigo = document.getElementById("inputCodigo");
+
+            const esFoodTruck = tipo === "FOOD_TRUCK";
+
+            foodTruck.style.display = esFoodTruck ? "block" : "none";
+            puesto.style.display = esFoodTruck ? "none" : "block";
+
+            inputCodigo.placeholder = esFoodTruck
+                ? "Ej: FT12345678"
+                : "Ej: PD12345678";
+        }
+
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+
+            if (input.type === "password") {
+                input.type = "text";
+                btn.textContent = "Ocultar";
+            } else {
+                input.type = "password";
+                btn.textContent = "Mostrar";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            const password = document.getElementById("inputPassword");
+            const confirmPassword = document.getElementById("inputConfirmPassword");
+            const passError = document.getElementById("passError");
+
+            toggleCamposTipo();
+
+            form.addEventListener("submit", function (event) {
+                if (password.value !== confirmPassword.value) {
+                    event.preventDefault();
+                    passError.hidden = false;
+                    confirmPassword.setAttribute("aria-invalid", "true");
+                    confirmPassword.focus();
+                } else {
+                    passError.hidden = true;
+                    confirmPassword.removeAttribute("aria-invalid");
+                }
+            });
+
+            confirmPassword.addEventListener("input", function () {
+                if (password.value === confirmPassword.value) {
+                    passError.hidden = true;
+                    confirmPassword.removeAttribute("aria-invalid");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

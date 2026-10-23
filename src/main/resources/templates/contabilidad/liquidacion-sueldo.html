@@ -1,48 +1,97 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contabilidad - Liquidación de Haberes</title>
+    <link rel="stylesheet" th:href="@{/css/liquidacionSueldoEmpleado.css}">
 </head>
+
 <body>
+<div class="container">
 
-<h2>Liquidación de Haberes</h2>
-<p>Usuario autenticado: <strong th:text="${username}">admin</strong></p>
+    <header class="header">
+        <div>
+            <h1>Liquidación de haberes</h1>
+            <p class="subtitle">
+                Usuario autenticado:
+                <span class="username" th:text="${username}">usuario</span>
+            </p>
+        </div>
 
-<div th:if="${#lists.isEmpty(liquidaciones)}">
-    <p>No hay registros de liquidaciones de sueldo disponibles.</p>
+        <a th:href="@{/home}" class="btn btn-back">
+            ← Volver al inicio
+        </a>
+    </header>
+
+    <main class="card">
+        <h2>Detalle de liquidaciones</h2>
+
+        <div class="empty" th:if="${#lists.isEmpty(liquidaciones)}">
+            No hay registros de liquidaciones de sueldo disponibles.
+        </div>
+
+        <div class="table-wrapper"
+             th:if="${!#lists.isEmpty(liquidaciones)}">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Empleado</th>
+                    <th>Fecha</th>
+                    <th>Festival</th>
+                    <th>Días trabajados</th>
+                    <th>Sueldo base</th>
+                    <th>Adicional</th>
+                    <th>Factor</th>
+                    <th>Total neto</th>
+                    <th>Acción</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="liq : ${liquidaciones}">
+                    <td th:text="${liq.empleado != null && liq.empleado.usuario != null ? liq.empleado.usuario.username : 'Sin empleado'}">
+                        empleado
+                    </td>
+
+                    <td th:text="${liq.fecha}">2026-10-20</td>
+
+                    <td th:text="${liq.festival != null ? liq.festival.nombre : 'Sin festival'}">
+                        Festival
+                    </td>
+
+                    <td th:text="${liq.diasFestival}">20</td>
+
+                    <td class="amount"
+                        th:text="${#numbers.formatDecimal(liq.sueldo, 1, 2)}">
+                        100000.00
+                    </td>
+
+                    <td class="amount"
+                        th:text="${#numbers.formatDecimal(liq.adicionalAplicado, 1, 2)}">
+                        20000.00
+                    </td>
+
+                    <td th:text="${liq.factorAplicado}">1.00</td>
+
+                    <td class="amount total"
+                        th:text="${#numbers.formatDecimal(liq.total, 1, 2)}">
+                        120000.00
+                    </td>
+
+                    <td>
+                        <span class="download">PDF próximamente</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
 </div>
-
-<table border="1" th:if="${!#lists.isEmpty(liquidaciones)}">
-    <thead>
-    <tr>
-        <th>Empleado</th>
-        <th>Fecha</th>
-        <th>Festival</th>
-        <th>Días Trabajados</th>
-        <th>Sueldo Base</th>
-        <th>Adicional Aplicado</th>
-        <th>Factor Aplicado</th>
-        <th>Total Neto</th>
-        <th>Acción</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="liq : ${liquidaciones}">
-        <td th:text="${liq.empleado != null && liq.empleado.usuario != null ? liq.empleado.usuario.username : 'Sin Empleado'}">juan_cajero</td>
-        <td th:text="${liq.fecha}">2026-10-20</td>
-        <td th:text="${liq.festival != null ? liq.festival.nombre : 'Sin Festival'}">Festival Gourmet</td>
-        <td th:text="${liq.diasFestival}">20</td>
-        <td th:text="${'$' + liq.sueldo}">$100000.00</td>
-        <td th:text="${'$' + liq.adicionalAplicado}">$20000.00</td>
-        <td th:text="${liq.factorAplicado}">1.00</td>
-        <td th:text="${'$' + liq.total}">$120000.00</td>
-        <td>
-            <a href="#" onclick="alert('Descarga de recibo PDF en preparación')">Descargar PDF</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
 </body>
 </html>

@@ -1,71 +1,110 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Epicentro Gourmet - Inicio</title>
     <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 
 <body>
     <header class="header">
+        <a th:href="@{/}" class="brand">Epicentro Gourmet</a>
 
-        <!-- Usuario autenticado -->
-        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-            <button type="submit">Cerrar sesión</button>
-        </form>
+        <div class="header-actions">
+            <form sec:authorize="isAuthenticated()"
+                  th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline">
+                    Cerrar sesión
+                </button>
+            </form>
 
-        <!-- Usuario sin loguear -->
-        <form sec:authorize="isAnonymous()" th:action="@{/login}" method="get">
-            <button type="submit">Iniciar Sesion</button>
-        </form>
-
-        <h1>Bienvenido al TFI</h1>
-
+            <a sec:authorize="isAnonymous()"
+               th:href="@{/login}"
+               class="btn btn-outline">
+                Iniciar sesión
+            </a>
+        </div>
     </header>
+
     <main class="main">
-        <section>
-            <h1 class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</h1>
+        <section class="page-heading">
+            <h1>Bienvenido a Epicentro Gourmet</h1>
+            <p class="subtitle">
+                Sistema de gestión de personas, unidades de venta y festivales.
+                Consultá los festivales disponibles y gestioná tu unidad de venta.
+            </p>
         </section>
-        <div class="">
-            <div>
-                <a th:href="@{/unidad-venta/registro-unidad}" class="btn btn-primary">
-                    Registrar Unidad de Venta
-                </a>
+
+        <section class="registro-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Unidades de venta</h2>
+                    <p>¿Querés participar con tu propia unidad?</p>
+                </div>
             </div>
 
-        </div>
+            <a th:href="@{/unidad-venta/registro-unidad}"
+               class="btn btn-primary">
+                Registrar unidad de venta
+            </a>
+        </section>
 
-        <div class="festivales">
-            <div th:each="f : ${festivales}" class="card">
-
-                <p>
-                    <span th:text="${f.nombre}"></span>
-                </p>
-
-                <p>
-                    Temporada:
-                    <span th:text="${f.temporada}"></span>
-                </p>
-
-                <p>
-                    Fecha de inicio:
-                    <span th:text="${f.fechaInicio}"></span>
-                </p>
-
-                <p>
-                    Fecha de fin:
-                    <span th:text="${f.fechaFin}"></span>
-                </p>
-                <p>
-                    Estado:
-                    <span th:text="${f.estado}"></span>
-                </p>
-                
+        <section class="festivales-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Festivales</h2>
+                    <p>Conocé las próximas temporadas y sus fechas.</p>
+                </div>
             </div>
-        </div>
+
+            <div class="festivales"
+                 th:if="${festivales != null and !#lists.isEmpty(festivales)}">
+
+                <article th:each="f : ${festivales}" class="card">
+                    <div class="festival-header">
+                        <h3 th:text="${f.nombre}">Nombre del festival</h3>
+                        <span class="festival-temporada"
+                              th:text="'Temporada ' + ${f.temporada}">
+                            Temporada
+                        </span>
+                    </div>
+
+                    <div class="festival-datos">
+                        <div class="festival-dato">
+                            <span class="dato-label">Fecha de inicio</span>
+                            <strong th:text="${f.fechaInicio}">Fecha</strong>
+                        </div>
+
+                        <div class="festival-dato">
+                            <span class="dato-label">Fecha de finalización</span>
+                            <strong th:text="${f.fechaFin}">Fecha</strong>
+                        </div>
+                    </div>
+
+                    <div class="festival-estado">
+                        <span class="dato-label">Estado</span>
+                        <span class="status"
+                              th:text="${f.estado}"
+                              th:classappend="${f.estado != null and f.estado.toString() == 'ACTIVO'} ? ' status-active' : (${f.estado != null and f.estado.toString() == 'FINALIZADO'} ? ' status-finished' : ' status-upcoming')">
+                            Estado
+                        </span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="empty-state"
+                 th:if="${festivales == null or #lists.isEmpty(festivales)}">
+                No hay festivales disponibles para mostrar.
+            </div>
+        </section>
     </main>
 
+    <footer class="footer">
+        Epicentro Gourmet · Sistema de gestión de festivales
+    </footer>
 </body>
-
 </html>

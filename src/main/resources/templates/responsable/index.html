@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="es"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi unidad de venta - Epicentro Gourmet</title>
-    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/homeEncargado.css}">
 </head>
 
 <body>
@@ -15,24 +13,20 @@
         <a th:href="@{/}" class="brand">Epicentro Gourmet</a>
 
         <div class="header-actions">
-            <form sec:authorize="isAuthenticated()"
-                  th:action="@{/logout}" method="post">
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
                 <button type="submit" class="btn btn-outline">
                     Cerrar sesión
                 </button>
             </form>
 
-            <a sec:authorize="isAnonymous()"
-               th:href="@{/login}"
-               class="btn btn-outline">
+            <a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-outline">
                 Iniciar sesión
             </a>
         </div>
     </header>
 
     <main class="main">
-        <section sec:authorize="hasRole('RESPONSABLE')"
-                 class="page-heading">
+        <section sec:authorize="hasRole('RESPONSABLE')" class="page-heading">
             <h1>Mi unidad de venta</h1>
             <p class="subtitle">
                 Consultá los datos de tu unidad y gestioná tus platos,
@@ -42,20 +36,16 @@
 
         <section sec:authorize="hasRole('RESPONSABLE')">
 
-            <p class="empty-state"
-               th:if="${errorUnidad != null}"
-               th:text="${errorUnidad}">
+            <p class="empty-state" th:if="${errorUnidad != null}" th:text="${errorUnidad}">
             </p>
 
-            <div class="table-container"
-                 th:if="${miUnidad != null}">
+            <div class="table-container" th:if="${miUnidad != null}">
 
                 <div class="table-heading">
                     <h2 th:text="${miUnidad.nombreComercial}">
                         Nombre comercial
                     </h2>
-                    <span class="counter"
-                          th:text="'Código: ' + ${miUnidad.codigo}">
+                    <span class="counter" th:text="'Código: ' + ${miUnidad.codigo}">
                         Código
                     </span>
                 </div>
@@ -93,8 +83,7 @@
                                 Incorporá empleados para trabajar
                                 en tu unidad de venta.
                             </p>
-                            <a th:href="@{/empleado/alta}"
-                               class="btn btn-primary">
+                            <a th:href="@{/empleado/alta}" class="btn btn-primary">
                                 Dar de alta empleado
                             </a>
                         </article>
@@ -105,8 +94,7 @@
                                 Registrá nuevos platos para ofrecer
                                 en tu unidad.
                             </p>
-                            <a th:href="@{/plato/alta}"
-                               class="btn btn-primary">
+                            <a th:href="@{/plato/alta}" class="btn btn-primary">
                                 Dar de alta plato
                             </a>
                         </article>
@@ -117,11 +105,22 @@
                                 Consultá los pedidos recibidos
                                 por tu unidad de venta.
                             </p>
-                            <a th:href="@{/pedido/getPedidos-unidad-venta(id=${miUnidad.id})}"
-                               class="btn btn-primary">
+                            <a th:href="@{/pedido/getPedidos-unidad-venta(id=${miUnidad.id})}" class="btn btn-primary">
                                 Ver pedidos
                             </a>
                         </article>
+                        
+                        <article class="accion-card">
+                            <h4>Liquidaciones de sueldo</h4>
+                            <p>
+                                Consultá las liquidaciones de los empleados
+                                de tu unidad de venta.
+                            </p>
+                            <a th:href="@{/contabilidad/sueldo}" class="btn btn-primary">
+                                Ver liquidaciones
+                            </a>
+                        </article>
+                        
                     </div>
                 </div>
             </div>
@@ -146,4 +145,5 @@
         Epicentro Gourmet · Sistema de gestión de festivales
     </footer>
 </body>
+
 </html>
