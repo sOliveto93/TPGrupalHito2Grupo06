@@ -125,6 +125,9 @@
                                 <a th:href="@{/contabilidad/ranking(id=${f.id})}" class="btn btn-outline">
                                     Ver ranking
                                 </a>
+                                <a th:href="@{/plato/reporte-plato-estrella(id=${f.id})}" class="btn btn-outline">
+                                    Ver plato estrella
+                                </a>
                             </td>
                         </tr>
 
@@ -132,7 +135,7 @@
                     </tbody>
                 </table>
                 <div th:if="${#lists.isEmpty(festivales)}">
-                    <p colspan="6" class="empty-state">
+                    <p class="empty-state">
                         No hay festivales que coincidan con los filtros.
                     </p>
                 </div>

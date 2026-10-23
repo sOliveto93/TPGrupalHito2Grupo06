@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #a5aab2;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f2937;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    background: #071940;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 24px;
+}
+
+header h1 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    color: white;
+    text-align: center;
+    font-size: 26px;
+}
+
+header h2 {
+    grid-column: 2;
+    margin: 8px 0 0;
+    color: #dbeafe;
+    text-align: center;
+    font-size: 18px;
+}
+
+.btn-volver {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 14px;
+    border: 1px solid #64748b;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.btn-volver:hover {
+    background: #1e3a6b;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    padding: 32px 20px;
+    background: #b3b9c8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main h3 {
+    margin: 0 0 24px;
+    color: #071940;
+    font-size: 22px;
+}
+
+.tabla-reporte {
+    width: 100%;
+    max-width: 850px;
+    border-collapse: collapse;
+    background: #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgb(7 25 64 / 15%);
+}
+
+.tabla-reporte thead {
+    background: #071940;
+    color: white;
+}
+
+.tabla-reporte th,
+.tabla-reporte td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid #c4c9d2;
+}
+
+.tabla-reporte tbody tr:nth-child(even) {
+    background: #d5d9e1;
+}
+
+.tabla-reporte tbody tr:hover {
+    background: #c2ccdf;
+}
+
+.tabla-reporte tbody tr:last-child td {
+    border-bottom: none;
+}
+
+main p {
+    padding: 16px 20px;
+    background: #e5e7eb;
+    border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+    header {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        padding: 16px;
+    }
+
+    header h1,
+    header h2,
+    .btn-volver {
+        grid-column: 1;
+        grid-row: auto;
+        text-align: center;
+    }
+
+    .tabla-reporte th,
+    .tabla-reporte td {
+        padding: 12px 8px;
+        font-size: 14px;
+    }
+
+    main {
+        padding: 24px 12px;
+    }
+}
