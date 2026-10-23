@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking de ingresos</title>
+    <link rel="stylesheet" th:href="@{/css/ranking-unidades.css}">
+</head>
+
+<body>
+    <main class="contenedor">
+        </a>
+        <a th:href="@{/home}" class=" btn-volver">
+            ← Volver
+        </a>
+        <header class="encabezado">
+            <span class="etiqueta">CONTABILIDAD</span>
+            <h1>Ranking de ingresos</h1>
+            <p class="subtitulo">
+                Festival:
+                <strong th:text="${festival.nombre}">Nombre del festival</strong>
+            </p>
+        </header>
+
+        <section class="panel">
+            <div class="panel-titulo">
+                <div>
+                    <h2>Unidades de venta</h2>
+                    <p>Ordenadas de mayor a menor ingreso</p>
+                </div>
+                <span class="cantidad" th:text="${#lists.size(lista)} + ' unidades'">
+                    0 unidades
+                </span>
+            </div>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-posicion">#</th>
+                            <th>Unidad de venta</th>
+                            <th>Código</th>
+                            <th class="col-ingresos">Ingresos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="unidad, estado : ${lista}">
+                            <td class="posicion" th:text="${estado.count}">1</td>
+                            <td class="nombre" th:text="${unidad.nombreComercial}">
+                                Nombre de unidad
+                            </td>
+                            <td>
+                                <span class="codigo" th:text="${unidad.codigo}">
+                                    COD-001
+                                </span>
+                            </td>
+                            <td class="ingresos"
+                                th:text="${#numbers.formatDecimal(unidad.ingresos, 1, 'POINT', 2, 'COMMA')}">
+                                0,00
+                            </td>
+                        </tr>
+
+                        <tr th:if="${#lists.isEmpty(lista)}">
+                            <td colspan="4" class="sin-datos">
+                                No hay unidades de venta para mostrar.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

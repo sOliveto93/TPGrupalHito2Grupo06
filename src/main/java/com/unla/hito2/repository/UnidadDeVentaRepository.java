@@ -20,4 +20,6 @@ public interface UnidadDeVentaRepository extends JpaRepository<UnidadDeVenta,Lon
     List<UnidadDeVenta> findByFestivalId(@Param("id") Long id);
     Optional<UnidadDeVenta> findByEmpleados_Usuario_Username(String username);
     Optional<UnidadDeVenta> findByResponsable_Usuario_Username(String username);
+
+  
 }

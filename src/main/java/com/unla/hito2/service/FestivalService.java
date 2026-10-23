@@ -4,6 +4,8 @@ import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.entity.Festival;
 import com.unla.hito2.repository.FestivalRepository;
 
+import org.apache.el.stream.Optional;
+import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
@@ -38,20 +40,20 @@ public class FestivalService {
 
     public List<FestivalDto> buscarEntreFechas(LocalDate inicio, LocalDate fin) {
 
-    if (inicio != null && fin != null && inicio.isAfter(fin)) {
-        throw new IllegalArgumentException(
-                "La fecha de inicio no puede ser posterior a la fecha de fin");
+        if (inicio != null && fin != null && inicio.isAfter(fin)) {
+            throw new IllegalArgumentException(
+                    "La fecha de inicio no puede ser posterior a la fecha de fin");
+        }
+
+        List<Festival> lista = festivalRepository.buscarEntreFechas(inicio, fin);
+        List<FestivalDto> dtos = new ArrayList<>();
+
+        for (Festival festival : lista) {
+            dtos.add(festivalToDto(festival));
+        }
+
+        return dtos;
     }
-
-    List<Festival> lista = festivalRepository.buscarEntreFechas(inicio, fin);
-    List<FestivalDto> dtos = new ArrayList<>();
-
-    for (Festival festival : lista) {
-        dtos.add(festivalToDto(festival));
-    }
-
-    return dtos;
-}
 
     public List<FestivalDto> traerTodos() {
         List<Festival> lista = festivalRepository.findAll();
@@ -62,6 +64,14 @@ public class FestivalService {
         }
 
         return dtos;
+    }
+
+    public FestivalDto traerFestivalPorId(Long id) {
+        Festival festival = festivalRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "No se encontró un festival con id: " + id));
+
+        return festivalToDto(festival);
     }
 
     private FestivalDto festivalToDto(Festival festival) {
@@ -84,46 +94,46 @@ public class FestivalService {
     }
 
     public List<FestivalDto> filtrarFestivales(
-        String nombre,
-        String temporada,
-        String estado,
-        LocalDate fechaInicio,
-        LocalDate fechaFin) {
+            String nombre,
+            String temporada,
+            String estado,
+            LocalDate fechaInicio,
+            LocalDate fechaFin) {
 
-    if (fechaInicio != null && fechaFin != null
-            && fechaInicio.isAfter(fechaFin)) {
-        throw new IllegalArgumentException(
-                "La fecha de inicio no puede ser posterior a la fecha de fin");
-    }
-
-    if (nombre != null) {
-        nombre = nombre.trim();
-        if (nombre.isEmpty()) {
-            nombre = null;
+        if (fechaInicio != null && fechaFin != null
+                && fechaInicio.isAfter(fechaFin)) {
+            throw new IllegalArgumentException(
+                    "La fecha de inicio no puede ser posterior a la fecha de fin");
         }
-    }
 
-    if (temporada != null) {
-        temporada = temporada.trim();
-        if (temporada.isEmpty()) {
-            temporada = null;
+        if (nombre != null) {
+            nombre = nombre.trim();
+            if (nombre.isEmpty()) {
+                nombre = null;
+            }
         }
-    }
 
-    List<Festival> festivales = festivalRepository.filtrarFestivales(
-            nombre, temporada, fechaInicio, fechaFin);
-
-    List<FestivalDto> resultado = new ArrayList<>();
-
-    for (Festival festival : festivales) {
-        FestivalDto dto = festivalToDto(festival);
-        //filtramos aca porque esto es un parametro calculado
-        if (estado == null || estado.isBlank()
-                || estado.equals(dto.getEstado())) {
-            resultado.add(dto);
+        if (temporada != null) {
+            temporada = temporada.trim();
+            if (temporada.isEmpty()) {
+                temporada = null;
+            }
         }
-    }
 
-    return resultado;
-}
+        List<Festival> festivales = festivalRepository.filtrarFestivales(
+                nombre, temporada, fechaInicio, fechaFin);
+
+        List<FestivalDto> resultado = new ArrayList<>();
+
+        for (Festival festival : festivales) {
+            FestivalDto dto = festivalToDto(festival);
+            // filtramos aca porque esto es un parametro calculado
+            if (estado == null || estado.isBlank()
+                    || estado.equals(dto.getEstado())) {
+                resultado.add(dto);
+            }
+        }
+
+        return resultado;
+    }
 }

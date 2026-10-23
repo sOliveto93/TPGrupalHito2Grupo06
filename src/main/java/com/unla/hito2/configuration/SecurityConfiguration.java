@@ -36,8 +36,6 @@ public class SecurityConfiguration {
 				.cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
 					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/","/403", "/login").permitAll();
-					auth.requestMatchers("/contabilidad/liquidacion-sueldo/**").hasAnyRole("EMPLEADO", "RESPONSABLE", "ADMINISTRADOR");
-					auth.requestMatchers("/contabilidad/**").hasAnyRole("RESPONSABLE", "ADMINISTRADOR");
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(form -> form

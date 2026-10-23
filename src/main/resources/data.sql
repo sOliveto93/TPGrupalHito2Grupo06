@@ -454,23 +454,102 @@ VALUES
 -- 6. CARGA DE PLATOS DEL MENÚ
 -- =====================================================
 INSERT INTO `plato` (`id`, `nombre`, `precio`, `costo`, `activo`, `unidad_venta_id`)
-VALUES (1, 'Hamburguesa Doble Queso', 8500.00, 3200.00, 1, 1),
+VALUES 
+        -- Unidad 1:
+        (1, 'Hamburguesa Doble Queso', 8500.00, 3200.00, 1, 1),
        (2, 'Papas Rústicas', 4000.00, 1200.00, 1, 1),
-       (3, 'Taco de Carne x3', 7500.00, 2800.00, 1, 2);
+       (3, 'Taco de Carne x3', 7500.00, 2800.00, 1, 1),
+                
+        -- Unidad 2: tacos
+        (4,'Quesadillas de Pollo', 6800.00, 2600.00, TRUE, 2),
+        (5,'Nachos con Cheddar', 5200.00, 1900.00, TRUE, 2),
+        (6,'Burrito de Carne', 7900.00, 3100.00, TRUE, 2),
 
+        -- Unidad 3: pizzas y empanadas
+        (7,'Pizza Muzarella', 9000.00, 3800.00, TRUE, 3),
+        (8,'Pizza Especial', 11500.00, 4900.00, TRUE, 3),
+        (9,'Empanadas de Carne x3', 6000.00, 2400.00, TRUE, 3),
+
+        -- Unidad 4: parrilla
+        (10,'Choripan Completo', 6500.00, 2700.00, TRUE, 4),
+        (11,'Sandwich de Bondiola', 8500.00, 3600.00, TRUE, 4),
+        (12,'Provoleta', 5800.00, 2300.00, TRUE, 4),
+
+        -- Unidad 5: opciones vegetarianas
+        (13,'Hamburguesa Vegetariana', 7800.00, 3000.00, TRUE, 5),
+        (14,'Wrap de Vegetales', 6200.00, 2200.00, TRUE, 5),
+        (15,'Ensalada Gourmet', 5900.00, 2100.00, TRUE, 5),
+
+        -- Unidad 6: postres
+        (16,'Brownie con Helado', 4800.00, 1700.00, TRUE, 6),
+        (17,'Cheesecake', 4200.00, 1500.00, TRUE, 6),
+        (18,'Café con Medialunas', 3500.00, 1200.00, TRUE, 6),
+
+        -- Unidad 7: bebidas y combos
+        (19,'Limonada Casera', 2800.00, 700.00, TRUE, 7),
+        (20,'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 7),
+        (21,'Combo Hamburguesa y Bebida', 10500.00, 4200.00, TRUE, 7);
 -- =====================================================
 -- 7. CARGA DE PEDIDOS Y SUS DETALLES (VENTAS)
 -- =====================================================
 INSERT INTO `pedido` (`id`, `fecha_hora`, `unidad_venta_id`)
-VALUES (1, '2026-10-05 13:30:00', 1),
-       (2, '2026-10-05 14:15:00', 1),
-       (3, '2026-10-05 20:00:00', 2);
+VALUES (1,  '2026-10-05 13:30:00', 1),
+(2,  '2026-10-05 14:15:00', 1),
+
+(3,  '2026-10-05 20:00:00', 2),
+(4,  '2026-10-05 20:30:00', 2),
+
+(5,  '2026-10-05 13:45:00', 3),
+(6,  '2026-10-05 14:30:00', 3),
+
+(7,  '2026-10-05 15:00:00', 4),
+(8,  '2026-10-05 20:15:00', 4),
+
+(9,  '2026-10-05 16:00:00', 5),
+(10, '2026-10-05 19:00:00', 5),
+
+(11, '2026-10-05 17:30:00', 6),
+(12, '2026-10-05 20:00:00', 6),
+
+(13, '2026-10-05 18:15:00', 7),
+(14, '2026-10-05 21:00:00', 7);
 
 INSERT INTO `detalle_pedido` (`id`, `pedido_id`, `plato_id`, `cantidad`, `precio_unitario`, `subtotal`)
-VALUES (1, 1, 1, 2, 8500.00, 17000.00),
-       (2, 1, 2, 1, 4000.00, 4000.00),
-       (3, 2, 1, 1, 8500.00, 8500.00),
-       (4, 3, 3, 3, 7500.00, 22500.00);
+VALUES 
+-- Unidad 1: Hamburguesas y papas
+(1,  1, 1, 2, 8500.00, 17000.00),
+(2,  1, 2, 1, 4000.00,  4000.00),
+(3,  2, 1, 1, 8500.00,  8500.00),
+
+-- Unidad 2: Comida mexicana
+(4,  3, 4, 3, 6800.00, 20400.00),
+(5,  4, 4, 2, 6800.00, 13600.00),
+(6,  4, 5, 1, 5200.00,  5200.00),
+
+-- Unidad 3: Pizzería
+(7,  5, 7, 2, 9000.00, 18000.00),
+(8,  5, 9, 3, 6000.00, 18000.00),
+(9,  6, 8, 1, 11500.00, 11500.00),
+
+-- Unidad 4: Parrilla
+(10, 7, 10, 2, 6500.00, 13000.00),
+(11, 7, 12, 1, 5800.00,  5800.00),
+(12, 8, 11, 2, 8500.00, 17000.00),
+
+-- Unidad 5: Comida saludable
+(13, 9, 13, 2, 7800.00, 15600.00),
+(14, 9, 15, 1, 5900.00,  5900.00),
+(15, 10, 14, 3, 6200.00, 18600.00),
+
+-- Unidad 6: Cafetería y postres
+(16, 11, 16, 2, 4800.00,  9600.00),
+(17, 11, 18, 2, 3500.00,  7000.00),
+(18, 12, 17, 3, 4200.00, 12600.00),
+
+-- Unidad 7: Bebidas y combos
+(19, 13, 21, 2, 10500.00, 21000.00),
+(20, 13, 19, 2,  2800.00,  5600.00),
+(21, 14, 20, 3,  2200.00,  6600.00);
 
 -- =====================================================
 -- 8. CIERRES DE CAJA Y LIQUIDACIÓN DE HABERES (PRUEBAS DE REPORTES)

@@ -1,7 +1,6 @@
 package com.unla.hito2.controller;
 
 import com.unla.hito2.dto.FestivalDto;
-import com.unla.hito2.entity.Festival;
 import com.unla.hito2.service.FestivalService;
 
 import com.unla.hito2.service.UnidadDeVentaService;

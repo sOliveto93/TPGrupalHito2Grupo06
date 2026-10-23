@@ -1,6 +1,7 @@
 package com.unla.hito2.repository;
 
 import com.unla.hito2.entity.Festival;
+import com.unla.hito2.entity.Pedido;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,4 +37,6 @@ public interface FestivalRepository extends JpaRepository<Festival, Long> {
             """)
     List<Festival> filtrarFestivales(@Param("nombre") String nombre, @Param("temporada") String temporada,
             @Param("fechaInicio") LocalDate fechaInicio, @Param("fechaFin") LocalDate fechaFin);
+
+
 }
