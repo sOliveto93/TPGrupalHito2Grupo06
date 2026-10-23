@@ -21,7 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/empleado")
-@PreAuthorize("hasRole('RESPONSABLE')")
+@PreAuthorize("hasAnyRole('EMPLEADO','RESPONSABLE')")
+
 public class EmpleadoController {
 
     private final EmpleadoService empleadoService;
@@ -42,6 +43,7 @@ public class EmpleadoController {
         return "empleado/formulario";
     }
     @PostMapping("/alta")
+      @PreAuthorize("hasRole('RESPONSABLE')")
     public String registrarEmpleado(@Valid @ModelAttribute("empleadoDto") EmpleadoDto dto,
                                     BindingResult result,
                                     Authentication authentication,

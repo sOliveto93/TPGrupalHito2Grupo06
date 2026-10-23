@@ -5,6 +5,9 @@ import com.unla.hito2.entity.Plato;
 import com.unla.hito2.entity.UnidadDeVenta;
 import com.unla.hito2.repository.PlatoRepository;
 import jakarta.transaction.Transactional;
+
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,11 +20,16 @@ public class PlatoService {
     }
 
     @Transactional
-    public Plato registrarPlato(AltaPlatoDto dto, UnidadDeVenta unidadDeVenta){
+    public Plato registrarPlato(AltaPlatoDto dto, UnidadDeVenta unidadDeVenta) {
 
-        if(unidadDeVenta == null){
+        if (unidadDeVenta == null) {
             throw new IllegalArgumentException(
                     "El responsable no tiene una unidad de venta asignada");
+        }
+
+        if (dto.getPrecio().compareTo(dto.getCosto()) < 0) {
+            throw new IllegalArgumentException(
+                    "El precio de venta no puede ser menor que el costo");
         }
 
         Plato plato = new Plato();
@@ -34,6 +42,5 @@ public class PlatoService {
         return platoRepository.save(plato);
 
     }
-
 
 }
