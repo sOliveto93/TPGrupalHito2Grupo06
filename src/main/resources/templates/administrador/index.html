@@ -68,15 +68,15 @@
             </div>
 
             <div class="filter-actions">
-    <button type="submit" class="btn btn-primary">
-        Filtrar
-    </button>
+                <button type="submit" class="btn btn-primary">
+                    Filtrar
+                </button>
 
-    <a th:href="@{/festival/filtro}" class="btn btn-outline btn-clear">
-        <span aria-hidden="true">↺</span>
-        Limpiar
-    </a>
-</div>
+                <a th:href="@{/festival/filtro}" class="btn btn-outline btn-clear">
+                    <span aria-hidden="true">↺</span>
+                    Limpiar
+                </a>
+            </div>
         </form>
         <section class="table-container">
             <div class="table-heading">
@@ -120,6 +120,10 @@
                                 <a th:href="@{/unidad-venta/unidad-venta-por-festival(id=${f.id})}"
                                     class="btn btn-primary">
                                     Ver unidades
+                                </a>
+
+                                <a th:href="@{/contabilidad/ranking(id=${f.id})}" class="btn btn-outline">
+                                    Ver ranking
                                 </a>
                             </td>
                         </tr>
