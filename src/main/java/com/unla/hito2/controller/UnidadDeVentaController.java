@@ -38,7 +38,7 @@ public class UnidadDeVentaController {
     @GetMapping("registro-unidad")
     public String mostrarFormulario(Model model) {
         model.addAttribute("registroDto", new RegistroUnidadDto());
-        model.addAttribute("festivales", festivalService.traerTodos());
+        model.addAttribute("festivales", festivalService.traerActivosYProximos());
         return "registro-unidad"; // Renderiza templates/registro-unidad.html
     }
 
@@ -49,7 +49,7 @@ public class UnidadDeVentaController {
                                 Model model) {
 
         if (result.hasErrors()) {
-            model.addAttribute("festivales", festivalService.traerTodos());
+            model.addAttribute("festivales", festivalService.traerActivosYProximos());
             return "registro-unidad";
         }
 
@@ -61,7 +61,7 @@ public class UnidadDeVentaController {
         } catch (Exception e) {
             // Captura las excepciones tiradas por el Service (DNI repetido, menor de edad, etc.)
             model.addAttribute("error", e.getMessage());
-            model.addAttribute("festivales", festivalService.traerTodos());
+            model.addAttribute("festivales", festivalService.traerActivosYProximos());
             return "registro-unidad";
         }
     }

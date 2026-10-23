@@ -23,7 +23,7 @@ public class FestivalDto {
 
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-
+    private String estado;
     
    
 }

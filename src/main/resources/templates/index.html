@@ -1,113 +1,71 @@
 <!DOCTYPE html>
-<html lang="es"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Epicentro Gourmet - Inicio</title>
-        <link rel="stylesheet" th:href="@{/css/home.css}">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Epicentro Gourmet - Inicio</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
 
-    <body>
-        <header class="header">
+<body>
+    <header class="header">
 
-            <!-- Usuario autenticado -->
-            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                <button type="submit">Cerrar sesión</button>
-            </form>
+        <!-- Usuario autenticado -->
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <button type="submit">Cerrar sesión</button>
+        </form>
 
-            <!-- Usuario sin loguear -->
-            <form sec:authorize="isAnonymous()" th:action="@{/login}" method="get">
-                <button type="submit">Iniciar Sesion</button>
-            </form>
+        <!-- Usuario sin loguear -->
+        <form sec:authorize="isAnonymous()" th:action="@{/login}" method="get">
+            <button type="submit">Iniciar Sesion</button>
+        </form>
 
-            <h1>Bienvenido al TFI</h1>
+        <h1>Bienvenido al TFI</h1>
 
-        </header>
-        <main class="main">
-            <section>
-                <h1 class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</h1>
-            </section>
-            <div class="">
-                <div sec:authorize="hasRole('ADMINISTRADOR')">
-                    <a th:href="@{/unidad-venta/registro-unidad}" class="btn btn-primary">
-                        Registrar Unidad de Venta
-                    </a>
-                </div>
-                <div sec:authorize="hasRole('EMPLEADO')">
-                    <a th:href="@{/pedido/alta}" class="btn btn-primary">
-                        Crear pedido
-                    </a>
-                </div>
-
+    </header>
+    <main class="main">
+        <section>
+            <h1 class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</h1>
+        </section>
+        <div class="">
+            <div>
+                <a th:href="@{/unidad-venta/registro-unidad}" class="btn btn-primary">
+                    Registrar Unidad de Venta
+                </a>
             </div>
 
-            <section sec:authorize="hasRole('RESPONSABLE')">
-                <h2>Mi unidad de venta</h2>
+        </div>
 
-                <p th:if="${errorUnidad}" th:text="${errorUnidad}"></p>
+        <div class="festivales">
+            <div th:each="f : ${festivales}" class="card">
 
-                <div th:if="${miUnidad != null}">
-                    <p>
-                        Nombre:
-                        <span th:text="${miUnidad.nombreComercial}"></span>
-                    </p>
-                    <p>
-                        Código:
-                        <span th:text="${miUnidad.codigo}"></span>
-                    </p>
-                    <p>
-                        Superficie:
-                        <span th:text="${miUnidad.superficie}"></span> m²
-                    </p>
+                <p>
+                    <span th:text="${f.nombre}"></span>
+                </p>
 
-                    <form th:action="@{/pedido/getPedidos-unidad-venta}" method="get">
-                        <input type="hidden" name="id" th:value="${miUnidad.id}">
-                        <button type="submit">Ver pedidos de mi unidad</button>
-                    </form>
+                <p>
+                    Temporada:
+                    <span th:text="${f.temporada}"></span>
+                </p>
 
-                    <form th:action="@{/empleado/alta}" method="get">
-                        <button type="submit">Dar de alta un empleado</button>
-                    </form>
+                <p>
+                    Fecha de inicio:
+                    <span th:text="${f.fechaInicio}"></span>
+                </p>
 
-                    <form th:action="@{/plato/alta}" method="get">
-                        <button type="submit"> Dar de alta un plato</button>
-                    </form>
-                </div>
-            </section>
-
-                       <div class="festivales">
-                <div th:each="f : ${festivales}" class="card">
-                    <p>
-                        <span th:text="${f.nombre}"></span>
-                    </p>
-
-                    <p>
-                        Temporada:
-                        <span th:text="${f.temporada}"></span>
-                    </p>
-
-                    <p>
-                        Fecha de inicio:
-                        <span th:text="${f.fechaInicio}"></span>
-                    </p>
-
-                    <p>
-                        Fecha de fin:
-                        <span th:text="${f.fechaFin}"></span>
-                    </p>
-
-                    <div sec:authorize="hasRole('ADMINISTRADOR')">
-                        <a th:href="@{/unidad-venta/unidad-venta-por-festival(id=${f.id})}"
-                           class="btn btn-primary">
-                            Mostrar unidades de venta
-                        </a>
-                    </div>
-                </div>
+                <p>
+                    Fecha de fin:
+                    <span th:text="${f.fechaFin}"></span>
+                </p>
+                <p>
+                    Estado:
+                    <span th:text="${f.estado}"></span>
+                </p>
+                
             </div>
-        </main>
+        </div>
+    </main>
 
-    </body>
+</body>
 
-    </html>
+</html>
