@@ -27,12 +27,15 @@
         <section>
             <h1 class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</h1>
         </section>
-        
-            <div sec:authorize="hasRole('EMPLEADO')">
-                <a th:href="@{/pedido/alta}" class="btn btn-primary">
-                    Crear pedido
-                </a>
-            </div>
+
+        <div sec:authorize="hasRole('EMPLEADO')">
+            <a th:href="@{/pedido/alta}" class="btn btn-primary">
+                Crear pedido
+            </a>
+            <a th:href="@{/contabilidad/sueldo}" class="btn btn-primary">
+                Mis liquidaciones de sueldo
+            </a>
+        </div>
 
         </div>
 
@@ -88,7 +91,7 @@
                     Estado:
                     <span th:text="${f.estado}"></span>
                 </p>
-               
+
             </div>
         </div>
     </main>

@@ -1,0 +1,351 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    color: #263238;
+    line-height: 1.5;
+}
+
+h2 {
+    max-width: 850px;
+    margin: 0 auto 25px;
+    color: #263b50;
+    font-size: 28px;
+    text-align: center;
+}
+
+h3 {
+    margin: 30px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e2e8f0;
+    color: #34495e;
+    font-size: 19px;
+}
+
+
+form {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 30px 36px;
+    background-color: #ffffff;
+    border: 1px solid #e1e7ed;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(25, 42, 62, 0.07);
+}
+
+form p {
+    margin: 0 0 20px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: #34495e;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    min-height: 43px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #263238;
+    font: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder {
+    color: #9aa6b2;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #2878b5;
+    box-shadow: 0 0 0 3px rgba(40, 120, 181, 0.13);
+}
+
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 7px;
+    accent-color: #2878b5;
+    vertical-align: middle;
+}
+
+#camposFoodTruck,
+#camposPuesto {
+    margin: 5px 0 25px;
+    padding: 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #f8fafc;
+}
+
+#camposFoodTruck p:last-child,
+#camposPuesto p:last-child {
+    margin-bottom: 0;
+}
+
+button {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2878b5;
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: #1d5f91;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+input[type="password"] + button {
+    margin-top: 8px;
+}
+
+a {
+    color: #2878b5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+form p:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+form p:last-child a {
+    margin-right: auto;
+}
+
+
+
+#passError {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+ul {
+    padding-left: 22px;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 22px 12px;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    form {
+        padding: 22px 17px;
+    }
+
+    h3 {
+        font-size: 17px;
+    }
+
+    form p:last-child {
+        flex-wrap: wrap;
+    }
+
+    form p:last-child button {
+        flex: 1;
+    }
+}
+
+/* ===== Header de Epicentro Gourmet ===== */
+.site-header {
+    width: 100%;
+    margin: -40px 0 36px;
+    padding: 16px 24px;
+    background: #263b50;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.brand:hover {
+    text-decoration: none;
+}
+
+.brand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border: 2px solid #e5b45b;
+    border-radius: 12px;
+    color: #e5b45b;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    letter-spacing: 2px;
+}
+
+.brand-text strong {
+    font-size: 17px;
+}
+
+.brand-text small {
+    margin-top: 4px;
+    color: #e5b45b;
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+.btn-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 7px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-home:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #e5b45b;
+    text-decoration: none;
+}
+
+/* ===== Encabezado de la página ===== */
+.page-container {
+    width: 100%;
+}
+
+.page-heading {
+    max-width: 850px;
+    margin: 0 auto 25px;
+    text-align: center;
+}
+
+.page-eyebrow {
+    color: #b17c25;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.page-heading h1 {
+    margin: 8px 0;
+    color: #263b50;
+    font-size: 30px;
+}
+
+.page-heading p {
+    margin: 0;
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* El título principal ahora está en page-heading */
+body > h2 {
+    display: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+    .site-header {
+        margin-top: -22px;
+        margin-right: -12px;
+        margin-left: -12px;
+        width: calc(100% + 24px);
+        padding: 14px 16px;
+    }
+
+    .header-content {
+        gap: 10px;
+    }
+
+    .brand {
+        gap: 8px;
+    }
+
+    .brand-icon {
+        width: 39px;
+        height: 39px;
+        font-size: 14px;
+    }
+
+    .brand-text strong {
+        font-size: 14px;
+    }
+
+    .brand-text small {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+
+    .btn-home {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+
+    .page-heading h1 {
+        font-size: 24px;
+    }
+}

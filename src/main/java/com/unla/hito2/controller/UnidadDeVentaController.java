@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/unidad-venta")
-@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 public class UnidadDeVentaController {
 
     private final UnidadDeVentaService unidadDeVentaService;
@@ -37,9 +36,10 @@ public class UnidadDeVentaController {
 
     @GetMapping("registro-unidad")
     public String mostrarFormulario(Model model) {
+        System.out.println("ENTRÓ AL CONTROLADOR DE REGISTRO");
         model.addAttribute("registroDto", new RegistroUnidadDto());
         model.addAttribute("festivales", festivalService.traerActivosYProximos());
-        return "registro-unidad"; // Renderiza templates/registro-unidad.html
+        return "/unidad-venta/registro-unidad"; // Renderiza templates/registro-unidad.html
     }
 
     @PostMapping("/guardar")
@@ -50,7 +50,7 @@ public class UnidadDeVentaController {
 
         if (result.hasErrors()) {
             model.addAttribute("festivales", festivalService.traerActivosYProximos());
-            return "registro-unidad";
+            return "/unidad-venta/registro-unidad";
         }
 
         try {
@@ -62,7 +62,7 @@ public class UnidadDeVentaController {
             // Captura las excepciones tiradas por el Service (DNI repetido, menor de edad, etc.)
             model.addAttribute("error", e.getMessage());
             model.addAttribute("festivales", festivalService.traerActivosYProximos());
-            return "registro-unidad";
+            return "/unidad-venta/registro-unidad";
         }
     }
 
