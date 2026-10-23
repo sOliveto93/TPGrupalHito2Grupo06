@@ -1,79 +1,149 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
-    <title>Epicentro Gourmet - Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi unidad de venta - Epicentro Gourmet</title>
     <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 
 <body>
     <header class="header">
+        <a th:href="@{/}" class="brand">Epicentro Gourmet</a>
 
-        <!-- Usuario autenticado -->
-        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-            <button type="submit">Cerrar sesión</button>
-        </form>
+        <div class="header-actions">
+            <form sec:authorize="isAuthenticated()"
+                  th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline">
+                    Cerrar sesión
+                </button>
+            </form>
 
-        <!-- Usuario sin loguear -->
-        <form sec:authorize="isAnonymous()" th:action="@{/login}" method="get">
-            <button type="submit">Iniciar Sesion</button>
-        </form>
-
-        <h1>Bienvenido al TFI</h1>
-
-    </header>
-    <main class="main">
-        <section>
-            <h1 class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</h1>
-        </section>
-        <div class="">
-         
-            <div sec:authorize="hasRole('EMPLEADO')">
-                <a th:href="@{/pedido/alta}" class="btn btn-primary">
-                    Crear pedido
-                </a>
-            </div>
-
+            <a sec:authorize="isAnonymous()"
+               th:href="@{/login}"
+               class="btn btn-outline">
+                Iniciar sesión
+            </a>
         </div>
+    </header>
+
+    <main class="main">
+        <section sec:authorize="hasRole('RESPONSABLE')"
+                 class="page-heading">
+            <h1>Mi unidad de venta</h1>
+            <p class="subtitle">
+                Consultá los datos de tu unidad y gestioná tus platos,
+                empleados y pedidos.
+            </p>
+        </section>
 
         <section sec:authorize="hasRole('RESPONSABLE')">
-            <h2>Mi unidad de venta</h2>
 
-            <p th:if="${errorUnidad}" th:text="${errorUnidad}"></p>
+            <p class="empty-state"
+               th:if="${errorUnidad != null}"
+               th:text="${errorUnidad}">
+            </p>
 
-            <div th:if="${miUnidad != null}">
-                <p>
-                    Nombre:
-                    <span th:text="${miUnidad.nombreComercial}"></span>
-                </p>
-                <p>
-                    Código:
-                    <span th:text="${miUnidad.codigo}"></span>
-                </p>
-                <p>
-                    Superficie:
-                    <span th:text="${miUnidad.superficie}"></span> m²
-                </p>
+            <div class="table-container"
+                 th:if="${miUnidad != null}">
 
-                <form th:action="@{/pedido/getPedidos-unidad-venta}" method="get">
-                    <input type="hidden" name="id" th:value="${miUnidad.id}">
-                    <button type="submit">Ver pedidos de mi unidad</button>
-                </form>
+                <div class="table-heading">
+                    <h2 th:text="${miUnidad.nombreComercial}">
+                        Nombre comercial
+                    </h2>
+                    <span class="counter"
+                          th:text="'Código: ' + ${miUnidad.codigo}">
+                        Código
+                    </span>
+                </div>
 
-                <form th:action="@{/empleado/alta}" method="get">
-                    <button type="submit">Dar de alta un empleado</button>
-                </form>
+                <div class="unidad-detalle">
+                    <div class="dato-unidad">
+                        <span class="dato-label">Superficie</span>
+                        <strong>
+                            <span th:text="${miUnidad.superficie}">0</span> m²
+                        </strong>
+                    </div>
 
-                <form th:action="@{/plato/alta}" method="get">
-                    <button type="submit"> Dar de alta un plato</button>
-                </form>
+                    <div class="dato-unidad">
+                        <span class="dato-label">Empleados</span>
+                        <strong th:text="${#sets.size(miUnidad.empleados)}">
+                            0
+                        </strong>
+                    </div>
+
+                    <div class="dato-unidad">
+                        <span class="dato-label">Platos registrados</span>
+                        <strong th:text="${#sets.size(miUnidad.platos)}">
+                            0
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="acciones-unidad">
+                    <h3>Gestionar unidad</h3>
+
+                    <div class="acciones-grid">
+                        <article class="accion-card">
+                            <h4>Personal</h4>
+                            <p>
+                                Incorporá empleados para trabajar
+                                en tu unidad de venta.
+                            </p>
+                            <a th:href="@{/empleado/alta}"
+                               class="btn btn-primary">
+                                Dar de alta empleado
+                            </a>
+                        </article>
+
+                        <article class="accion-card">
+                            <h4>Platos</h4>
+                            <p>
+                                Registrá nuevos platos para ofrecer
+                                en tu unidad.
+                            </p>
+                            <a th:href="@{/plato/alta}"
+                               class="btn btn-primary">
+                                Dar de alta plato
+                            </a>
+                        </article>
+
+                        <article class="accion-card">
+                            <h4>Pedidos</h4>
+                            <p>
+                                Consultá los pedidos recibidos
+                                por tu unidad de venta.
+                            </p>
+                            <a th:href="@{/pedido/getPedidos-unidad-venta(id=${miUnidad.id})}"
+                               class="btn btn-primary">
+                                Ver pedidos
+                            </a>
+                        </article>
+                    </div>
+                </div>
             </div>
         </section>
 
-       
+        <section sec:authorize="hasRole('EMPLEADO')">
+            <div class="table-container">
+                <div class="table-heading">
+                    <h2>Gestión de pedidos</h2>
+                </div>
+                <div class="acciones-unidad">
+                    <p>Registrá un nuevo pedido.</p>
+                    <a th:href="@{/pedido/alta}" class="btn btn-primary">
+                        Crear pedido
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <footer class="footer">
+        Epicentro Gourmet · Sistema de gestión de festivales
+    </footer>
 </body>
-
 </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de platos estrella</title>
+    <link rel="stylesheet" th:href="@{/css/platoEstrella.css}">
+</head>
+
+<body>
+    <header>
+        <a th:href="@{/home}" class=" btn-volver">
+            ← Volver
+        </a>
+        <h1>Reporte de platos más vendidos</h1>
+        <h2 th:text="${festival.nombre}">Nombre del festival</h2>
+    </header>
+
+    <main>
+        <h3>Top 3 de platos</h3>
+
+        <p th:if="${#lists.isEmpty(platoEstrella)}">
+            No hay platos vendidos para este festival.
+        </p>
+
+        <table th:unless="${#lists.isEmpty(platoEstrella)}">
+            <thead>
+                <tr>
+                    <th>Posición</th>
+                    <th>Plato</th>
+                    <th>Unidades vendidas</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="plato, iteracion : ${platoEstrella}">
+                    <td th:text="${iteracion.count}">1</td>
+                    <td th:text="${plato.nombre}">Nombre del plato</td>
+                    <td th:text="${plato.unidadesVendidas}">0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+    </main>
+</body>
+
+</html>

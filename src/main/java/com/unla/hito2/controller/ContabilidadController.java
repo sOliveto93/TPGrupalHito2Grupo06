@@ -31,21 +31,23 @@ public class ContabilidadController {
     }
 
     @GetMapping({"/sueldo", "/liquidacion-sueldo"})
+    @PreAuthorize ("hasAnyRole('EMPLEADO','RESPONSABLE')")
     public String verLiquidacionSueldo(Authentication authentication, Model model) {
         if (authentication == null) {
             return "redirect:/login";
         }
 
         String username = authentication.getName();
+        
 
-        boolean esAdmin = authentication.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().contains("ADMIN") || a.getAuthority().contains("RESPONSABLE"));
+        boolean esResponsable = authentication.getAuthorities().stream()
+                .anyMatch(a ->   a.getAuthority().contains("RESPONSABLE"));
 
         List<LiquidacionHaberes> liquidaciones;
-        if (esAdmin) {
-            liquidaciones = contabilidadService.obtenerTodasLasLiquidaciones();
+        if (esResponsable) {
+            liquidaciones = contabilidadService.obtenerLiquidacionesPorUnidadDeVenta(username);
         } else {
-            liquidaciones = contabilidadService.obtenerLiquidacionesPorEmpleado(username);
+            liquidaciones = contabilidadService.obtenerLiquidacionesPorEmpleadoHistorico(username);
         }
 
         model.addAttribute("liquidaciones", liquidaciones);
