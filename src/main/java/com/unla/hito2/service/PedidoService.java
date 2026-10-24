@@ -8,7 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jspecify.annotations.Nullable;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import com.unla.hito2.dto.pedido.DetallePedidoDtoRequest;
@@ -24,6 +29,7 @@ import com.unla.hito2.entity.UnidadDeVenta;
 
 import com.unla.hito2.repository.PedidoRepository;
 import com.unla.hito2.repository.PlatoRepository;
+import com.unla.hito2.repository.StaffRepository;
 import com.unla.hito2.repository.UnidadDeVentaRepository;
 
 import jakarta.transaction.Transactional;
@@ -34,17 +40,20 @@ public class PedidoService {
     private PedidoRepository pedidoRepository;
     private UnidadDeVentaRepository unidadDeVentaRepository;
     private PlatoRepository platoRepository;
+    private StaffRepository staffRepository;
 
     public PedidoService(PedidoRepository pedidoRepository, UnidadDeVentaRepository unidadDeVentaRepository,
-            PlatoRepository platoRepository) {
+            PlatoRepository platoRepository,StaffRepository staffRepository) {
         this.pedidoRepository = pedidoRepository;
         this.unidadDeVentaRepository = unidadDeVentaRepository;
         this.platoRepository = platoRepository;
+        this.staffRepository =staffRepository;
     }
 
     @Transactional
-    public PedidoDtoResponse altaPedido(PedidoDtoRequest dto) {
+    public PedidoDtoResponse altaPedido(PedidoDtoRequest dto,String username) {
 
+        validarEmpleadoActivo(username);
         if (dto.getDetalles() == null || dto.getDetalles().isEmpty()) {
             throw new IllegalArgumentException("El pedido debe contener al menos un detalle");
         }
@@ -81,7 +90,7 @@ public class PedidoService {
                         "La cantidad no puede ser negativa");
             }
 
-            if(cantidad == 0){
+            if (cantidad == 0) {
                 continue;
             }
 
@@ -166,12 +175,36 @@ public class PedidoService {
     }
 
     @Transactional
-    public List<PedidoDtoResponse> findAllByIdUnidadVenta(Long id) {
+    public Page<PedidoDtoResponse> findAllByIdUnidadVenta(Long id, int numeroPagina) {
+
+        int tamanioPagina = 10;
+
+        Pageable pageable = PageRequest.of(
+                numeroPagina,
+                tamanioPagina,
+                Sort.by(Sort.Order.desc("id")));
+
+        Page<Pedido> paginaPedidos = pedidoRepository.findAllByUnidadDeVenta_Id(id, pageable);
+
+        System.out.println("Unidad consultada: " + id);
+        System.out.println("Total de pedidos: " + paginaPedidos.getTotalElements());
+        System.out.println("Pedidos en esta página: " + paginaPedidos.getNumberOfElements());
+
+        for (Pedido pedido : paginaPedidos.getContent()) {
+            System.out.println(
+                    "Pedido ID: " + pedido.getId()
+                            + " | Fecha: " + pedido.getFechaHora()
+                            + " | Unidad: " + pedido.getUnidadDeVenta().getId());
+        }
+
         List<PedidoDtoResponse> lista = new ArrayList<>();
-        for (Pedido pedido : pedidoRepository.findAllByUnidadDeVenta_Id(id)) {
+
+        for (Pedido pedido : paginaPedidos.getContent()) {
             lista.add(pedidoToDto(pedido));
         }
-        return lista;
+
+        return new PageImpl<>(lista, pageable, paginaPedidos.getTotalElements());
+
     }
 
     private PedidoDtoResponse pedidoToDto(Pedido pedido) {
@@ -196,7 +229,7 @@ public class PedidoService {
 
     @Transactional
     public PedidoAltaDto prepararAltaPorEmpleado(String username) {
-
+        validarEmpleadoActivo(username);
         UnidadDeVenta unidad = unidadDeVentaRepository
                 .findByEmpleados_Usuario_Username(username)
                 .orElseThrow(() -> new IllegalArgumentException(
@@ -208,13 +241,12 @@ public class PedidoService {
         dto.setNombreUnidadDeVenta(unidad.getNombreComercial());
 
         List<PlatoPedidoDto> platosDto = platosToDto(unidad.getPlatos());
-        
 
         dto.setPlatos(platosDto);
 
         return dto;
     }
-
+//no lo usamos mas restringi el acceso solo a empleado
     @Transactional
     public PedidoAltaDto prepararAltaPorResponsable(String username) {
 
@@ -233,7 +265,18 @@ public class PedidoService {
 
         return dto;
     }
-    private List<PlatoPedidoDto> platosToDto(Set<Plato> platos){
+
+    public boolean empleadoActivo(String username) {
+    return staffRepository.existsByUsuario_UsernameAndActivoTrue(username);
+}
+    private void validarEmpleadoActivo(String username) {
+        if (!staffRepository.existsByUsuario_UsernameAndActivoTrue(username)) {
+            throw new AccessDeniedException(
+                    "El empleado está inactivo y no puede crear pedidos.");
+        }
+    }
+
+    private List<PlatoPedidoDto> platosToDto(Set<Plato> platos) {
         List<PlatoPedidoDto> platosDto = new ArrayList<>();
 
         for (Plato plato : platos) {

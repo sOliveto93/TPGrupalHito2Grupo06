@@ -32,6 +32,10 @@
             <a th:href="@{/pedido/alta}" class="btn btn-primary">
                 Crear pedido
             </a>
+            <a th:if="${miUnidad != null}" th:href="@{/pedido/getPedidos-unidad-venta(id=${miUnidad.id})}"
+                class="btn btn-primary">
+                Ver pedidos de mi unidad
+            </a>
             <a th:href="@{/contabilidad/sueldo}" class="btn btn-primary">
                 Mis liquidaciones de sueldo
             </a>
@@ -58,10 +62,7 @@
                     <span th:text="${miUnidad.superficie}"></span> m²
                 </p>
 
-                <form th:action="@{/pedido/getPedidos-unidad-venta}" method="get">
-                    <input type="hidden" name="id" th:value="${miUnidad.id}">
-                    <button type="submit">Ver pedidos de mi unidad</button>
-                </form>
+                
 
             </div>
         </section>
