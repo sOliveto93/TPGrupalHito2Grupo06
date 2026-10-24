@@ -155,7 +155,71 @@ VALUES (1, 'admin', 'admin@gmail.com', '$2a$10$RzFQ8VQWqT.fdjiQEF9QsOOHTxXoVCPYb
 (95,'valentinapereyra','valentinapereyra@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (96,'gabrielortiz','gabrielortiz@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (97,'jazminromero','jazminromero@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
-(98,'alanarias','alanarias@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW());
+(98,'alanarias','alanarias@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
+(99, 'empleado99', 'empleado99@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(100, 'empleado100', 'empleado100@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(101, 'empleado101', 'empleado101@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(102, 'empleado102', 'empleado102@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(103, 'empleado103', 'empleado103@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(104, 'empleado104', 'empleado104@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(105, 'empleado105', 'empleado105@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(106, 'empleado106', 'empleado106@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(107, 'empleado107', 'empleado107@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(108, 'empleado108', 'empleado108@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(109, 'empleado109', 'empleado109@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(110, 'empleado110', 'empleado110@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(111, 'empleado111', 'empleado111@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(112, 'empleado112', 'empleado112@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(113, 'empleado113', 'empleado113@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(114, 'empleado114', 'empleado114@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(115, 'empleado115', 'empleado115@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(116, 'empleado116', 'empleado116@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(117, 'empleado117', 'empleado117@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(118, 'empleado118', 'empleado118@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(119, 'empleado119', 'empleado119@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(120, 'empleado120', 'empleado120@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(121, 'empleado121', 'empleado121@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(122, 'empleado122', 'empleado122@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(123, 'empleado123', 'empleado123@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(124, 'empleado124', 'empleado124@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(125, 'empleado125', 'empleado125@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(126, 'empleado126', 'empleado126@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(127, 'empleado127', 'empleado127@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(128, 'empleado128', 'empleado128@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(129, 'empleado129', 'empleado129@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(130, 'empleado130', 'empleado130@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(131, 'empleado131', 'empleado131@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(132, 'empleado132', 'empleado132@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(133, 'empleado133', 'empleado133@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(134, 'empleado134', 'empleado134@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(135, 'empleado135', 'empleado135@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(136, 'empleado136', 'empleado136@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(137, 'empleado137', 'empleado137@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(138, 'empleado138', 'empleado138@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(139, 'empleado139', 'empleado139@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(140, 'empleado140', 'empleado140@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(141, 'empleado141', 'empleado141@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(142, 'empleado142', 'empleado142@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(143, 'empleado143', 'empleado143@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(144, 'empleado144', 'empleado144@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(145, 'empleado145', 'empleado145@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(146, 'empleado146', 'empleado146@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(147, 'empleado147', 'empleado147@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(148, 'empleado148', 'empleado148@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(149, 'empleado149', 'empleado149@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(150, 'empleado150', 'empleado150@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(151, 'empleado151', 'empleado151@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(152, 'empleado152', 'empleado152@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(153, 'empleado153', 'empleado153@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(154, 'empleado154', 'empleado154@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(155, 'empleado155', 'empleado155@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(156, 'empleado156', 'empleado156@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(157, 'empleado157', 'empleado157@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(158, 'empleado158', 'empleado158@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(159, 'empleado159', 'empleado159@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(160, 'empleado160', 'empleado160@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(161, 'empleado161', 'empleado161@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW()),
+(162, 'empleado162', 'empleado162@gmail.com', '$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u', 1, NOW(), NOW());
 
 -- Rol del Administrador del sistema
 INSERT INTO `usuario_rol` (`id`, `usuario_id`, `rol`, `created_at`, `updated_at`)
@@ -194,12 +258,76 @@ VALUES (1, 1, 'ROLE_ADMINISTRADOR', NOW(), NOW()),
 (87,87,'ROLE_RESPONSABLE',NOW(),NOW()),(88,88,'ROLE_EMPLEADO',NOW(),NOW()),(89,89,'ROLE_EMPLEADO',NOW(),NOW()),
 (90,90,'ROLE_RESPONSABLE',NOW(),NOW()),(91,91,'ROLE_EMPLEADO',NOW(),NOW()),(92,92,'ROLE_EMPLEADO',NOW(),NOW()),
 (93,93,'ROLE_RESPONSABLE',NOW(),NOW()),(94,94,'ROLE_EMPLEADO',NOW(),NOW()),(95,95,'ROLE_EMPLEADO',NOW(),NOW()),
-(96,96,'ROLE_RESPONSABLE',NOW(),NOW()),(97,97,'ROLE_EMPLEADO',NOW(),NOW()),(98,98,'ROLE_EMPLEADO',NOW(),NOW());
+(96,96,'ROLE_RESPONSABLE',NOW(),NOW()),(97,97,'ROLE_EMPLEADO',NOW(),NOW()),(98,98,'ROLE_EMPLEADO',NOW(),NOW()),
+(99,99,'ROLE_EMPLEADO',NOW(),NOW()),
+(100,100,'ROLE_EMPLEADO',NOW(),NOW()),
+(101,101,'ROLE_EMPLEADO',NOW(),NOW()),
+(102,102,'ROLE_EMPLEADO',NOW(),NOW()),
+(103,103,'ROLE_EMPLEADO',NOW(),NOW()),
+(104,104,'ROLE_EMPLEADO',NOW(),NOW()),
+(105,105,'ROLE_EMPLEADO',NOW(),NOW()),
+(106,106,'ROLE_EMPLEADO',NOW(),NOW()),
+(107,107,'ROLE_EMPLEADO',NOW(),NOW()),
+(108,108,'ROLE_EMPLEADO',NOW(),NOW()),
+(109,109,'ROLE_EMPLEADO',NOW(),NOW()),
+(110,110,'ROLE_EMPLEADO',NOW(),NOW()),
+(111,111,'ROLE_EMPLEADO',NOW(),NOW()),
+(112,112,'ROLE_EMPLEADO',NOW(),NOW()),
+(113,113,'ROLE_EMPLEADO',NOW(),NOW()),
+(114,114,'ROLE_EMPLEADO',NOW(),NOW()),
+(115,115,'ROLE_EMPLEADO',NOW(),NOW()),
+(116,116,'ROLE_EMPLEADO',NOW(),NOW()),
+(117,117,'ROLE_EMPLEADO',NOW(),NOW()),
+(118,118,'ROLE_EMPLEADO',NOW(),NOW()),
+(119,119,'ROLE_EMPLEADO',NOW(),NOW()),
+(120,120,'ROLE_EMPLEADO',NOW(),NOW()),
+(121,121,'ROLE_EMPLEADO',NOW(),NOW()),
+(122,122,'ROLE_EMPLEADO',NOW(),NOW()),
+(123,123,'ROLE_EMPLEADO',NOW(),NOW()),
+(124,124,'ROLE_EMPLEADO',NOW(),NOW()),
+(125,125,'ROLE_EMPLEADO',NOW(),NOW()),
+(126,126,'ROLE_EMPLEADO',NOW(),NOW()),
+(127,127,'ROLE_EMPLEADO',NOW(),NOW()),
+(128,128,'ROLE_EMPLEADO',NOW(),NOW()),
+(129,129,'ROLE_EMPLEADO',NOW(),NOW()),
+(130,130,'ROLE_EMPLEADO',NOW(),NOW()),
+(131,131,'ROLE_EMPLEADO',NOW(),NOW()),
+(132,132,'ROLE_EMPLEADO',NOW(),NOW()),
+(133,133,'ROLE_EMPLEADO',NOW(),NOW()),
+(134,134,'ROLE_EMPLEADO',NOW(),NOW()),
+(135,135,'ROLE_EMPLEADO',NOW(),NOW()),
+(136,136,'ROLE_EMPLEADO',NOW(),NOW()),
+(137,137,'ROLE_EMPLEADO',NOW(),NOW()),
+(138,138,'ROLE_EMPLEADO',NOW(),NOW()),
+(139,139,'ROLE_EMPLEADO',NOW(),NOW()),
+(140,140,'ROLE_EMPLEADO',NOW(),NOW()),
+(141,141,'ROLE_EMPLEADO',NOW(),NOW()),
+(142,142,'ROLE_EMPLEADO',NOW(),NOW()),
+(143,143,'ROLE_EMPLEADO',NOW(),NOW()),
+(144,144,'ROLE_EMPLEADO',NOW(),NOW()),
+(145,145,'ROLE_EMPLEADO',NOW(),NOW()),
+(146,146,'ROLE_EMPLEADO',NOW(),NOW()),
+(147,147,'ROLE_EMPLEADO',NOW(),NOW()),
+(148,148,'ROLE_EMPLEADO',NOW(),NOW()),
+(149,149,'ROLE_EMPLEADO',NOW(),NOW()),
+(150,150,'ROLE_EMPLEADO',NOW(),NOW()),
+(151,151,'ROLE_EMPLEADO',NOW(),NOW()),
+(152,152,'ROLE_EMPLEADO',NOW(),NOW()),
+(153,153,'ROLE_EMPLEADO',NOW(),NOW()),
+(154,154,'ROLE_EMPLEADO',NOW(),NOW()),
+(155,155,'ROLE_EMPLEADO',NOW(),NOW()),
+(156,156,'ROLE_EMPLEADO',NOW(),NOW()),
+(157,157,'ROLE_EMPLEADO',NOW(),NOW()),
+(158,158,'ROLE_EMPLEADO',NOW(),NOW()),
+(159,159,'ROLE_EMPLEADO',NOW(),NOW()),
+(160,160,'ROLE_EMPLEADO',NOW(),NOW()),
+(161,161,'ROLE_EMPLEADO',NOW(),NOW()),
+(162,162,'ROLE_EMPLEADO',NOW(),NOW());
 
 -- =====================================================
 -- 4. CARGA DE STAFF / PERSONAL
 -- =====================================================
-INSERT INTO `staff` (`id`, `usuario_id`, `name`, apellido, `dni`, `fecha_nac`, `fecha_ingreso`, `activo`, `fecha_baja`, `unidad_venta_id`)
+INSERT INTO `staff` (`id`, `usuario_id`, `name`, `apellido`, `dni`, `fecha_nac`, `fecha_ingreso`, `activo`, `fecha_baja`, `unidad_venta_id`)
 VALUES
 (2, 2, 'Carlos', 'Ríos', '30111222', '1985-05-12', '2020-03-01', 1, NULL, NULL),
 (3, 3, 'Ana', 'Martínez', '32333444', '1988-08-20', '2021-06-15', 1, NULL, NULL),
@@ -297,7 +425,76 @@ VALUES
 (95, 95, 'Valentina', 'Pereyra', '82000030', '1992-01-01', CURDATE(), 1, NULL, NULL),
 (96, 96, 'Gabriel', 'Ortiz', '80000031', '1990-01-01', CURDATE(), 1, NULL, NULL),
 (97, 97, 'Jazmín', 'Romero', '81000031', '1995-01-01', CURDATE(), 1, NULL, NULL),
-(98, 98, 'Alan', 'Arias', '82000031', '1992-01-01', CURDATE(), 1, NULL, NULL);
+(98, 98, 'Alan', 'Arias', '82000031', '1992-01-01', CURDATE(), 1, NULL, NULL),
+
+-- Ayudantes de cocina: uno por unidad de venta
+-- Ayudantes de cocina: uno por unidad de venta
+(99, 99, 'Ayudante', 'Cocina 1', '90000099', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(100, 100, 'Ayudante', 'Cocina 2', '90000100', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(101, 101, 'Ayudante', 'Cocina 3', '90000101', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(102, 102, 'Ayudante', 'Cocina 4', '90000102', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(103, 103, 'Ayudante', 'Cocina 5', '90000103', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(104, 104, 'Ayudante', 'Cocina 6', '90000104', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(105, 105, 'Ayudante', 'Cocina 7', '90000105', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(106, 106, 'Ayudante', 'Cocina 8', '90000106', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(107, 107, 'Ayudante', 'Cocina 9', '90000107', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(108, 108, 'Ayudante', 'Cocina 10', '90000108', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(109, 109, 'Ayudante', 'Cocina 11', '90000109', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(110, 110, 'Ayudante', 'Cocina 12', '90000110', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(111, 111, 'Ayudante', 'Cocina 13', '90000111', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(112, 112, 'Ayudante', 'Cocina 14', '90000112', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(113, 113, 'Ayudante', 'Cocina 15', '90000113', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(114, 114, 'Ayudante', 'Cocina 16', '90000114', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(115, 115, 'Ayudante', 'Cocina 17', '90000115', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(116, 116, 'Ayudante', 'Cocina 18', '90000116', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(117, 117, 'Ayudante', 'Cocina 19', '90000117', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(118, 118, 'Ayudante', 'Cocina 20', '90000118', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(119, 119, 'Ayudante', 'Cocina 21', '90000119', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(120, 120, 'Ayudante', 'Cocina 22', '90000120', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(121, 121, 'Ayudante', 'Cocina 23', '90000121', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(122, 122, 'Ayudante', 'Cocina 24', '90000122', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(123, 123, 'Ayudante', 'Cocina 25', '90000123', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(124, 124, 'Ayudante', 'Cocina 26', '90000124', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(125, 125, 'Ayudante', 'Cocina 27', '90000125', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(126, 126, 'Ayudante', 'Cocina 28', '90000126', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(127, 127, 'Ayudante', 'Cocina 29', '90000127', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(128, 128, 'Ayudante', 'Cocina 30', '90000128', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(129, 129, 'Ayudante', 'Cocina 31', '90000129', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(130, 130, 'Ayudante', 'Cocina 32', '90000130', '1995-01-01', CURDATE(), 1, NULL, NULL),
+
+-- Lavaplatos: uno por unidad de venta
+(131, 131, 'Lavaplatos', 'Unidad 1', '90000131', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(132, 132, 'Lavaplatos', 'Unidad 2', '90000132', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(133, 133, 'Lavaplatos', 'Unidad 3', '90000133', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(134, 134, 'Lavaplatos', 'Unidad 4', '90000134', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(135, 135, 'Lavaplatos', 'Unidad 5', '90000135', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(136, 136, 'Lavaplatos', 'Unidad 6', '90000136', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(137, 137, 'Lavaplatos', 'Unidad 7', '90000137', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(138, 138, 'Lavaplatos', 'Unidad 8', '90000138', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(139, 139, 'Lavaplatos', 'Unidad 9', '90000139', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(140, 140, 'Lavaplatos', 'Unidad 10', '90000140', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(141, 141, 'Lavaplatos', 'Unidad 11', '90000141', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(142, 142, 'Lavaplatos', 'Unidad 12', '90000142', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(143, 143, 'Lavaplatos', 'Unidad 13', '90000143', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(144, 144, 'Lavaplatos', 'Unidad 14', '90000144', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(145, 145, 'Lavaplatos', 'Unidad 15', '90000145', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(146, 146, 'Lavaplatos', 'Unidad 16', '90000146', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(147, 147, 'Lavaplatos', 'Unidad 17', '90000147', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(148, 148, 'Lavaplatos', 'Unidad 18', '90000148', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(149, 149, 'Lavaplatos', 'Unidad 19', '90000149', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(150, 150, 'Lavaplatos', 'Unidad 20', '90000150', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(151, 151, 'Lavaplatos', 'Unidad 21', '90000151', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(152, 152, 'Lavaplatos', 'Unidad 22', '90000152', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(153, 153, 'Lavaplatos', 'Unidad 23', '90000153', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(154, 154, 'Lavaplatos', 'Unidad 24', '90000154', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(155, 155, 'Lavaplatos', 'Unidad 25', '90000155', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(156, 156, 'Lavaplatos', 'Unidad 26', '90000156', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(157, 157, 'Lavaplatos', 'Unidad 27', '90000157', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(158, 158, 'Lavaplatos', 'Unidad 28', '90000158', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(159, 159, 'Lavaplatos', 'Unidad 29', '90000159', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(160, 160, 'Lavaplatos', 'Unidad 30', '90000160', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(161, 161, 'Lavaplatos', 'Unidad 31', '90000161', '1995-01-01', CURDATE(), 1, NULL, NULL),
+(162, 162, 'Lavaplatos', 'Unidad 32', '90000162', '1995-01-01', CURDATE(), 1, NULL, NULL);
 -- =====================================================
 -- SUBTIPOS DE EMPLEADOS
 -- =====================================================
@@ -369,7 +566,75 @@ VALUES
 (89, 'COCINERO'),
 (92, 'COCINERO'),
 (95, 'COCINERO'),
-(98, 'COCINERO');
+(98, 'COCINERO'),
+
+-- Ayudantes de cocina
+(99, 'AYUDANTE_COCINA'),
+(100, 'AYUDANTE_COCINA'),
+(101, 'AYUDANTE_COCINA'),
+(102, 'AYUDANTE_COCINA'),
+(103, 'AYUDANTE_COCINA'),
+(104, 'AYUDANTE_COCINA'),
+(105, 'AYUDANTE_COCINA'),
+(106, 'AYUDANTE_COCINA'),
+(107, 'AYUDANTE_COCINA'),
+(108, 'AYUDANTE_COCINA'),
+(109, 'AYUDANTE_COCINA'),
+(110, 'AYUDANTE_COCINA'),
+(111, 'AYUDANTE_COCINA'),
+(112, 'AYUDANTE_COCINA'),
+(113, 'AYUDANTE_COCINA'),
+(114, 'AYUDANTE_COCINA'),
+(115, 'AYUDANTE_COCINA'),
+(116, 'AYUDANTE_COCINA'),
+(117, 'AYUDANTE_COCINA'),
+(118, 'AYUDANTE_COCINA'),
+(119, 'AYUDANTE_COCINA'),
+(120, 'AYUDANTE_COCINA'),
+(121, 'AYUDANTE_COCINA'),
+(122, 'AYUDANTE_COCINA'),
+(123, 'AYUDANTE_COCINA'),
+(124, 'AYUDANTE_COCINA'),
+(125, 'AYUDANTE_COCINA'),
+(126, 'AYUDANTE_COCINA'),
+(127, 'AYUDANTE_COCINA'),
+(128, 'AYUDANTE_COCINA'),
+(129, 'AYUDANTE_COCINA'),
+(130, 'AYUDANTE_COCINA'),
+
+-- Lavaplatos
+(131, 'LAVAPLATOS'),
+(132, 'LAVAPLATOS'),
+(133, 'LAVAPLATOS'),
+(134, 'LAVAPLATOS'),
+(135, 'LAVAPLATOS'),
+(136, 'LAVAPLATOS'),
+(137, 'LAVAPLATOS'),
+(138, 'LAVAPLATOS'),
+(139, 'LAVAPLATOS'),
+(140, 'LAVAPLATOS'),
+(141, 'LAVAPLATOS'),
+(142, 'LAVAPLATOS'),
+(143, 'LAVAPLATOS'),
+(144, 'LAVAPLATOS'),
+(145, 'LAVAPLATOS'),
+(146, 'LAVAPLATOS'),
+(147, 'LAVAPLATOS'),
+(148, 'LAVAPLATOS'),
+(149, 'LAVAPLATOS'),
+(150, 'LAVAPLATOS'),
+(151, 'LAVAPLATOS'),
+(152, 'LAVAPLATOS'),
+(153, 'LAVAPLATOS'),
+(154, 'LAVAPLATOS'),
+(155, 'LAVAPLATOS'),
+(156, 'LAVAPLATOS'),
+(157, 'LAVAPLATOS'),
+(158, 'LAVAPLATOS'),
+(159, 'LAVAPLATOS'),
+(160, 'LAVAPLATOS'),
+(161, 'LAVAPLATOS'),
+(162, 'LAVAPLATOS');
 -- =====================================================
 -- 5. CARGA DE UNIDADES DE VENTA (Food Trucks y Puestos Desarmables)
 -- Códigos únicos de 10 caracteres según requerimientos del TP.
@@ -488,7 +753,209 @@ VALUES
         -- Unidad 7: bebidas y combos
         (19,'Limonada Casera', 2800.00, 700.00, TRUE, 7),
         (20,'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 7),
-        (21,'Combo Hamburguesa y Bebida', 10500.00, 4200.00, TRUE, 7);
+        (21,'Combo Hamburguesa y Bebida', 10500.00, 4200.00, TRUE, 7),
+-- completamos
+    (22, 'Hamburguesa BBQ', 9200.00, 3500.00, TRUE, 1),
+    (23, 'Papas con Cheddar', 4800.00, 1600.00, TRUE, 1),
+
+    -- Unidad 2: completar 5 platos
+    (24, 'Tacos de Pollo x3', 7200.00, 2700.00, TRUE, 2),
+    (25, 'Guacamole con Nachos', 5500.00, 2000.00, TRUE, 2),
+
+    -- Unidad 3: completar 5 platos
+    (26, 'Pizza Napolitana', 9800.00, 4100.00, TRUE, 3),
+    (27, 'Empanadas de Jamón y Queso x3', 5800.00, 2200.00, TRUE, 3),
+
+    -- Unidad 4: completar 5 platos
+    (28, 'Vacío al Pan', 9500.00, 4000.00, TRUE, 4),
+    (29, 'Papas Fritas', 4200.00, 1400.00, TRUE, 4),
+
+    -- Unidad 5: completar 5 platos
+    (30, 'Tarta de Verduras', 5500.00, 1900.00, TRUE, 5),
+    (31, 'Bastones de Mozzarella', 5700.00, 2100.00, TRUE, 5),
+
+    -- Unidad 6: completar 5 platos
+    (32, 'Churros con Dulce de Leche', 3900.00, 1300.00, TRUE, 6),
+    (33, 'Helado Artesanal', 4500.00, 1600.00, TRUE, 6),
+
+    -- Unidad 7: completar 5 platos
+    (34, 'Agua Mineral 500 ml', 1800.00, 500.00, TRUE, 7),
+    (35, 'Limonada con Menta', 3200.00, 900.00, TRUE, 7),
+
+    -- Unidad 8
+    (36, 'Hamburguesa Clásica', 8000.00, 3000.00, TRUE, 8),
+    (37, 'Papas Fritas', 4000.00, 1200.00, TRUE, 8),
+    (38, 'Hamburguesa Doble', 9500.00, 3700.00, TRUE, 8),
+    (39, 'Nuggets de Pollo', 5200.00, 1900.00, TRUE, 8),
+    (40, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 8),
+
+    -- Unidad 9
+    (41, 'Tacos de Carne x3', 7500.00, 2800.00, TRUE, 9),
+    (42, 'Quesadillas de Queso', 6200.00, 2300.00, TRUE, 9),
+    (43, 'Burrito de Pollo', 7800.00, 3000.00, TRUE, 9),
+    (44, 'Nachos con Guacamole', 5600.00, 2000.00, TRUE, 9),
+    (45, 'Agua Mineral 500 ml', 1800.00, 500.00, TRUE, 9),
+
+    -- Unidad 10
+    (46, 'Pizza Muzarella', 9000.00, 3800.00, TRUE, 10),
+    (47, 'Pizza Napolitana', 9800.00, 4100.00, TRUE, 10),
+    (48, 'Empanadas de Carne x3', 6000.00, 2400.00, TRUE, 10),
+    (49, 'Fugazzeta', 10500.00, 4500.00, TRUE, 10),
+    (50, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 10),
+
+    -- Unidad 11
+    (51, 'Choripan Completo', 6500.00, 2700.00, TRUE, 11),
+    (52, 'Sandwich de Bondiola', 8500.00, 3600.00, TRUE, 11),
+    (53, 'Vacío al Pan', 9500.00, 4000.00, TRUE, 11),
+    (54, 'Provoleta', 5800.00, 2300.00, TRUE, 11),
+    (55, 'Papas Fritas', 4200.00, 1400.00, TRUE, 11),
+
+    -- Unidad 12
+    (56, 'Hamburguesa Vegetariana', 7800.00, 3000.00, TRUE, 12),
+    (57, 'Wrap de Vegetales', 6200.00, 2200.00, TRUE, 12),
+    (58, 'Ensalada Gourmet', 5900.00, 2100.00, TRUE, 12),
+    (59, 'Tarta de Verduras', 5500.00, 1900.00, TRUE, 12),
+    (60, 'Limonada Casera', 2800.00, 700.00, TRUE, 12),
+
+    -- Unidad 13
+    (61, 'Brownie con Helado', 4800.00, 1700.00, TRUE, 13),
+    (62, 'Cheesecake', 4200.00, 1500.00, TRUE, 13),
+    (63, 'Churros con Dulce de Leche', 3900.00, 1300.00, TRUE, 13),
+    (64, 'Café con Medialunas', 3500.00, 1200.00, TRUE, 13),
+    (65, 'Helado Artesanal', 4500.00, 1600.00, TRUE, 13),
+
+    -- Unidad 14
+    (66, 'Limonada Casera', 2800.00, 700.00, TRUE, 14),
+    (67, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 14),
+    (68, 'Agua Mineral 500 ml', 1800.00, 500.00, TRUE, 14),
+    (69, 'Limonada con Menta', 3200.00, 900.00, TRUE, 14),
+    (70, 'Combo Hamburguesa y Bebida', 10500.00, 4200.00, TRUE, 14),
+
+    -- Unidad 15
+    (71, 'Hamburguesa BBQ', 9200.00, 3500.00, TRUE, 15),
+    (72, 'Papas con Cheddar', 4800.00, 1600.00, TRUE, 15),
+    (73, 'Nuggets de Pollo', 5200.00, 1900.00, TRUE, 15),
+    (74, 'Hamburguesa Doble', 9500.00, 3700.00, TRUE, 15),
+    (75, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 15),
+
+    -- Unidad 16
+    (76, 'Tacos de Pollo x3', 7200.00, 2700.00, TRUE, 16),
+    (77, 'Quesadillas de Pollo', 6800.00, 2600.00, TRUE, 16),
+    (78, 'Burrito de Carne', 7900.00, 3100.00, TRUE, 16),
+    (79, 'Nachos con Cheddar', 5200.00, 1900.00, TRUE, 16),
+    (80, 'Agua Mineral 500 ml', 1800.00, 500.00, TRUE, 16),
+
+    -- Unidad 17
+    (81, 'Pizza Especial', 11500.00, 4900.00, TRUE, 17),
+    (82, 'Pizza Muzarella', 9000.00, 3800.00, TRUE, 17),
+    (83, 'Empanadas de Jamón y Queso x3', 5800.00, 2200.00, TRUE, 17),
+    (84, 'Pizza Napolitana', 9800.00, 4100.00, TRUE, 17),
+    (85, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 17),
+
+    -- Unidad 18
+    (86, 'Choripan Completo', 6500.00, 2700.00, TRUE, 18),
+    (87, 'Sandwich de Bondiola', 8500.00, 3600.00, TRUE, 18),
+    (88, 'Vacío al Pan', 9500.00, 4000.00, TRUE, 18),
+    (89, 'Provoleta', 5800.00, 2300.00, TRUE, 18),
+    (90, 'Papas Fritas', 4200.00, 1400.00, TRUE, 18),
+
+    -- Unidad 19
+    (91, 'Hamburguesa Vegetariana', 7800.00, 3000.00, TRUE, 19),
+    (92, 'Wrap de Vegetales', 6200.00, 2200.00, TRUE, 19),
+    (93, 'Ensalada Gourmet', 5900.00, 2100.00, TRUE, 19),
+    (94, 'Tarta de Verduras', 5500.00, 1900.00, TRUE, 19),
+    (95, 'Limonada Casera', 2800.00, 700.00, TRUE, 19),
+
+    -- Unidad 20
+    (96, 'Brownie con Helado', 4800.00, 1700.00, TRUE, 20),
+    (97, 'Cheesecake', 4200.00, 1500.00, TRUE, 20),
+    (98, 'Churros con Dulce de Leche', 3900.00, 1300.00, TRUE, 20),
+    (99, 'Café con Medialunas', 3500.00, 1200.00, TRUE, 20),
+    (100, 'Helado Artesanal', 4500.00, 1600.00, TRUE, 20),
+
+    -- Unidad 21
+    (101, 'Limonada Casera', 2800.00, 700.00, TRUE, 21),
+    (102, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 21),
+    (103, 'Agua Mineral 500 ml', 1800.00, 500.00, TRUE, 21),
+    (104, 'Limonada con Menta', 3200.00, 900.00, TRUE, 21),
+    (105, 'Combo Hamburguesa y Bebida', 10500.00, 4200.00, TRUE, 21),
+
+    -- Unidad 22
+    (106, 'Hamburguesa BBQ', 9200.00, 3500.00, TRUE, 22),
+    (107, 'Papas con Cheddar', 4800.00, 1600.00, TRUE, 22),
+    (108, 'Nuggets de Pollo', 5200.00, 1900.00, TRUE, 22),
+    (109, 'Hamburguesa Doble', 9500.00, 3700.00, TRUE, 22),
+    (110, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 22),
+
+    -- Unidad 23
+    (111, 'Tacos de Carne x3', 7500.00, 2800.00, TRUE, 23),
+    (112, 'Quesadillas de Queso', 6200.00, 2300.00, TRUE, 23),
+    (113, 'Burrito de Pollo', 7800.00, 3000.00, TRUE, 23),
+    (114, 'Nachos con Guacamole', 5600.00, 2000.00, TRUE, 23),
+    (115, 'Agua Mineral 500 ml', 1800.00, 500.00, TRUE, 23),
+
+    -- Unidad 24
+    (116, 'Pizza Muzarella', 9000.00, 3800.00, TRUE, 24),
+    (117, 'Pizza Napolitana', 9800.00, 4100.00, TRUE, 24),
+    (118, 'Empanadas de Carne x3', 6000.00, 2400.00, TRUE, 24),
+    (119, 'Fugazzeta', 10500.00, 4500.00, TRUE, 24),
+    (120, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 24),
+
+    -- Unidad 25
+    (121, 'Choripan Completo', 6500.00, 2700.00, TRUE, 25),
+    (122, 'Sandwich de Bondiola', 8500.00, 3600.00, TRUE, 25),
+    (123, 'Vacío al Pan', 9500.00, 4000.00, TRUE, 25),
+    (124, 'Provoleta', 5800.00, 2300.00, TRUE, 25),
+    (125, 'Papas Fritas', 4200.00, 1400.00, TRUE, 25),
+
+    -- Unidad 26
+    (126, 'Hamburguesa Vegetariana', 7800.00, 3000.00, TRUE, 26),
+    (127, 'Wrap de Vegetales', 6200.00, 2200.00, TRUE, 26),
+    (128, 'Ensalada Gourmet', 5900.00, 2100.00, TRUE, 26),
+    (129, 'Tarta de Verduras', 5500.00, 1900.00, TRUE, 26),
+    (130, 'Limonada Casera', 2800.00, 700.00, TRUE, 26),
+
+    -- Unidad 27
+    (131, 'Brownie con Helado', 4800.00, 1700.00, TRUE, 27),
+    (132, 'Cheesecake', 4200.00, 1500.00, TRUE, 27),
+    (133, 'Churros con Dulce de Leche', 3900.00, 1300.00, TRUE, 27),
+    (134, 'Café con Medialunas', 3500.00, 1200.00, TRUE, 27),
+    (135, 'Helado Artesanal', 4500.00, 1600.00, TRUE, 27),
+
+    -- Unidad 28
+    (136, 'Limonada Casera', 2800.00, 700.00, TRUE, 28),
+    (137, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 28),
+    (138, 'Agua Mineral 500 ml', 1800.00, 500.00, TRUE, 28),
+    (139, 'Limonada con Menta', 3200.00, 900.00, TRUE, 28),
+    (140, 'Combo Hamburguesa y Bebida', 10500.00, 4200.00, TRUE, 28),
+
+    -- Unidad 29
+    (141, 'Hamburguesa BBQ', 9200.00, 3500.00, TRUE, 29),
+    (142, 'Papas con Cheddar', 4800.00, 1600.00, TRUE, 29),
+    (143, 'Nuggets de Pollo', 5200.00, 1900.00, TRUE, 29),
+    (144, 'Hamburguesa Doble', 9500.00, 3700.00, TRUE, 29),
+    (145, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 29),
+
+    -- Unidad 30
+    (146, 'Tacos de Pollo x3', 7200.00, 2700.00, TRUE, 30),
+    (147, 'Quesadillas de Pollo', 6800.00, 2600.00, TRUE, 30),
+    (148, 'Burrito de Carne', 7900.00, 3100.00, TRUE, 30),
+    (149, 'Nachos con Cheddar', 5200.00, 1900.00, TRUE, 30),
+    (150, 'Agua Mineral 500 ml', 1800.00, 500.00, TRUE, 30),
+
+    -- Unidad 31
+    (151, 'Pizza Especial', 11500.00, 4900.00, TRUE, 31),
+    (152, 'Pizza Muzarella', 9000.00, 3800.00, TRUE, 31),
+    (153, 'Empanadas de Jamón y Queso x3', 5800.00, 2200.00, TRUE, 31),
+    (154, 'Pizza Napolitana', 9800.00, 4100.00, TRUE, 31),
+    (155, 'Gaseosa 500 ml', 2200.00, 800.00, TRUE, 31),
+
+    -- Unidad 32
+    (156, 'Choripan Completo', 6500.00, 2700.00, TRUE, 32),
+    (157, 'Sandwich de Bondiola', 8500.00, 3600.00, TRUE, 32),
+    (158, 'Vacío al Pan', 9500.00, 4000.00, TRUE, 32),
+    (159, 'Provoleta', 5800.00, 2300.00, TRUE, 32),
+    (160, 'Papas Fritas', 4200.00, 1400.00, TRUE, 32);
 -- =====================================================
 -- 7. CARGA DE PEDIDOS Y SUS DETALLES (VENTAS)
 -- =====================================================
@@ -697,3 +1164,100 @@ UPDATE staff SET unidad_venta_id = 31 WHERE id IN (93, 94, 95);
 
 -- Unidad 32
 UPDATE staff SET unidad_venta_id = 32 WHERE id IN (96, 97, 98);
+
+------------ayudantes y lavaplatos --------------------
+-- Unidad 1
+UPDATE staff SET unidad_venta_id = 1 WHERE id IN (99, 131);
+
+-- Unidad 2
+UPDATE staff SET unidad_venta_id = 2 WHERE id IN (100, 132);
+
+-- Unidad 3
+UPDATE staff SET unidad_venta_id = 3 WHERE id IN (101, 133);
+
+-- Unidad 4
+UPDATE staff SET unidad_venta_id = 4 WHERE id IN (102, 134);
+
+-- Unidad 5
+UPDATE staff SET unidad_venta_id = 5 WHERE id IN (103, 135);
+
+-- Unidad 6
+UPDATE staff SET unidad_venta_id = 6 WHERE id IN (104, 136);
+
+-- Unidad 7
+UPDATE staff SET unidad_venta_id = 7 WHERE id IN (105, 137);
+
+-- Unidad 8
+UPDATE staff SET unidad_venta_id = 8 WHERE id IN (106, 138);
+
+-- Unidad 9
+UPDATE staff SET unidad_venta_id = 9 WHERE id IN (107, 139);
+
+-- Unidad 10
+UPDATE staff SET unidad_venta_id = 10 WHERE id IN (108, 140);
+
+-- Unidad 11
+UPDATE staff SET unidad_venta_id = 11 WHERE id IN (109, 141);
+
+-- Unidad 12
+UPDATE staff SET unidad_venta_id = 12 WHERE id IN (110, 142);
+
+-- Unidad 13
+UPDATE staff SET unidad_venta_id = 13 WHERE id IN (111, 143);
+
+-- Unidad 14
+UPDATE staff SET unidad_venta_id = 14 WHERE id IN (112, 144);
+
+-- Unidad 15
+UPDATE staff SET unidad_venta_id = 15 WHERE id IN (113, 145);
+
+-- Unidad 16
+UPDATE staff SET unidad_venta_id = 16 WHERE id IN (114, 146);
+
+-- Unidad 17
+UPDATE staff SET unidad_venta_id = 17 WHERE id IN (115, 147);
+
+-- Unidad 18
+UPDATE staff SET unidad_venta_id = 18 WHERE id IN (116, 148);
+
+-- Unidad 19
+UPDATE staff SET unidad_venta_id = 19 WHERE id IN (117, 149);
+
+-- Unidad 20
+UPDATE staff SET unidad_venta_id = 20 WHERE id IN (118, 150);
+
+-- Unidad 21
+UPDATE staff SET unidad_venta_id = 21 WHERE id IN (119, 151);
+
+-- Unidad 22
+UPDATE staff SET unidad_venta_id = 22 WHERE id IN (120, 152);
+
+-- Unidad 23
+UPDATE staff SET unidad_venta_id = 23 WHERE id IN (121, 153);
+
+-- Unidad 24
+UPDATE staff SET unidad_venta_id = 24 WHERE id IN (122, 154);
+
+-- Unidad 25
+UPDATE staff SET unidad_venta_id = 25 WHERE id IN (123, 155);
+
+-- Unidad 26
+UPDATE staff SET unidad_venta_id = 26 WHERE id IN (124, 156);
+
+-- Unidad 27
+UPDATE staff SET unidad_venta_id = 27 WHERE id IN (125, 157);
+
+-- Unidad 28
+UPDATE staff SET unidad_venta_id = 28 WHERE id IN (126, 158);
+
+-- Unidad 29
+UPDATE staff SET unidad_venta_id = 29 WHERE id IN (127, 159);
+
+-- Unidad 30
+UPDATE staff SET unidad_venta_id = 30 WHERE id IN (128, 160);
+
+-- Unidad 31
+UPDATE staff SET unidad_venta_id = 31 WHERE id IN (129, 161);
+
+-- Unidad 32
+UPDATE staff SET unidad_venta_id = 32 WHERE id IN (130, 162);
