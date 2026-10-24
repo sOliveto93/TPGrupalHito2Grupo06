@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.unla.hito2.service.FestivalService;
+import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.dto.RegistroUnidadDto;
+import com.unla.hito2.dto.ReporteMayoresCanonDTO;
 import com.unla.hito2.dto.UnidadDeVentaDto;
 import com.unla.hito2.service.UnidadDeVentaService;
 
@@ -29,6 +31,7 @@ public class UnidadDeVentaController {
     private final UnidadDeVentaService unidadDeVentaService;
 
     private final FestivalService festivalService;
+
     public UnidadDeVentaController(UnidadDeVentaService unidadDeVentaService, FestivalService festivalService) {
         this.unidadDeVentaService = unidadDeVentaService;
         this.festivalService = festivalService;
@@ -44,9 +47,9 @@ public class UnidadDeVentaController {
 
     @PostMapping("/guardar")
     public String guardarUnidad(@Valid @ModelAttribute("registroDto") RegistroUnidadDto dto,
-                                BindingResult result,
-                                RedirectAttributes redirect,
-                                Model model) {
+            BindingResult result,
+            RedirectAttributes redirect,
+            Model model) {
 
         if (result.hasErrors()) {
             model.addAttribute("festivales", festivalService.traerActivosYProximos());
@@ -59,7 +62,8 @@ public class UnidadDeVentaController {
             return "redirect:/unidad-venta/registro-unidad";
 
         } catch (Exception e) {
-            // Captura las excepciones tiradas por el Service (DNI repetido, menor de edad, etc.)
+            // Captura las excepciones tiradas por el Service (DNI repetido, menor de edad,
+            // etc.)
             model.addAttribute("error", e.getMessage());
             model.addAttribute("festivales", festivalService.traerActivosYProximos());
             return "/unidad-venta/registro-unidad";
@@ -67,12 +71,34 @@ public class UnidadDeVentaController {
     }
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @GetMapping ("/unidad-venta-por-festival")
-    public  ModelAndView mostrarUnidadesporFestival(  @RequestParam("id") Long id){
-        ModelAndView vista=new ModelAndView("/festival/index.html");
-        List<UnidadDeVentaDto>lista=unidadDeVentaService.buscarPorFestival(id);
+    @GetMapping("/unidad-venta-por-festival")
+    public ModelAndView mostrarUnidadesporFestival(@RequestParam("id") Long id) {
+        ModelAndView vista = new ModelAndView("/festival/index.html");
+        List<UnidadDeVentaDto> lista = unidadDeVentaService.buscarPorFestival(id);
         vista.addObject("lista", lista);
         return vista;
 
+    }
+
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @GetMapping("/mayores-canon")
+    public ModelAndView mostrarMayoresCanon(
+            @RequestParam("id") Long id,
+            @RequestParam("cantidad") int cantidad) {
+
+        ModelAndView vista = new ModelAndView("unidad-venta/mayores-canon");
+        try {
+            FestivalDto festival = festivalService.traerFestivalPorId(id);
+            List<ReporteMayoresCanonDTO> lista = unidadDeVentaService.obtenerMayoresCanon(id, cantidad);
+
+            vista.addObject("lista", lista);
+            vista.addObject("festival", festival);
+            vista.addObject("cantidad", cantidad);
+
+        } catch (Exception e) {
+            vista.addObject("error", e.getMessage());
+        }
+
+        return vista;
     }
 }

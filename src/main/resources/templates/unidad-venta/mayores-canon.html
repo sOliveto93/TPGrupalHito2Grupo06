@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidades con Mayor Canon</title>
+    <link rel="stylesheet" th:href="@{/css/liquidacionSueldoEmpleado.css}">
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="header">
+            <div>
+                <h1>Unidades con mayor canon</h1>
+                <p class="subtitle">Ranking de unidades de venta por canon</p>
+            </div>
+
+            <a th:href="@{/home}" class="btn btn-back">
+                ← Volver al inicio
+            </a>
+        </header>
+
+        <main class="card">
+            <h2>Detalle del reporte</h2>
+
+            <div th:if="${festival != null}">
+                <p>
+                    <strong>Festival:</strong>
+                    <span th:text="${festival.nombre}">Nombre del festival</span>
+                </p>
+
+                <p th:if="${festival.temporada != null}">
+                    <strong>Temporada:</strong>
+                    <span th:text="${festival.temporada}">Temporada</span>
+                </p>
+
+                <p>
+                    <strong>Cantidad solicitada:</strong>
+                    <span th:text="${cantidad}">3</span>
+                </p>
+
+                <div class="table-wrapper" th:if="${!lista.isEmpty()}">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Posición</th>
+                                <th>Nombre comercial</th>
+                                <th>Código</th>
+                                <th>Tipo de unidad</th>
+                                <th>Canon</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="unidad, iteracion : ${lista}">
+                                <td th:text="${iteracion.count}">1</td>
+                                <td th:text="${unidad.nombreComercial}">Nombre comercial</td>
+                                <td th:text="${unidad.codigo}">COD001</td>
+                                <td th:text="${unidad.tipoDeUnidad}">Food Truck</td>
+                                <td class="amount total"
+                                    th:text="${'$ ' + #numbers.formatDecimal(unidad.canon, 1, 2)}">
+                                    $ 0,00
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="empty" th:if="${lista.isEmpty()}">
+                    No hay unidades de venta para mostrar en este festival.
+                </div>
+            </div>
+
+            <div class="empty" th:if="${error != null}" th:text="${error}">
+                No se pudo generar el reporte.
+            </div>
+
+            <div class="empty" th:if="${festival == null && error == null}">
+                No hay información disponible para el reporte.
+            </div>
+        </main>
+
+    </div>
+</body>
+
+</html>
