@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contabilidad - Reporte de Recaudación</title>
+    <link rel="stylesheet" th:href="@{/css/liquidacionSueldoEmpleado.css}">
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="header">
+            <div>
+                <h1>Reporte de recaudación</h1>
+                <p class="subtitle">Resumen financiero del festival</p>
+            </div>
+
+            <a th:href="@{/home}" class="btn btn-back">
+                ← Volver al inicio
+            </a>
+        </header>
+
+        <main class="card">
+            <h2>Detalle del reporte</h2>
+
+            <div th:if="${reporte != null}">
+                <p>
+                    <strong>Festival:</strong>
+                    <span th:text="${reporte.festival.nombre}">Nombre del festival</span>
+                </p>
+
+                <p th:if="${reporte.festival.temporada != null}">
+                    <strong>Temporada:</strong>
+                    <span th:text="${reporte.festival.temporada}">Temporada</span>
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Concepto</th>
+                                <th>Importe total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Recaudación total</td>
+                                <td class="amount total"
+                                    th:text="${#numbers.formatDecimal(reporte.recaudacionTotal, 1, 2)}">
+                                    0.00
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="empty" th:if="${error != null}" th:text="${error}">
+                No existe el festival solicitado.
+            </div>
+
+            <div class="empty" th:if="${reporte == null && error == null}">
+                No hay información disponible para el reporte.
+            </div>
+        </main>
+
+    </div>
+</body>
+
+</html>

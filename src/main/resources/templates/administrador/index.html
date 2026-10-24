@@ -116,19 +116,30 @@
                                 </span>
                             </td>
 
-                            <td>
-                                <a th:href="@{/unidad-venta/unidad-venta-por-festival(id=${f.id})}"
-                                    class="btn btn-primary">
-                                    Ver unidades
-                                </a>
+                            <td class="acciones">
+    <a th:href="@{/unidad-venta/unidad-venta-por-festival(id=${f.id})}"
+       class="btn btn-primary">
+        Ver unidades
+    </a>
 
-                                <a th:href="@{/contabilidad/ranking(id=${f.id})}" class="btn btn-outline">
-                                    Ver ranking
-                                </a>
-                                <a th:href="@{/plato/reporte-plato-estrella(id=${f.id})}" class="btn btn-outline">
-                                    Ver plato estrella
-                                </a>
-                            </td>
+    <a sec:authorize="hasRole('ADMINISTRADOR')"
+       th:href="@{/contabilidad/reporte-venta(id=${f.id})}"
+       class="btn btn-outline">
+        Ver recaudación
+    </a>
+
+    <a sec:authorize="hasRole('ADMINISTRADOR')"
+       th:href="@{/contabilidad/ranking(id=${f.id})}"
+       class="btn btn-outline">
+        Ver ranking
+    </a>
+
+    <a sec:authorize="hasRole('ADMINISTRADOR')"
+       th:href="@{/plato/reporte-plato-estrella(id=${f.id})}"
+       class="btn btn-outline">
+        Ver plato estrella
+    </a>
+</td>
                         </tr>
 
 

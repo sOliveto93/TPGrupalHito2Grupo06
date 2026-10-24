@@ -10,7 +10,7 @@
 
 <body>
     <header>
-        <a th:href="@{/home}" class=" btn-volver">
+        <a th:href="@{/home}" class="btn-volver">
             ← Volver
         </a>
         <h1>Reporte de platos más vendidos</h1>
@@ -24,7 +24,7 @@
             No hay platos vendidos para este festival.
         </p>
 
-        <table th:unless="${#lists.isEmpty(platoEstrella)}">
+        <table class="tabla-reporte" th:unless="${#lists.isEmpty(platoEstrella)}">
             <thead>
                 <tr>
                     <th>Posición</th>
@@ -42,7 +42,7 @@
             </tbody>
         </table>
 
-        
+
     </main>
 </body>
 

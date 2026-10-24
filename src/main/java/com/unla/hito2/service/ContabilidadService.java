@@ -1,8 +1,10 @@
 package com.unla.hito2.service;
 
-import com.unla.hito2.dto.UnidadDeVentaDto;
+import com.unla.hito2.dto.FestivalDto;
+import com.unla.hito2.dto.ReporteVentaDto;
 import com.unla.hito2.dto.UnidadDeVentaRankingDto;
 import com.unla.hito2.entity.DetallePedido;
+
 import com.unla.hito2.entity.LiquidacionHaberes;
 import com.unla.hito2.entity.Pedido;
 import com.unla.hito2.entity.Staff;
@@ -15,20 +17,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Comparator;
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ContabilidadService {
 
     private final LiquidacionRepository liquidacionRepository;
     private UnidadDeVentaRepository unidadDeVentaRepository;
+    private FestivalService festivalService;
 
     public ContabilidadService(LiquidacionRepository liquidacionRepository,
-            UnidadDeVentaRepository unidadDeVentaRepository) {
+            UnidadDeVentaRepository unidadDeVentaRepository, FestivalService festivalService) {
         this.liquidacionRepository = liquidacionRepository;
         this.unidadDeVentaRepository = unidadDeVentaRepository;
+        this.festivalService = festivalService;
     }
 
     @Transactional(readOnly = true)
@@ -48,10 +51,9 @@ public class ContabilidadService {
     }
 
     @Transactional(readOnly = true)
-    public List<UnidadDeVentaRankingDto> rankingUnidadesVentaPorPedido(Long id) {
+    public List<UnidadDeVentaRankingDto> calcularIngresoPorUnidadPorFestival(Long id) {
         List<UnidadDeVenta> unidadesVenta = unidadDeVentaRepository.findByFestivalId(id);
         List<UnidadDeVentaRankingDto> dtos = new ArrayList<>();
-
         for (UnidadDeVenta unidadActual : unidadesVenta) {
 
             BigDecimal ingresosPorUnidad = BigDecimal.ZERO;
@@ -74,6 +76,13 @@ public class ContabilidadService {
 
             ingresosPorUnidad = BigDecimal.ZERO;
         }
+        return dtos;
+    }
+
+    @Transactional(readOnly = true)
+    public List<UnidadDeVentaRankingDto> rankingUnidadesVentaPorPedido(Long id) {
+        List<UnidadDeVentaRankingDto> dtos = calcularIngresoPorUnidadPorFestival(id);
+
         dtos.sort((a, b) -> b.getIngresos().compareTo(a.getIngresos()));
 
         return dtos;
@@ -98,5 +107,22 @@ public class ContabilidadService {
             }
         }
         return liquidaciones;
+    }
+
+    @Transactional(readOnly = true)
+    public ReporteVentaDto generarReporteVentaPorFestival(Long id) {
+        List<UnidadDeVentaRankingDto> lista = calcularIngresoPorUnidadPorFestival(id);
+
+        BigDecimal recaudacionTotal = BigDecimal.ZERO;
+        for (UnidadDeVentaRankingDto actual : lista) {
+            recaudacionTotal = recaudacionTotal.add(actual.getIngresos());
+        }
+        ReporteVentaDto reporte = new ReporteVentaDto();
+        reporte.setRecaudacionTotal(recaudacionTotal);
+        FestivalDto festival = festivalService.traerFestivalPorId(id);
+
+        reporte.setFestival(festival);
+
+        return reporte;
     }
 }

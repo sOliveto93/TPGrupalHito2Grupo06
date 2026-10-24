@@ -134,6 +134,20 @@ body {
     outline-offset: 3px;
 }
 
+/* Botones de acciones en la tabla de festivales */
+
+table .btn-outline {
+    background: white;
+    border-color: var(--border);
+    color: var(--primary);
+}
+
+table .btn-outline:hover {
+    background: var(--surface-alt);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
 /* Secciones */
 
 .registro-section,
@@ -369,4 +383,15 @@ body {
     .card:hover {
         transform: none;
     }
+}
+.filter-actions .btn-outline {
+    background: white;
+    border-color: var(--border);
+    color: var(--primary);
+}
+
+.filter-actions .btn-outline:hover {
+    background: var(--surface-alt);
+    border-color: var(--accent);
+    color: var(--accent);
 }
