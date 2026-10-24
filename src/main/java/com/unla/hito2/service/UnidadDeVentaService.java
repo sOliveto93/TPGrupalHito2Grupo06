@@ -2,15 +2,20 @@ package com.unla.hito2.service;
 
 import com.unla.hito2.Enum.Rol;
 import com.unla.hito2.dto.RegistroUnidadDto;
+import com.unla.hito2.dto.ReporteMayoresCanonDTO;
 import com.unla.hito2.dto.UnidadDeVentaDto;
 import com.unla.hito2.entity.*;
 import com.unla.hito2.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -132,12 +137,11 @@ public class UnidadDeVentaService {
     }
 
     public UnidadDeVenta buscarPorEmpleado(String username) throws Exception {
-    return unidadDeVentaRepository
-            .findByEmpleados_Usuario_Username(username)
-            .orElseThrow(() -> new Exception(
-                    "No se encontró una unidad de venta para el empleado: " + username
-            ));
-}
+        return unidadDeVentaRepository
+                .findByEmpleados_Usuario_Username(username)
+                .orElseThrow(() -> new Exception(
+                        "No se encontró una unidad de venta para el empleado: " + username));
+    }
 
     public List<UnidadDeVentaDto> buscarPorFestival(Long id) {
         List<UnidadDeVenta> lista = unidadDeVentaRepository.findByFestivalId(id);
@@ -162,4 +166,80 @@ public class UnidadDeVentaService {
         }
         return dtos;
     }
+
+    private BigDecimal calcularCanon(UnidadDeVenta unidad) {
+
+        if (unidad instanceof FoodTruck foodTruck) {
+            BigDecimal canon = BigDecimal.valueOf(unidad.getSuperficie())
+                    .multiply(BigDecimal.valueOf(500));
+
+            if (foodTruck.isRequiereElectricidad()) {
+                canon = canon.add(BigDecimal.valueOf(2000));
+            }
+
+            return canon;
+        }
+
+        if (unidad instanceof PuestoDesarmable puesto) {
+            BigDecimal canonSuperficie = BigDecimal.valueOf(unidad.getSuperficie())
+                    .multiply(BigDecimal.valueOf(500));
+
+            BigDecimal costoMontaje = BigDecimal.valueOf(puesto.getTiempoMontajeMinutos())
+                    .multiply(BigDecimal.valueOf(10));
+
+            return canonSuperficie.subtract(costoMontaje);
+        }
+
+        throw new IllegalArgumentException("Tipo de unidad de venta no reconocido");
+    }
+
+    public List<ReporteMayoresCanonDTO> obtenerMayoresCanon(            Long idFestival, int cantidad) {
+
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException(
+                    "La cantidad debe ser mayor que cero");
+        }
+
+        List<UnidadDeVenta> unidades = unidadDeVentaRepository.findByFestivalId(idFestival);
+
+        List<ReporteMayoresCanonDTO> reportes = new ArrayList<>();
+
+        for (UnidadDeVenta unidad : unidades) {
+
+            ReporteMayoresCanonDTO dto = new ReporteMayoresCanonDTO();
+
+            dto.setNombreComercial(unidad.getNombreComercial());
+            dto.setCodigo(unidad.getCodigo());
+
+            if (unidad instanceof FoodTruck) {
+                dto.setTipoDeUnidad("Food Truck");
+            } else if (unidad instanceof PuestoDesarmable) {
+                dto.setTipoDeUnidad("Puesto Desarmable");
+            } else {
+                throw new IllegalArgumentException(
+                        "Tipo de unidad de venta no reconocido");
+            }
+
+            dto.setCanon(calcularCanon(unidad));
+
+            reportes.add(dto);
+        }
+
+        Collections.sort(reportes, new Comparator<ReporteMayoresCanonDTO>() {
+            @Override
+            public int compare(
+                    ReporteMayoresCanonDTO reporte1,
+                    ReporteMayoresCanonDTO reporte2) {
+
+                return reporte2.getCanon().compareTo(reporte1.getCanon());
+            }
+        });
+
+        if (reportes.size() > cantidad) {
+            return new ArrayList<>(reportes.subList(0, cantidad));
+        }
+
+        return reportes;
+    }
+
 }
