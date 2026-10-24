@@ -49,10 +49,12 @@ public class HomeController {
 
         if (esResponsable) {
             return "redirect:/responsable/home";
+        } else if (esEmpleado) {
+            return "redirect:/empleado/home";
+        } else if (esAdministrador) {
+            return "redirect:/administrador/home";
         }
-        else if(esEmpleado){return "redirect:/empleado/home";}
-        else if(esAdministrador){return "redirect:/administrador/home";}
-        
+
         return "redirect:/";
     }
 
@@ -70,22 +72,30 @@ public class HomeController {
 
         return vista;
     }
+
     @GetMapping("/empleado/home")
     @PreAuthorize("hasRole('EMPLEADO')")
     public ModelAndView homeEmpleado(Authentication authentication) {
         ModelAndView vista = new ModelAndView("/empleado/index");
 
-        
+        try {
+            vista.addObject("miUnidad",
+                    unidadDeVentaService.buscarPorEmpleado(authentication.getName()));
+        } catch (Exception e) {
+            vista.addObject("errorUnidad",
+                    "No tenés una unidad de venta asignada.");
+        }
 
         return vista;
     }
+
     @GetMapping("/administrador/home")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ModelAndView homeAdministrador(Authentication authentication) {
         ModelAndView vista = new ModelAndView("/administrador/index");
 
-              List<FestivalDto> lista = festivalService.traerTodos();
-            vista.addObject("festivales", lista);
+        List<FestivalDto> lista = festivalService.traerTodos();
+        vista.addObject("festivales", lista);
 
         return vista;
     }

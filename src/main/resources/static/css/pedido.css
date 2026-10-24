@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    color: #263238;
+}
+
+.panel {
+    padding: 24px;
+    margin-bottom: 24px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.selector {
+    display: grid;
+    grid-template-columns: 1fr 120px auto;
+    gap: 12px;
+    align-items: end;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+select,
+input,
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: white;
+    background: #1769aa;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-secondary {
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-remove {
+    width: auto;
+    color: #a32121;
+    background: transparent;
+    border: none;
+}
+
+.error {
+    color: #b42318;
+}
+
+.empty {
+    color: #666;
+    padding: 12px 0;
+}
+
+.total {
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.actions button {
+    width: auto;
+}
+
+@media (max-width: 600px) {
+    .selector {
+        grid-template-columns: 1fr;
+    }
+}
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 17px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--surface);
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent);
+    background: var(--surface-alt);
+    color: var(--accent);
+}

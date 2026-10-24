@@ -5,49 +5,217 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear pedido</title>
+    <link rel="stylesheet" th:href="@{/css/pedido.css}">
+
 </head>
 
 <body>
-
+    <a class="btn-secondary" th:href="@{/pedido/getPedidos-unidad-venta(id=${pedidoAlta.idUnidadDeVenta})}">
+        Volver a los pedidos
+    </a>
     <h1>Crear pedido</h1>
 
-    <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+    <p class="error" th:if="${error}" th:text="${error}"></p>
 
-    <h2 th:text="${pedidoAlta.nombreUnidadDeVenta}">
-        Unidad de venta
-    </h2>
+    <section class="panel">
+        <h2 th:text="${pedidoAlta.nombreUnidadDeVenta}">
+            Unidad de venta
+        </h2>
 
-    <form th:action="@{/pedido/alta}" method="post">
+        <h3>1. Seleccionar plato y cantidad</h3>
 
+        <div class="selector">
+            <div>
+                <label for="plato">Plato</label>
+                <select id="plato">
+                    <option value="">Seleccioná un plato</option>
+
+                    <option th:each="plato : ${pedidoAlta.platos}" th:value="${plato.id}"
+                        th:text="${plato.nombre + ' - $ ' + plato.precio}" th:attr="data-nombre=${plato.nombre},
+                                 data-precio=${plato.precio}">
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label for="cantidad">Cantidad</label>
+                <input type="number" id="cantidad" min="1" step="1" value="1">
+            </div>
+
+            <button type="button" id="agregar" class="btn-primary">
+                Agregar
+            </button>
+        </div>
+
+        <p id="mensaje" class="error" role="alert"></p>
+    </section>
+
+    <form th:action="@{/pedido/alta}" method="post" id="formPedido">
         <input type="hidden" name="idUnidadDeVenta" th:value="${pedidoAlta.idUnidadDeVenta}">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Plato</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                </tr>
-            </thead>
+        <section class="panel">
+            <h3>2. Resumen del pedido</h3>
 
-            <tbody>
-                <tr th:each="plato, iter : ${pedidoAlta.platos}">
-                    <td th:text="${plato.nombre}">Nombre del plato</td>
+            <p id="vacio" class="empty">
+                Todavía no agregaste platos al pedido.
+            </p>
 
-                    <td th:text="${plato.precio}">0.00</td>
+            <table id="tablaPedido" hidden style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Plato</th>
+                        <th style="text-align: right;">Precio</th>
+                        <th style="text-align: right;">Cantidad</th>
+                        <th style="text-align: right;">Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="detallesPedido"></tbody>
+            </table>
 
-                    <td>
-                        <input type="hidden" th:name="|detalles[${iter.index}].platoId|" th:value="${plato.id}">
+            <p class="total">
+                Total: $ <span id="total">0.00</span>
+            </p>
+        </section>
 
-                        <input type="number" th:name="|detalles[${iter.index}].cantidad|" value="0" min="0">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <button type="submit">Crear pedido</button>
-
+        <div class="actions">
+            <button type="submit" id="crear" class="btn-primary" disabled>
+                Crear pedido
+            </button>
+        </div>
     </form>
+
+    <script>
+        const selectorPlato = document.getElementById("plato");
+        const inputCantidad = document.getElementById("cantidad");
+        const botonAgregar = document.getElementById("agregar");
+        const cuerpoDetalles = document.getElementById("detallesPedido");
+        const tablaPedido = document.getElementById("tablaPedido");
+        const mensaje = document.getElementById("mensaje");
+        const totalElemento = document.getElementById("total");
+        const botonCrear = document.getElementById("crear");
+        const textoVacio = document.getElementById("vacio");
+
+        const detalles = new Map();
+
+        function actualizarResumen() {
+            cuerpoDetalles.replaceChildren();
+
+            let total = 0;
+            let indice = 0;
+
+            detalles.forEach(function (detalle, platoId) {
+                const subtotal = detalle.precio * detalle.cantidad;
+                total += subtotal;
+
+                const fila = document.createElement("tr");
+
+                const nombre = document.createElement("td");
+                nombre.textContent = detalle.nombre;
+
+                const precio = document.createElement("td");
+                precio.textContent = detalle.precio.toFixed(2);
+                precio.style.textAlign = "right";
+
+                const cantidad = document.createElement("td");
+                cantidad.textContent = detalle.cantidad;
+                cantidad.style.textAlign = "right";
+
+                const subtotalCelda = document.createElement("td");
+                subtotalCelda.textContent = subtotal.toFixed(2);
+                subtotalCelda.style.textAlign = "right";
+
+                const acciones = document.createElement("td");
+                acciones.style.textAlign = "right";
+
+                const botonQuitar = document.createElement("button");
+                botonQuitar.type = "button";
+                botonQuitar.className = "btn-remove";
+                botonQuitar.textContent = "Quitar";
+
+                botonQuitar.addEventListener("click", function () {
+                    detalles.delete(platoId);
+                    actualizarResumen();
+                });
+
+                acciones.appendChild(botonQuitar);
+
+                fila.append(nombre, precio, cantidad, subtotalCelda, acciones);
+
+                const inputId = document.createElement("input");
+                inputId.type = "hidden";
+                inputId.name = "detalles[" + indice + "].platoId";
+                inputId.value = platoId;
+
+                const inputCantidadDetalle = document.createElement("input");
+                inputCantidadDetalle.type = "hidden";
+                inputCantidadDetalle.name = "detalles[" + indice + "].cantidad";
+                inputCantidadDetalle.value = detalle.cantidad;
+
+                const celdaOculta = document.createElement("td");
+                celdaOculta.hidden = true;
+                celdaOculta.append(inputId, inputCantidadDetalle);
+                fila.appendChild(celdaOculta);
+
+                cuerpoDetalles.appendChild(fila);
+                indice++;
+            });
+
+            tablaPedido.hidden = detalles.size === 0;
+            textoVacio.hidden = detalles.size !== 0;
+            botonCrear.disabled = detalles.size === 0;
+            totalElemento.textContent = total.toFixed(2);
+        }
+
+        botonAgregar.addEventListener("click", function () {
+            mensaje.textContent = "";
+
+            const opcion = selectorPlato.selectedOptions[0];
+            const platoId = selectorPlato.value;
+            const cantidad = Number(inputCantidad.value);
+
+            if (!platoId) {
+                mensaje.textContent = "Seleccioná un plato.";
+                return;
+            }
+
+            if (!Number.isInteger(cantidad) || cantidad <= 0) {
+                mensaje.textContent = "La cantidad debe ser un entero mayor que cero.";
+                return;
+            }
+
+            const precio = Number(opcion.dataset.precio);
+
+            if (!Number.isFinite(precio) || precio < 0) {
+                mensaje.textContent = "El precio del plato no es válido.";
+                return;
+            }
+
+            const detalleExistente = detalles.get(platoId);
+
+            if (detalleExistente) {
+                detalleExistente.cantidad += cantidad;
+            } else {
+                detalles.set(platoId, {
+                    nombre: opcion.dataset.nombre,
+                    precio: precio,
+                    cantidad: cantidad
+                });
+            }
+
+            selectorPlato.value = "";
+            inputCantidad.value = "1";
+
+            actualizarResumen();
+        });
+
+        document.getElementById("formPedido").addEventListener("submit", function (evento) {
+            if (detalles.size === 0) {
+                evento.preventDefault();
+                mensaje.textContent = "Agregá al menos un plato antes de crear el pedido.";
+            }
+        });
+    </script>
 
 </body>
 

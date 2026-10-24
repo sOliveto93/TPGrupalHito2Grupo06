@@ -3,7 +3,6 @@ package com.unla.hito2.controller;
 import com.unla.hito2.dto.AltaPlatoDto;
 import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.dto.PlatoEstrellaDto;
-import com.unla.hito2.dto.pedido.PlatoPedidoDto;
 import com.unla.hito2.entity.UnidadDeVenta;
 import com.unla.hito2.service.FestivalService;
 import com.unla.hito2.service.PlatoService;
@@ -33,6 +32,7 @@ public class PlatoController {
     private final PlatoService platoService;
     private final UnidadDeVentaService unidadDeVentaService;
     private FestivalService festivalService;
+    
     public PlatoController(PlatoService platoService, UnidadDeVentaService unidadDeVentaService,FestivalService festivalService) {
 
         this.platoService = platoService;
