@@ -22,10 +22,36 @@
             </p>
         </div>
 
-        <a th:href="@{/home}" class="btn btn-back">
+        <a th:href="@{/}" class="btn btn-back">
             ← Volver al inicio
         </a>
     </header>
+
+    <div th:if="${exito}" style="color: green; margin: 10px 0;" th:text="${exito}"></div>
+    <div th:if="${error}" style="color: red; margin: 10px 0;" th:text="${error}"></div>
+
+    <section class="card" sec:authorize="hasRole('RESPONSABLE')">
+        <h2>Generar liquidación</h2>
+        <form th:action="@{/contabilidad/liquidacion/generar}" method="post" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: end;">
+            <div>
+                <label>Empleado:</label><br/>
+                <select name="staffId" required>
+                    <option value="" disabled selected>Seleccione empleado</option>
+                    <option th:each="emp : ${empleados}" th:value="${emp.id}" th:text="${emp.name + ' ' + emp.apellido + ' (' + emp.dni + ')'}"></option>
+                </select>
+            </div>
+            <div>
+                <label>Festival:</label><br/>
+                <select name="festivalId" required>
+                    <option value="" disabled selected>Seleccione festival</option>
+                    <option th:each="f : ${festivales}" th:value="${f.id}" th:text="${f.nombre}"></option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="btn">Generar liquidación</button>
+            </div>
+        </form>
+    </section>
 
     <main class="card">
         <h2>Detalle de liquidaciones</h2>
@@ -41,6 +67,7 @@
                 <thead>
                 <tr>
                     <th>Empleado</th>
+                    <th>Rol/Categoría</th>
                     <th>Fecha</th>
                     <th>Festival</th>
                     <th>Días trabajados</th>
@@ -54,8 +81,17 @@
 
                 <tbody>
                 <tr th:each="liq : ${liquidaciones}">
-                    <td th:text="${liq.empleado != null && liq.empleado.usuario != null ? liq.empleado.usuario.username : 'Sin empleado'}">
-                        empleado
+                    <td>
+                        <span th:if="${liq.empleado != null}" th:text="${(liq.empleado.name != null ? liq.empleado.name : '') + ' ' + (liq.empleado.apellido != null ? liq.empleado.apellido : '')}"></span>
+                        <br/>
+                        <small th:if="${liq.empleado != null && liq.empleado.usuario != null}" th:text="${liq.empleado.usuario.username}"></small>
+                        <span th:if="${liq.empleado == null}">Sin empleado</span>
+                    </td>
+                    <td>
+                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName == 'Cajero'}">CAJERO</span>
+                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName == 'Cocinero' and liq.empleado.categoria != null}" th:text="${liq.empleado.categoria}"></span>
+                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName == 'Cocinero' and liq.empleado.categoria == null}">COCINERO</span>
+                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName != 'Cajero' and liq.empleado['class'].simpleName != 'Cocinero'}">STAFF</span>
                     </td>
 
                     <td th:text="${liq.fecha}">2026-10-20</td>
@@ -84,7 +120,7 @@
                     </td>
 
                     <td>
-                        <span class="download">PDF próximamente</span>
+                        <a class="download" th:href="@{/contabilidad/liquidacion/{id}/pdf(id=${liq.id})}" target="_blank">Descargar PDF</a>
                     </td>
                 </tr>
                 </tbody>

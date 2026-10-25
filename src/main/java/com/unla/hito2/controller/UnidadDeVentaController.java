@@ -39,14 +39,13 @@ public class UnidadDeVentaController {
 
     @GetMapping("registro-unidad")
     public String mostrarFormulario(Model model) {
-        System.out.println("ENTRÓ AL CONTROLADOR DE REGISTRO");
         model.addAttribute("registroDto", new RegistroUnidadDto());
         model.addAttribute("festivales", festivalService.traerActivosYProximos());
-        return "/unidad-venta/registro-unidad"; // Renderiza templates/registro-unidad.html
+        return "/unidad-venta/registro-unidad";
     }
 
     @PostMapping("/guardar")
-    public String guardarUnidad(@Valid @ModelAttribute("registroDto") RegistroUnidadDto dto,
+    public String guardarUnidad(@jakarta.validation.Valid @ModelAttribute("registroDto") RegistroUnidadDto dto,
             BindingResult result,
             RedirectAttributes redirect,
             Model model) {
@@ -55,6 +54,8 @@ public class UnidadDeVentaController {
             model.addAttribute("festivales", festivalService.traerActivosYProximos());
             return "/unidad-venta/registro-unidad";
         }
+
+        dto.setCodigo(null);
 
         try {
             unidadDeVentaService.registrarUnidadConResponsable(dto);

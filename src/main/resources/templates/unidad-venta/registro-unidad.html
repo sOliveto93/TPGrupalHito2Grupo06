@@ -83,15 +83,7 @@
                        required>
             </p>
 
-            <p>
-                <label for="inputCodigo">Código Único (10 caracteres):</label><br>
-                <input type="text"
-                       id="inputCodigo"
-                       th:field="*{codigo}"
-                       maxlength="10"
-                       placeholder="Ej: FT12345678"
-                       required>
-            </p>
+            <input type="hidden" th:field="*{codigo}" id="inputCodigo">
 
             <p>
                 <label for="superficie">Superficie (m²):</label><br>
@@ -160,7 +152,7 @@
             </div>
 
             <!-- 2. Responsable -->
-            <h3>2. Datos del Responsable (Staff)</h3>
+            <h3>2. Datos del Responsable </h3>
 
             <p>
                 <label for="nombre">Nombre:</label><br>
@@ -197,13 +189,7 @@
                        required>
             </p>
 
-            <p>
-                <label for="fechaIngreso">Fecha de Ingreso:</label><br>
-                <input type="date"
-                       th:field="*{fechaIngreso}"
-                       id="fechaIngreso"
-                       required>
-            </p>
+            <input type="hidden" th:field="*{fechaIngreso}" id="fechaIngreso">
 
             <!-- 3. Credenciales -->
             <h3>3. Credenciales de Usuario</h3>
@@ -294,6 +280,14 @@
             const password = document.getElementById("inputPassword");
             const confirmPassword = document.getElementById("inputConfirmPassword");
             const passError = document.getElementById("passError");
+            const fechaIngreso = document.getElementById("fechaIngreso");
+            if (fechaIngreso && !fechaIngreso.value) {
+                const hoy = new Date();
+                const yyyy = hoy.getFullYear();
+                const mm = String(hoy.getMonth() + 1).padStart(2, '0');
+                const dd = String(hoy.getDate()).padStart(2, '0');
+                fechaIngreso.value = yyyy + '-' + mm + '-' + dd;
+            }
 
             toggleCamposTipo();
 

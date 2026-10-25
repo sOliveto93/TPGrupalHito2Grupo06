@@ -20,8 +20,6 @@ public class RegistroUnidadDto  {
     //atributos de la unidad
     @NotNull
     private Long festivalId;
-    @NotBlank(message = "El código es obligatorio.")
-    @Size(min = 10, max = 10, message = "El código debe tener exactamente 10 caracteres.")
     private String codigo;
     @NotBlank(message = "El nombre comercial es obligatorio.")
     private String nombreComercial;
@@ -48,7 +46,6 @@ public class RegistroUnidadDto  {
     private String dni;
     @NotNull
     private LocalDate fechaNac;
-    @NotNull(message = "La fecha de ingreso es obligatoria.")
     private LocalDate fechaIngreso;
     @NotBlank
     @Email(message = "Debe ingresar un email válido.")
