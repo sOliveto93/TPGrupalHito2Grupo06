@@ -35,7 +35,7 @@ public class SecurityConfiguration {
 				.csrf(AbstractHttpConfigurer::disable)
 				.cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/","/403", "/login","/unidad-venta/registro-unidad").permitAll();
+					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/","/403", "/login","/unidad-venta/registro-unidad","/unidad-venta/guardar").permitAll();
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(form -> form

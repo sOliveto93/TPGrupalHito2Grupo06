@@ -48,14 +48,11 @@ public class UnidadDeVentaService {
         if (staffRepository.existsByDni(dto.getDni())) {
             throw new Exception("Ya existe un usuario/responsable registrado con el DNI: " + dto.getDni());
         }
-        if (dto.getCodigo().length() != 10) {
-            throw new Exception("El codigo debe tener 10 digitos.");
-        }
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new Exception("Ya existe un usuario registrado con este email");
         }
-        if (unidadDeVentaRepository.existsByCodigo(dto.getCodigo())) {
-            throw new Exception("Ya existe una unidad registrada con este codigo");
+        if (dto.getFechaIngreso() == null) {
+            dto.setFechaIngreso(java.time.LocalDate.now());
         }
         int edad = Period.between(dto.getFechaNac(), LocalDate.now()).getYears();
 
@@ -121,7 +118,44 @@ public class UnidadDeVentaService {
             unidad = pd;
         }
         unidad.setNombreComercial(dto.getNombreComercial());
-        unidad.setCodigo(dto.getCodigo());
+        if (dto.getFechaIngreso() == null) {
+            dto.setFechaIngreso(java.time.LocalDate.now());
+        }
+        responsable.setFechaIngreso(dto.getFechaIngreso());
+        String prefijo = "FOOD_TRUCK".equalsIgnoreCase(dto.getTipoUnidad()) ? "FT" : "PD";
+        long maxFt = unidadDeVentaRepository.findAll().stream()
+                .map(UnidadDeVenta::getCodigo)
+                .filter(c -> c != null && c.toUpperCase().startsWith("FT"))
+                .map(c -> {
+                    try {
+                        String num = c.substring(2);
+                        return Long.parseLong(num.replaceAll("\\D", ""));
+                    } catch (Exception e) {
+                        return 0L;
+                    }
+                })
+                .max(Long::compareTo)
+                .orElse(0L);
+        long maxPd = unidadDeVentaRepository.findAll().stream()
+                .map(UnidadDeVenta::getCodigo)
+                .filter(c -> c != null && c.toUpperCase().startsWith("PD"))
+                .map(c -> {
+                    try {
+                        String num = c.substring(2);
+                        return Long.parseLong(num.replaceAll("\\D", ""));
+                    } catch (Exception e) {
+                        return 0L;
+                    }
+                })
+                .max(Long::compareTo)
+                .orElse(0L);
+        long next = "FOOD_TRUCK".equalsIgnoreCase(dto.getTipoUnidad()) ? maxFt + 1 : maxPd + 1;
+        String codigoFinal = String.format(prefijo + "%08d", next);
+        while (unidadDeVentaRepository.existsByCodigo(codigoFinal)) {
+            next++;
+            codigoFinal = String.format(prefijo + "%08d", next);
+        }
+        unidad.setCodigo(codigoFinal);
         unidad.setSuperficie(dto.getSuperficie());
         unidad.setResponsable(responsable);
         unidad.setFestival(festival);
