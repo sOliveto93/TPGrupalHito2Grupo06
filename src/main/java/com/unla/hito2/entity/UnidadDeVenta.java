@@ -40,9 +40,9 @@ public class UnidadDeVenta {
     @JoinColumn(name = "festival_id", nullable = false)
     private Festival festival;
     
-    //por la simplificacion del diagrama . se pone 1 a 1
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "responsable_id", nullable = false, unique = true)
+  
+    @ManyToOne (fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "responsable_id", nullable = false)
     private Staff responsable;
 
     @OneToMany(mappedBy = "unidadDeVenta")

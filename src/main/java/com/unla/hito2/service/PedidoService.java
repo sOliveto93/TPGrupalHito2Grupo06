@@ -265,7 +265,7 @@ public class PedidoService {
 
         return dto;
     }
-
+//hacemos esta doble validacion por las dudas si alguien usa los metodos desde otro servicio
     public boolean empleadoActivo(String username) {
     return staffRepository.existsByUsuario_UsernameAndActivoTrue(username);
 }

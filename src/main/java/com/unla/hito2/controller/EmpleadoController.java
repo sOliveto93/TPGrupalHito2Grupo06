@@ -31,7 +31,7 @@ public class EmpleadoController {
         this.empleadoService = empleadoService;
         this.unidadDeVentaService = unidadDeVentaService;
     }
-
+    
     @GetMapping("/alta")
     public String mostrarFormularioAlta(Model model) {
         model.addAttribute("empleadoDto", new EmpleadoDto());
