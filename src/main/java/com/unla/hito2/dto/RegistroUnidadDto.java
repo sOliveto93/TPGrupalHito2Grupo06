@@ -38,16 +38,6 @@ public class RegistroUnidadDto  {
 
     //atributos del responsable
     @NotBlank
-    private String nombre;
-    @NotBlank
-    private String apellido;
-    @NotBlank(message = "El DNI es obligatorio.")
-    @Size(min=7, max = 8, message = "El DNI debe escribirse sin puntos ni espacios")
-    private String dni;
-    @NotNull
-    private LocalDate fechaNac;
-    private LocalDate fechaIngreso;
-    @NotBlank
     @Email(message = "Debe ingresar un email válido.")
     private String email;
     @NotBlank

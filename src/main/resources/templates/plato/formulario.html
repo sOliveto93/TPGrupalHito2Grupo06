@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/alta-plato.css}">
     <meta charset="UTF-8">
     <title>Alta de Plato</title>
 </head>
 <body>
 
-<h1>Alta de Plato</h1>
+<div class="page-heading">
+    <h1>Alta de Plato</h1>
+    <p>Registrá un nuevo plato para ofrecer en tu unidad de venta.</p>
+</div>
 
-<p th:if="${exito}" th:text="${exito}" style="color: green;"></p>
+<p th:if="${exito}" th:text="${exito}"
+   class="alert alert-success"></p>
 
-<p th:if="${error}" th:text="${error}" style="color: red;"></p>
+<p th:if="${error}" th:text="${error}"
+   class="alert alert-error"></p>
 
 <form th:action="@{/plato/alta}"
       th:object="${altaPlatoDto}"
@@ -40,8 +47,10 @@
                step="0.01" min="0" required>
     </p>
 
-    <button type="submit">Registrar plato</button>
-    <a th:href="@{/}">Volver al inicio</a>
+    <p>
+        <a th:href="@{/responsable/home}">Volver a mi unidad</a>
+        <button type="submit">Registrar plato</button>
+    </p>
 </form>
 
 

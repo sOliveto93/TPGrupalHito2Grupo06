@@ -32,6 +32,7 @@
                 Consultá los datos de tu unidad y gestioná tus platos,
                 empleados y pedidos.
             </p>
+            <p th:if="${exito}" th:text="${exito}" style="color: green;"></p>
         </section>
 
         <section sec:authorize="hasRole('RESPONSABLE')">
@@ -122,6 +123,17 @@
                         </article>
                         
                     </div>
+
+                    <form th:if="${perfilIncompleto}"
+                          th:action="@{/responsable/completar-datos}"
+                          method="get"
+                          class="acciones-perfil">
+
+                        <button type="submit" class="btn btn-primary">
+                            Completar mis datos
+                        </button>
+                    </form>
+
                 </div>
             </div>
         </section>

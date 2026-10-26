@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
+    color: #263238;
+    line-height: 1.5;
+}
+
+.page-heading {
+    max-width: 760px;
+    margin: 0 auto 28px;
+    padding: 26px 24px;
+    background: #305f92;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.page-heading h1 {
+    margin: 0 0 8px;
+    color: white;
+}
+
+.page-heading p {
+    margin: 0;
+    color: #e2e8f0;
+}
+
+form {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 30px;
+    background: white;
+    border: 1px solid #e1e7ed;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(25, 42, 62, 0.07);
+}
+
+form > p {
+    margin: 0 0 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    min-height: 43px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: white;
+    color: #263238;
+    font: inherit;
+}
+
+input:focus {
+    outline: 3px solid #dbeafe;
+    border-color: #2878b5;
+}
+
+button {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #2878b5;
+    color: white;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d5f91;
+}
+
+a {
+    color: #2878b5;
+    font-weight: 600;
+}
+
+form > p:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 28px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.alert {
+    max-width: 760px;
+    margin: 0 auto 20px;
+    padding: 14px 18px;
+    border-radius: 6px;
+}
+
+.alert-error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.alert ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 24px 12px;
+    }
+
+    .page-heading {
+        padding: 22px 18px;
+    }
+
+    form {
+        padding: 22px 18px;
+    }
+
+    form > p:last-child {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+.alert-success {
+    background: #dcfce7;
+    color: #166534;
+}

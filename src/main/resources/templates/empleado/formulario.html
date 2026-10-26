@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/css/alta-empleado.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Alta de Empleado</title>
 </head>
 <body>
 
-<h2>Alta de Empleado</h2>
-
+<div class="page-heading">
+    <h1>Alta de Empleado</h1>
+    <p>Registrá al empleado que trabajará en tu unidad de venta.</p>
+</div>
 <!--/*@thymesVar id="exito" type="java.lang.String"*/-->
 <!--/*@thymesVar id="error" type="java.lang.String"*/-->
-<p th:if="${exito}" th:text="${exito}" style="color: green;"></p>
-<p th:if="${error}" th:text="${error}" style="color: red;"></p>
+<p th:if="${exito}" th:text="${exito}"
+   class="alert alert-success"></p>
+
+<p th:if="${error}" th:text="${error}"
+   class="alert alert-error"></p>
 
 <!--/*@thymesVar id="empleadoDto" type="com.unla.hito2.dto.EmpleadoDto"*/-->
 <!--/*@thymesVar id="categorias" type="com.unla.hito2.Enum.CategoriaCocina[]"*/-->
@@ -21,38 +28,44 @@
     <div>
         <label for="name">Nombre:</label>
         <input type="text" id="name" th:field="*{name}" />
-        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-    </div>
+        <span class="field-error"
+              th:if="${#fields.hasErrors('name')}"
+              th:errors="*{name}"></span>    </div>
 
     <div>
         <label for="apellido">Apellido:</label>
         <input type="text" id="apellido" th:field="*{apellido}" />
-        <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></span>
-    </div>
+        <span class="field-error"
+              th:if="${#fields.hasErrors('apellido')}"
+              th:errors="*{apellido}"></span>    </div>
 
     <div>
         <label for="dni">DNI:</label>
         <input type="text" id="dni" th:field="*{dni}" />
-        <span th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></span>
-    </div>
+        <span class="field-error"
+              th:if="${#fields.hasErrors('dni')}"
+              th:errors="*{dni}"></span>    </div>
 
     <div>
         <label for="email">Email:</label>
         <input type="email" id="email" th:field="*{email}" />
-        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-    </div>
+        <span class="field-error"
+              th:if="${#fields.hasErrors('email')}"
+              th:errors="*{email}"></span>    </div>
 
     <div>
         <label for="fechaNac">Fecha de Nacimiento:</label>
         <input type="date" id="fechaNac" th:field="*{fechaNac}" />
-        <span th:if="${#fields.hasErrors('fechaNac')}" th:errors="*{fechaNac}"></span>
-    </div>
+        <span class="field-error"
+              th:if="${#fields.hasErrors('fechaNac')}"
+              th:errors="*{fechaNac}"></span>    </div>
 
     <div>
         <label for="fechaIngreso">Fecha de Ingreso:</label>
         <input type="date" id="fechaIngreso" th:field="*{fechaIngreso}" />
-        <span th:if="${#fields.hasErrors('fechaIngreso')}" th:errors="*{fechaIngreso}"></span>
-    </div>
+        <span class="field-error"
+              th:if="${#fields.hasErrors('fechaIngreso')}"
+              th:errors="*{fechaIngreso}"></span>    </div>
 
     <div>
         <label for="tipoEmpleado">Tipo de Empleado:</label>
@@ -61,8 +74,9 @@
             <option value="COCINERO">Cocinero</option>
             <option value="CAJERO">Cajero</option>
         </select>
-        <span th:if="${#fields.hasErrors('tipoEmpleado')}" th:errors="*{tipoEmpleado}"></span>
-    </div>
+        <span class="field-error"
+              th:if="${#fields.hasErrors('tipoEmpleado')}"
+              th:errors="*{tipoEmpleado}"></span>    </div>
 
     <div id="divCategoria" style="display: none; margin-top: 10px;">
         <label for="categoria">Categoría de Cocina:</label>
@@ -70,8 +84,9 @@
             <option value="">-- Seleccionar Categoría --</option>
             <option th:each="cat : ${categorias}" th:value="${cat}" th:text="${cat}"></option>
         </select>
-        <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></span>
-    </div>
+        <span class="field-error"
+              th:if="${#fields.hasErrors('categoria')}"
+              th:errors="*{categoria}"></span>    </div>
 
     <div id="divTurno" style="display: none; margin-top: 10px;">
         <label for="turno">Turno de Caja:</label>
@@ -79,11 +94,14 @@
             <option value="">-- Seleccionar Turno --</option>
             <option th:each="t : ${turnos}" th:value="${t}" th:text="${t}"></option>
         </select>
-        <span th:if="${#fields.hasErrors('turno')}" th:errors="*{turno}"></span>
-    </div>
+        <span class="field-error"
+              th:if="${#fields.hasErrors('turno')}"
+              th:errors="*{turno}"></span>    </div>
 
-    <br>
-    <button type="submit">Registrar Empleado</button>
+    <p>
+        <a th:href="@{/responsable/home}">Volver a mi unidad</a>
+        <button type="submit">Registrar empleado</button>
+    </p>
 </form>
 
 <script>
