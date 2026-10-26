@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/completar-responsable.css}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Completar mis datos</title>
+</head>
+<body>
+
+<div class="page-heading">
+  <h1>Completar mis datos</h1>
+  <p>Completá tus datos personales como responsable de la unidad.</p>
+</div>
+
+<div th:if="${error}" class="alert alert-error">
+  <span th:text="${error}"></span>
+</div>
+
+<form th:action="@{/responsable/completar-datos}"
+      th:object="${responsableDto}"
+      method="post">
+
+  <div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
+    <ul>
+      <li th:each="err : ${#fields.errors('*')}"
+          th:text="${err}"></li>
+    </ul>
+  </div>
+
+  <p>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" th:field="*{nombre}" required>
+  </p>
+
+  <p>
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" th:field="*{apellido}" required>
+  </p>
+
+  <p>
+    <label for="dni">DNI:</label>
+    <input type="text" id="dni" th:field="*{dni}"
+           minlength="7" maxlength="8" required>
+  </p>
+
+  <p>
+    <label for="fechaNac">Fecha de nacimiento:</label>
+    <input type="date" id="fechaNac" th:field="*{fechaNac}" required>
+  </p>
+
+  <p>
+    <a th:href="@{/responsable/home}">Volver a mi unidad</a>
+    <button type="submit">Guardar mis datos</button>
+  </p></form>
+
+</body>
+</html>

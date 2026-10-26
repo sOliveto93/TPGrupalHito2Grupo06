@@ -42,30 +42,12 @@ public class UnidadDeVentaService {
     @Transactional
     public UnidadDeVenta registrarUnidadConResponsable(RegistroUnidadDto dto) throws Exception {
 
-        if (!dto.getDni().matches("^\\d{7,8}$")) {
-            throw new Exception("El DNI debe contener entre 7 y 8 dígitos numericos");
-        }
-        if (staffRepository.existsByDni(dto.getDni())) {
-            throw new Exception("Ya existe un usuario/responsable registrado con el DNI: " + dto.getDni());
-        }
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new Exception("Ya existe un usuario registrado con este email");
-        }
-        if (dto.getFechaIngreso() == null) {
-            dto.setFechaIngreso(java.time.LocalDate.now());
-        }
-        int edad = Period.between(dto.getFechaNac(), LocalDate.now()).getYears();
-
-        if (edad < 18) {
-            throw new Exception("El Usuario debe ser mayor de edad");
-        }
-        if (dto.getFechaIngreso().isBefore(dto.getFechaNac())) {
-            throw new Exception("La fecha de ingreso no puede ser anterior a la fecha de nacimiento.");
         }
         if (!festivalRepository.existsById(dto.getFestivalId())) {
             throw new Exception("El festival no existe");
         }
-
         if ("FOOD_TRUCK".equalsIgnoreCase(dto.getTipoUnidad())) {
             if (dto.getPatente() == null || dto.getPatente().trim().isEmpty()) {
                 throw new Exception("La patente es obligatoria para las unidades de tipo Food Truck.");
@@ -95,11 +77,7 @@ public class UnidadDeVentaService {
         usuarioRolRepository.save(usuarioRol);
 
         Staff responsable = new Staff();
-        responsable.setName(dto.getNombre());
-        responsable.setApellido(dto.getApellido());
-        responsable.setDni(dto.getDni());
-        responsable.setFechaNac(dto.getFechaNac());
-        responsable.setFechaIngreso(dto.getFechaIngreso());
+        responsable.setFechaIngreso(LocalDate.now());
         responsable.setActivo(true);
         responsable.setUsuario(usuario);
         staffRepository.save(responsable);
@@ -118,10 +96,7 @@ public class UnidadDeVentaService {
             unidad = pd;
         }
         unidad.setNombreComercial(dto.getNombreComercial());
-        if (dto.getFechaIngreso() == null) {
-            dto.setFechaIngreso(java.time.LocalDate.now());
-        }
-        responsable.setFechaIngreso(dto.getFechaIngreso());
+
         String prefijo = "FOOD_TRUCK".equalsIgnoreCase(dto.getTipoUnidad()) ? "FT" : "PD";
         long maxFt = unidadDeVentaRepository.findAll().stream()
                 .map(UnidadDeVenta::getCodigo)

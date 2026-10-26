@@ -309,4 +309,9 @@ body {
     .acciones-grid {
         grid-template-columns: 1fr;
     }
+
+}
+
+.acciones-perfil {
+    margin-top: 40px;
 }
