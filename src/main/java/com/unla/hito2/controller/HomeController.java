@@ -2,6 +2,7 @@ package com.unla.hito2.controller;
 
 import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.dto.UnidadDeVentaDto;
+import com.unla.hito2.service.CajaService;
 import com.unla.hito2.service.FestivalService;
 
 import com.unla.hito2.service.UnidadDeVentaService;
@@ -20,11 +21,12 @@ public class HomeController {
 
     private final FestivalService festivalService;
     private final UnidadDeVentaService unidadDeVentaService;
-
+    private CajaService cajaService;
     public HomeController(FestivalService festivalService,
-            UnidadDeVentaService unidadDeVentaService) {
+            UnidadDeVentaService unidadDeVentaService,CajaService cajaService) {
         this.festivalService = festivalService;
         this.unidadDeVentaService = unidadDeVentaService;
+        this.cajaService=cajaService;
     }
 
     @GetMapping
@@ -80,10 +82,12 @@ public class HomeController {
     @PreAuthorize("hasRole('EMPLEADO')")
     public ModelAndView homeEmpleado(Authentication authentication) {
         ModelAndView vista = new ModelAndView("/empleado/index");
-
+        vista.addObject("esCajero", cajaService.isCajero(authentication.getName()));
+        
         try {
             vista.addObject("miUnidad",
                     unidadDeVentaService.buscarPorEmpleado(authentication.getName()));
+                    
         } catch (Exception e) {
             vista.addObject("errorUnidad",
                     "No tenés una unidad de venta asignada.");

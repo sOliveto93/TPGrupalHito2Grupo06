@@ -68,7 +68,7 @@ public class PedidoController {
         }
         try {
             pedidoService.altaPedido(dto, username);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | IllegalStateException e) {
             ModelAndView vista = mostrarFormulario(authentication);
             vista.addObject("error", e.getMessage());
             return vista;

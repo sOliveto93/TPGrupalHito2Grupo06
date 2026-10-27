@@ -43,15 +43,15 @@ public class PedidoService {
     private StaffRepository staffRepository;
 
     public PedidoService(PedidoRepository pedidoRepository, UnidadDeVentaRepository unidadDeVentaRepository,
-            PlatoRepository platoRepository,StaffRepository staffRepository) {
+            PlatoRepository platoRepository, StaffRepository staffRepository) {
         this.pedidoRepository = pedidoRepository;
         this.unidadDeVentaRepository = unidadDeVentaRepository;
         this.platoRepository = platoRepository;
-        this.staffRepository =staffRepository;
+        this.staffRepository = staffRepository;
     }
 
     @Transactional
-    public PedidoDtoResponse altaPedido(PedidoDtoRequest dto,String username) {
+    public PedidoDtoResponse altaPedido(PedidoDtoRequest dto, String username) {
 
         validarEmpleadoActivo(username);
         if (dto.getDetalles() == null || dto.getDetalles().isEmpty()) {
@@ -62,6 +62,10 @@ public class PedidoService {
                 .orElseThrow(() -> {
                     return new IllegalArgumentException("Unidad de venta no econtrada");
                 });
+        if (!unidadDeVenta.isCajaAbierta()) {
+            throw new IllegalStateException(
+                    "No se puede crear un pedido porque la caja está cerrada.");
+        }
 
         Pedido pedidoNuevo = new Pedido();
 
@@ -246,7 +250,8 @@ public class PedidoService {
 
         return dto;
     }
-//no lo usamos mas restringi el acceso solo a empleado
+
+    // no lo usamos mas restringi el acceso solo a empleado
     @Transactional
     public PedidoAltaDto prepararAltaPorResponsable(String username) {
 
@@ -265,10 +270,13 @@ public class PedidoService {
 
         return dto;
     }
-//hacemos esta doble validacion por las dudas si alguien usa los metodos desde otro servicio
+
+    // hacemos esta doble validacion por las dudas si alguien usa los metodos desde
+    // otro servicio
     public boolean empleadoActivo(String username) {
-    return staffRepository.existsByUsuario_UsernameAndActivoTrue(username);
-}
+        return staffRepository.existsByUsuario_UsernameAndActivoTrue(username);
+    }
+
     private void validarEmpleadoActivo(String username) {
         if (!staffRepository.existsByUsuario_UsernameAndActivoTrue(username)) {
             throw new AccessDeniedException(

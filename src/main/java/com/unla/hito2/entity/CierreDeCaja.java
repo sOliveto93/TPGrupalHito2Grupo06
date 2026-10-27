@@ -38,7 +38,7 @@ public class CierreDeCaja {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "unidad_venta_id", nullable = false)
     private UnidadDeVenta unidadDeVenta;
-
+    private LocalDateTime fechaHoraApertura;
     private LocalDateTime fechaHoraCierre;
     private BigDecimal totalSistema;
     private BigDecimal totalDeclarado;

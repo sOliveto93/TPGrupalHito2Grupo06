@@ -212,39 +212,39 @@ VALUES
 -- =====================================================
 -- Responsables: un responsable por unidad.
 INSERT INTO unidad_de_venta
-    (id, codigo, nombre_comercial, superficie, festival_id, responsable_id)
+    (id, codigo, nombre_comercial, superficie, festival_id, responsable_id,caja_abierta)
 VALUES
-    (1,  'FT00000001', 'Panchos Truck',        25.00, 1, 2),
-    (2,  'PD00000001', 'Puesto de Tacos',      15.00, 1, 3),
-    (3,  'FT00000002', 'Burger Truck',          25.00, 1, 4),
-    (4,  'PD00000002', 'Puesto de Tacos',      15.00, 1, 5),
-    (5,  'FT00000003', 'Pizza al Paso',         20.00, 1, 6),
-    (6,  'PD00000003', 'Puesto de Empanadas',   12.00, 1, 7),
-    (8,  'FT00000005', 'Burger Fest',           25.00, 2, 2),
-    (9,  'PD00000004', 'Tacos Fest',            15.00, 2, 3),
-    (10, 'FT00000006', 'Pizza Fest',            20.00, 2, 4),
-    (11, 'UV204VENTA', 'Empanadas Fest',        12.00, 2, 5),
-    (12, 'UV205VENTA', 'Gourmet Fest',          22.00, 2, 6),
-    (13, 'UV301VENTA', 'Burger de Otoño',       25.00, 3, 7),
-    (14, 'UV302VENTA', 'Tacos de Otoño',        15.00, 3, 2),
-    (15, 'UV303VENTA', 'Pizza de Otoño',        20.00, 3, 3),
-    (16, 'UV304VENTA', 'Empanadas de Otoño',    12.00, 3, 4),
-    (17, 'UV305VENTA', 'Sabores Gourmet',       22.00, 3, 5),
-    (18, 'UV401VENTA', 'Burger de Invierno',    25.00, 4, 6),
-    (19, 'UV402VENTA', 'Tacos de Invierno',     15.00, 4, 7),
-    (20, 'UV403VENTA', 'Pizza de Invierno',     20.00, 4, 2),
-    (21, 'UV404VENTA', 'Empanadas Calientes',   12.00, 4, 3),
-    (22, 'UV405VENTA', 'Gourmet de Invierno',   22.00, 4, 4),
-    (23, 'UV501VENTA', 'Street Burger',         25.00, 5, 5),
-    (24, 'UV502VENTA', 'Street Tacos',          15.00, 5, 6),
-    (25, 'UV503VENTA', 'Street Pizza',          20.00, 5, 7),
-    (26, 'UV504VENTA', 'Street Empanadas',      12.00, 5, 2),
-    (27, 'UV505VENTA', 'Street Gourmet',        22.00, 5, 3),
-    (28, 'UV601VENTA', 'Sabores Burger',        25.00, 6, 4),
-    (29, 'UV602VENTA', 'Sabores Tacos',         15.00, 6, 5),
-    (30, 'UV603VENTA', 'Sabores Pizza',         20.00, 6, 6),
-    (31, 'UV604VENTA', 'Sabores Empanadas',     12.00, 6, 7),
-    (32, 'UV605VENTA', 'Sabores Gourmet',       22.00, 6, 2);
+    (1,  'FT00000001', 'Panchos Truck',        25.00, 1, 2,TRUE),
+    (2,  'PD00000001', 'Puesto de Tacos',      15.00, 1, 3,TRUE),
+    (3,  'FT00000002', 'Burger Truck',          25.00, 1, 4,TRUE),
+    (4,  'PD00000002', 'Puesto de Tacos',      15.00, 1, 5,TRUE),
+    (5,  'FT00000003', 'Pizza al Paso',         20.00, 1, 6,TRUE),
+    (6,  'PD00000003', 'Puesto de Empanadas',   12.00, 1, 7,TRUE),
+    (8,  'FT00000005', 'Burger Fest',           25.00, 2, 2,TRUE),
+    (9,  'PD00000004', 'Tacos Fest',            15.00, 2, 3,TRUE),
+    (10, 'FT00000006', 'Pizza Fest',            20.00, 2, 4,TRUE),
+    (11, 'UV204VENTA', 'Empanadas Fest',        12.00, 2, 5,TRUE),
+    (12, 'UV205VENTA', 'Gourmet Fest',          22.00, 2, 6,TRUE),
+    (13, 'UV301VENTA', 'Burger de Otoño',       25.00, 3, 7,TRUE),
+    (14, 'UV302VENTA', 'Tacos de Otoño',        15.00, 3, 2,TRUE),
+    (15, 'UV303VENTA', 'Pizza de Otoño',        20.00, 3, 3,TRUE),
+    (16, 'UV304VENTA', 'Empanadas de Otoño',    12.00, 3, 4,TRUE),
+    (17, 'UV305VENTA', 'Sabores Gourmet',       22.00, 3, 5,TRUE),
+    (18, 'UV401VENTA', 'Burger de Invierno',    25.00, 4, 6,TRUE),
+    (19, 'UV402VENTA', 'Tacos de Invierno',     15.00, 4, 7,TRUE),
+    (20, 'UV403VENTA', 'Pizza de Invierno',     20.00, 4, 2,TRUE),
+    (21, 'UV404VENTA', 'Empanadas Calientes',   12.00, 4, 3,TRUE),
+    (22, 'UV405VENTA', 'Gourmet de Invierno',   22.00, 4, 4,TRUE),
+    (23, 'UV501VENTA', 'Street Burger',         25.00, 5, 5,TRUE),
+    (24, 'UV502VENTA', 'Street Tacos',          15.00, 5, 6,TRUE),
+    (25, 'UV503VENTA', 'Street Pizza',          20.00, 5, 7,TRUE),
+    (26, 'UV504VENTA', 'Street Empanadas',      12.00, 5, 2,TRUE),
+    (27, 'UV505VENTA', 'Street Gourmet',        22.00, 5, 3,TRUE),
+    (28, 'UV601VENTA', 'Sabores Burger',        25.00, 6, 4,TRUE),
+    (29, 'UV602VENTA', 'Sabores Tacos',         15.00, 6, 5,TRUE),
+    (30, 'UV603VENTA', 'Sabores Pizza',         20.00, 6, 6,TRUE),
+    (31, 'UV604VENTA', 'Sabores Empanadas',     12.00, 6, 7,TRUE),
+    (32, 'UV605VENTA', 'Sabores Gourmet',       22.00, 6, 2,TRUE);
 
 -- Subtipos de las nuevas unidades: Food Trucks
 INSERT INTO `foodtruck` (`id`, `patente`, `requiere_electricidad`)
@@ -575,15 +575,15 @@ VALUES
 -- 8. CIERRES DE CAJA Y LIQUIDACIÓN DE HABERES (PRUEBAS DE REPORTES)
 -- =====================================================
 INSERT INTO `cierre_de_caja`
-    (`id`, `cajero_id`, `festival_id`, `unidad_venta_id`,
+    (`id`, `cajero_id`, `festival_id`, `unidad_venta_id`,`fecha_hora_apertura`,
      `fecha_hora_cierre`, `total_sistema`, `total_declarado`, `diferencia`)
 VALUES
-    (1,  8, 1, 1, '2026-10-05 23:00:00', 29500.00, 29500.00,      0.00),
-    (2,  9, 1, 2, '2026-10-05 23:15:00', 39200.00, 39400.00,    200.00),
-    (3, 10, 1, 3, '2026-10-05 23:30:00', 47500.00, 47000.00,   -500.00),
-    (4, 11, 1, 4, '2026-10-05 23:45:00', 35800.00, 19000.00, -16800.00),
-    (5, 12, 1, 5, '2026-10-06 00:00:00', 40100.00, 21500.00, -18600.00),
-    (6, 13, 1, 6, '2026-10-06 00:15:00', 29200.00, 29000.00,   -200.00);
+    (1,  8, 1, 1, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL),
+    (2,  9, 1, 2, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL),
+    (3, 10, 1, 3, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL),
+    (4, 11, 1, 4, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL),
+    (5, 12, 1, 5, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL),
+    (6, 13, 1, 6, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL);
 
 INSERT INTO `liquidacion_de_haberes`
     (`id`, `empleado_id`, `festival_id`, `fecha`,
