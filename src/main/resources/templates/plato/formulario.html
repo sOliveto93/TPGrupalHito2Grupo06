@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/alta-plato.css}">
     <title>Alta de Plato</title>
 </head>
+
 <body>
 
     <header class="page-heading">
@@ -16,50 +18,100 @@
         <p>Registrá un nuevo plato para ofrecer en tu unidad de venta.</p>
     </header>
 
-    <main>
-        <p th:if="${exito}" th:text="${exito}"
-           class="alert alert-success"></p>
+    <main class="plato-layout">
 
-        <p th:if="${error}" th:text="${error}"
-           class="alert alert-error"></p>
+        <section class="formulario-plato">
+            <h2>Nuevo plato</h2>
 
-        <form th:action="@{/plato/alta}"
-              th:object="${altaPlatoDto}"
-              method="post">
+            <p th:if="${exito}" th:text="${exito}" class="alert alert-success"></p>
 
-            <div th:if="${#fields.hasErrors('*')}" style="color: red;">
-                <ul>
-                    <li th:each="err : ${#fields.errors('*')}"
-                        th:text="${err}"></li>
-                </ul>
-            </div>
+            <p th:if="${error}" th:text="${error}" class="alert alert-error"></p>
 
-            <p>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre"
-                       th:field="*{nombre}" required>
-            </p>
+            <form th:action="@{/plato/alta}" th:object="${altaPlatoDto}" method="post">
 
-            <p>
-                <label for="precio">Precio de venta:</label>
-                <input type="number" id="precio"
-                       th:field="*{precio}"
-                       step="0.01" min="0.01" required>
-            </p>
+                <input type="hidden" name="idUnidad" th:value="${idUnidad}">
 
-            <p>
-                <label for="costo">Costo de producción:</label>
-                <input type="number" id="costo"
-                       th:field="*{costo}"
-                       step="0.01" min="0" required>
-            </p>
+                <div th:if="${#fields.hasErrors('*')}" class="errores">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                    </ul>
+                </div>
 
-            <p>
-                <a th:href="@{/responsable/home}">Volver a mi unidad</a>
+                <p>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" th:field="*{nombre}" required>
+                </p>
+
+                <p>
+                    <label for="precio">Precio de venta:</label>
+                    <input type="number" id="precio" th:field="*{precio}" step="0.01" min="0.01" required>
+                </p>
+
+                <p>
+                    <label for="costo">Costo de producción:</label>
+                    <input type="number" id="costo" th:field="*{costo}" step="0.01" min="0" required>
+                </p>
+
                 <button type="submit">Registrar plato</button>
+            </form>
+
+            <a th:href="@{/responsable/home}" class="volver-unidad">
+                Volver a mi unidad
+            </a>
+        </section>
+
+        <section class="inventario-platos">
+            <h2>Inventario de platos</h2>
+
+            <p th:if="${#lists.isEmpty(platos)}">
+                Todavía no hay platos registrados en esta unidad.
             </p>
-        </form>
+
+            <div class="tabla-contenedor" th:unless="${#lists.isEmpty(platos)}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Costo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="plato : ${platos}">
+                            <td th:text="${plato.nombre}"></td>
+                            <td th:text="${plato.precio}"></td>
+                            <td th:text="${plato.costo}"></td>
+                            <td>
+                                <span th:if="${plato.activo}" class="estado-activo">
+                                    Activo
+                                </span>
+                                <span th:unless="${plato.activo}" class="estado-inactivo">
+                                    Inactivo
+                                </span>
+                            </td>
+                            <td>
+                                <form th:if="${plato.activo}" th:action="@{/plato/{id}/desactivar(id=${plato.id})}"
+                                    method="post">
+                                    <input type="hidden" name="idUnidad" th:value="${idUnidad}">
+                                    <button type="submit">Desactivar</button>
+                                </form>
+
+                                <form th:unless="${plato.activo}" th:action="@{/plato/{id}/activar(id=${plato.id})}"
+                                    method="post">
+                                    <input type="hidden" name="idUnidad" th:value="${idUnidad}">
+                                    <button type="submit">Activar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
     </main>
 
 </body>
+
 </html>

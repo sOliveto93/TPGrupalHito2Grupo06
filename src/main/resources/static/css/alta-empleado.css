@@ -136,3 +136,62 @@ form > p:last-child {
         align-items: stretch;
     }
 }
+
+/* Acciones del inventario de platos */
+.acciones-plato {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inventario-platos td form {
+    margin: 0;
+}
+
+.inventario-platos td button {
+    border: none;
+    border-radius: 6px;
+    padding: 8px 13px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+}
+
+/* Desactivar */
+.inventario-platos td form:has(button[type="submit"]) button {
+    color: white;
+}
+
+/* Botón rojo para desactivar */
+.inventario-platos td form:has(button) button {
+    background-color: #dc3545;
+}
+
+.inventario-platos td form:has(button):has(input[name="idUnidad"]) button:hover {
+    background-color: #bb2d3b;
+    transform: translateY(-1px);
+}
+
+/* Botón verde para activar */
+.inventario-platos td form:has(button) button {
+    background-color: #dc3545;
+}
+
+/* Diferenciar según la acción de cada formulario */
+.inventario-platos td form[action*="/activar"] button {
+    background-color: #198754;
+}
+
+.inventario-platos td form[action*="/activar"] button:hover {
+    background-color: #157347;
+}
+
+.inventario-platos td form[action*="/desactivar"] button {
+    background-color: #dc3545;
+}
+
+.inventario-platos td form[action*="/desactivar"] button:hover {
+    background-color: #bb2d3b;
+}

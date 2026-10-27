@@ -15,7 +15,9 @@ import org.springframework.stereotype.Repository;
 public interface PlatoRepository extends JpaRepository<Plato, Long> {
 
     Optional<Plato> findByIdAndUnidadDeVenta_Id(Long id, Long idUnidadDeVenta);
-//devolvemos platos vendidos y agrupados por plato y ordenados de mayor a menor
+    List<Plato> findByUnidadDeVenta_Id(Long idUnidadDeVenta);
+    
+    //devolvemos platos vendidos y agrupados por plato y ordenados de mayor a menor
     @Query("""
             SELECT NEW com.unla.hito2.dto.PlatoEstrellaDto(
                 p.id,
