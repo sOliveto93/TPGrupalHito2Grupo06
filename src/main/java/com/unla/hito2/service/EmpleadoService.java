@@ -4,6 +4,8 @@ import com.unla.hito2.Enum.Rol;
 import com.unla.hito2.entity.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.unla.hito2.dto.EmpleadoDto;
+import com.unla.hito2.dto.HistorialEmpleadoDto;
+import com.unla.hito2.dto.UnidadHistorialDto;
 import com.unla.hito2.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import java.security.SecureRandom;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class EmpleadoService {
@@ -22,8 +26,12 @@ public class EmpleadoService {
     private final UsuarioRolRepository usuarioRolRepository;
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
+    private final HistorialUnidadVentaService historialUnidadVentaService;
 
-    public EmpleadoService(StaffRepository staffRepository, CajeroRepository cajeroRepository, CocineroRepository cocineroRepository, UserRepository userRepository, UsuarioRolRepository usuarioRolRepository, EmailService emailService, PasswordEncoder passwordEncoder) {
+    public EmpleadoService(StaffRepository staffRepository, CajeroRepository cajeroRepository,
+            CocineroRepository cocineroRepository, UserRepository userRepository,
+            UsuarioRolRepository usuarioRolRepository, EmailService emailService, PasswordEncoder passwordEncoder,
+            HistorialUnidadVentaService historialUnidadVentaService) {
         this.staffRepository = staffRepository;
         this.cajeroRepository = cajeroRepository;
         this.cocineroRepository = cocineroRepository;
@@ -31,6 +39,15 @@ public class EmpleadoService {
         this.usuarioRolRepository = usuarioRolRepository;
         this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
+        this.historialUnidadVentaService = historialUnidadVentaService;
+    }
+
+    public EmpleadoDto buscarStaffPorId(Long id) {
+
+        Staff staff = staffRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(
+                        "No se encontró el empleado."));
+        return empleadoToDto(staff);
     }
 
     private void validarEmpleado(EmpleadoDto dto) throws Exception {
@@ -68,6 +85,7 @@ public class EmpleadoService {
         }
         return sb.toString();
     }
+
     @Transactional
     public void registrarEmpleado(EmpleadoDto dto, UnidadDeVenta unidadDeVenta) throws Exception {
         validarEmpleado(dto);
@@ -84,7 +102,7 @@ public class EmpleadoService {
         UsuarioRol usuarioRol = new UsuarioRol();
         usuarioRol.setUsuario(usuario);
         usuarioRol.setRol(Rol.ROLE_EMPLEADO);
-        
+
         usuarioRolRepository.save(usuarioRol);
 
         if ("COCINERO".equalsIgnoreCase(dto.getTipoEmpleado())) {
@@ -100,6 +118,8 @@ public class EmpleadoService {
             cocinero.setCategoria(dto.getCategoria());
 
             cocineroRepository.save(cocinero);
+            historialUnidadVentaService.registrarAsignacion(cocinero, unidadDeVenta);
+
         } else if ("CAJERO".equalsIgnoreCase(dto.getTipoEmpleado())) {
             Cajero cajero = new Cajero();
             cajero.setName(dto.getName());
@@ -113,11 +133,92 @@ public class EmpleadoService {
             cajero.setTurno(dto.getTurno());
 
             cajeroRepository.save(cajero);
+            historialUnidadVentaService.registrarAsignacion(cajero, unidadDeVenta);
 
         } else {
             throw new Exception("El tipo de empleado especificado no es válido.");
         }
 
         emailService.enviarCredenciales(dto.getEmail(), passwordPlana);
+    }
+
+    public List<EmpleadoDto> buscarEmpleadosPorUnidad(Long idUnidad) {
+        List<Staff> empleados = staffRepository.findByUnidadDeVenta_Id(idUnidad);
+
+        List<EmpleadoDto> dtos = new ArrayList<>();
+
+        for (Staff staff : empleados) {
+            dtos.add(empleadoToDto(staff));
+        }
+
+        return dtos;
+    }
+
+    private EmpleadoDto empleadoToDto(Staff staff) {
+        EmpleadoDto dto = new EmpleadoDto();
+
+        dto.setName(staff.getName());
+        dto.setApellido(staff.getApellido());
+        dto.setDni(staff.getDni());
+        dto.setFechaNac(staff.getFechaNac());
+        dto.setFechaIngreso(staff.getFechaIngreso());
+        dto.setEmail(staff.getUsuario().getEmail());
+
+        if (staff instanceof Cajero cajero) {
+            dto.setTipoEmpleado("CAJERO");
+            dto.setTurno(cajero.getTurno());
+        } else if (staff instanceof Cocinero cocinero) {
+            dto.setTipoEmpleado("COCINERO");
+            dto.setCategoria(cocinero.getCategoria());
+        }
+
+        return dto;
+    }
+
+    @Transactional
+    public HistorialEmpleadoDto buscarHistorialEmpleado(Long idStaff) {
+
+        Staff staff = staffRepository.findById(idStaff)
+                .orElseThrow(() -> new RuntimeException(
+                        "No se encontró el empleado."));
+
+        List<HistorialUnidadVenta> asignaciones = historialUnidadVentaService.buscarPorStaff(idStaff);
+
+        HistorialEmpleadoDto dto = new HistorialEmpleadoDto();
+        dto.setEmpleado(empleadoToDto(staff));
+
+        List<UnidadHistorialDto> historial = new ArrayList<>();
+
+        for (HistorialUnidadVenta asignacion : asignaciones) {
+            UnidadHistorialDto unidadDto = new UnidadHistorialDto();
+
+            unidadDto.setNombreUnidad(
+                    asignacion.getUnidadDeVenta().getNombreComercial());
+
+            unidadDto.setActual(
+                    staff.getUnidadDeVenta() != null
+                            && staff.getUnidadDeVenta().getId()
+                                    .equals(asignacion.getUnidadDeVenta().getId()));
+            Festival festival = asignacion.getUnidadDeVenta().getFestival();
+
+            unidadDto.setNombreFestival(festival.getNombre());
+            unidadDto.setFechaInicioFestival(festival.getFechaInicio());
+            unidadDto.setFechaFinFestival(festival.getFechaFin());
+
+            historial.add(unidadDto);
+        }
+
+        dto.setHistorial(historial);
+
+        return dto;
+    }
+
+    @Transactional
+    public Long verificarEmpleadoHistorial(String username) {
+        Staff staff = staffRepository.findByUsuario_Username(username)
+                .orElseThrow(() -> new RuntimeException(
+                        "No se encontró el empleado autenticado."));
+
+        return staff.getId();
     }
 }

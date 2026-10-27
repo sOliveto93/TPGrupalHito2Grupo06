@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.unla.hito2.entity.CierreDeCaja;
+import com.unla.hito2.entity.Festival;
 import com.unla.hito2.entity.Pedido;
 import com.unla.hito2.entity.Plato;
 import com.unla.hito2.entity.Staff;
@@ -35,4 +36,6 @@ public class UnidadDeVentaDto {
     private Set<Plato> platos=new HashSet<>();
 
     private Set<Pedido> pedidos= new HashSet<>();
+
+    private FestivalDto festival;
 }

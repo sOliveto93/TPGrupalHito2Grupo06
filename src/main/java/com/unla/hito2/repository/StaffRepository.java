@@ -4,6 +4,7 @@ import com.unla.hito2.entity.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -13,4 +14,5 @@ public interface StaffRepository extends JpaRepository<Staff, Long> {
     boolean existsByUsuario_UsernameAndActivoTrue(String username);
 
     Optional<Staff> findByUsuario_Username(String username);
+    List<Staff> findByUnidadDeVenta_Id(Long idUnidad);
 }

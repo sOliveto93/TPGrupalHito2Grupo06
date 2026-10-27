@@ -1,8 +1,7 @@
 package com.unla.hito2.controller;
 
 import com.unla.hito2.dto.FestivalDto;
-import com.unla.hito2.entity.Staff;
-import com.unla.hito2.entity.UnidadDeVenta;
+import com.unla.hito2.dto.UnidadDeVentaDto;
 import com.unla.hito2.service.FestivalService;
 
 import com.unla.hito2.service.UnidadDeVentaService;
@@ -66,19 +65,10 @@ public class HomeController {
         ModelAndView vista = new ModelAndView("/responsable/index");
 
         try {
-            UnidadDeVenta unidad = unidadDeVentaService.buscarPorResponsable(
+            List<UnidadDeVentaDto> unidades = unidadDeVentaService.buscarUnidadesActivasPorResponsable(
                     authentication.getName());
-
-            Staff responsable = unidad.getResponsable();
-
-            boolean perfilIncompleto =
-                    responsable.getName() == null || responsable.getName().isBlank()
-                            || responsable.getApellido() == null || responsable.getApellido().isBlank()
-                            || responsable.getDni() == null || responsable.getDni().isBlank()
-                            || responsable.getFechaNac() == null;
-
-            vista.addObject("miUnidad", unidad);
-            vista.addObject("perfilIncompleto", perfilIncompleto);
+            
+            vista.addObject("unidades", unidades);
         } catch (Exception e) {
             vista.addObject("errorUnidad", e.getMessage());
         }

@@ -1,6 +1,7 @@
 package com.unla.hito2.service;
 
 import com.unla.hito2.Enum.Rol;
+import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.dto.RegistroUnidadDto;
 import com.unla.hito2.dto.ReporteMayoresCanonDTO;
 import com.unla.hito2.dto.UnidadDeVentaDto;
@@ -24,24 +25,31 @@ public class UnidadDeVentaService {
     private final UserRepository userRepository;
     private final UnidadDeVentaRepository unidadDeVentaRepository;
     private final FestivalRepository festivalRepository;
+    private FestivalService festivalService;
     private final UsuarioRolRepository usuarioRolRepository;
     private final StaffRepository staffRepository;
     private final PasswordEncoder passwordEncoder;
+    private final HistorialUnidadVentaRepository historialUnidadVentaRepository;
 
     public UnidadDeVentaService(UnidadDeVentaRepository unidadDeVentaRepository, UserRepository userRepository,
-            FestivalRepository festivalRepository, UsuarioRolRepository usuarioRolRepository,
-            StaffRepository staffRepository, PasswordEncoder passwordEncoder) {
+            FestivalRepository festivalRepository, FestivalService festivalService,
+            UsuarioRolRepository usuarioRolRepository,
+            StaffRepository staffRepository, PasswordEncoder passwordEncoder,HistorialUnidadVentaRepository historialUnidadVentaRepository) {
         this.unidadDeVentaRepository = unidadDeVentaRepository;
         this.userRepository = userRepository;
         this.festivalRepository = festivalRepository;
         this.usuarioRolRepository = usuarioRolRepository;
         this.staffRepository = staffRepository;
         this.passwordEncoder = passwordEncoder;
+        this.festivalService = festivalService;
+        this.historialUnidadVentaRepository= historialUnidadVentaRepository;
     }
 
     @Transactional
     public UnidadDeVenta registrarUnidadConResponsable(RegistroUnidadDto dto) throws Exception {
-
+        System.out.println("Email recibido: " + dto.getEmail());
+System.out.println("Password recibido: " +
+        (dto.getPassword() == null ? "NULL" : "PRESENTE"));
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new Exception("Ya existe un usuario registrado con este email");
         }
@@ -139,17 +147,63 @@ public class UnidadDeVentaService {
 
     }
 
+    @Transactional
+    public List<UnidadDeVentaDto> buscarUnidadesActivasPorResponsable(String username) {
+
+        LocalDate hoy = LocalDate.now();
+        List<UnidadDeVentaDto> dtos = new ArrayList<>();
+        List<UnidadDeVenta> lista = unidadDeVentaRepository.findUnidadesActivasPorResponsable(username, hoy);
+
+        if (!lista.isEmpty()) {
+            for (UnidadDeVenta unidad : lista) {
+
+                UnidadDeVentaDto dto = new UnidadDeVentaDto();
+                dto.setId(unidad.getId());
+                dto.setNombreComercial(unidad.getNombreComercial());
+                dto.setCodigo(unidad.getCodigo());
+                dto.setSuperficie(unidad.getSuperficie());
+                dto.setResponsable(unidad.getResponsable());
+                dto.setEmpleados(unidad.getEmpleados());
+                dto.setCierresDeCaja(unidad.getCierresDeCaja());
+                dto.setPlatos(unidad.getPlatos());
+                dto.setPedidos(unidad.getPedidos());
+                dto.setFestival(festivalService.festivalToDto(unidad.getFestival()));
+                dtos.add(dto);
+            }
+
+        }
+        return dtos;
+    }
+
+    public UnidadDeVenta buscarPorId(Long id) throws Exception {
+    return unidadDeVentaRepository.findById(id)
+            .orElseThrow(() -> new Exception("No se encontró la unidad de venta"));
+}
     public UnidadDeVenta buscarPorResponsable(String identificador) throws Exception {
         return unidadDeVentaRepository.findByResponsable(identificador)
                 .orElseThrow(() -> new Exception(
                         "No se encontró una Unidad de Venta asociada al usuario: " + identificador));
     }
 
-    public UnidadDeVenta buscarPorEmpleado(String username) throws Exception {
-        return unidadDeVentaRepository
+    @Transactional 
+    public UnidadDeVentaDto buscarPorEmpleado(String username) throws Exception {
+        UnidadDeVenta unidad=unidadDeVentaRepository
                 .findByEmpleados_Usuario_Username(username)
                 .orElseThrow(() -> new Exception(
                         "No se encontró una unidad de venta para el empleado: " + username));
+
+                 UnidadDeVentaDto dto = new UnidadDeVentaDto();
+                dto.setId(unidad.getId());
+                dto.setNombreComercial(unidad.getNombreComercial());
+                dto.setCodigo(unidad.getCodigo());
+                dto.setSuperficie(unidad.getSuperficie());
+                dto.setResponsable(unidad.getResponsable());
+                dto.setEmpleados(unidad.getEmpleados());
+                dto.setCierresDeCaja(unidad.getCierresDeCaja());
+                dto.setPlatos(unidad.getPlatos());
+                dto.setPedidos(unidad.getPedidos());
+                dto.setFestival(festivalService.festivalToDto(unidad.getFestival()));
+                return dto;
     }
 
     public List<UnidadDeVentaDto> buscarPorFestival(Long id) {
@@ -169,6 +223,7 @@ public class UnidadDeVentaService {
                 dto.setCierresDeCaja(unidad.getCierresDeCaja());
                 dto.setPlatos(unidad.getPlatos());
                 dto.setPedidos(unidad.getPedidos());
+                dto.setFestival(festivalService.festivalToDto(unidad.getFestival()));
                 dtos.add(dto);
             }
 
@@ -202,7 +257,7 @@ public class UnidadDeVentaService {
         throw new IllegalArgumentException("Tipo de unidad de venta no reconocido");
     }
 
-    public List<ReporteMayoresCanonDTO> obtenerMayoresCanon(            Long idFestival, int cantidad) {
+    public List<ReporteMayoresCanonDTO> obtenerMayoresCanon(Long idFestival, int cantidad) {
 
         if (cantidad <= 0) {
             throw new IllegalArgumentException(
@@ -251,4 +306,5 @@ public class UnidadDeVentaService {
         return reportes;
     }
 
+    
 }

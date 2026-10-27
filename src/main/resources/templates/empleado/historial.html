@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi historial de unidades</title>
+    <link rel="stylesheet" th:href="@{/css/liquidacionSueldoEmpleado.css}">
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="header">
+            <div>
+                <h1>Mi historial de unidades de venta</h1>
+                <p class="subtitle">
+                    Empleado:
+                    <span class="username"
+                        th:text="${historialEmpleado.empleado.name + ' ' + historialEmpleado.empleado.apellido}">
+                        Nombre del empleado
+                    </span>
+                </p>
+            </div>
+
+            <a th:href="@{/home}" class="btn btn-back">
+                ← Volver al inicio
+            </a>
+        </header>
+
+        <main class="card">
+            <h2>Unidades de venta asignadas</h2>
+
+            <div class="empty" th:if="${#lists.isEmpty(historialEmpleado.historial)}">
+                No tenés unidades de venta registradas en tu historial.
+            </div>
+
+            <div class="table-wrapper" th:unless="${#lists.isEmpty(historialEmpleado.historial)}">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Unidad de venta</th>
+                            <th>Estado de asignación</th>
+                            <th>Festival</th>
+                            <th>Inicio del festival</th>
+                            <th>Fin del festival</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="unidad : ${historialEmpleado.historial}">
+                            <td th:text="${unidad.nombreUnidad}"></td>
+
+                            <td>
+                                <span th:if="${unidad.actual}">Actual</span>
+                                <span th:unless="${unidad.actual}">Anterior</span>
+                            </td>
+                            <td th:text="${unidad.nombreFestival}"></td>
+                            <td th:text="${unidad.fechaInicioFestival}"></td>
+                            <td th:text="${unidad.fechaFinFestival}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </main>
+
+    </div>
+</body>
+
+</html>

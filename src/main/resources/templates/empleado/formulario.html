@@ -25,6 +25,7 @@
 <!--/*@thymesVar id="turnos" type="com.unla.hito2.Enum.Turno[]"*/-->
 <form th:action="@{/empleado/alta}" th:object="${empleadoDto}" method="post">
 
+    <input type="hidden" name="idUnidad" th:value="${unidad.id}">
     <div>
         <label for="name">Nombre:</label>
         <input type="text" id="name" th:field="*{name}" />

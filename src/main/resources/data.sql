@@ -45,11 +45,11 @@ VALUES  (1, 450.00,  8.00,  4000.00,  80000.00, 120000.00, 1500.00, 40000.00,  9
 -- =====================================================
 INSERT INTO `festival` (`id`, `nombre`, `temporada`, `fecha_inicio`, `fecha_fin`, `costos_id`)
 VALUES  (1, 'Festival Gourmet Primavera', 'PRIMAVERA', '2026-10-01', '2026-11-30', 1),
-    (2, 'Beer & Food Fest Verano', 'PRIMAVERA', '2026-10-01', '2026-10-15', 2),
+    (2, 'Beer & Food Fest Verano', 'OTONIO', '2026-04-01', '2026-04-15', 2),
     (3, 'Sabores de Otoño', 'OTONIO', '2026-03-01', '2026-03-28', 3),
     (4, 'Festival del Invierno', 'INVIERNO', '2027-05-10', '2027-06-30', 4),
-    (5, 'Buenos Aires Street Food', 'PRIMAVERA', '2026-10-15', '2026-11-15', 5),
-    (6, 'Sabores Fest', 'PRIMAVERA', '2026-10-05', '2026-11-15', 6);
+    (5, 'Buenos Aires Street Food', 'VERANO', '2026-12-01', '2026-12-31', 5),
+    (6, 'Sabores Fest', 'VERANO', '2027-01-01', '2027-02-28', 6);
 -- =====================================================
 -- 3. CARGA DE USUARIOS (Admin, Responsables y Empleados)
 -- Nota: Las contraseñas representan credenciales encriptadas o temporales.
@@ -66,26 +66,26 @@ VALUES (1, 'admin', 'admin@gmail.com', '$2a$10$RzFQ8VQWqT.fdjiQEF9QsOOHTxXoVCPYb
         NOW(), NOW()),
         (6,'lucasfernandez','lucasfernandez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (7,'martinrodriguez','martinrodriguez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
-(8,'valentinagomez','valentinagomez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
+(8,'valentinagomez','valentinagomez@gmail.com','$2a$10$oQ6SN6cUbY1yZ/q2iSsosuJtQfSOvDgurrm/AJjsqZztDyaG8Qz1a',1,NOW(),NOW()),
 (9,'sofiaMartinez','sofiamartinez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (10,'facundolopez','facundolopez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (11,'camilaromero','camilaromero@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (12,'tomasdiaz','tomasdiaz@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (13,'florenciatorres','florenciatorres@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (14,'nicolasacosta','nicolasacosta@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
-(15,'julietasuarez','julietasuarez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
+(15,'julietasuarez','julietasuarez@gmail.com','$2a$10$S0qV0d86WwtOcgGEMoxupOHRRAPJIBaawTn7tJJpC2gfuwhkjb2/W',1,NOW(),NOW()),
 (16,'mateosilva','mateosilva@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (17,'agustinromero','agustinromero@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (18,'martinaflores','martinaflores@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (19,'santiagomendez','santiagomendez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (20,'milagroscastro','milagroscastro@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
-(21, 'empleado21', 'empleado21@gmail.com', 'COPIAR_HASH_PASSWORD_EXISTENTE', 1, NOW(), NOW()),
+(21, 'ayudanteCocina1', 'ayudanteCocina1@gmail.com', '$2a$10$R22RocfHjczVQQhlWidXs.miyU3hDvb2Imwm9UOPtCyu1LyuSNqTq', 1, NOW(), NOW()),
 (22,'abrilnavarro','abrilnavarro@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (23,'joaquinpereyra','joaquinpereyra@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (24,'raul','raul@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (25,'franciscovargas','franciscovargas@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (26,'emiliapaz','emiliapaz@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
-(27,'micaela','micaela@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
+(27,'micaela','micaela@gmail.com','$2a$10$FBid1DnXmpq2U3inPf4Pl.FScdumDHIkVJJ9.ZB63MUTtSeaDZEdy',1,NOW(),NOW()),
 (28,'renatamolina','renatamolina@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (29,'brunocabrera','brunocabrera@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (30, 'empleado30', 'empleado30@gmail.com', 'COPIAR_HASH_PASSWORD_EXISTENTE', 1, NOW(), NOW()),
@@ -641,37 +641,20 @@ VALUES
 (13, 6), (20, 6), (26, 6), (32, 6),
 
 -- Festival 2: unidades 8 a 12
-(8, 8), (15, 8), (21, 8), (27, 8),
-(9, 9), (16, 9), (22, 9), (28, 9),
-(10, 10), (17, 10), (23, 10), (29, 10),
-(11, 11), (18, 11), (24, 11), (30, 11),
-(12, 12), (19, 12), (25, 12), (31, 12),
+
 
 -- Festival 3: unidades 13 a 17
 (8, 13), (15, 13), (21, 13), (27, 13),
 (9, 14), (16, 14), (22, 14), (28, 14),
 (10, 15), (17, 15), (23, 15), (29, 15),
 (11, 16), (18, 16), (24, 16), (30, 16),
-(12, 17), (19, 17), (25, 17), (31, 17),
+(12, 17), (19, 17), (25, 17), (31, 17);
 
 -- Festival 4: unidades 18 a 22
-(8, 18), (15, 18), (21, 18), (27, 18),
-(9, 19), (16, 19), (22, 19), (28, 19),
-(10, 20), (17, 20), (23, 20), (29, 20),
-(11, 21), (18, 21), (24, 21), (30, 21),
-(12, 22), (19, 22), (25, 22), (31, 22),
-
+--no ocurrio
 -- Festival 5: unidades 23 a 27
-(8, 23), (15, 23), (21, 23), (27, 23),
-(9, 24), (16, 24), (22, 24), (28, 24),
-(10, 25), (17, 25), (23, 25), (29, 25),
-(11, 26), (18, 26), (24, 26), (30, 26),
-(12, 27), (19, 27), (25, 27), (31, 27),
+--no ocurrio
 
 -- Festival 6: unidades 28 a 32
-(8, 28), (15, 28), (21, 28), (27, 28),
-(9, 29), (16, 29), (22, 29), (28, 29),
-(10, 30), (17, 30), (23, 30), (29, 30),
-(11, 31), (18, 31), (24, 31), (30, 31),
-(12, 32), (19, 32), (25, 32), (31, 32);
+--no ocurrio
 

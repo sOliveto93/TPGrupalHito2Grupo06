@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi unidad de venta - Epicentro Gourmet</title>
+    <title>Mis unidades de venta - Epicentro Gourmet</title>
     <link rel="stylesheet" th:href="@{/css/homeEncargado.css}">
 </head>
 
@@ -27,10 +27,10 @@
 
     <main class="main">
         <section sec:authorize="hasRole('RESPONSABLE')" class="page-heading">
-            <h1>Mi unidad de venta</h1>
+            <h1>Mis unidades de venta</h1>
             <p class="subtitle">
-                Consultá los datos de tu unidad y gestioná tus platos,
-                empleados y pedidos.
+                Consultá tus unidades de venta correspondientes a festivales activos
+                y gestioná sus platos, empleados y pedidos.
             </p>
             <p th:if="${exito}" th:text="${exito}" style="color: green;"></p>
         </section>
@@ -40,36 +40,61 @@
             <p class="empty-state" th:if="${errorUnidad != null}" th:text="${errorUnidad}">
             </p>
 
-            <div class="table-container" th:if="${miUnidad != null}">
+            <p class="empty-state" th:if="${unidades != null and #lists.isEmpty(unidades) and errorUnidad == null}">
+                No tenés unidades de venta asociadas a festivales activos actualmente.
+            </p>
+
+            <div class="table-container" th:each="unidad : ${unidades}">
 
                 <div class="table-heading">
-                    <h2 th:text="${miUnidad.nombreComercial}">
+                    <h2 th:text="${unidad.nombreComercial}">
                         Nombre comercial
                     </h2>
-                    <span class="counter" th:text="'Código: ' + ${miUnidad.codigo}">
+                    <span class="counter" th:text="'Código: ' + ${unidad.codigo}">
                         Código
                     </span>
                 </div>
 
                 <div class="unidad-detalle">
+
+                    <div class="dato-unidad">
+                        <span class="dato-label">Festival</span>
+                        <strong th:text="${unidad.festival.nombre}">
+                            Nombre del festival
+                        </strong>
+                    </div>
+
                     <div class="dato-unidad">
                         <span class="dato-label">Superficie</span>
                         <strong>
-                            <span th:text="${miUnidad.superficie}">0</span> m²
+                            <span th:text="${unidad.superficie}">0</span> m²
                         </strong>
                     </div>
 
                     <div class="dato-unidad">
                         <span class="dato-label">Empleados</span>
-                        <strong th:text="${#sets.size(miUnidad.empleados)}">
+                        <strong th:text="${unidad.empleados != null ? #sets.size(unidad.empleados) : 0}">
                             0
                         </strong>
                     </div>
 
                     <div class="dato-unidad">
                         <span class="dato-label">Platos registrados</span>
-                        <strong th:text="${#sets.size(miUnidad.platos)}">
+                        <strong th:text="${unidad.platos != null ? #sets.size(unidad.platos) : 0}">
                             0
+                        </strong>
+                    </div>
+                    <div class="dato-unidad">
+                        <span class="dato-label">Inicio del festival</span>
+                        <strong th:text="${#temporals.format(unidad.festival.fechaInicio, 'dd/MM/yyyy')}">
+                            01/10/2026
+                        </strong>
+                    </div>
+
+                    <div class="dato-unidad">
+                        <span class="dato-label">Fin del festival</span>
+                        <strong th:text="${#temporals.format(unidad.festival.fechaFin, 'dd/MM/yyyy')}">
+                            30/11/2026
                         </strong>
                     </div>
                 </div>
@@ -84,8 +109,18 @@
                                 Incorporá empleados para trabajar
                                 en tu unidad de venta.
                             </p>
-                            <a th:href="@{/empleado/alta}" class="btn btn-primary">
+                            <a th:href="@{/empleado/alta(idUnidad=${unidad.id})}" class="btn btn-primary">
                                 Dar de alta empleado
+                            </a>
+                        </article>
+                        <article class="accion-card">
+                            <h4>Empleados de la unidad</h4>
+                            <p>
+                                Consultá quiénes están asignados actualmente
+                                a esta unidad de venta.
+                            </p>
+                            <a th:href="@{/empleado/lista(idUnidad=${unidad.id})}" class="btn btn-primary">
+                                Ver empleados
                             </a>
                         </article>
 
@@ -95,7 +130,7 @@
                                 Registrá nuevos platos para ofrecer
                                 en tu unidad.
                             </p>
-                            <a th:href="@{/plato/alta}" class="btn btn-primary">
+                            <a th:href="@{/plato/alta(idUnidad=${unidad.id})}" class="btn btn-primary">
                                 Dar de alta plato
                             </a>
                         </article>
@@ -106,36 +141,32 @@
                                 Consultá los pedidos recibidos
                                 por tu unidad de venta.
                             </p>
-                            <a th:href="@{/pedido/getPedidos-unidad-venta(id=${miUnidad.id})}" class="btn btn-primary">
+                            <a th:href="@{/pedido/getPedidos-unidad-venta(id=${unidad.id})}" class="btn btn-primary">
                                 Ver pedidos
                             </a>
                         </article>
-                        
+
                         <article class="accion-card">
                             <h4>Liquidaciones de sueldo</h4>
                             <p>
                                 Consultá las liquidaciones de los empleados
                                 de tu unidad de venta.
                             </p>
-                            <a th:href="@{/contabilidad/sueldo}" class="btn btn-primary">
+                            <a th:href="@{/contabilidad/sueldo(idUnidad=${unidad.id})}" class="btn btn-primary">
                                 Ver liquidaciones
                             </a>
                         </article>
-                        
                     </div>
-
-                    <form th:if="${perfilIncompleto}"
-                          th:action="@{/responsable/completar-datos}"
-                          method="get"
-                          class="acciones-perfil">
-
-                        <button type="submit" class="btn btn-primary">
-                            Completar mis datos
-                        </button>
-                    </form>
-
                 </div>
             </div>
+
+            <form th:if="${perfilIncompleto}" th:action="@{/responsable/completar-datos}" method="get"
+                class="acciones-perfil">
+
+                <button type="submit" class="btn btn-primary">
+                    Completar mis datos
+                </button>
+            </form>
         </section>
 
         <section sec:authorize="hasRole('EMPLEADO')">
