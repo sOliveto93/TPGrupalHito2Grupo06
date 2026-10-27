@@ -14,5 +14,6 @@ public interface StaffRepository extends JpaRepository<Staff, Long> {
     boolean existsByUsuario_UsernameAndActivoTrue(String username);
 
     Optional<Staff> findByUsuario_Username(String username);
+    Optional<Staff> findByIdAndUnidadDeVenta_Id(Long id, Long idUnidad);
     List<Staff> findByUnidadDeVenta_Id(Long idUnidad);
 }

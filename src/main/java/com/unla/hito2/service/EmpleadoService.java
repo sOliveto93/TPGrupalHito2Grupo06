@@ -163,6 +163,8 @@ public class EmpleadoService {
         dto.setFechaNac(staff.getFechaNac());
         dto.setFechaIngreso(staff.getFechaIngreso());
         dto.setEmail(staff.getUsuario().getEmail());
+        dto.setId(staff.getId());
+        dto.setActivo(staff.isActivo());
 
         if (staff instanceof Cajero cajero) {
             dto.setTipoEmpleado("CAJERO");
@@ -220,5 +222,31 @@ public class EmpleadoService {
                         "No se encontró el empleado autenticado."));
 
         return staff.getId();
+    }
+
+    @Transactional
+    public void desactivarEmpleado(Long idEmpleado, Long idUnidad) {
+        cambiarEstadoEmpleado(idEmpleado, idUnidad, false);
+    }
+
+    @Transactional
+    public void activarEmpleado(Long idEmpleado, Long idUnidad) {
+        cambiarEstadoEmpleado(idEmpleado, idUnidad, true);
+    }
+
+    private void cambiarEstadoEmpleado(
+            Long idEmpleado,
+            Long idUnidad,
+            boolean estado) {
+
+        Staff staff = staffRepository
+                .findByIdAndUnidadDeVenta_Id(idEmpleado, idUnidad)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "El empleado no pertenece a esta unidad de venta."));
+
+        staff.setActivo(estado);
+        staff.setFechaBaja(estado ? null : LocalDate.now());
+
+        staffRepository.save(staff);
     }
 }
