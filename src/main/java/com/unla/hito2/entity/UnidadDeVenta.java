@@ -35,7 +35,7 @@ public class UnidadDeVenta {
     private String nombreComercial;
     private String codigo;
     private double superficie;
-
+    private boolean cajaAbierta;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "festival_id", nullable = false)
     private Festival festival;

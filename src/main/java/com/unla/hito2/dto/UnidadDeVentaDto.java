@@ -26,7 +26,7 @@ public class UnidadDeVentaDto {
     private String nombreComercial;
     private String codigo;
     private double superficie;
-    
+    private boolean cajaAbierta;
     private Staff responsable;
 
     private Set<Staff> empleados=new HashSet<>();

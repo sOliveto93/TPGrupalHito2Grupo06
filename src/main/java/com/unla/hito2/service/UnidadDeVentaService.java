@@ -162,6 +162,7 @@ System.out.println("Password recibido: " +
                 dto.setNombreComercial(unidad.getNombreComercial());
                 dto.setCodigo(unidad.getCodigo());
                 dto.setSuperficie(unidad.getSuperficie());
+                dto.setCajaAbierta(unidad.isCajaAbierta());
                 dto.setResponsable(unidad.getResponsable());
                 dto.setEmpleados(unidad.getEmpleados());
                 dto.setCierresDeCaja(unidad.getCierresDeCaja());
@@ -197,6 +198,7 @@ System.out.println("Password recibido: " +
                 dto.setNombreComercial(unidad.getNombreComercial());
                 dto.setCodigo(unidad.getCodigo());
                 dto.setSuperficie(unidad.getSuperficie());
+                dto.setCajaAbierta(unidad.isCajaAbierta());
                 dto.setResponsable(unidad.getResponsable());
                 dto.setEmpleados(unidad.getEmpleados());
                 dto.setCierresDeCaja(unidad.getCierresDeCaja());
@@ -218,6 +220,7 @@ System.out.println("Password recibido: " +
                 dto.setNombreComercial(unidad.getNombreComercial());
                 dto.setCodigo(unidad.getCodigo());
                 dto.setSuperficie(unidad.getSuperficie());
+                dto.setCajaAbierta(unidad.isCajaAbierta());
                 dto.setResponsable(unidad.getResponsable());
                 dto.setEmpleados(unidad.getEmpleados());
                 dto.setCierresDeCaja(unidad.getCierresDeCaja());

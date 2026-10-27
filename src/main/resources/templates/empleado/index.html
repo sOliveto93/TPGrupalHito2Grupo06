@@ -26,7 +26,8 @@
     </header>
 
     <main class="main">
-
+        <p th:if="${exito != null}" th:text="${exito}" class="notice"></p>
+        <p th:if="${error != null}" th:text="${error}" class="notice"></p>
         <section class="page-heading">
             <p class="eyebrow">SISTEMA DE GESTIÓN</p>
             <h1>Bienvenido a Epicentro Gourmet</h1>
@@ -95,6 +96,27 @@
                     <strong>
                         <span th:text="${miUnidad.superficie}">15</span> m²
                     </strong>
+                </div>
+                <div class="unit-caja" th:if="${esCajero}">
+                    <span>Estado de caja:</span>
+
+                    <strong th:if="${miUnidad.cajaAbierta}">Abierta</strong>
+                    <strong th:unless="${miUnidad.cajaAbierta}">Cerrada</strong>
+
+                    <form th:if="${!miUnidad.cajaAbierta}" th:action="@{/caja/abrir}" method="post">
+                        <button type="submit" class="btn">
+                            Abrir caja
+                        </button>
+                    </form>
+
+                    <form th:if="${miUnidad.cajaAbierta}" th:action="@{/caja/cerrar}" method="post">
+                        <label for="totalDeclarado">Total declarado al cierre</label>
+                        <input id="totalDeclarado" type="number" name="totalDeclarado" min="0" step="0.01" required>
+
+                        <button type="submit" class="btn">
+                            Cerrar caja
+                        </button>
+                    </form>
                 </div>
             </article>
 
