@@ -3,12 +3,13 @@ package com.unla.hito2.controller;
 import com.unla.hito2.dto.AltaPlatoDto;
 import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.dto.PlatoEstrellaDto;
+import com.unla.hito2.dto.UnidadDeVentaDto;
 import com.unla.hito2.entity.UnidadDeVenta;
 import com.unla.hito2.service.FestivalService;
 import com.unla.hito2.service.PlatoService;
 import com.unla.hito2.service.UnidadDeVentaService;
 import jakarta.validation.Valid;
-
+import org.springframework.security.access.AccessDeniedException;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,62 +34,150 @@ public class PlatoController {
     private final PlatoService platoService;
     private final UnidadDeVentaService unidadDeVentaService;
     private FestivalService festivalService;
-    
-    public PlatoController(PlatoService platoService, UnidadDeVentaService unidadDeVentaService,FestivalService festivalService) {
+
+    public PlatoController(PlatoService platoService, UnidadDeVentaService unidadDeVentaService,
+            FestivalService festivalService) {
 
         this.platoService = platoService;
         this.unidadDeVentaService = unidadDeVentaService;
-        this.festivalService= festivalService;
+        this.festivalService = festivalService;
     }
 
     @GetMapping("/alta")
     @PreAuthorize("hasRole('RESPONSABLE')")
-    public String mostrarFormularioAlta(Model model) {
+    public String mostrarFormularioAlta(@RequestParam Long idUnidad, Model model, Authentication authentication) {
 
-        model.addAttribute("altaPlatoDto", new AltaPlatoDto());
+        String username = authentication.getName();
+
+        List<UnidadDeVentaDto> unidades = unidadDeVentaService.buscarUnidadesActivasPorResponsable(username);
+        boolean pertenece = unidades.stream().anyMatch(unidad -> unidad.getId().equals(idUnidad));
+
+        if (!pertenece) {
+            throw new AccessDeniedException("No tenés acceso a esta unidad de venta.");
+        }
+
+        AltaPlatoDto dto = new AltaPlatoDto();
+
+        model.addAttribute("altaPlatoDto", dto);
+        model.addAttribute("idUnidad", idUnidad);
+        model.addAttribute("platos", platoService.traerPlatosPorUnidad(idUnidad));
         return "plato/formulario";
     }
 
     @PostMapping("/alta")
     @PreAuthorize("hasRole('RESPONSABLE')")
     public String registrarPlato(
+            @RequestParam Long idUnidad,
             @Valid @ModelAttribute("altaPlatoDto") AltaPlatoDto dto,
             BindingResult result,
             Authentication authentication,
             Model model,
             RedirectAttributes redirectAttributes) {
 
+        String username = authentication.getName();
+
+        List<UnidadDeVentaDto> unidades = unidadDeVentaService.buscarUnidadesActivasPorResponsable(username);
+
+        boolean pertenece = unidades.stream()
+                .anyMatch(unidad -> unidad.getId().equals(idUnidad));
+
+        if (!pertenece) {
+            throw new AccessDeniedException(
+                    "No tenés acceso a esta unidad de venta.");
+        }
+
         if (result.hasErrors()) {
+            model.addAttribute("idUnidad", idUnidad);
+            cargarPlatos(idUnidad, model);
             return "plato/formulario";
         }
 
         try {
-            String username = authentication.getName();
+            UnidadDeVenta unidad = unidadDeVentaService.buscarPorId(idUnidad);
 
-            UnidadDeVenta unidadDeVenta = unidadDeVentaService.buscarPorResponsable(username);
+            platoService.registrarPlato(dto, unidad);
 
-            platoService.registrarPlato(dto, unidadDeVenta);
+            redirectAttributes.addFlashAttribute(
+                    "exito", "Plato registrado con éxito.");
 
-            redirectAttributes.addFlashAttribute("exito", "Plato registrado con éxito.");
-            return "redirect:/plato/alta";
+            return "redirect:/plato/alta?idUnidad=" + idUnidad;
 
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
+            model.addAttribute("idUnidad", idUnidad);
+            cargarPlatos(idUnidad, model);
+            return "plato/formulario";
         }
-
-        return "plato/formulario";
     }
 
     @GetMapping("/reporte-plato-estrella")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ModelAndView reportePlatoEstrella(@RequestParam Long id) {
-        ModelAndView vista=new ModelAndView("plato/reportePlatoEstrella");
+        ModelAndView vista = new ModelAndView("plato/reportePlatoEstrella");
 
-        List<PlatoEstrellaDto> platoEstrella= platoService.traerPlatosEstrellaFestival(id);
+        List<PlatoEstrellaDto> platoEstrella = platoService.traerPlatosEstrellaFestival(id);
         FestivalDto festival = festivalService.traerFestivalPorId(id);
-        vista.addObject("platoEstrella",platoEstrella);
-        vista.addObject("festival",festival);
+        vista.addObject("platoEstrella", platoEstrella);
+        vista.addObject("festival", festival);
         return vista;
     }
 
+    private void cargarPlatos(Long idUnidad, Model model) {
+        model.addAttribute(
+                "platos",
+                platoService.traerPlatosPorUnidad(idUnidad));
+    }
+
+    @PostMapping("/{idPlato}/desactivar")
+    @PreAuthorize("hasRole('RESPONSABLE')")
+    public String desactivarPlato(
+            @PathVariable Long idPlato,
+            @RequestParam Long idUnidad,
+            Authentication authentication,
+            RedirectAttributes redirectAttributes) {
+
+        validarAccesoUnidad(idUnidad, authentication);
+
+        platoService.desactivarPlato(idPlato, idUnidad);
+
+        redirectAttributes.addFlashAttribute(
+                "exito", "Plato desactivado con éxito.");
+
+        return "redirect:/plato/alta?idUnidad=" + idUnidad;
+    }
+
+    @PostMapping("/{idPlato}/activar")
+    @PreAuthorize("hasRole('RESPONSABLE')")
+    public String activarPlato(
+            @PathVariable Long idPlato,
+            @RequestParam Long idUnidad,
+            Authentication authentication,
+            RedirectAttributes redirectAttributes) {
+
+        validarAccesoUnidad(idUnidad, authentication);
+
+        platoService.activarPlato(idPlato, idUnidad);
+
+        redirectAttributes.addFlashAttribute(
+                "exito", "Plato activado con éxito.");
+
+        return "redirect:/plato/alta?idUnidad=" + idUnidad;
+    }
+
+    private void validarAccesoUnidad(
+            Long idUnidad,
+            Authentication authentication) {
+
+        String username = authentication.getName();
+
+        List<UnidadDeVentaDto> unidades = unidadDeVentaService.buscarUnidadesActivasPorResponsable(username);
+
+        boolean pertenece = unidades.stream()
+                .anyMatch(unidad -> unidad.getId().equals(idUnidad));
+
+        if (!pertenece) {
+            throw new AccessDeniedException(
+                    "No tenés acceso a esta unidad de venta.");
+        }
+    }
 }

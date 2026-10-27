@@ -7,6 +7,7 @@ import lombok.Setter;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Getter
 @Setter
@@ -20,6 +21,8 @@ public class AltaPlatoDto {
     private BigDecimal precio;
 
     @NotNull(message = "El costo es obligatorio")
-    @DecimalMin(value = "0.0",  message = "El costo no puede ser negativo.")
+    @DecimalMin(value = "0.0", message = "El costo no puede ser negativo.")
     private BigDecimal costo;
+    
+    
 }

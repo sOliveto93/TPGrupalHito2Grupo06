@@ -48,11 +48,40 @@ public class PlatoService {
 
     @Transactional
     public List<PlatoEstrellaDto> traerPlatosEstrellaFestival(Long idFestival) {
-        
+
         return platoRepository.buscarPlatosMasVendidosPorFestival(idFestival)
                 .stream()
                 .limit(3)
                 .toList();
     }
 
+    @Transactional
+    public List<Plato> traerPlatosPorUnidad(Long idUnidadDeVenta) {
+        return platoRepository.findByUnidadDeVenta_Id(idUnidadDeVenta);
+    }
+
+    @Transactional
+    public void desactivarPlato(Long idPlato, Long idUnidadDeVenta) {
+        cambiarEstadoPlato(idPlato, idUnidadDeVenta, false);
+    }
+
+    @Transactional
+    public void activarPlato(Long idPlato, Long idUnidadDeVenta) {
+        cambiarEstadoPlato(idPlato, idUnidadDeVenta, true);
+    }
+   
+
+    private void cambiarEstadoPlato(
+            Long idPlato,
+            Long idUnidadDeVenta,
+            boolean estado) {
+
+        Plato plato = platoRepository
+                .findByIdAndUnidadDeVenta_Id(idPlato, idUnidadDeVenta)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "El plato no existe en esta unidad de venta"));
+
+        plato.setActivo(estado);
+        platoRepository.save(plato);
+    }
 }
