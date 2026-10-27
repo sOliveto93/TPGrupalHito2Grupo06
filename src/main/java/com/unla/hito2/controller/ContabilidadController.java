@@ -2,6 +2,7 @@ package com.unla.hito2.controller;
 
 import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.dto.ReporteVentaDto;
+import com.unla.hito2.dto.UnidadDeVentaDto;
 import com.unla.hito2.dto.UnidadDeVentaRankingDto;
 import com.unla.hito2.entity.LiquidacionHaberes;
 import com.unla.hito2.repository.LiquidacionRepository;
@@ -43,8 +44,8 @@ public class ContabilidadController {
     private final UnidadDeVentaService unidadDeVentaService;
 
     public ContabilidadController(ContabilidadService contabilidadService, FestivalService festivalService,
-                                   PdfService pdfService, LiquidacionRepository liquidacionRepository,
-                                   LiquidacionService liquidacionService, UnidadDeVentaService unidadDeVentaService) {
+            PdfService pdfService, LiquidacionRepository liquidacionRepository,
+            LiquidacionService liquidacionService, UnidadDeVentaService unidadDeVentaService) {
         this.contabilidadService = contabilidadService;
         this.festivalService = festivalService;
         this.pdfService = pdfService;
@@ -55,7 +56,8 @@ public class ContabilidadController {
 
     @GetMapping({ "/sueldo", "/liquidacion-sueldo" })
     @PreAuthorize("hasAnyRole('EMPLEADO','RESPONSABLE','ADMINISTRADOR')")
-    public String verLiquidacionSueldo(Authentication authentication, Model model) {
+    public String verLiquidacionSueldo(Authentication authentication, Model model,
+            @RequestParam(required = false) Long idUnidad) {
         if (authentication == null) {
             return "redirect:/login";
         }
@@ -75,15 +77,33 @@ public class ContabilidadController {
             model.addAttribute("festivales", festivalService.traerTodos());
             model.addAttribute("empleados", new java.util.ArrayList<>());
         } else if (esResponsable) {
-            liquidaciones = contabilidadService.obtenerLiquidacionesPorUnidadDeVenta(username);
-            try {
-                com.unla.hito2.entity.UnidadDeVenta uv = unidadDeVentaService.buscarPorResponsable(username);
-                model.addAttribute("festivales", java.util.List.of(uv.getFestival()));
-                model.addAttribute("empleados", new java.util.ArrayList<>(uv.getEmpleados()));
-            } catch (Exception e) {
-                model.addAttribute("festivales", festivalService.traerTodos());
-                model.addAttribute("empleados", new java.util.ArrayList<>());
+            if (idUnidad == null) {
+                return "redirect:/";
             }
+
+            List<UnidadDeVentaDto> unidades = unidadDeVentaService.buscarUnidadesActivasPorResponsable(username);
+
+            UnidadDeVentaDto unidadSeleccionada = null;
+
+            for (UnidadDeVentaDto unidad : unidades) {
+                if (unidad.getId().equals(idUnidad)) {
+                    unidadSeleccionada = unidad;
+                    break;
+                }
+            }
+
+            if (unidadSeleccionada == null) {
+                throw new org.springframework.security.access.AccessDeniedException(
+                        "No tenés acceso a esta unidad de venta.");
+            }
+
+            liquidaciones = contabilidadService
+                    .obtenerLiquidacionesPorUnidadDeVenta(username, idUnidad);
+
+            model.addAttribute("festivales",
+                    java.util.List.of(unidadSeleccionada.getFestival()));
+            model.addAttribute("empleados", unidadSeleccionada.getEmpleados());
+
         } else if (esEmpleado) {
             liquidaciones = contabilidadService.obtenerLiquidacionesPorEmpleadoHistorico(username);
             model.addAttribute("festivales", festivalService.traerTodos());
@@ -147,8 +167,8 @@ public class ContabilidadController {
     @PostMapping("/liquidacion/generar")
     @PreAuthorize("hasAnyRole('RESPONSABLE','ADMINISTRADOR')")
     public String generarLiquidacion(@RequestParam Long staffId,
-                                     @RequestParam Long festivalId,
-                                     RedirectAttributes redirectAttributes) {
+            @RequestParam Long festivalId,
+            RedirectAttributes redirectAttributes) {
         try {
             liquidacionService.generarLiquidacion(staffId, festivalId);
             redirectAttributes.addFlashAttribute("exito", "Liquidación generada correctamente");
@@ -158,5 +178,3 @@ public class ContabilidadController {
         return "redirect:/contabilidad/sueldo";
     }
 }
-
-

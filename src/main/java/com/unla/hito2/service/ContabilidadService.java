@@ -88,24 +88,35 @@ public class ContabilidadService {
         return dtos;
     }
 
-    // asumimos una unidad de venta --> en un solo festival
     @Transactional(readOnly = true)
-    public List<LiquidacionHaberes> obtenerLiquidacionesPorUnidadDeVenta(String username) {
-        UnidadDeVenta unidadDeVenta = unidadDeVentaRepository.findByResponsable_Usuario_Username(username)
-                .orElseThrow(() -> new RuntimeException(
-                        "error no se encontro una unidad que tenga acargo el usuario -->" + username));
+    public List<LiquidacionHaberes> obtenerLiquidacionesPorUnidadDeVenta(
+            String username, Long idUnidad) {
+
+        UnidadDeVenta unidadDeVenta = unidadDeVentaRepository.findById(idUnidad)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "No existe la unidad de venta con ID " + idUnidad));
+
+        String usernameResponsable = unidadDeVenta.getResponsable().getUsuario().getUsername();
+
+        if (!usernameResponsable.equals(username)) {
+            throw new org.springframework.security.access.AccessDeniedException(
+                    "No tenés acceso a esta unidad de venta.");
+        }
+
         List<LiquidacionHaberes> liquidaciones = new ArrayList<>();
         Long idFestival = unidadDeVenta.getFestival().getId();
+
         for (Staff staff : unidadDeVenta.getEmpleados()) {
             String currentUsername = staff.getUsuario().getUsername();
 
-            LiquidacionHaberes liquidacion = obtenerLiquidacionesPorEmpleadoPorUnidad(currentUsername,
-                    unidadDeVenta.getId(), idFestival);
+            LiquidacionHaberes liquidacion = obtenerLiquidacionesPorEmpleadoPorUnidad(
+                    currentUsername, idUnidad, idFestival);
 
             if (liquidacion != null) {
                 liquidaciones.add(liquidacion);
             }
         }
+
         return liquidaciones;
     }
 

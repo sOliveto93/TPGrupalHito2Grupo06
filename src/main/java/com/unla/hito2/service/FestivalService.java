@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FestivalService {
@@ -62,7 +63,10 @@ public class FestivalService {
 
         return dtos;
     }
-
+    public FestivalDto treaerPorId(Long id){
+        Festival festival=festivalRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("No se encontro festival con el id ->" + id));
+        return festivalToDto(festival);
+    }
     public FestivalDto traerFestivalPorId(Long id) {
         Festival festival = festivalRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(
@@ -71,7 +75,7 @@ public class FestivalService {
         return festivalToDto(festival);
     }
 
-    private FestivalDto festivalToDto(Festival festival) {
+    public FestivalDto festivalToDto(Festival festival) {
         FestivalDto dto = new FestivalDto();
         LocalDate hoy = LocalDate.now();
         dto.setId(festival.getId());

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contabilidad - Liquidación de Haberes</title>
+    <title>Liquidaciones de haberes</title>
     <link rel="stylesheet" th:href="@{/css/liquidacionSueldoEmpleado.css}">
 </head>
 
@@ -15,49 +15,29 @@
 
     <header class="header">
         <div>
-            <h1>Liquidación de haberes</h1>
+            <h1>Liquidaciones de haberes</h1>
             <p class="subtitle">
                 Usuario autenticado:
                 <span class="username" th:text="${username}">usuario</span>
             </p>
         </div>
 
-        <a th:href="@{/}" class="btn btn-back">
+        <a th:href="@{/home}" class="btn btn-back">
             ← Volver al inicio
         </a>
     </header>
 
-    <div th:if="${exito}" style="color: green; margin: 10px 0;" th:text="${exito}"></div>
-    <div th:if="${error}" style="color: red; margin: 10px 0;" th:text="${error}"></div>
+    <div th:if="${exito}" style="color: green; margin: 10px 0;"
+         th:text="${exito}"></div>
 
-    <section class="card" sec:authorize="hasRole('RESPONSABLE')">
-        <h2>Generar liquidación</h2>
-        <form th:action="@{/contabilidad/liquidacion/generar}" method="post" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: end;">
-            <div>
-                <label>Empleado:</label><br/>
-                <select name="staffId" required>
-                    <option value="" disabled selected>Seleccione empleado</option>
-                    <option th:each="emp : ${empleados}" th:value="${emp.id}" th:text="${emp.name + ' ' + emp.apellido + ' (' + emp.dni + ')'}"></option>
-                </select>
-            </div>
-            <div>
-                <label>Festival:</label><br/>
-                <select name="festivalId" required>
-                    <option value="" disabled selected>Seleccione festival</option>
-                    <option th:each="f : ${festivales}" th:value="${f.id}" th:text="${f.nombre}"></option>
-                </select>
-            </div>
-            <div>
-                <button type="submit" class="btn">Generar liquidación</button>
-            </div>
-        </form>
-    </section>
+    <div th:if="${error}" style="color: red; margin: 10px 0;"
+         th:text="${error}"></div>
 
     <main class="card">
         <h2>Detalle de liquidaciones</h2>
 
         <div class="empty" th:if="${#lists.isEmpty(liquidaciones)}">
-            No hay registros de liquidaciones de sueldo disponibles.
+            No hay liquidaciones disponibles para esta unidad de venta.
         </div>
 
         <div class="table-wrapper"
@@ -82,45 +62,62 @@
                 <tbody>
                 <tr th:each="liq : ${liquidaciones}">
                     <td>
-                        <span th:if="${liq.empleado != null}" th:text="${(liq.empleado.name != null ? liq.empleado.name : '') + ' ' + (liq.empleado.apellido != null ? liq.empleado.apellido : '')}"></span>
+                        <span th:if="${liq.empleado != null}"
+                              th:text="${(liq.empleado.name != null ? liq.empleado.name : '') + ' ' + (liq.empleado.apellido != null ? liq.empleado.apellido : '')}">
+                        </span>
+
                         <br/>
-                        <small th:if="${liq.empleado != null && liq.empleado.usuario != null}" th:text="${liq.empleado.usuario.username}"></small>
-                        <span th:if="${liq.empleado == null}">Sin empleado</span>
+
+                        <small th:if="${liq.empleado != null && liq.empleado.usuario != null}"
+                               th:text="${liq.empleado.usuario.username}">
+                        </small>
+
+                        <span th:if="${liq.empleado == null}">
+                            Sin empleado
+                        </span>
                     </td>
+
                     <td>
-                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName == 'Cajero'}">CAJERO</span>
-                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName == 'Cocinero' and liq.empleado.categoria != null}" th:text="${liq.empleado.categoria}"></span>
-                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName == 'Cocinero' and liq.empleado.categoria == null}">COCINERO</span>
-                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName != 'Cajero' and liq.empleado['class'].simpleName != 'Cocinero'}">STAFF</span>
+                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName == 'Cajero'}">
+                            CAJERO
+                        </span>
+
+                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName == 'Cocinero' and liq.empleado.categoria != null}"
+                              th:text="${liq.empleado.categoria}">
+                        </span>
+
+                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName == 'Cocinero' and liq.empleado.categoria == null}">
+                            COCINERO
+                        </span>
+
+                        <span th:if="${liq.empleado != null and liq.empleado['class'].simpleName != 'Cajero' and liq.empleado['class'].simpleName != 'Cocinero'}">
+                            STAFF
+                        </span>
                     </td>
 
-                    <td th:text="${liq.fecha}">2026-10-20</td>
+                    <td th:text="${liq.fecha}"></td>
 
-                    <td th:text="${liq.festival != null ? liq.festival.nombre : 'Sin festival'}">
-                        Festival
-                    </td>
+                    <td th:text="${liq.festival != null ? liq.festival.nombre : 'Sin festival'}"></td>
 
-                    <td th:text="${liq.diasFestival}">20</td>
+                    <td th:text="${liq.diasFestival}"></td>
 
                     <td class="amount"
-                        th:text="${#numbers.formatDecimal(liq.sueldo, 1, 2)}">
-                        100000.00
-                    </td>
+                        th:text="${#numbers.formatDecimal(liq.sueldo, 1, 2)}"></td>
 
                     <td class="amount"
-                        th:text="${#numbers.formatDecimal(liq.adicionalAplicado, 1, 2)}">
-                        20000.00
-                    </td>
+                        th:text="${#numbers.formatDecimal(liq.adicionalAplicado, 1, 2)}"></td>
 
-                    <td th:text="${liq.factorAplicado}">1.00</td>
+                    <td th:text="${liq.factorAplicado}"></td>
 
                     <td class="amount total"
-                        th:text="${#numbers.formatDecimal(liq.total, 1, 2)}">
-                        120000.00
-                    </td>
+                        th:text="${#numbers.formatDecimal(liq.total, 1, 2)}"></td>
 
                     <td>
-                        <a class="download" th:href="@{/contabilidad/liquidacion/{id}/pdf(id=${liq.id})}" target="_blank">Descargar PDF</a>
+                        <a class="download"
+                           th:href="@{/contabilidad/liquidacion/{id}/pdf(id=${liq.id})}"
+                           target="_blank">
+                            Descargar PDF
+                        </a>
                     </td>
                 </tr>
                 </tbody>

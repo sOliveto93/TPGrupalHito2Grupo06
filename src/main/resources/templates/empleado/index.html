@@ -3,100 +3,155 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Epicentro Gourmet - Inicio</title>
-    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epicentro Gourmet | Inicio</title>
+    <link rel="stylesheet" th:href="@{/css/empleado-home.css}">
 </head>
 
 <body>
     <header class="header">
+        <a th:href="@{/}" class="brand">EPICENTRO <span>GOURMET</span></a>
 
-        <!-- Usuario autenticado -->
-        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-            <button type="submit">Cerrar sesión</button>
-        </form>
+        <nav class="header-actions">
+            <a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-outline">
+                Iniciar sesión
+            </a>
 
-        <!-- Usuario sin loguear -->
-        <form sec:authorize="isAnonymous()" th:action="@{/login}" method="get">
-            <button type="submit">Iniciar Sesion</button>
-        </form>
-
-        <h1>Bienvenido al TFI</h1>
-
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline">
+                    Cerrar sesión
+                </button>
+            </form>
+        </nav>
     </header>
+
     <main class="main">
-        <section>
-            <h1 class="mb-4">Sistema de gestion de personas y titulos - Universidad Nacional de Lanus</h1>
+
+        <section class="page-heading">
+            <p class="eyebrow">SISTEMA DE GESTIÓN</p>
+            <h1>Bienvenido a Epicentro Gourmet</h1>
+            <p class="subtitle">
+                Gestioná pedidos, unidades de venta y festivales desde un solo lugar.
+            </p>
         </section>
 
-        <div sec:authorize="hasRole('EMPLEADO')">
-            <a th:href="@{/pedido/alta}" class="btn btn-primary">
-                Crear pedido
-            </a>
-            <a th:if="${miUnidad != null}" th:href="@{/pedido/getPedidos-unidad-venta(id=${miUnidad.id})}"
-                class="btn btn-primary">
-                Ver pedidos de mi unidad
-            </a>
-            <a th:href="@{/contabilidad/sueldo}" class="btn btn-primary">
-                Mis liquidaciones de sueldo
-            </a>
-        </div>
+        <!-- Acciones del empleado -->
+        <section sec:authorize="hasRole('EMPLEADO')" class="section">
+            <div class="section-heading">
+                <h2>Accesos rápidos</h2>
+                <p>Las herramientas para tu jornada de trabajo.</p>
+            </div>
 
-        </div>
+            <div class="actions-grid">
+                <a th:href="@{/pedido/alta}" class="action-card">
+                    <span class="action-icon">＋</span>
+                    <span class="action-title">Crear pedido</span>
+                    <span class="action-description">Registrar un nuevo pedido.</span>
+                </a>
 
-        <section>
-            <h2>Mi unidad de venta</h2>
+                <a th:if="${miUnidad != null}" th:href="@{/pedido/getPedidos-unidad-venta(id=${miUnidad.id})}"
+                    class="action-card">
+                    <span class="action-icon">≡</span>
+                    <span class="action-title">Pedidos de mi unidad</span>
+                    <span class="action-description">Consultar los pedidos registrados.</span>
+                </a>
 
-            <p th:if="${errorUnidad}" th:text="${errorUnidad}"></p>
-
-            <div th:if="${miUnidad != null}">
-                <p>
-                    Nombre:
-                    <span th:text="${miUnidad.nombreComercial}"></span>
-                </p>
-                <p>
-                    Código:
-                    <span th:text="${miUnidad.codigo}"></span>
-                </p>
-                <p>
-                    Superficie:
-                    <span th:text="${miUnidad.superficie}"></span> m²
-                </p>
-
-                
-
+                <a th:href="@{/contabilidad/sueldo}" class="action-card">
+                    <span class="action-icon">$</span>
+                    <span class="action-title">Mis liquidaciones</span>
+                    <span class="action-description">Consultar las liquidaciones de sueldo.</span>
+                </a>
+                <a th:href="@{/empleado/historial}" class="action-card">
+                    <span class="action-icon">↻</span>
+                    <span class="action-title">Mi historial de unidades</span>
+                    <span class="action-description">
+                        Consultar las unidades y los festivales anteriores.
+                    </span>
+                </a>
             </div>
         </section>
 
-        <div class="festivales">
-            <div th:each="f : ${festivales}" class="card">
-
-                <p>
-                    <span th:text="${f.nombre}"></span>
-                </p>
-
-                <p>
-                    Temporada:
-                    <span th:text="${f.temporada}"></span>
-                </p>
-
-                <p>
-                    Fecha de inicio:
-                    <span th:text="${f.fechaInicio}"></span>
-                </p>
-
-                <p>
-                    Fecha de fin:
-                    <span th:text="${f.fechaFin}"></span>
-                </p>
-                <p>
-                    Estado:
-                    <span th:text="${f.estado}"></span>
-                </p>
-
+        <!-- Unidad del empleado -->
+        <section sec:authorize="hasRole('EMPLEADO')" class="section">
+            <div class="section-heading">
+                <h2>Mi unidad de venta</h2>
+                <p>Información de la unidad a la que pertenecés.</p>
             </div>
-        </div>
+
+            <p th:if="${errorUnidad != null}" th:text="${errorUnidad}" class="notice"></p>
+
+            <article th:if="${miUnidad != null}" class="unit-card">
+                <div>
+                    <span class="unit-label">UNIDAD ASIGNADA</span>
+                    <h3 th:text="${miUnidad.nombreComercial}">Nombre de la unidad</h3>
+                    <p>
+                        Código:
+                        <strong th:text="${miUnidad.codigo}">FT00000001</strong>
+                    </p>
+                </div>
+
+                <div class="unit-surface">
+                    <span>Superficie</span>
+                    <strong>
+                        <span th:text="${miUnidad.superficie}">15</span> m²
+                    </strong>
+                </div>
+            </article>
+
+            <div th:if="${miUnidad == null and errorUnidad == null}" class="empty-state">
+                No hay una unidad de venta asociada a tu usuario.
+            </div>
+        </section>
+
+        <!-- Festival donde trabaja el empleado -->
+        <section sec:authorize="hasRole('EMPLEADO')" class="section">
+            <div class="section-heading">
+                <h2>Mi festival</h2>
+                <p>Información del festival donde trabaja tu unidad.</p>
+            </div>
+
+            <article th:if="${miUnidad != null and miUnidad.festival != null}" class="card">
+
+                <div class="festival-header">
+                    <h3 th:text="${miUnidad.festival.nombre}">
+                        Nombre del festival
+                    </h3>
+
+                    <span class="festival-temporada" th:text="'Temporada ' + ${miUnidad.festival.temporada}">
+                        Temporada
+                    </span>
+                </div>
+
+                <div class="festival-datos">
+                    <div class="festival-dato">
+                        <span>Fecha de inicio</span>
+                        <strong th:text="${miUnidad.festival.fechaInicio}">Fecha</strong>
+                    </div>
+
+                    <div class="festival-dato">
+                        <span>Fecha de finalización</span>
+                        <strong th:text="${miUnidad.festival.fechaFin}">Fecha</strong>
+                    </div>
+                </div>
+
+                <div class="festival-estado">
+                    <span>Estado</span>
+                    <span class="status" th:text="${miUnidad.festival.estado}">
+                        Estado
+                    </span>
+                </div>
+            </article>
+
+            <div th:if="${miUnidad == null or miUnidad.festival == null}" class="empty-state">
+                No hay un festival asociado a tu unidad de venta.
+            </div>
+        </section>
+
     </main>
 
+    <footer class="footer">
+        Epicentro Gourmet · Sistema de gestión de festivales
+    </footer>
 </body>
 
 </html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empleados de la unidad - Epicentro Gourmet</title>
+    <link rel="stylesheet" th:href="@{/css/empleado-lista.css}">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <p class="header-subtitle">EPICENTRO GOURMET</p>
+                <h1>Personal de la unidad</h1>
+            </div>
+            <a th:href="@{/home}" class="btn btn-secondary">Volver al inicio</a>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="unidad-card">
+            <div>
+                <span class="section-label">UNIDAD DE VENTA</span>
+                <h2 th:text="${unidad.nombreComercial}">Nombre comercial</h2>
+                <p>
+                    Código:
+                    <strong th:text="${unidad.codigo}">Código</strong>
+                </p>
+            </div>
+
+            <div class="total-empleados">
+                <span>Total de empleados</span>
+                <strong th:text="${#lists.size(empleados)}">0</strong>
+            </div>
+        </section>
+
+        <section class="personal-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Empleados asignados</h2>
+                    <p>Personal registrado en esta unidad de venta.</p>
+                </div>
+
+                <a th:href="@{/empleado/alta(idUnidad=${unidad.id})}" class="btn btn-primary">
+                    + Registrar empleado
+                </a>
+            </div>
+
+            <div th:if="${#lists.isEmpty(empleados)}" class="empty-state">
+                <h3>No hay empleados registrados</h3>
+                <p>Esta unidad todavía no tiene empleados asignados.</p>
+            </div>
+
+            <div th:unless="${#lists.isEmpty(empleados)}" class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Empleado</th>
+                            <th>DNI</th>
+                            <th>Correo electrónico</th>
+                            <th>Tipo</th>
+                            <th>Turno / Categoría</th>
+                            <th>Fecha de ingreso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="empleado : ${empleados}">
+                            <td>
+                                <strong th:text="${empleado.name + ' ' + empleado.apellido}">
+                                    Nombre Apellido
+                                </strong>
+                            </td>
+                            <td th:text="${empleado.dni}">DNI</td>
+                            <td th:text="${empleado.email}">correo@ejemplo.com</td>
+                            <td>
+                                <span class="tipo-badge" th:text="${empleado.tipoEmpleado}">
+                                    CAJERO
+                                </span>
+                            </td>
+                            <td>
+                                <span th:if="${empleado.tipoEmpleado == 'CAJERO'
+                                         and empleado.turno != null}" th:text="${empleado.turno}">
+                                    MAÑANA
+                                </span>
+
+                                <span th:if="${empleado.tipoEmpleado == 'COCINERO'
+                                         and empleado.categoria != null}" th:text="${empleado.categoria}">
+                                    PRINCIPAL
+                                </span>
+
+                                <span th:if="${empleado.turno == null
+                                         and empleado.categoria == null}">
+                                    —
+                                </span>
+                            </td>
+                            <td th:text="${#temporals.format(empleado.fechaIngreso, 'dd/MM/yyyy')}">
+                                01/01/2026
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="footer-actions">
+            <a th:href="@{/home}" class="btn btn-secondary">Volver al inicio</a>
+        </div>
+
+    </main>
+
+</body>
+
+</html>

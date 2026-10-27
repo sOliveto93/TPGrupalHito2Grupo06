@@ -7,14 +7,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 
+import com.unla.hito2.dto.UnidadDeVentaDto;
 import com.unla.hito2.dto.pedido.PedidoAltaDto;
 import com.unla.hito2.dto.pedido.PedidoDtoRequest;
 import com.unla.hito2.dto.pedido.PedidoDtoResponse;
-import com.unla.hito2.entity.UnidadDeVenta;
 import com.unla.hito2.service.PedidoService;
 import com.unla.hito2.service.UnidadDeVentaService;
 
@@ -106,18 +109,37 @@ public class PedidoController {
         boolean esEmpleado = authentication.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_EMPLEADO"));
 
-        UnidadDeVenta unidad;
+        UnidadDeVentaDto unidad;
 
         try {
             if (esResponsable) {
-                unidad = unidadDeVentaService.buscarPorResponsable(
+                List<UnidadDeVentaDto> unidades = unidadDeVentaService.buscarUnidadesActivasPorResponsable(
                         authentication.getName());
+
+                boolean tieneAcceso = false;
+
+                for (UnidadDeVentaDto u : unidades) {
+                    if (u.getId().equals(id)) {
+                        tieneAcceso = true;
+                        break;
+                    }
+                }
+
+                if (!tieneAcceso) {
+                    throw new AccessDeniedException(
+                            "No podés consultar los pedidos de otra unidad.");
+                }
+
+                return;
             } else if (esEmpleado) {
                 unidad = unidadDeVentaService.buscarPorEmpleado(
                         authentication.getName());
             } else {
                 throw new AccessDeniedException("Rol no habilitado.");
             }
+
+        } catch (AccessDeniedException e) {
+            throw e;
         } catch (Exception e) {
             throw new AccessDeniedException(
                     "No tenés una unidad de venta habilitada.", e);
