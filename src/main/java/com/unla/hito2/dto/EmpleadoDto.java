@@ -17,7 +17,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmpleadoDto {
-
+    private Long id;
+    private boolean activo;
     @NotBlank
     private String name;
     @NotBlank
@@ -30,13 +31,14 @@ public class EmpleadoDto {
     private LocalDate fechaIngreso;
     @NotBlank
     private String tipoEmpleado;
-    //atributos de usuario
+    // atributos de usuario
     @NotBlank(message = "El correo electrónico es obligatorio")
     private String email;
 
-    //atributos de cajero
+    // atributos de cajero
     private Turno turno;
 
-    //atributos de cocinero
+    // atributos de cocinero
     private CategoriaCocina categoria;
+    
 }

@@ -9,7 +9,6 @@ import com.unla.hito2.service.EmpleadoService;
 import com.unla.hito2.service.UnidadDeVentaService;
 import jakarta.validation.Valid;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -141,5 +140,53 @@ public class EmpleadoController {
         vista.addObject("historialEmpleado", historial);
 
         return vista;
+    }
+
+    @PreAuthorize("hasRole('RESPONSABLE')")
+    @PostMapping("/desactivar")
+    public String desactivarEmpleado(
+            @RequestParam Long idEmpleado,
+            @RequestParam Long idUnidad,
+            Authentication authentication,
+            RedirectAttributes redirectAttributes) throws Exception {
+
+        UnidadDeVenta unidad = unidadDeVentaService.buscarPorId(idUnidad);
+
+        if (!unidad.getResponsable().getUsuario().getUsername()
+                .equals(authentication.getName())) {
+            throw new org.springframework.security.access.AccessDeniedException(
+                    "No tenés permiso para gestionar esta unidad de venta");
+        }
+
+        empleadoService.desactivarEmpleado(idEmpleado, idUnidad);
+
+        redirectAttributes.addFlashAttribute(
+                "exito", "Empleado desactivado con éxito.");
+
+        return "redirect:/empleado/lista?idUnidad=" + idUnidad;
+    }
+
+    @PreAuthorize("hasRole('RESPONSABLE')")
+    @PostMapping("/activar")
+    public String activarEmpleado(
+            @RequestParam Long idEmpleado,
+            @RequestParam Long idUnidad,
+            Authentication authentication,
+            RedirectAttributes redirectAttributes) throws Exception {
+
+        UnidadDeVenta unidad = unidadDeVentaService.buscarPorId(idUnidad);
+
+        if (!unidad.getResponsable().getUsuario().getUsername()
+                .equals(authentication.getName())) {
+            throw new org.springframework.security.access.AccessDeniedException(
+                    "No tenés permiso para gestionar esta unidad de venta");
+        }
+
+        empleadoService.activarEmpleado(idEmpleado, idUnidad);
+
+        redirectAttributes.addFlashAttribute(
+                "exito", "Empleado activado con éxito.");
+
+        return "redirect:/empleado/lista?idUnidad=" + idUnidad;
     }
 }

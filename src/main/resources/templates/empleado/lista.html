@@ -61,10 +61,8 @@
                         <tr>
                             <th>Empleado</th>
                             <th>DNI</th>
-                            <th>Correo electrónico</th>
-                            <th>Tipo</th>
-                            <th>Turno / Categoría</th>
-                            <th>Fecha de ingreso</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,31 +72,27 @@
                                     Nombre Apellido
                                 </strong>
                             </td>
+
                             <td th:text="${empleado.dni}">DNI</td>
-                            <td th:text="${empleado.email}">correo@ejemplo.com</td>
+
                             <td>
-                                <span class="tipo-badge" th:text="${empleado.tipoEmpleado}">
-                                    CAJERO
+                                <span th:text="${empleado.activo ? 'Activo' : 'Inactivo'}">
+                                    Activo
                                 </span>
                             </td>
+
                             <td>
-                                <span th:if="${empleado.tipoEmpleado == 'CAJERO'
-                                         and empleado.turno != null}" th:text="${empleado.turno}">
-                                    MAÑANA
-                                </span>
+                                <form th:if="${empleado.activo}" th:action="@{/empleado/desactivar}" method="post">
+                                    <input type="hidden" name="idEmpleado" th:value="${empleado.id}">
+                                    <input type="hidden" name="idUnidad" th:value="${unidad.id}">
+                                    <button type="submit">Desactivar</button>
+                                </form>
 
-                                <span th:if="${empleado.tipoEmpleado == 'COCINERO'
-                                         and empleado.categoria != null}" th:text="${empleado.categoria}">
-                                    PRINCIPAL
-                                </span>
-
-                                <span th:if="${empleado.turno == null
-                                         and empleado.categoria == null}">
-                                    —
-                                </span>
-                            </td>
-                            <td th:text="${#temporals.format(empleado.fechaIngreso, 'dd/MM/yyyy')}">
-                                01/01/2026
+                                <form th:unless="${empleado.activo}" th:action="@{/empleado/activar}" method="post">
+                                    <input type="hidden" name="idEmpleado" th:value="${empleado.id}">
+                                    <input type="hidden" name="idUnidad" th:value="${unidad.id}">
+                                    <button type="submit">Activar</button>
+                                </form>
                             </td>
                         </tr>
                     </tbody>
