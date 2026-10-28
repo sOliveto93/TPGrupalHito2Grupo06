@@ -48,7 +48,7 @@ public class UnidadDeVentaService {
     @Transactional
     public UnidadDeVenta registrarUnidadConResponsable(RegistroUnidadDto dto) throws Exception {
         System.out.println("Email recibido: " + dto.getEmail());
-System.out.println("Password recibido: " +
+        System.out.println("Password recibido: " +
         (dto.getPassword() == null ? "NULL" : "PRESENTE"));
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new Exception("Ya existe un usuario registrado con este email");
