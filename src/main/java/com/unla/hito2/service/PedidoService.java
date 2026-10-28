@@ -1,6 +1,7 @@
 package com.unla.hito2.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,6 +74,9 @@ public class PedidoService {
 
         pedidoNuevo.setUnidadDeVenta(unidadDeVenta);
         pedidoNuevo.setFechaHora(LocalDateTime.now());
+        if (!pedidoNuevo.getFechaHora().toLocalDate().equals(LocalDate.now())) {
+            throw new IllegalArgumentException("Un pedido solo puede registrar la fecha del día corriente.");
+        }
         Map<Long, Integer> platosProcesados = new HashMap<>();
 
         // verificamos duplicados de detalles antes de hacer algo

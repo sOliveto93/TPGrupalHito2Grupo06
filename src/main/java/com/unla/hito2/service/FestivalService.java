@@ -76,6 +76,10 @@ public class FestivalService {
     }
 
     public FestivalDto festivalToDto(Festival festival) {
+        if (festival.getFechaInicio() != null && festival.getFechaFin() != null
+                && festival.getFechaInicio().isAfter(festival.getFechaFin())) {
+            throw new IllegalArgumentException("El período del festival es inválido: la fecha de inicio debe ser anterior o igual a la fecha de fin.");
+        }
         FestivalDto dto = new FestivalDto();
         LocalDate hoy = LocalDate.now();
         dto.setId(festival.getId());
