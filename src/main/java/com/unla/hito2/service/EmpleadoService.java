@@ -52,6 +52,9 @@ public class EmpleadoService {
 
     private void validarEmpleado(EmpleadoDto dto) throws Exception {
 
+        if (dto.getDni() == null || !dto.getDni().matches("^[0-9]{7,8}$")) {
+            throw new Exception("El DNI debe contener solo números y tener 7 u 8 dígitos");
+        }
         if (staffRepository.existsByDni(dto.getDni())) {
             throw new Exception("Ya existe un usuario registrado con el mismo DNI");
         }

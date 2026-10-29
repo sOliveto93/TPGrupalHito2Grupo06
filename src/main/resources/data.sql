@@ -44,12 +44,12 @@ VALUES  (1, 450.00,  8.00,  4000.00,  80000.00, 120000.00, 1500.00, 40000.00,  9
 -- 2. CARGA DE FESTIVALES
 -- =====================================================
 INSERT INTO `festival` (`id`, `nombre`, `temporada`, `fecha_inicio`, `fecha_fin`, `costos_id`)
-VALUES  (1, 'Festival Gourmet Primavera', 'PRIMAVERA', '2026-10-01', '2026-11-30', 1),
-    (2, 'Beer & Food Fest Verano', 'OTONIO', '2026-04-01', '2026-04-15', 2),
-    (3, 'Sabores de Otoño', 'OTONIO', '2026-03-01', '2026-03-28', 3),
-    (4, 'Festival del Invierno', 'INVIERNO', '2027-05-10', '2027-06-30', 4),
-    (5, 'Buenos Aires Street Food', 'VERANO', '2026-12-01', '2026-12-31', 5),
-    (6, 'Sabores Fest', 'VERANO', '2027-01-01', '2027-02-28', 6);
+VALUES  (1, 'Festival Gourmet Primavera', 'PRIMAVERA', '2026-08-01', '2026-09-10', 1),
+        (2, 'Beer & Food Fest Verano',   'VERANO',    '2026-10-15', '2026-11-15', 2),
+        (3, 'Sabores de Otoño',          'OTONIO',    '2026-11-20', '2026-12-15', 3),
+        (4, 'Festival del Invierno',     'INVIERNO',  '2027-05-10', '2027-06-30', 4),
+        (5, 'Buenos Aires Street Food',  'VERANO',    '2027-01-10', '2027-02-10', 5),
+        (6, 'Sabores Fest',              'VERANO',    '2027-03-01', '2027-04-01', 6);
 -- =====================================================
 -- 3. CARGA DE USUARIOS (Admin, Responsables y Empleados)
 -- Nota: Las contraseñas representan credenciales encriptadas o temporales.
@@ -220,31 +220,31 @@ VALUES
     (4,  'PD00000002', 'Puesto de Tacos',      15.00, 1, 5,TRUE),
     (5,  'FT00000003', 'Pizza al Paso',         20.00, 1, 6,TRUE),
     (6,  'PD00000003', 'Puesto de Empanadas',   12.00, 1, 7,TRUE),
-    (8,  'FT00000005', 'Burger Fest',           25.00, 2, 2,TRUE),
+    (8,  'FT00000004', 'Burger Fest',           25.00, 2, 2,TRUE),
     (9,  'PD00000004', 'Tacos Fest',            15.00, 2, 3,TRUE),
-    (10, 'FT00000006', 'Pizza Fest',            20.00, 2, 4,TRUE),
-    (11, 'UV204VENTA', 'Empanadas Fest',        12.00, 2, 5,TRUE),
-    (12, 'UV205VENTA', 'Gourmet Fest',          22.00, 2, 6,TRUE),
-    (13, 'UV301VENTA', 'Burger de Otoño',       25.00, 3, 7,TRUE),
-    (14, 'UV302VENTA', 'Tacos de Otoño',        15.00, 3, 2,TRUE),
-    (15, 'UV303VENTA', 'Pizza de Otoño',        20.00, 3, 3,TRUE),
-    (16, 'UV304VENTA', 'Empanadas de Otoño',    12.00, 3, 4,TRUE),
-    (17, 'UV305VENTA', 'Sabores Gourmet',       22.00, 3, 5,TRUE),
-    (18, 'UV401VENTA', 'Burger de Invierno',    25.00, 4, 6,TRUE),
-    (19, 'UV402VENTA', 'Tacos de Invierno',     15.00, 4, 7,TRUE),
-    (20, 'UV403VENTA', 'Pizza de Invierno',     20.00, 4, 2,TRUE),
-    (21, 'UV404VENTA', 'Empanadas Calientes',   12.00, 4, 3,TRUE),
-    (22, 'UV405VENTA', 'Gourmet de Invierno',   22.00, 4, 4,TRUE),
-    (23, 'UV501VENTA', 'Street Burger',         25.00, 5, 5,TRUE),
-    (24, 'UV502VENTA', 'Street Tacos',          15.00, 5, 6,TRUE),
-    (25, 'UV503VENTA', 'Street Pizza',          20.00, 5, 7,TRUE),
-    (26, 'UV504VENTA', 'Street Empanadas',      12.00, 5, 2,TRUE),
-    (27, 'UV505VENTA', 'Street Gourmet',        22.00, 5, 3,TRUE),
-    (28, 'UV601VENTA', 'Sabores Burger',        25.00, 6, 4,TRUE),
-    (29, 'UV602VENTA', 'Sabores Tacos',         15.00, 6, 5,TRUE),
-    (30, 'UV603VENTA', 'Sabores Pizza',         20.00, 6, 6,TRUE),
-    (31, 'UV604VENTA', 'Sabores Empanadas',     12.00, 6, 7,TRUE),
-    (32, 'UV605VENTA', 'Sabores Gourmet',       22.00, 6, 2,TRUE);
+    (10, 'FT00000005', 'Pizza Fest',            20.00, 2, 4,TRUE),
+    (11, 'PD00000005', 'Empanadas Fest',        12.00, 2, 5,TRUE),
+    (12, 'FT00000006', 'Gourmet Fest',          22.00, 2, 6,TRUE),
+    (13, 'FT00000007', 'Burger de Otoño',       25.00, 3, 7,TRUE),
+    (14, 'PD00000006', 'Tacos de Otoño',        15.00, 3, 2,TRUE),
+    (15, 'FT00000008', 'Pizza de Otoño',        20.00, 3, 3,TRUE),
+    (16, 'PD00000007', 'Empanadas de Otoño',    12.00, 3, 4,TRUE),
+    (17, 'FT00000009', 'Sabores Gourmet',       22.00, 3, 5,TRUE),
+    (18, 'FT00000010', 'Burger de Invierno',    25.00, 4, 6,TRUE),
+    (19, 'PD00000008', 'Tacos de Invierno',     15.00, 4, 7,TRUE),
+    (20, 'FT00000011', 'Pizza de Invierno',     20.00, 4, 2,TRUE),
+    (21, 'PD00000009', 'Empanadas Calientes',   12.00, 4, 3,TRUE),
+    (22, 'FT00000012', 'Gourmet de Invierno',   22.00, 4, 4,TRUE),
+    (23, 'FT00000013', 'Street Burger',         25.00, 5, 5,TRUE),
+    (24, 'PD00000010', 'Street Tacos',          15.00, 5, 6,TRUE),
+    (25, 'FT00000014', 'Street Pizza',          20.00, 5, 7,TRUE),
+    (26, 'PD00000011', 'Street Empanadas',      12.00, 5, 2,TRUE),
+    (27, 'FT00000015', 'Street Gourmet',        22.00, 5, 3,TRUE),
+    (28, 'FT00000016', 'Sabores Burger',        25.00, 6, 4,TRUE),
+    (29, 'PD00000012', 'Sabores Tacos',         15.00, 6, 5,TRUE),
+    (30, 'FT00000017', 'Sabores Pizza',         20.00, 6, 6,TRUE),
+    (31, 'PD00000013', 'Sabores Empanadas',     12.00, 6, 7,TRUE),
+    (32, 'FT00000018', 'Sabores Gourmet',       22.00, 6, 2,TRUE);
 
 -- Subtipos de las nuevas unidades: Food Trucks
 INSERT INTO `foodtruck` (`id`, `patente`, `requiere_electricidad`)

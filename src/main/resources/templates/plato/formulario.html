@@ -10,12 +10,12 @@
 
 <body>
 
-    <header class="page-heading">
-        <a th:href="@{/home}" class="btn-volver">
-            ← Volver
-        </a>
-        <h1>Alta de Plato</h1>
-        <p>Registrá un nuevo plato para ofrecer en tu unidad de venta.</p>
+    <header class="page-heading" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+        <div>
+            <h1>Alta de Plato</h1>
+            <p>Registrá un nuevo plato para ofrecer en tu unidad de venta.</p>
+        </div>
+        <a th:href="@{/home}" class="btn-volver">← Volver al inicio</a>
     </header>
 
     <main class="plato-layout">
@@ -55,8 +55,8 @@
                 <button type="submit">Registrar plato</button>
             </form>
 
-            <a th:href="@{/responsable/home}" class="volver-unidad">
-                Volver a mi unidad
+            <a th:href="@{/home}" class="volver-unidad">
+                ← Volver al inicio
             </a>
         </section>
 

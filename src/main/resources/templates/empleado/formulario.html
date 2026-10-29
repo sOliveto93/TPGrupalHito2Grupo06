@@ -10,9 +10,12 @@
 
 <body>
 
-    <div class="page-heading">
-        <h1>Alta de Empleado</h1>
-        <p>Registrá al empleado que trabajará en tu unidad de venta.</p>
+    <div class="page-heading" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+        <div>
+            <h1>Alta de Empleado</h1>
+            <p>Registrá al empleado que trabajará en tu unidad de venta.</p>
+        </div>
+        <a th:href="@{/home}" class="btn btn-back">← Volver al inicio</a>
     </div>
     <!--/*@thymesVar id="exito" type="java.lang.String"*/-->
     <!--/*@thymesVar id="error" type="java.lang.String"*/-->

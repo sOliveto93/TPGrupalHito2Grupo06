@@ -5,6 +5,7 @@ import com.unla.hito2.Enum.Turno;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class EmpleadoDto {
     @NotBlank
     private String apellido;
     @NotBlank(message = "El DNI es obligatorio")
+    @Pattern(regexp = "^[0-9]{7,8}$", message = "El DNI debe contener solo números y tener 7 u 8 dígitos")
     private String dni;
     @NotNull
     private LocalDate fechaNac;

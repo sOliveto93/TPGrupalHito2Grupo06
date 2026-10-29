@@ -15,6 +15,12 @@
         <a th:href="@{/}" class="brand">Epicentro Gourmet</a>
 
         <div class="header-actions">
+            <a sec:authorize="isAuthenticated()"
+               th:href="@{/home}"
+               class="btn btn-outline">
+                Ir a mi panel
+            </a>
+
             <form sec:authorize="isAuthenticated()"
                   th:action="@{/logout}" method="post">
                 <button type="submit" class="btn btn-outline">

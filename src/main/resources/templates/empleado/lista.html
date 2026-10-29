@@ -11,12 +11,12 @@
 <body>
 
     <header class="header">
-        <div class="header-content">
+        <div class="header-content" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
             <div>
                 <p class="header-subtitle">EPICENTRO GOURMET</p>
                 <h1>Personal de la unidad</h1>
             </div>
-            <a th:href="@{/home}" class="btn btn-secondary">Volver al inicio</a>
+            <a th:href="@{/home}" class="btn btn-back">← Volver al inicio</a>
         </div>
     </header>
 
@@ -101,7 +101,7 @@
         </section>
 
         <div class="footer-actions">
-            <a th:href="@{/home}" class="btn btn-secondary">Volver al inicio</a>
+            <a th:href="@{/home}" class="btn btn-back">← Volver al inicio</a>
         </div>
 
     </main>

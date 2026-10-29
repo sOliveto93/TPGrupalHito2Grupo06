@@ -52,6 +52,7 @@ pedidos_generados AS (
         ON fest.id = uv.festival_id
     INNER JOIN fechas f
         ON f.festival_id = fest.id
+    WHERE fest.fecha_inicio <= CURRENT_DATE
     CROSS JOIN numeros n
 )
 SELECT

@@ -161,6 +161,15 @@ body {
     background: #334155;
 }
 
+.btn-back {
+    background-color: #475569;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #334155;
+}
+
 .table-container {
     overflow-x: auto;
     background: var(--surface);

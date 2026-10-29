@@ -86,6 +86,28 @@ button:hover {
 a {
     color: #2878b5;
     font-weight: 600;
+    text-decoration: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-back {
+    background-color: #475569;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #334155;
 }
 
 form > p:last-child {
