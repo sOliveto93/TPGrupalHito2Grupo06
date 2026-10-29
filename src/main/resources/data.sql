@@ -67,7 +67,7 @@ VALUES (1, 'admin', 'admin@gmail.com', '$2a$10$RzFQ8VQWqT.fdjiQEF9QsOOHTxXoVCPYb
         (6,'lucasfernandez','lucasfernandez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (7,'martinrodriguez','martinrodriguez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (8,'valentinagomez','valentinagomez@gmail.com','$2a$10$oQ6SN6cUbY1yZ/q2iSsosuJtQfSOvDgurrm/AJjsqZztDyaG8Qz1a',1,NOW(),NOW()),
-(9,'sofiaMartinez','sofiamartinez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
+(9,'sofiaMartinez','sofiamartinez@gmail.com','$2a$10$d8iTixyiE/I9/ftsUctiwOmpfhavAL291NJvFTllTbgy9L9IKWXHC',1,NOW(),NOW()),
 (10,'facundolopez','facundolopez@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (11,'camilaromero','camilaromero@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
 (12,'tomasdiaz','tomasdiaz@gmail.com','$2a$10$vPmxwQFVLUq6FWAwU0EwU.Ub.F6zzlwkn1NpVc3s9n5Lajf1uyd6u',1,NOW(),NOW()),
@@ -131,37 +131,37 @@ VALUES (1, 1, 'ROLE_ADMINISTRADOR', NOW(), NOW()),
 -- =====================================================
 INSERT INTO `staff` (`id`, `usuario_id`, `name`, `apellido`, `dni`, `fecha_nac`, `fecha_ingreso`, `activo`, `fecha_baja`, `unidad_venta_id`)
 VALUES
-(2, 2, 'Carlos', 'Ríos', '30111222', '1985-05-12', '2020-03-01', 1, NULL, NULL),
-(3, 3, 'Ana', 'Martínez', '32333444', '1988-08-20', '2021-06-15', 1, NULL, NULL),
-(4, 4, 'Juan', 'Pérez', '38555666', '1995-02-10', '2022-01-10', 1, NULL, NULL),
-(5, 5, 'María', 'Gómez', '36777888', '1992-11-05', '2021-02-01', 1, NULL, NULL),
-(6, 6, 'Lucas', 'Fernández', '80000001', '1990-01-01', CURDATE(), 1, NULL, NULL),
-(7, 7, 'Martín', 'Rodríguez', '81000001', '1995-01-01', CURDATE(), 1, NULL, NULL),
-(8, 8, 'Valentina', 'Gómez', '82000001', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(9, 9, 'Sofía', 'Martínez', '80000002', '1990-01-01', CURDATE(), 1, NULL, NULL),
-(10, 10, 'Facundo', 'López', '81000002', '1995-01-01', CURDATE(), 1, NULL, NULL),
-(11, 11, 'Camila', 'Romero', '82000002', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(12, 12, 'Tomás', 'Díaz', '80000003', '1990-01-01', CURDATE(), 1, NULL, NULL),
-(13, 13, 'Florencia', 'Torres', '81000003', '1995-01-01', CURDATE(), 1, NULL, NULL),
-(14, 14, 'Nicolás', 'Acosta', '82000003', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(15, 15, 'Julieta', 'Suárez', '80000004', '1990-01-01', CURDATE(), 1, NULL, NULL),
-(16, 16, 'Mateo', 'Silva', '81000004', '1995-01-01', CURDATE(), 1, NULL, NULL),
-(17, 17, 'Agustín', 'Romero', '82000004', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(18, 18, 'Martina', 'Flores', '80000005', '1990-01-01', CURDATE(), 1, NULL, NULL),
-(19, 19, 'Santiago', 'Méndez', '81000005', '1995-01-01', CURDATE(), 1, NULL, NULL),
-(20, 20, 'Milagros', 'Castro', '82000005', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(21, 21, 'empleado21', 'empleado21', '83200005', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(22, 22, 'Abril', 'Navarro', '81000006', '1995-01-01', CURDATE(), 1, NULL, NULL),
-(23, 23, 'Joaquín', 'Pereyra', '82000506', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(24, 24, 'raul', 'gomez', '82003006', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(25, 25, 'Francisco', 'Vargas', '81000007', '1995-01-01', CURDATE(), 1, NULL, NULL),
-(26, 26, 'Emilia', 'Paz', '82000207', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(27, 27, 'micaela', 'fernandez', '82010207', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(28, 28, 'Renata', 'Molina', '81000008', '1995-01-01', CURDATE(), 1, NULL, NULL),
-(29, 29, 'Bruno', 'Cabrera', '82000008', '1992-01-01', CURDATE(), 1, NULL, NULL),
-(30, 30, 'Empleado', 'Veintiuno', '41000021', '1998-01-21', CURDATE(), 1, NULL, NULL),
-(31, 31, 'Empleado', 'empeleado', '41000024', '1998-04-24', CURDATE(), 1, NULL, NULL),
-(32, 32, 'Empleado', 'empeleado', '41000027', '1998-07-27', CURDATE(), 1, NULL, NULL);
+(2, 2, 'Carlos', 'Ríos', '30111222', '1985-05-12', '2026-08-01', 1, NULL, NULL),
+(3, 3, 'Ana', 'Martínez', '32333444', '1988-08-20', '2026-08-01', 1, NULL, NULL),
+(4, 4, 'Juan', 'Pérez', '38555666', '1995-02-10', '2026-08-01', 1, NULL, NULL),
+(5, 5, 'María', 'Gómez', '36777888', '1992-11-05', '2026-08-01', 1, NULL, NULL),
+(6, 6, 'Lucas', 'Fernández', '80000001', '1990-01-01', '2026-08-01', 1, NULL, NULL),
+(7, 7, 'Martín', 'Rodríguez', '81000001', '1995-01-01', '2026-08-01', 1, NULL, NULL),
+(8, 8, 'Valentina', 'Gómez', '82000001', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(9, 9, 'Sofía', 'Martínez', '80000002', '1990-01-01', '2026-08-01', 1, NULL, NULL),
+(10, 10, 'Facundo', 'López', '81000002', '1995-01-01', '2026-08-01', 1, NULL, NULL),
+(11, 11, 'Camila', 'Romero', '82000002', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(12, 12, 'Tomás', 'Díaz', '80000003', '1990-01-01', '2026-08-01', 1, NULL, NULL),
+(13, 13, 'Florencia', 'Torres', '81000003', '1995-01-01', '2026-08-01', 1, NULL, NULL),
+(14, 14, 'Nicolás', 'Acosta', '82000003', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(15, 15, 'Julieta', 'Suárez', '80000004', '1990-01-01', '2026-08-01', 1, NULL, NULL),
+(16, 16, 'Mateo', 'Silva', '81000004', '1995-01-01', '2026-08-01', 1, NULL, NULL),
+(17, 17, 'Agustín', 'Romero', '82000004', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(18, 18, 'Martina', 'Flores', '80000005', '1990-01-01', '2026-08-01', 1, NULL, NULL),
+(19, 19, 'Santiago', 'Méndez', '81000005', '1995-01-01', '2026-08-01', 1, NULL, NULL),
+(20, 20, 'Milagros', 'Castro', '82000005', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(21, 21, 'empleado21', 'empleado21', '83200005', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(22, 22, 'Abril', 'Navarro', '81000006', '1995-01-01', '2026-08-01', 1, NULL, NULL),
+(23, 23, 'Joaquín', 'Pereyra', '82000506', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(24, 24, 'raul', 'gomez', '82003006', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(25, 25, 'Francisco', 'Vargas', '81000007', '1995-01-01', '2026-08-01', 1, NULL, NULL),
+(26, 26, 'Emilia', 'Paz', '82000207', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(27, 27, 'micaela', 'fernandez', '82010207', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(28, 28, 'Renata', 'Molina', '81000008', '1995-01-01', '2026-08-01', 1, NULL, NULL),
+(29, 29, 'Bruno', 'Cabrera', '82000008', '1992-01-01', '2026-08-01', 1, NULL, NULL),
+(30, 30, 'Empleado', 'Veintiuno', '41000021', '1998-01-21', '2026-08-01', 1, NULL, NULL),
+(31, 31, 'Empleado', 'empeleado', '41000024', '1998-04-24', '2026-08-01', 1, NULL, NULL),
+(32, 32, 'Empleado', 'empeleado', '41000027', '1998-07-27', '2026-08-01', 1, NULL, NULL);
 
 
 
@@ -586,49 +586,67 @@ VALUES
     (6, 13, 1, 6, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL);
 
 INSERT INTO `liquidacion_de_haberes`
-    (`id`, `empleado_id`, `festival_id`, `fecha`,
-     `dias_festival`, `sueldo`, `adicional_aplicado`,
+    (`id`, `empleado_id`, `festival_id`, `fecha`,`dias_festival`, `sueldo`, `adicional_aplicado`,
      `factor_aplicado`, `total`)
 VALUES
-    -- Unidad 1: Carlos, Ana, Juan y María
-    (1,  8, 1, '2026-10-20', 20,  90000.00, 20000.00, 1.00, 110000.00),
-    (2,  15, 1, '2026-10-20', 20, 120000.00, 40000.00, 1.00, 160000.00),
+    -- Unidad 1
+    (1,  8, 1, '2026-09-10', 41, 100000.00,      0, 1.00, 100000.00),
+    (2, 15, 1, '2026-09-10', 41, 100000.00, 150000.00, 1.00, 250000.00),
 
-    -- Unidad 2: Lucas, Martín y Valentina
-    (3,  9, 1, '2026-10-20', 15, 100000.00, 15000.00, 1.00, 115000.00),
-    (4,  16, 1, '2026-10-20', 15, 135000.00, 30000.00, 1.10, 181500.00),
+    -- Unidad 2
+    (3,  9, 1, '2026-09-10', 41, 100000.00,      0, 1.00, 100000.00),
+    (4, 16, 1, '2026-09-10', 41, 100000.00, 150000.00, 1.10, 275000.00),
 
-    -- Unidad 3: Sofía, Facundo y Camila
-    (5, 10, 1, '2026-10-20', 18,  90000.00, 18000.00, 1.00, 108000.00),
-    (6, 17, 1, '2026-10-20', 18, 120000.00, 45000.00, 1.10, 181500.00),
+    -- Unidad 3
+    (5, 10, 1, '2026-09-10', 41, 100000.00,      0, 1.00, 100000.00),
+    (6, 17, 1, '2026-09-10', 18, 100000.00, 150000.00, 1.10, 275000.00),
 
-    -- Unidad 4: Tomás, Florencia y Nicolás
-    (7, 11, 1, '2026-10-20', 20,  90000.00, 25000.00, 1.00, 115000.00),
-    (8, 18, 1, '2026-10-20', 20, 120000.00, 50000.00, 1.10, 187000.00),
+    -- Unidad 4
+    (7, 11, 1, '2026-09-10', 41, 100000.00,      0, 1.00, 100000.00),
+    (8, 18, 1, '2026-09-10', 41, 100000.00, 150000.00, 1.10, 275000.00),
 
-    -- Unidad 5: Julieta, Mateo y Agustín
-    (9, 12, 1, '2026-10-20', 12, 100000.00, 12000.00, 1.00, 112000.00),
-    (10,19, 1, '2026-10-20', 12, 135000.00, 35000.00, 1.10, 187000.00),
+    -- Unidad 5
+    (9, 12, 1, '2026-09-10', 41, 100000.00,      0, 1.00, 100000.00),
+    (10,19, 1, '2026-09-10', 41, 100000.00, 150000.00, 1.10, 275000.00),
 
-    -- Unidad 6: Martina, Santiago y Milagros
-    (11,13, 1, '2026-10-20', 16,  90000.00, 20000.00, 1.00, 110000.00),
-    (12,20, 1, '2026-10-20', 16, 120000.00, 40000.00, 1.10, 176000.00);
+    -- Unidad 6
+    (11,13, 1, '2026-09-10', 41, 100000.00,      0, 1.00, 100000.00),
+    (12,20, 1, '2026-09-10', 41, 100000.00, 150000.00, 1.10, 275000.00),
 
--- =====================================================
--- asignamos staff a sus unidades de venta
--- =====================================================
+    -- Ayudantes
+    (13, 21, 1, '2026-09-10', 41, 100000.00, 100000.00, 1.00, 200000.00),
+    (14, 22, 1, '2026-09-10', 41, 100000.00, 100000.00, 1.00, 200000.00),
+    (15, 23, 1, '2026-09-10', 41, 100000.00, 100000.00, 1.00, 200000.00),
+    (16, 24, 1, '2026-09-10', 41, 100000.00, 100000.00, 1.00, 200000.00),
+    (17, 25, 1, '2026-09-10', 41, 100000.00, 100000.00, 1.00, 200000.00),
+    (18, 26, 1, '2026-09-10', 41, 100000.00, 100000.00, 1.00, 200000.00),
 
+    -- Lavaplatos
+    (19, 27, 1, '2026-09-10', 41, 100000.00, 50000.00, 1.00, 150000.00),
+    (20, 28, 1, '2026-09-10', 41, 100000.00, 50000.00, 1.00, 150000.00),
+    (21, 29, 1, '2026-09-10', 41, 100000.00, 50000.00, 1.00, 150000.00),
+    (22, 30, 1, '2026-09-10', 41, 100000.00, 50000.00, 1.00, 150000.00),
+    (23, 31, 1, '2026-09-10', 41, 100000.00, 50000.00, 1.00, 150000.00),
+    (24, 32, 1, '2026-09-10', 41, 100000.00, 50000.00, 1.00, 150000.00);
 -- =====================================================
 -- Asignamos encargados a las unidades del Festival 1
 -- =====================================================
 
-
+-- asignando a festival pasado
 UPDATE staff SET unidad_venta_id = 1 WHERE id IN (8,15,21,27);
 UPDATE staff SET unidad_venta_id = 2 WHERE id IN (9,16,22,28);
 UPDATE staff SET unidad_venta_id = 3 WHERE id IN (10,17,23,29);
 UPDATE staff SET unidad_venta_id = 4 WHERE id IN (11,18,24,30);
 UPDATE staff SET unidad_venta_id = 5 WHERE id IN (12,19,25,31);
 UPDATE staff SET unidad_venta_id = 6 WHERE id IN (13,20,26,32);
+
+--asignando a festival activo
+
+UPDATE staff SET unidad_venta_id = 8 WHERE id IN (8, 15, 21, 27);
+UPDATE staff SET unidad_venta_id = 9 WHERE id IN (9, 16, 22, 28);
+UPDATE staff SET unidad_venta_id = 10 WHERE id IN (10, 17, 23, 29);
+UPDATE staff SET unidad_venta_id = 11 WHERE id IN (11, 18, 24, 30);
+UPDATE staff SET unidad_venta_id = 12 WHERE id IN (12, 19, 25, 31);
 
 INSERT INTO historial_unidad (staff_id, unidad_venta_id)
 VALUES

@@ -204,6 +204,7 @@ public class ContabilidadController {
         return "redirect:/contabilidad/sueldo";
     }
 
+    //sacar admin de aca
     @PostMapping("/liquidacion/generar")
     @PreAuthorize("hasAnyRole('RESPONSABLE','ADMINISTRADOR')")
     public String generarLiquidacion(@RequestParam Long staffId,

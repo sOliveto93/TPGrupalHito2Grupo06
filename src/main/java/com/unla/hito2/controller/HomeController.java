@@ -31,6 +31,7 @@ public class HomeController {
 
     @GetMapping
     public ModelAndView home(Authentication authentication) {
+       
         ModelAndView modelo = new ModelAndView("index");
         List<FestivalDto> lista = festivalService.traerActivosYProximos();
         modelo.addObject("festivales", lista);

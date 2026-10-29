@@ -45,7 +45,7 @@ public class LiquidacionService {
 
         Costos costos = costosRepository.findAll().stream().findFirst()
                 .orElseThrow(() -> new Exception("No hay costos configurados"));
-
+        //revisar sueldo bbase meterlo dentro de los iff con lso valores coorrespondientes
         BigDecimal sueldoBase = costos.getSueldoBase() != null ? costos.getSueldoBase() : new BigDecimal("100000");
         BigDecimal adicional = BigDecimal.ZERO;
 

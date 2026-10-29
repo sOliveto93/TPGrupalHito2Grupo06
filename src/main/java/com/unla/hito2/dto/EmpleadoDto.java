@@ -3,6 +3,7 @@ package com.unla.hito2.dto;
 import com.unla.hito2.Enum.CategoriaCocina;
 import com.unla.hito2.Enum.Turno;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -35,6 +36,7 @@ public class EmpleadoDto {
     private String tipoEmpleado;
     // atributos de usuario
     @NotBlank(message = "El correo electrónico es obligatorio")
+    @Email(message = "El correo electrónico no tiene un formato válido")
     private String email;
 
     // atributos de cajero

@@ -10,7 +10,12 @@ import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
+import com.unla.hito2.entity.Cajero;
+import com.unla.hito2.entity.Cocinero;
 import com.unla.hito2.entity.LiquidacionHaberes;
+import com.unla.hito2.entity.Staff;
+
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -37,25 +42,38 @@ public class PdfService {
             Font boldFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
 
             if (liquidacion.getEmpleado() != null) {
-                String nombreCompleto = (liquidacion.getEmpleado().getName() != null ? liquidacion.getEmpleado().getName() : "") + 
-                                        " " + (liquidacion.getEmpleado().getApellido() != null ? liquidacion.getEmpleado().getApellido() : "");
+                String nombreCompleto = (liquidacion.getEmpleado().getName() != null
+                        ? liquidacion.getEmpleado().getName()
+                        : "") +
+                        " " + (liquidacion.getEmpleado().getApellido() != null ? liquidacion.getEmpleado().getApellido()
+                                : "");
                 document.add(new Paragraph("Empleado: " + nombreCompleto.trim(), infoFont));
-                document.add(new Paragraph("DNI: " + (liquidacion.getEmpleado().getDni() != null ? liquidacion.getEmpleado().getDni() : "-"), infoFont));
+                document.add(new Paragraph("DNI: "
+                        + (liquidacion.getEmpleado().getDni() != null ? liquidacion.getEmpleado().getDni() : "-"),
+                        infoFont));
                 String rol = "STAFF";
                 String categoria = "-";
-                if (liquidacion.getEmpleado() instanceof com.unla.hito2.entity.Cajero) {
-                    rol = "CAJERO";
-                    categoria = "CAJERO";
-                } else if (liquidacion.getEmpleado() instanceof com.unla.hito2.entity.Cocinero cocinero) {
-                    rol = "COCINERO";
-                    if (cocinero.getCategoria() != null) {
-                        categoria = cocinero.getCategoria().name().replace("_", " ");
+
+                System.out.println(" ---------------------------------  Clase del empleado: " +
+                        liquidacion.getEmpleado().getClass().getName());
+
+                Staff empleado = liquidacion.getEmpleado();
+
+                if (empleado != null) {
+                    empleado = (Staff) Hibernate.unproxy(empleado);
+
+                    if (empleado instanceof Cajero) {
+                        rol = "STAFF";
+                        categoria = "CAJERO";
+                    } else if (empleado instanceof Cocinero cocinero) {
+                        rol = "STAFF";
+                        categoria = cocinero.getCategoria() != null
+                                ? cocinero.getCategoria().name().replace("_", " ")
+                                : "COCINERO";
                     } else {
-                        categoria = "COCINERO";
+                        rol = "STAFF";
+                        categoria = "RESPONSABLE";
                     }
-                } else {
-                    rol = "STAFF";
-                    categoria = "RESPONSABLE";
                 }
                 document.add(new Paragraph("Rol: " + rol, infoFont));
                 document.add(new Paragraph("Categoria: " + categoria, infoFont));
