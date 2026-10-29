@@ -118,6 +118,13 @@
                            target="_blank">
                             Descargar PDF
                         </a>
+                        <form sec:authorize="hasRole('EMPLEADO')"
+                              th:action="@{/liquidacion/{id}/enviar-mail(id=${liq.id})}"
+                              method="post" style="margin-top: 6px;">
+                            <button type="submit" class="btn btn-back" style="padding: 6px 10px; font-size: 12px;">
+                                Enviar por mail
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>

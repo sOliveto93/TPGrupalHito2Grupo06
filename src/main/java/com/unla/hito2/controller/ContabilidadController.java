@@ -7,6 +7,7 @@ import com.unla.hito2.dto.UnidadDeVentaRankingDto;
 import com.unla.hito2.entity.LiquidacionHaberes;
 import com.unla.hito2.repository.LiquidacionRepository;
 import com.unla.hito2.service.ContabilidadService;
+import com.unla.hito2.service.EmailService;
 import com.unla.hito2.service.FestivalService;
 import com.unla.hito2.service.LiquidacionService;
 import com.unla.hito2.service.PdfService;
@@ -42,16 +43,19 @@ public class ContabilidadController {
     private final LiquidacionRepository liquidacionRepository;
     private final LiquidacionService liquidacionService;
     private final UnidadDeVentaService unidadDeVentaService;
+    private final EmailService emailService;
 
     public ContabilidadController(ContabilidadService contabilidadService, FestivalService festivalService,
             PdfService pdfService, LiquidacionRepository liquidacionRepository,
-            LiquidacionService liquidacionService, UnidadDeVentaService unidadDeVentaService) {
+            LiquidacionService liquidacionService, UnidadDeVentaService unidadDeVentaService,
+            EmailService emailService) {
         this.contabilidadService = contabilidadService;
         this.festivalService = festivalService;
         this.pdfService = pdfService;
         this.liquidacionRepository = liquidacionRepository;
         this.liquidacionService = liquidacionService;
         this.unidadDeVentaService = unidadDeVentaService;
+        this.emailService = emailService;
     }
 
     @GetMapping({ "/sueldo", "/liquidacion-sueldo" })
@@ -162,6 +166,42 @@ public class ContabilidadController {
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
+    }
+
+    @PostMapping("/liquidacion/{id}/enviar-mail")
+    @PreAuthorize("hasRole('EMPLEADO')")
+    public String enviarLiquidacionPorMail(@PathVariable Long id, Authentication authentication,
+            RedirectAttributes redirectAttributes) {
+        try {
+            if (authentication == null) {
+                return "redirect:/login";
+            }
+
+            String username = authentication.getName();
+            LiquidacionHaberes liquidacion = liquidacionRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Liquidación no encontrada"));
+
+            if (liquidacion.getEmpleado() == null
+                    || liquidacion.getEmpleado().getUsuario() == null
+                    || !username.equals(liquidacion.getEmpleado().getUsuario().getUsername())) {
+                throw new org.springframework.security.access.AccessDeniedException(
+                        "No podés enviar esta liquidación por mail.");
+            }
+
+            java.io.ByteArrayInputStream bis = pdfService.generarReciboLiquidacion(liquidacion);
+            byte[] pdfBytes = bis.readAllBytes();
+
+            String emailDestino = liquidacion.getEmpleado().getUsuario().getEmail();
+            String nombreEmpleado = (liquidacion.getEmpleado().getName() != null ? liquidacion.getEmpleado().getName() : "")
+                    + " " + (liquidacion.getEmpleado().getApellido() != null ? liquidacion.getEmpleado().getApellido() : "");
+
+            emailService.enviarLiquidacionPorMail(emailDestino, nombreEmpleado.trim(), pdfBytes, liquidacion.getId());
+            redirectAttributes.addFlashAttribute("exito", "Liquidación enviada por mail correctamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+
+        return "redirect:/contabilidad/sueldo";
     }
 
     @PostMapping("/liquidacion/generar")

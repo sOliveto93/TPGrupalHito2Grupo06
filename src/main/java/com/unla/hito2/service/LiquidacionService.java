@@ -2,9 +2,11 @@ package com.unla.hito2.service;
 
 import com.unla.hito2.entity.*;
 import com.unla.hito2.repository.*;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -17,15 +19,21 @@ public class LiquidacionService {
     private final CostosRepository costosRepository;
     private final StaffRepository staffRepository;
     private final FestivalRepository festivalRepository;
+    private final PdfService pdfService;
+    private final EmailService emailService;
 
     public LiquidacionService(LiquidacionRepository liquidacionRepository,
                               CostosRepository costosRepository,
                               StaffRepository staffRepository,
-                              FestivalRepository festivalRepository) {
+                              FestivalRepository festivalRepository,
+                              PdfService pdfService,
+                              EmailService emailService) {
         this.liquidacionRepository = liquidacionRepository;
         this.costosRepository = costosRepository;
         this.staffRepository = staffRepository;
         this.festivalRepository = festivalRepository;
+        this.pdfService = pdfService;
+        this.emailService = emailService;
     }
 
     @Transactional
@@ -94,5 +102,30 @@ public class LiquidacionService {
         liquidacion.setTotal(total);
 
         return liquidacionRepository.save(liquidacion);
+    }
+
+    @Transactional(readOnly = true)
+    public void enviarLiquidacionPorMail(Long liquidacionId, String usernameAutenticado) throws Exception {
+        LiquidacionHaberes liquidacion = liquidacionRepository.findById(liquidacionId)
+                .orElseThrow(() -> new Exception("Liquidación no encontrada"));
+
+        if (liquidacion.getEmpleado() == null
+                || liquidacion.getEmpleado().getUsuario() == null
+                || !usernameAutenticado.equals(liquidacion.getEmpleado().getUsuario().getUsername())) {
+            throw new AccessDeniedException("No tiene permisos para enviar esta liquidación por correo electrónico.");
+        }
+
+        ByteArrayInputStream pdfStream = pdfService.generarReciboLiquidacion(liquidacion);
+        byte[] pdfBytes = pdfStream.readAllBytes();
+
+        Staff empleado = liquidacion.getEmpleado();
+        String nombreCompleto = ((empleado.getName() != null) ? empleado.getName() : "")
+                + " "
+                + ((empleado.getApellido() != null) ? empleado.getApellido() : "");
+        nombreCompleto = nombreCompleto.trim();
+
+        String emailDestino = empleado.getUsuario().getEmail();
+
+        emailService.enviarLiquidacionPorMail(emailDestino, nombreCompleto, pdfBytes, liquidacion.getId());
     }
 }
