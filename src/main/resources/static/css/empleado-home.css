@@ -42,6 +42,13 @@ body {
     color: #cbd8e8;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
 .header-actions form {
     margin: 0;
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/cuenta.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi cuenta</title>
+</head>
+<body>
+
+<div class="page-heading">
+    <h1>Mi cuenta</h1>
+</div>
+
+<section>
+    <h2>Datos de acceso</h2>
+
+    <p>
+        Usuario:
+        <span th:text="${usuario.username}"></span>
+    </p>
+
+    <p>
+        Email:
+        <span th:text="${usuario.email}"></span>
+    </p>
+</section>
+
+<section th:if="${usuario.staff != null}">
+    <h2>Datos personales</h2>
+
+    <p>
+        Nombre:
+        <span th:text="${usuario.staff.name ?: 'Pendiente'}"></span>
+    </p>
+
+    <p>
+        Apellido:
+        <span th:text="${usuario.staff.apellido ?: 'Pendiente'}"></span>
+    </p>
+
+    <p>
+        DNI:
+        <span th:text="${usuario.staff.dni ?: 'Pendiente'}"></span>
+    </p>
+
+    <p>
+        Fecha de nacimiento:
+        <span th:text="${usuario.staff.fechaNac != null
+            ? #temporals.format(usuario.staff.fechaNac, 'dd/MM/yyyy')
+            : 'Pendiente'}"></span>
+    </p>
+
+    <p>
+        Fecha de ingreso:
+        <span th:text="${usuario.staff.fechaIngreso != null
+            ? #temporals.format(usuario.staff.fechaIngreso, 'dd/MM/yyyy')
+            : 'Pendiente'}"></span>
+    </p>
+</section>
+
+<section>
+    <h2>Seguridad</h2>
+    <a th:href="@{/cuenta/cambiar-contrasenia}">
+        Cambiar contraseña
+    </a>
+</section>
+
+<p>
+<p class="back-link">
+    <a th:href="@{/home}">Volver a mi panel</a>
+</p>
+</p>
+
+</body>
+</html>
