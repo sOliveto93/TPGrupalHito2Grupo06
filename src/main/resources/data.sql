@@ -578,12 +578,20 @@ INSERT INTO `cierre_de_caja`
     (`id`, `cajero_id`, `festival_id`, `unidad_venta_id`,`fecha_hora_apertura`,
      `fecha_hora_cierre`, `total_sistema`, `total_declarado`, `diferencia`)
 VALUES
-    (1,  8, 1, 1, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL),
-    (2,  9, 1, 2, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL),
-    (3, 10, 1, 3, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL),
-    (4, 11, 1, 4, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL),
-    (5, 12, 1, 5, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL),
-    (6, 13, 1, 6, '2026-10-05 08:30:00', NULL, NULL, NULL, NULL);
+    -- Festival 1: cierres históricos
+(1,  8, 1, 1, '2026-09-05 08:30:00', '2026-09-05 22:00:00', 150000, 150000, 0),
+(2,  9, 1, 2, '2026-09-05 08:30:00', '2026-09-05 22:00:00', 180000, 180000, 0),
+(3, 10, 1, 3, '2026-09-05 08:30:00', '2026-09-05 22:00:00', 120000, 120000, 0),
+(4, 11, 1, 4, '2026-09-05 08:30:00', '2026-09-05 22:00:00', 200000, 200000, 0),
+(5, 12, 1, 5, '2026-09-05 08:30:00', '2026-09-05 22:00:00', 175000, 175000, 0),
+(6, 13, 1, 6, '2026-09-05 08:30:00', '2026-09-05 22:00:00', 160000, 160000, 0),
+
+-- Festival 2: cajas abiertas
+(7,  8, 2, 8,  '2026-10-30 08:30:00', NULL, NULL, NULL, NULL),
+(8,  9, 2, 9,  '2026-10-30 08:30:00', NULL, NULL, NULL, NULL),
+(9, 10, 2, 10, '2026-10-30 08:30:00', NULL, NULL, NULL, NULL),
+(10, 11, 2, 11, '2026-10-30 08:30:00', NULL, NULL, NULL, NULL),
+(11, 12, 2, 12, '2026-10-30 08:30:00', NULL, NULL, NULL, NULL);
 
 INSERT INTO `liquidacion_de_haberes`
     (`id`, `empleado_id`, `festival_id`, `fecha`,`dias_festival`, `sueldo`, `adicional_aplicado`,
