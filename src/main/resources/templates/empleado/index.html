@@ -17,6 +17,12 @@
                 Iniciar sesión
             </a>
 
+            <a sec:authorize="isAuthenticated()"
+               th:href="@{/cuenta/perfil}"
+               class="btn btn-outline">
+                Mi cuenta
+            </a>
+
             <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
                 <button type="submit" class="btn btn-outline">
                     Cerrar sesión

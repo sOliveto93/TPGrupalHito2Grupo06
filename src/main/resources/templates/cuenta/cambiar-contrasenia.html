@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/cuenta.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar contraseña</title>
+</head>
+<body>
+
+<div class="page-heading">
+    <h1>Cambiar contraseña</h1>
+</div>
+
+<p th:if="${exito}" th:text="${exito}" class="alert alert-success"></p>
+<p th:if="${error}" th:text="${error}" class="alert alert-error"></p>
+
+<form th:action="@{/cuenta/cambiar-contrasenia}"
+      th:object="${contraseniaDto}"
+      method="post">
+
+    <div th:if="${#fields.hasErrors('*')}" style="color: red;">
+        <ul>
+            <li th:each="err : ${#fields.errors('*')}"
+                th:text="${err}"></li>
+        </ul>
+    </div>
+
+    <p>
+        <label for="contraseniaActual">Contraseña actual:</label>
+        <input type="password"
+               id="contraseniaActual"
+               name="contraseniaActual"
+               autocomplete="current-password"
+               required>
+    </p>
+
+    <p>
+        <label for="nuevaContrasenia">Nueva contraseña:</label>
+        <input type="password"
+               id="nuevaContrasenia"
+               name="nuevaContrasenia"
+               autocomplete="new-password"
+               minlength="6"
+               required>
+    </p>
+
+    <p>
+        <label for="confirmarContrasenia">Confirmar nueva contraseña:</label>
+        <input type="password"
+               id="confirmarContrasenia"
+               name="confirmarContrasenia"
+               autocomplete="new-password"
+               required>
+    </p>
+
+    <p class="form-actions">
+        <a th:href="@{/home}">Volver a mi panel</a>
+        <button type="submit">Cambiar contraseña</button>
+    </p>
+</form>
+
+</body>
+</html>
