@@ -14,6 +14,7 @@ public interface UserRepository extends JpaRepository<Usuario, Long> {
     Usuario findByUsernameAndFetchUsuarioRolesEagerly(@Param("username") String username);
 
     Optional<Usuario> findByUsernameOrEmail(String username, String email);
+    Optional<Usuario> findByEmail(String email);
 
     boolean existsByEmail(String email);
 }
