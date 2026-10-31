@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer contraseña</title>
+    <link rel="stylesheet" th:href="@{/css/cuenta.css}">
+</head>
+<body>
+
+<div class="page-heading">
+    <h1>Restablecer contraseña</h1>
+    <p>Elegí una nueva contraseña para tu cuenta.</p>
+</div>
+
+<p th:if="${error}" th:text="${error}"
+   class="alert alert-error"></p>
+
+<form th:if="${enlaceValido}"
+      th:action="@{/recuperar-contrasenia/restablecer}"
+      th:object="${restablecerDto}"
+      method="post">
+
+    <input type="hidden" th:field="*{token}">
+
+    <div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
+        <ul>
+            <li th:each="err : ${#fields.errors('*')}"
+                th:text="${err}"></li>
+        </ul>
+    </div>
+
+    <p>
+        <label for="nuevaContrasenia">Nueva contraseña:</label>
+        <input type="password"
+               id="nuevaContrasenia"
+               name="nuevaContrasenia"
+               autocomplete="new-password"
+               minlength="6"
+               required>
+    </p>
+
+    <p>
+        <label for="confirmarContrasenia">Confirmar nueva contraseña:</label>
+        <input type="password"
+               id="confirmarContrasenia"
+               name="confirmarContrasenia"
+               autocomplete="new-password"
+               required>
+    </p>
+
+    <p class="form-actions">
+        <a th:href="@{/login}">Volver al login</a>
+        <button type="submit">Guardar contraseña</button>
+    </p>
+</form>
+
+<p th:unless="${enlaceValido}" class="back-link">
+    <a th:href="@{/recuperar-contrasenia}">Solicitar otro enlace</a>
+</p>
+
+</body>
+</html>

@@ -115,3 +115,19 @@
     outline: 2px solid #2563eb;
     outline-offset: 3px;
 }
+
+
+ .recuperar-acceso {
+     margin: 20px 0 0;
+     text-align: center;
+ }
+
+ .recuperar-acceso a {
+     color: #2563eb;
+     text-decoration: none;
+     font-size: 14px;
+ }
+
+ .recuperar-acceso a:hover {
+     text-decoration: underline;
+ }

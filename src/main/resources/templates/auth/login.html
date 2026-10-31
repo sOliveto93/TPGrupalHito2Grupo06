@@ -11,6 +11,8 @@
 
     <main class="login-card">
         <h1>Iniciar sesión</h1>
+        <div th:if="${exito}" th:text="${exito}"
+             class="message success"></div>
 
         <div th:if="${param.error}" class="message error">
             Usuario o contraseña incorrectos.
@@ -33,6 +35,13 @@
 
             <button type="submit">Ingresar</button>
         </form>
+
+        <p class="recuperar-acceso">
+            <a th:href="@{/recuperar-contrasenia}">
+                Olvidé mi contraseña
+            </a>
+        </p>
+
     </main>
 
 </body>

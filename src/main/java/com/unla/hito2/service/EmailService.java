@@ -44,5 +44,21 @@ public class EmailService {
         javaMailSender.send(mensaje);
     }
 
+    public void enviarEnlaceRecuperacion(String emailDestino, String enlace) {
+        SimpleMailMessage mensaje = new SimpleMailMessage();
+
+        mensaje.setTo(emailDestino);
+        mensaje.setSubject("Recuperar contraseña - Epicentro Gourmet");
+        mensaje.setText(
+                "Recibimos una solicitud para restablecer tu contraseña.\n\n"
+                        + "Ingresá al siguiente enlace para elegir una nueva:\n"
+                        + enlace + "\n\n"
+                        + "El enlace vence en 15 minutos y puede utilizarse una sola vez.\n\n"
+                        + "Si no solicitaste este cambio, ignorá este correo. "
+                        + "Tu contraseña seguirá siendo la misma.");
+
+        javaMailSender.send(mensaje);
+    }
+
 
 }
