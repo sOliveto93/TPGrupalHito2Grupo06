@@ -303,4 +303,11 @@ public class PedidoService {
         return platosDto;
 
     }
+
+    @Transactional
+    public Pedido buscarPedidoParaTicket(Long id) {
+        return pedidoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "No se encontró el pedido con ID: " + id));
+    }
 }
