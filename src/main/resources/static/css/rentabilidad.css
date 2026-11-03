@@ -1,0 +1,334 @@
+/* =========================
+   ESTILOS GENERALES
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 35px 20px;
+    min-height: 100vh;
+    background-color: #f4f6f9;
+    color: #263445;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    max-width: 850px;
+    margin: 30px auto;
+    color: #1e293b;
+    font-size: 2rem;
+    text-align: center;
+}
+
+h2 {
+    margin: 0 0 22px;
+    color: #263f5b;
+    font-size: 1.3rem;
+}
+
+/* =========================
+   BOTÓN VOLVER
+========================= */
+
+.btn-volver {
+    display: inline-block;
+    padding: 10px 17px;
+    border-radius: 7px;
+    background-color: #64748b;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.btn-volver:hover {
+    background-color: #475569;
+}
+
+/* =========================
+   SELECTOR DE UNIDAD
+========================= */
+
+.selector-unidad {
+    max-width: 850px;
+    margin: 0 auto 25px;
+    padding: 22px;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+.selector-unidad label {
+    display: block;
+    margin-bottom: 10px;
+    color: #334155;
+    font-weight: 600;
+}
+
+.selector-unidad select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background-color: #f8fafc;
+    color: #334155;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.selector-unidad select:focus {
+    outline: none;
+    border-color: #4776a8;
+    box-shadow: 0 0 0 3px rgba(71, 118, 168, 0.15);
+}
+
+/* =========================
+   INFORMACIÓN DEL FESTIVAL
+========================= */
+
+.info-festival {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 16px;
+    padding: 15px;
+    border-left: 4px solid #4776a8;
+    border-radius: 6px;
+    background-color: #eff6ff;
+    color: #334155;
+}
+
+.info-festival[hidden] {
+    display: none;
+}
+
+.info-festival strong {
+    color: #1e40af;
+    font-size: 1rem;
+}
+
+/* =========================
+   TARJETAS DE RENTABILIDAD
+========================= */
+
+body > section {
+    max-width: 850px;
+    margin: 25px auto;
+    padding: 25px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+/* Ocultar separadores */
+hr {
+    display: none;
+}
+
+/* =========================
+   FORMULARIOS
+========================= */
+
+body > section form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+body > section form label {
+    margin-top: 5px;
+    color: #334155;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+body > section form input[type="date"] {
+    width: 100%;
+    max-width: 350px;
+    padding: 11px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background-color: #f8fafc;
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+body > section form input[type="date"]:focus {
+    outline: none;
+    border-color: #4776a8;
+    box-shadow: 0 0 0 3px rgba(71, 118, 168, 0.15);
+}
+
+/* =========================
+   BOTONES DE CÁLCULO
+========================= */
+
+body > section form button {
+    align-self: flex-start;
+    margin-top: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 7px;
+    background-color: #315f8c;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+body > section form button:hover {
+    background-color: #24496d;
+    transform: translateY(-1px);
+}
+
+body > section form button:active {
+    transform: translateY(0);
+}
+
+/* =========================
+   RESULTADOS
+========================= */
+
+body > section p {
+    margin: 22px 0 0;
+    padding: 15px;
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
+    background-color: #eff6ff;
+    color: #334155;
+}
+
+body > section p strong {
+    display: inline-block;
+    margin-left: 5px;
+    color: #166534;
+    font-size: 1.2rem;
+}
+
+/* =========================
+   ERRORES
+========================= */
+
+body > p {
+    max-width: 850px;
+    margin: 20px auto;
+    padding: 14px 17px;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    background-color: #fef2f2;
+    color: #b91c1c;
+    font-weight: 500;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    h1 {
+        margin: 25px auto;
+        font-size: 1.55rem;
+    }
+
+    body > section,
+    .selector-unidad {
+        padding: 18px;
+    }
+
+    body > section form button {
+        width: 100%;
+        align-self: stretch;
+    }
+
+    body > section form input[type="date"] {
+        max-width: 100%;
+    }
+}
+.aclaracion-costos {
+    margin-top: 15px;
+    padding: 12px 16px;
+    background-color: #fff3cd;
+    border-left: 4px solid #d69e00;
+    border-radius: 4px;
+    color: #664d03;
+    font-size: 0.9rem;
+}
+.resultado-rentabilidad {
+    max-width: 550px;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.resultado-rentabilidad h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.concepto,
+.subtotal,
+.total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.concepto strong,
+.subtotal strong,
+.total strong {
+    text-align: right;
+}
+
+.negativo strong {
+    color: #b42318;
+}
+
+.subtotal {
+    margin-top: 5px;
+    border-top: 1px solid #ccc;
+    font-weight: bold;
+}
+
+.total {
+    margin-top: 8px;
+    padding-top: 15px;
+    border-top: 2px solid #333;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.periodo-consultado {
+    margin-top: 20px;
+}
+
+.aclaracion-costos {
+    max-width: 550px;
+    margin-top: 15px;
+    padding: 12px 16px;
+    background-color: #fff3cd;
+    border-left: 4px solid #d69e00;
+    border-radius: 4px;
+    color: #664d03;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.mensaje-error {
+    color: #b42318;
+    font-weight: bold;
+}

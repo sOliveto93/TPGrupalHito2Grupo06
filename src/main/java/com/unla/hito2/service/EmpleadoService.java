@@ -27,11 +27,12 @@ public class EmpleadoService {
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
     private final HistorialUnidadVentaService historialUnidadVentaService;
+    private final LiquidacionService liquidacionService;
 
     public EmpleadoService(StaffRepository staffRepository, CajeroRepository cajeroRepository,
             CocineroRepository cocineroRepository, UserRepository userRepository,
             UsuarioRolRepository usuarioRolRepository, EmailService emailService, PasswordEncoder passwordEncoder,
-            HistorialUnidadVentaService historialUnidadVentaService) {
+            HistorialUnidadVentaService historialUnidadVentaService, LiquidacionService liquidacionService) {
         this.staffRepository = staffRepository;
         this.cajeroRepository = cajeroRepository;
         this.cocineroRepository = cocineroRepository;
@@ -40,6 +41,7 @@ public class EmpleadoService {
         this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
         this.historialUnidadVentaService = historialUnidadVentaService;
+        this.liquidacionService = liquidacionService;
     }
 
     public EmpleadoDto buscarStaffPorId(Long id) {
@@ -107,7 +109,7 @@ public class EmpleadoService {
         usuarioRol.setRol(Rol.ROLE_EMPLEADO);
 
         usuarioRolRepository.save(usuarioRol);
-
+        Staff empleado;
         if ("COCINERO".equalsIgnoreCase(dto.getTipoEmpleado())) {
             Cocinero cocinero = new Cocinero();
             cocinero.setName(dto.getName());
@@ -120,7 +122,7 @@ public class EmpleadoService {
             cocinero.setUsuario(usuario);
             cocinero.setCategoria(dto.getCategoria());
 
-            cocineroRepository.save(cocinero);
+            empleado = cocineroRepository.save(cocinero);
             historialUnidadVentaService.registrarAsignacion(cocinero, unidadDeVenta);
 
         } else if ("CAJERO".equalsIgnoreCase(dto.getTipoEmpleado())) {
@@ -135,12 +137,16 @@ public class EmpleadoService {
             cajero.setUsuario(usuario);
             cajero.setTurno(dto.getTurno());
 
-            cajeroRepository.save(cajero);
+            empleado = cajeroRepository.save(cajero);
             historialUnidadVentaService.registrarAsignacion(cajero, unidadDeVenta);
 
         } else {
             throw new Exception("El tipo de empleado especificado no es válido.");
         }
+        Festival festival = unidadDeVenta.getFestival();
+        liquidacionService.generarLiquidacion(
+                empleado.getId(),
+                festival.getId());
 
         emailService.enviarCredenciales(dto.getEmail(), passwordPlana);
     }

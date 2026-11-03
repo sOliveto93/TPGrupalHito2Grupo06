@@ -16,17 +16,20 @@ import com.unla.hito2.entity.Pedido;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-     List<Pedido> findAllByUnidadDeVenta_Id(Long id);
+  List<Pedido> findAllByUnidadDeVenta_Id(Long id);
 
-     Page<Pedido> findAllByUnidadDeVenta_Id(Long id, Pageable pageable);
+  Page<Pedido> findAllByUnidadDeVenta_Id(Long id, Pageable pageable);
 
-     @Query("""
-               SELECT COALESCE(SUM(d.subtotal), 0)
-               FROM DetallePedido d
-               WHERE d.pedido.unidadDeVenta.id = :unidadId
-                 AND d.pedido.fechaHora >= :apertura
-                 AND d.pedido.fechaHora <= :cierre
-               """)
-     BigDecimal calcularTotalCaja(@Param("unidadId") Long unidadId, @Param("apertura") LocalDateTime apertura,
-               @Param("cierre") LocalDateTime cierre);
+  @Query("""
+      SELECT COALESCE(SUM(d.subtotal), 0)
+      FROM DetallePedido d
+      WHERE d.pedido.unidadDeVenta.id = :unidadId
+        AND d.pedido.fechaHora >= :apertura
+        AND d.pedido.fechaHora <= :cierre
+      """)
+  BigDecimal calcularTotalCaja(@Param("unidadId") Long unidadId, @Param("apertura") LocalDateTime apertura,
+                                @Param("cierre") LocalDateTime cierre);
+
+  List<Pedido> findAllByUnidadDeVenta_IdAndFechaHoraBetween(Long unidadId, LocalDateTime fechaInicio,
+                                                             LocalDateTime fechaFin);
 }
