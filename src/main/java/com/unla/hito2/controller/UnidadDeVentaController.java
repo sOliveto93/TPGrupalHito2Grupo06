@@ -1,10 +1,11 @@
 package com.unla.hito2.controller;
 
-import jakarta.validation.Valid;
-
+import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.unla.hito2.service.FestivalService;
 import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.dto.RegistroUnidadDto;
+import com.unla.hito2.dto.RentabilidadDto;
 import com.unla.hito2.dto.ReporteMayoresCanonDTO;
 import com.unla.hito2.dto.UnidadDeVentaDto;
 import com.unla.hito2.service.UnidadDeVentaService;
@@ -95,6 +97,77 @@ public class UnidadDeVentaController {
             vista.addObject("lista", lista);
             vista.addObject("festival", festival);
             vista.addObject("cantidad", cantidad);
+
+        } catch (Exception e) {
+            vista.addObject("error", e.getMessage());
+        }
+
+        return vista;
+    }
+
+    @PreAuthorize("hasRole('RESPONSABLE')")
+    @GetMapping("/rentabilidad")
+    public ModelAndView mostrarFormularioRentabilidad(Authentication authentication) {
+        ModelAndView vista = new ModelAndView("unidad-venta/rentabilidad");
+
+        String username = authentication.getName();
+
+        List<UnidadDeVentaDto> unidades = unidadDeVentaService.obtenerUnidadesParaReporte(username);
+
+        vista.addObject("unidades", unidades);
+
+        return vista;
+    }
+
+    @PreAuthorize("hasRole('RESPONSABLE')")
+    @GetMapping("/rentabilidad/fechas")
+    public ModelAndView mostrarRentabilidadEntreFechas(@RequestParam Long unidadId,
+            Authentication authentication,
+            @RequestParam("fechaInicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaInicio,
+            @RequestParam("fechaFin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin) {
+        String username = authentication.getName();
+
+        ModelAndView vista = new ModelAndView("unidad-venta/rentabilidad");
+
+        List<UnidadDeVentaDto> unidades = unidadDeVentaService.obtenerUnidadesParaReporte(username);
+
+        vista.addObject("unidades", unidades);
+        vista.addObject("unidadId", unidadId);
+        vista.addObject("fechaInicio", fechaInicio);
+        vista.addObject("fechaFin", fechaFin);
+        try {
+
+            RentabilidadDto rentabilidadPeriodo = unidadDeVentaService
+                    .calcularRentabilidadNetaEntreFechas(unidadId,
+                            username, fechaInicio, fechaFin);
+
+            vista.addObject("rentabilidadPeriodo", rentabilidadPeriodo);
+
+        } catch (Exception e) {
+            vista.addObject("error", e.getMessage());
+        }
+
+        return vista;
+    }
+
+    @PreAuthorize("hasRole('RESPONSABLE')")
+    @GetMapping("/rentabilidad/calcular")
+    public ModelAndView calcularRentabilidad(
+            @RequestParam Long unidadId,
+            Authentication authentication) {
+
+        ModelAndView vista = new ModelAndView("unidad-venta/rentabilidad");
+        vista.addObject("unidadId", unidadId);
+        String username = authentication.getName();
+
+        List<UnidadDeVentaDto> unidades = unidadDeVentaService.obtenerUnidadesParaReporte(username);
+
+        vista.addObject("unidades", unidades);
+
+        try {
+            RentabilidadDto rentabilidad = unidadDeVentaService.calcularRentabilidadNeta(unidadId, username);
+
+            vista.addObject("rentabilidadNeta", rentabilidad);
 
         } catch (Exception e) {
             vista.addObject("error", e.getMessage());

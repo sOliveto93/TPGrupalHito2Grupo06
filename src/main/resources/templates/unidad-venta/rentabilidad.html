@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentabilidad de la unidad de venta</title>
+    <link rel="stylesheet" th:href="@{/css/rentabilidad.css}">
+</head>
+
+<body>
+
+    <a th:href="@{/home}" class="btn-volver">Volver al inicio</a>
+
+    <h1>Rentabilidad de la unidad de venta</h1>
+
+    <section>
+        <label for="unidadId">Unidad de venta:</label>
+
+        <section class="selector-unidad">
+            <select id="unidadId" required>
+                <option value="">Seleccione una unidad</option>
+
+                <option th:each="unidad : ${unidades}"
+                        th:value="${unidad.id}"
+                        th:selected="${unidad.id == unidadId}"
+                        th:attr="data-festival=${unidad.festival.nombre},
+                                 data-inicio=${unidad.festival.fechaInicio},
+                                 data-fin=${unidad.festival.fechaFin}"
+                        th:text="${unidad.nombreComercial + ' - ' + unidad.codigo}">
+                </option>
+            </select>
+
+            <div id="infoFestival" class="info-festival" hidden>
+                <strong id="nombreFestival"></strong>
+                <span>Período habilitado:</span>
+                <span id="fechasFestival"></span>
+            </div>
+        </section>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Rentabilidad general</h2>
+
+        <form th:action="@{/unidad-venta/rentabilidad/calcular}"
+              method="get"
+              onsubmit="return asignarUnidad(this)">
+
+            <input type="hidden" name="unidadId">
+            <button type="submit">Calcular rentabilidad total</button>
+        </form>
+
+        <div th:if="${rentabilidadNeta != null}" class="resultado-rentabilidad">
+
+            <h3>Resultado general</h3>
+
+            <div class="concepto">
+                <span>Ingresos</span>
+                <strong th:text="${rentabilidadNeta.ingresos}"></strong>
+            </div>
+
+            <div class="concepto negativo">
+                <span>- Costos de platos</span>
+                <strong th:text="${rentabilidadNeta.costosPlatos}"></strong>
+            </div>
+
+            <div class="subtotal">
+                <span>Margen</span>
+                <strong th:text="${rentabilidadNeta.margen}"></strong>
+            </div>
+
+            <div class="concepto negativo">
+                <span>- Sueldos</span>
+                <strong th:text="${rentabilidadNeta.sueldos}"></strong>
+            </div>
+
+            <div class="concepto negativo">
+                <span>- Canon</span>
+                <strong th:text="${rentabilidadNeta.canon}"></strong>
+            </div>
+
+            <div class="total">
+                <span>Rentabilidad neta</span>
+                <strong th:text="${rentabilidadNeta.rentabilidadNeta}"></strong>
+            </div>
+
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Rentabilidad entre fechas</h2>
+
+        <form th:action="@{/unidad-venta/rentabilidad/fechas}"
+              method="get"
+              onsubmit="return asignarUnidad(this)">
+
+            <input type="hidden" name="unidadId">
+
+            <label for="fechaInicio">Fecha de inicio:</label>
+            <input type="date"
+                   id="fechaInicio"
+                   name="fechaInicio"
+                   th:value="${fechaInicio}"
+                   required>
+
+            <label for="fechaFin">Fecha de fin:</label>
+            <input type="date"
+                   id="fechaFin"
+                   name="fechaFin"
+                   th:value="${fechaFin}"
+                   required>
+
+            <button type="submit">Calcular rentabilidad del período</button>
+        </form>
+
+        <div th:if="${rentabilidadPeriodo != null}">
+
+            <p class="periodo-consultado">
+                Período consultado:
+                <strong th:text="${fechaInicio}"></strong>
+                al
+                <strong th:text="${fechaFin}"></strong>
+            </p>
+
+            <div class="resultado-rentabilidad">
+
+                <h3>Resultado del período</h3>
+
+                <div class="concepto">
+                    <span>Ingresos</span>
+                    <strong th:text="${rentabilidadPeriodo.ingresos}"></strong>
+                </div>
+
+                <div class="concepto negativo">
+                    <span>- Costos de platos</span>
+                    <strong th:text="${rentabilidadPeriodo.costosPlatos}"></strong>
+                </div>
+
+                <div class="subtotal">
+                    <span>Margen</span>
+                    <strong th:text="${rentabilidadPeriodo.margen}"></strong>
+                </div>
+
+                <div class="concepto negativo">
+                    <span>- Sueldos</span>
+                    <strong th:text="${rentabilidadPeriodo.sueldos}"></strong>
+                </div>
+
+                <div class="concepto negativo">
+                    <span>- Canon</span>
+                    <strong th:text="${rentabilidadPeriodo.canon}"></strong>
+                </div>
+
+                <div class="total">
+                    <span>Rentabilidad neta</span>
+                    <strong th:text="${rentabilidadPeriodo.rentabilidadNeta}"></strong>
+                </div>
+
+            </div>
+
+            <div class="aclaracion-costos">
+                <strong>Consideración sobre los costos fijos:</strong>
+                Los sueldos del personal y el canon se consideran costos fijos
+                del festival. Por decisión del modelo de cálculo, ambos conceptos
+                se descuentan en su totalidad, independientemente del período consultado.
+            </div>
+
+        </div>
+    </section>
+
+    <p class="mensaje-error" th:if="${error != null}" th:text="${error}"></p>
+
+    <script>
+        function asignarUnidad(formulario) {
+            const unidadId = document.getElementById('unidadId').value;
+
+            if (!unidadId) {
+                alert('Seleccione una unidad de venta.');
+                return false;
+            }
+
+            formulario.querySelector('input[name="unidadId"]').value = unidadId;
+            return true;
+        }
+
+        const selectorUnidad = document.getElementById('unidadId');
+
+        function actualizarInfoFestival() {
+            const opcion = selectorUnidad.options[selectorUnidad.selectedIndex];
+            const info = document.getElementById('infoFestival');
+
+            if (!selectorUnidad.value) {
+                info.hidden = true;
+                return;
+            }
+
+            document.getElementById('nombreFestival').textContent =
+                opcion.dataset.festival;
+
+            document.getElementById('fechasFestival').textContent =
+                opcion.dataset.inicio + ' al ' + opcion.dataset.fin;
+
+            info.hidden = false;
+        }
+
+        selectorUnidad.addEventListener('change', actualizarInfoFestival);
+        actualizarInfoFestival();
+    </script>
+
+</body>
+</html>
+

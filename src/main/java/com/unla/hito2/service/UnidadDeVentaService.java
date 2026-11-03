@@ -1,19 +1,19 @@
 package com.unla.hito2.service;
 
 import com.unla.hito2.Enum.Rol;
-import com.unla.hito2.dto.FestivalDto;
 import com.unla.hito2.dto.RegistroUnidadDto;
+import com.unla.hito2.dto.RentabilidadDto;
 import com.unla.hito2.dto.ReporteMayoresCanonDTO;
 import com.unla.hito2.dto.UnidadDeVentaDto;
 import com.unla.hito2.entity.*;
 import com.unla.hito2.repository.*;
 import jakarta.transaction.Transactional;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,16 +25,22 @@ public class UnidadDeVentaService {
     private final UserRepository userRepository;
     private final UnidadDeVentaRepository unidadDeVentaRepository;
     private final FestivalRepository festivalRepository;
+    private final PedidoRepository pedidoRepository;
     private FestivalService festivalService;
     private final UsuarioRolRepository usuarioRolRepository;
     private final StaffRepository staffRepository;
     private final PasswordEncoder passwordEncoder;
     private final HistorialUnidadVentaRepository historialUnidadVentaRepository;
+    private final ContabilidadService contabilidadService;
+    private final LiquidacionRepository liquidacionRepository;
 
     public UnidadDeVentaService(UnidadDeVentaRepository unidadDeVentaRepository, UserRepository userRepository,
             FestivalRepository festivalRepository, FestivalService festivalService,
             UsuarioRolRepository usuarioRolRepository,
-            StaffRepository staffRepository, PasswordEncoder passwordEncoder,HistorialUnidadVentaRepository historialUnidadVentaRepository) {
+            StaffRepository staffRepository, PasswordEncoder passwordEncoder,
+            HistorialUnidadVentaRepository historialUnidadVentaRepository,
+            ContabilidadService contabilidadService, PedidoRepository pedidoRepository,
+            LiquidacionRepository liquidacionRepository) {
         this.unidadDeVentaRepository = unidadDeVentaRepository;
         this.userRepository = userRepository;
         this.festivalRepository = festivalRepository;
@@ -42,14 +48,17 @@ public class UnidadDeVentaService {
         this.staffRepository = staffRepository;
         this.passwordEncoder = passwordEncoder;
         this.festivalService = festivalService;
-        this.historialUnidadVentaRepository= historialUnidadVentaRepository;
+        this.historialUnidadVentaRepository = historialUnidadVentaRepository;
+        this.contabilidadService = contabilidadService;
+        this.pedidoRepository = pedidoRepository;
+        this.liquidacionRepository = liquidacionRepository;
     }
 
     @Transactional
     public UnidadDeVenta registrarUnidadConResponsable(RegistroUnidadDto dto) throws Exception {
-        System.out.println("Email recibido: " + dto.getEmail());
-        System.out.println("Password recibido: " +
-        (dto.getPassword() == null ? "NULL" : "PRESENTE"));
+        // System.out.println("Email recibido: " + dto.getEmail());
+        // System.out.println("Password recibido: " +
+        // (dto.getPassword() == null ? "NULL" : "PRESENTE"));
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new Exception("Ya existe un usuario registrado con este email");
         }
@@ -177,35 +186,36 @@ public class UnidadDeVentaService {
     }
 
     public UnidadDeVenta buscarPorId(Long id) throws Exception {
-    return unidadDeVentaRepository.findById(id)
-            .orElseThrow(() -> new Exception("No se encontró la unidad de venta"));
-}
+        return unidadDeVentaRepository.findById(id)
+                .orElseThrow(() -> new Exception("No se encontró la unidad de venta"));
+    }
+
     public UnidadDeVenta buscarPorResponsable(String identificador) throws Exception {
         return unidadDeVentaRepository.findByResponsable(identificador)
                 .orElseThrow(() -> new Exception(
                         "No se encontró una Unidad de Venta asociada al usuario: " + identificador));
     }
 
-    @Transactional 
+    @Transactional
     public UnidadDeVentaDto buscarPorEmpleado(String username) throws Exception {
-        UnidadDeVenta unidad=unidadDeVentaRepository
+        UnidadDeVenta unidad = unidadDeVentaRepository
                 .findByEmpleados_Usuario_Username(username)
                 .orElseThrow(() -> new Exception(
                         "No se encontró una unidad de venta para el empleado: " + username));
 
-                 UnidadDeVentaDto dto = new UnidadDeVentaDto();
-                dto.setId(unidad.getId());
-                dto.setNombreComercial(unidad.getNombreComercial());
-                dto.setCodigo(unidad.getCodigo());
-                dto.setSuperficie(unidad.getSuperficie());
-                dto.setCajaAbierta(unidad.isCajaAbierta());
-                dto.setResponsable(unidad.getResponsable());
-                dto.setEmpleados(unidad.getEmpleados());
-                dto.setCierresDeCaja(unidad.getCierresDeCaja());
-                dto.setPlatos(unidad.getPlatos());
-                dto.setPedidos(unidad.getPedidos());
-                dto.setFestival(festivalService.festivalToDto(unidad.getFestival()));
-                return dto;
+        UnidadDeVentaDto dto = new UnidadDeVentaDto();
+        dto.setId(unidad.getId());
+        dto.setNombreComercial(unidad.getNombreComercial());
+        dto.setCodigo(unidad.getCodigo());
+        dto.setSuperficie(unidad.getSuperficie());
+        dto.setCajaAbierta(unidad.isCajaAbierta());
+        dto.setResponsable(unidad.getResponsable());
+        dto.setEmpleados(unidad.getEmpleados());
+        dto.setCierresDeCaja(unidad.getCierresDeCaja());
+        dto.setPlatos(unidad.getPlatos());
+        dto.setPedidos(unidad.getPedidos());
+        dto.setFestival(festivalService.festivalToDto(unidad.getFestival()));
+        return dto;
     }
 
     public List<UnidadDeVentaDto> buscarPorFestival(Long id) {
@@ -234,14 +244,14 @@ public class UnidadDeVentaService {
         return dtos;
     }
 
-    private BigDecimal calcularCanon(UnidadDeVenta unidad) {
+    private BigDecimal calcularCanon(Costos costos, UnidadDeVenta unidad) {
 
         if (unidad instanceof FoodTruck foodTruck) {
             BigDecimal canon = BigDecimal.valueOf(unidad.getSuperficie())
-                    .multiply(BigDecimal.valueOf(500));
+                    .multiply(costos.getCostoPorMetroCuadrado());
 
             if (foodTruck.isRequiereElectricidad()) {
-                canon = canon.add(BigDecimal.valueOf(2000));
+                canon = canon.add(costos.getPlusElectricidad());
             }
 
             return canon;
@@ -249,10 +259,10 @@ public class UnidadDeVentaService {
 
         if (unidad instanceof PuestoDesarmable puesto) {
             BigDecimal canonSuperficie = BigDecimal.valueOf(unidad.getSuperficie())
-                    .multiply(BigDecimal.valueOf(500));
+                    .multiply(costos.getCostoPorMetroCuadrado());
 
             BigDecimal costoMontaje = BigDecimal.valueOf(puesto.getTiempoMontajeMinutos())
-                    .multiply(BigDecimal.valueOf(10));
+                    .multiply(costos.getCostoPorMinutoMontaje());
 
             return canonSuperficie.subtract(costoMontaje);
         }
@@ -266,10 +276,20 @@ public class UnidadDeVentaService {
             throw new IllegalArgumentException(
                     "La cantidad debe ser mayor que cero");
         }
+        Festival festival = festivalRepository.findById(idFestival)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "El festival no existe"));
+
+        if (festival.getFechaInicio().isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException(
+                    "No se puede generar el reporte de un festival que todavía no comenzó");
+        }
 
         List<UnidadDeVenta> unidades = unidadDeVentaRepository.findByFestivalId(idFestival);
 
         List<ReporteMayoresCanonDTO> reportes = new ArrayList<>();
+
+        Costos costos = festivalRepository.findCostosByFestivalId(festival.getId());
 
         for (UnidadDeVenta unidad : unidades) {
 
@@ -287,7 +307,7 @@ public class UnidadDeVentaService {
                         "Tipo de unidad de venta no reconocido");
             }
 
-            dto.setCanon(calcularCanon(unidad));
+            dto.setCanon(calcularCanon(costos, unidad));
 
             reportes.add(dto);
         }
@@ -309,5 +329,163 @@ public class UnidadDeVentaService {
         return reportes;
     }
 
-    
+    // toma el costo actual del plato no sirve para historico
+    // tendriamos que persistir costo en detalle_pedido para eso
+    @Transactional
+    public RentabilidadDto calcularRentabilidadNeta(Long unidadId, String username) {
+
+        UnidadDeVenta unidad = unidadDeVentaRepository.findById(unidadId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "No existe la unidad de venta"));
+
+        if (!unidad.getResponsable().getUsuario().getUsername().equals(username)) {
+            throw new IllegalArgumentException(
+                    "La unidad no pertenece a este responsable");
+        }
+        return calcularRentabilidad(unidad, username);
+
+    }
+
+    @Transactional
+    public RentabilidadDto calcularRentabilidadNetaEntreFechas(Long unidadId, String username, LocalDate fechaInicio,
+            LocalDate fechaFin) {
+        if (fechaInicio == null || fechaFin == null) {
+            throw new IllegalArgumentException("Las fechas son obligatorias");
+        }
+        if (fechaFin.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException(
+                    "La fecha de fin no puede ser posterior al día de hoy.");
+        }
+        if (fechaInicio.isAfter(fechaFin)) {
+            throw new IllegalArgumentException(
+                    "La fecha de inicio no puede ser posterior a la fecha de fin");
+        }
+
+        UnidadDeVenta unidad = unidadDeVentaRepository.findById(unidadId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "No existe la unidad de venta"));
+
+        if (!unidad.getResponsable().getUsuario().getUsername().equals(username)) {
+            throw new IllegalArgumentException(
+                    "La unidad no pertenece a este responsable");
+        }
+
+        if (fechaInicio.isBefore(unidad.getFestival().getFechaInicio())
+                || fechaFin.isAfter(unidad.getFestival().getFechaFin())) {
+            throw new IllegalArgumentException(
+                    "Las fechas deben estar dentro del período del festival");
+        }
+
+        List<Pedido> pedidos = pedidoRepository.findAllByUnidadDeVenta_IdAndFechaHoraBetween(unidad.getId(),
+                fechaInicio.atStartOfDay(), fechaFin.plusDays(1).atStartOfDay().minusNanos(1));
+
+        BigDecimal ingresos = BigDecimal.ZERO;
+
+        BigDecimal costosTotalesPlatos = BigDecimal.ZERO;
+
+        for (Pedido pedido : pedidos) {
+
+            for (DetallePedido detalle : pedido.getDetalles()) {
+
+                BigDecimal costoDetalle = detalle.getPlato().getCosto()
+                        .multiply(BigDecimal.valueOf(detalle.getCantidad()));
+
+                costosTotalesPlatos = costosTotalesPlatos.add(costoDetalle);
+                ingresos = ingresos.add(detalle.getSubtotal());
+            }
+        }
+
+        BigDecimal canon = calcularCanon(festivalRepository.findCostosByFestivalId(unidad.getFestival().getId()),
+                unidad);
+
+        BigDecimal sueldos = calcularSueldos(unidad);
+
+        BigDecimal margen = ingresos.subtract(costosTotalesPlatos);
+        BigDecimal rentabilidadNeta = margen.subtract(sueldos).subtract(canon);
+
+        RentabilidadDto dto = new RentabilidadDto();
+        dto.setIngresos(ingresos);
+        dto.setCostosPlatos(costosTotalesPlatos);
+        dto.setMargen(margen);
+        dto.setSueldos(sueldos);
+        dto.setCanon(canon);
+        dto.setRentabilidadNeta(rentabilidadNeta);
+
+        return dto;
+
+    }
+
+    private RentabilidadDto calcularRentabilidad(UnidadDeVenta unidad, String username) {
+
+        BigDecimal ingresos = BigDecimal.ZERO;
+        BigDecimal costosTotalesPlatos = BigDecimal.ZERO;
+
+        for (Pedido pedido : unidad.getPedidos()) {
+            for (DetallePedido detalle : pedido.getDetalles()) {
+
+                BigDecimal costoDetalle = detalle.getPlato().getCosto()
+                        .multiply(BigDecimal.valueOf(detalle.getCantidad()));
+
+                costosTotalesPlatos = costosTotalesPlatos.add(costoDetalle);
+                ingresos = ingresos.add(detalle.getSubtotal());
+            }
+        }
+
+        BigDecimal canon = calcularCanon(
+                festivalRepository.findCostosByFestivalId(unidad.getFestival().getId()),
+                unidad);
+
+        BigDecimal sueldos = calcularSueldos(unidad);
+
+        BigDecimal margen = ingresos.subtract(costosTotalesPlatos);
+        BigDecimal rentabilidadNeta = margen.subtract(sueldos).subtract(canon);
+
+        RentabilidadDto dto = new RentabilidadDto();
+        dto.setIngresos(ingresos);
+        dto.setCostosPlatos(costosTotalesPlatos);
+        dto.setMargen(margen);
+        dto.setSueldos(sueldos);
+        dto.setCanon(canon);
+        dto.setRentabilidadNeta(rentabilidadNeta);
+
+        return dto;
+    }
+
+    @Transactional
+    public List<UnidadDeVentaDto> obtenerUnidadesParaReporte(String username) {
+        LocalDate hoy = LocalDate.now();
+        List<UnidadDeVenta> unidades = unidadDeVentaRepository.findAllByResponsableUsuarioUsername(username);
+
+        List<UnidadDeVentaDto> resultado = new ArrayList<>();
+
+        for (UnidadDeVenta unidad : unidades) {
+            if (unidad.getFestival().getFechaInicio().isAfter(hoy)) {
+                continue;
+            }
+            UnidadDeVentaDto dto = new UnidadDeVentaDto();
+            dto.setId(unidad.getId());
+            dto.setNombreComercial(unidad.getNombreComercial());
+            dto.setCodigo(unidad.getCodigo());
+            dto.setFestival(festivalService.festivalToDto(unidad.getFestival()));
+
+            resultado.add(dto);
+        }
+
+        return resultado;
+    }
+
+    private BigDecimal calcularSueldos(UnidadDeVenta unidad) {
+
+        List<LiquidacionHaberes> liquidaciones = liquidacionRepository.buscarLiquidacionesHistoricasPorUnidad(
+                unidad.getId(),
+                unidad.getFestival().getId());
+
+        BigDecimal sueldos = BigDecimal.ZERO;
+
+        for (LiquidacionHaberes liquidacion : liquidaciones) {
+            sueldos = sueldos.add(liquidacion.getTotal());
+        }
+
+        return sueldos;
+    }
 }

@@ -2,13 +2,11 @@ package com.unla.hito2.service;
 
 import com.unla.hito2.dto.AltaPlatoDto;
 import com.unla.hito2.dto.PlatoEstrellaDto;
-import com.unla.hito2.dto.pedido.PlatoPedidoDto;
 import com.unla.hito2.entity.Plato;
 import com.unla.hito2.entity.UnidadDeVenta;
 import com.unla.hito2.repository.PlatoRepository;
 import jakarta.transaction.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Service;

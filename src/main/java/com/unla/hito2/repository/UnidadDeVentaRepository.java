@@ -19,7 +19,7 @@ public interface UnidadDeVentaRepository extends JpaRepository<UnidadDeVenta, Lo
   Optional<UnidadDeVenta> findByResponsable(@Param("identificador") String identificador);
 
   Optional<UnidadDeVenta> findByResponsableUsuarioEmail(String email);
-
+  List<UnidadDeVenta> findAllByResponsableUsuarioUsername(String username);
   @Query("SELECT u FROM UnidadDeVenta u WHERE u.festival.id = :id")
   List<UnidadDeVenta> findByFestivalId(@Param("id") Long id);
 
@@ -39,5 +39,5 @@ public interface UnidadDeVentaRepository extends JpaRepository<UnidadDeVenta, Lo
   List<UnidadDeVenta> findUnidadesActivasPorResponsable(@Param("username") String username,
       @Param("hoy") LocalDate hoy);
 
-
+ 
 }
