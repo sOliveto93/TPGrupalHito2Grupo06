@@ -36,6 +36,10 @@ public class SecurityConfiguration {
 				.cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
 					auth.requestMatchers("/css/**", "/imgs/**", "/js/**", "/","/403", "/login","/unidad-venta/registro-unidad","/unidad-venta/guardar").permitAll();
+					auth.requestMatchers(
+							"/recuperar-contrasenia",
+							"/recuperar-contrasenia/**"
+					).permitAll();
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(form -> form
