@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <link rel="stylesheet" th:href="@{/css/cuenta.css}">
@@ -7,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi cuenta</title>
 </head>
+
 <body>
 
 <div class="page-heading">
@@ -56,19 +58,19 @@
         <p>
             Fecha de nacimiento:
             <span th:text="${usuario.staff.fechaNac != null
-                ? #temporals.format(usuario.staff.fechaNac, 'dd/MM/yyyy')
-                : 'Pendiente'}"></span>
+                    ? #temporals.format(usuario.staff.fechaNac, 'dd/MM/yyyy')
+                    : 'Pendiente'}"></span>
         </p>
 
         <p>
             Fecha de ingreso:
             <span th:text="${usuario.staff.fechaIngreso != null
-                ? #temporals.format(usuario.staff.fechaIngreso, 'dd/MM/yyyy')
-                : 'Pendiente'}"></span>
+                    ? #temporals.format(usuario.staff.fechaIngreso, 'dd/MM/yyyy')
+                    : 'Pendiente'}"></span>
         </p>
     </div>
 
-    <p>
+    <p style="margin-top: 16px;">
         <a class="btn" th:href="@{/cuenta/editar}">Editar datos personales</a>
     </p>
 </section>
@@ -80,12 +82,11 @@
     </a>
 </section>
 
-<p>
 <p class="back-link">
     <a th:href="@{/home}">Volver a mi panel</a>
 </p>
-</p>
 
-    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
+<th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
+
 </html>

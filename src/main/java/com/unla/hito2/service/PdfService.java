@@ -12,7 +12,9 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.unla.hito2.entity.Cajero;
 import com.unla.hito2.entity.Cocinero;
+import com.unla.hito2.entity.DetallePedido;
 import com.unla.hito2.entity.LiquidacionHaberes;
+import com.unla.hito2.entity.Pedido;
 import com.unla.hito2.entity.Staff;
 
 import org.hibernate.Hibernate;
@@ -126,4 +128,71 @@ public class PdfService {
         cell.setPadding(5);
         table.addCell(cell);
     }
+
+    public ByteArrayInputStream generarTicket(Pedido pedido) {
+        Document document = new Document();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        try {
+            PdfWriter.getInstance(document, out);
+            document.open();
+
+            Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
+            Font infoFont = FontFactory.getFont(FontFactory.HELVETICA, 11);
+            Font boldFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11);
+
+            Paragraph title = new Paragraph("COMPROBANTE DE PEDIDO", titleFont);
+            title.setAlignment(Element.ALIGN_CENTER);
+            title.setSpacingAfter(20);
+            document.add(title);
+
+            document.add(new Paragraph("Pedido N°: " + pedido.getId(), infoFont));
+            document.add(new Paragraph("Fecha: " + pedido.getFechaHora(), infoFont));
+
+            document.add(new Paragraph(
+                    "Unidad de venta: " + pedido.getUnidadDeVenta().getNombreComercial(),
+                    infoFont));
+
+            document.add(new Paragraph(
+                    "Código: " + pedido.getUnidadDeVenta().getCodigo(),
+                    infoFont));
+
+            PdfPTable table = new PdfPTable(4);
+            table.setWidthPercentage(100);
+            table.setSpacingBefore(15);
+            table.setSpacingAfter(15);
+
+            addCell(table, "Plato", boldFont);
+            addCell(table, "Cantidad", boldFont);
+            addCell(table, "Precio unitario", boldFont);
+            addCell(table, "Subtotal", boldFont);
+
+            java.math.BigDecimal total = java.math.BigDecimal.ZERO;
+
+            for (DetallePedido detalle : pedido.getDetalles()) {
+                addCell(table, detalle.getPlato().getNombre(), infoFont);
+                addCell(table, String.valueOf(detalle.getCantidad()), infoFont);
+                addCell(table, "$ " + detalle.getPrecioUnitario(), infoFont);
+                addCell(table, "$ " + detalle.getSubtotal(), infoFont);
+
+                total = total.add(detalle.getSubtotal());
+            }
+
+            document.add(table);
+
+            Paragraph totalParagraph = new Paragraph(
+                    "TOTAL: $ " + total,
+                    boldFont);
+            totalParagraph.setAlignment(Element.ALIGN_RIGHT);
+            document.add(totalParagraph);
+
+            document.close();
+
+        } catch (DocumentException e) {
+            throw new RuntimeException("Error al generar el ticket del pedido", e);
+        }
+
+        return new ByteArrayInputStream(out.toByteArray());
+    }
+    
 }

@@ -23,28 +23,35 @@
     </p>
 
     <nav class="paginacion" th:if="${totalPaginas > 1}">
-    <a th:if="${paginaActual > 0}"
-       th:href="@{/pedido/getPedidos-unidad-venta(id=${idUnidadVenta}, pagina=${paginaActual - 1})}">
-        Anterior
-    </a>
+        <a th:if="${paginaActual > 0}"
+            th:href="@{/pedido/getPedidos-unidad-venta(id=${idUnidadVenta}, pagina=${paginaActual - 1})}">
+            Anterior
+        </a>
 
-    <span>
-        Página <strong th:text="${paginaActual + 1}"></strong>
-        de <strong th:text="${totalPaginas}"></strong>
-    </span>
+        <span>
+            Página <strong th:text="${paginaActual + 1}"></strong>
+            de <strong th:text="${totalPaginas}"></strong>
+        </span>
 
-    <a th:if="${paginaActual + 1 < totalPaginas}"
-       th:href="@{/pedido/getPedidos-unidad-venta(id=${idUnidadVenta}, pagina=${paginaActual + 1})}">
-        Siguiente
-    </a>
-</nav>
+        <a th:if="${paginaActual + 1 < totalPaginas}"
+            th:href="@{/pedido/getPedidos-unidad-venta(id=${idUnidadVenta}, pagina=${paginaActual + 1})}">
+            Siguiente
+        </a>
+    </nav>
     <section th:each="pedido : ${listaPedidos}">
         <hr>
 
-        <h2>
-            Pedido #
-            <span th:text="${pedido.id}">1</span>
-        </h2>
+        <div class="pedido-encabezado">
+            <h2>
+                Pedido #
+                <span th:text="${pedido.id}">1</span>
+            </h2>
+
+            <a th:href="@{/pedido/{id}/ticket(id=${pedido.id})}" class="btn-ticket" title="Descargar ticket"
+                aria-label="Descargar ticket del pedido">
+                🖨️
+            </a>
+        </div>
 
         <p>
             Fecha:
