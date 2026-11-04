@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empleados de la unidad - Epicentro Gourmet</title>
     <link rel="stylesheet" th:href="@{/css/empleado-lista.css}">
+    <link rel="stylesheet" th:href="@{/css/filtros.css}">
 </head>
 
 <body>
@@ -50,9 +51,57 @@
                 </a>
             </div>
 
+            <form th:action="@{/empleado/filtro}" method="get" class="filters">
+                <input type="hidden" name="idUnidad" th:value="${unidad.id}">
+
+                <div class="filter-field">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre"
+                           th:value="${filtroNombre}"
+                           placeholder="Buscar por nombre">
+                </div>
+
+                <div class="filter-field">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="apellido"
+                           th:value="${filtroApellido}"
+                           placeholder="Buscar por apellido">
+                </div>
+
+                <div class="filter-field">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni"
+                           th:value="${filtroDni}"
+                           placeholder="Buscar por DNI">
+                </div>
+
+                <div class="filter-actions">
+                    <button type="submit" class="btn btn-primary">Filtrar activos</button>
+
+                    <a th:href="@{/empleado/filtro(idUnidad=${unidad.id})}"
+                       class="btn btn-back">
+                        Limpiar
+                    </a>
+                </div>
+            </form>
+
+            <p th:if="${busquedaActiva == true}">
+                Resultados de empleados activos.
+                <a th:href="@{/empleado/lista(idUnidad=${unidad.id})}">
+                    Ver todos, incluidos los inactivos
+                </a>
+            </p>
+
             <div th:if="${#lists.isEmpty(empleados)}" class="empty-state">
-                <h3>No hay empleados registrados</h3>
-                <p>Esta unidad todavía no tiene empleados asignados.</p>
+                <h3 th:text="${busquedaActiva == true
+                    ? 'No se encontraron empleados activos'
+                    : 'No hay empleados registrados'}">
+                </h3>
+
+                <p th:text="${busquedaActiva == true
+                    ? 'No hay empleados activos que coincidan con los filtros.'
+                    : 'Esta unidad todavía no tiene empleados asignados.'}">
+                </p>
             </div>
 
             <div th:unless="${#lists.isEmpty(empleados)}" class="table-container">
