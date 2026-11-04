@@ -72,7 +72,7 @@ body {
 
 .page-heading h1 {
     margin: 0 0 8px;
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: clamp(1.8rem, 4vw, 2.4rem);
     line-height: 1.2;
     letter-spacing: -0.7px;
@@ -118,7 +118,7 @@ body {
     display: inline-block;
     padding: 6px 12px;
     background: #eff6ff;
-    color: var(--primary);
+    color: var(--text-primary);
     border: 1px solid #dbeafe;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -151,7 +151,7 @@ body {
 }
 
 .dato-unidad strong {
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: 1.65rem;
     font-weight: 750;
 }
@@ -195,7 +195,7 @@ body {
 
 .accion-card h4 {
     margin: 0 0 10px;
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: 1.12rem;
     font-weight: 700;
 }
@@ -268,7 +268,7 @@ body {
 
 .footer {
     padding: 22px 20px;
-    background: #ffffff;
+    background: var(--bg-card);
     border-top: 1px solid var(--border);
     color: var(--text-muted);
     font-size: 0.88rem;

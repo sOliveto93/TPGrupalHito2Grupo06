@@ -2,7 +2,7 @@
 :root {
     --primary: #1e3a5f;
     --primary-dark: #152b46;
-    --background: #f4f6f9;
+    --background: var(--bg-main);
     --surface: #ffffff;
     --text: #263238;
     --muted: #64748b;
@@ -67,7 +67,7 @@ body {
 }
 
 .section-label {
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: 11px;
     font-weight: bold;
     letter-spacing: 1.5px;
@@ -103,7 +103,7 @@ body {
 
 .total-empleados strong {
     margin-top: 5px;
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: 30px;
 }
 
@@ -162,12 +162,12 @@ body {
 }
 
 .btn-back {
-    background-color: #475569;
+    background-color: var(--text-secondary);
     color: white;
 }
 
 .btn-back:hover {
-    background-color: #334155;
+    background-color: var(--text-secondary);
 }
 
 .table-container {
@@ -207,7 +207,7 @@ tbody tr:last-child td {
 }
 
 tbody tr:hover {
-    background: #f8fafc;
+    background: var(--surface-alt);
 }
 
 .tipo-badge {
@@ -221,20 +221,27 @@ tbody tr:hover {
 }
 
 .empty-state {
-    padding: 42px 20px;
-    background: var(--surface);
-    border: 1px dashed #cbd5e1;
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 48px 24px;
+    background: var(--bg-card);
+    border: 1.5px dashed var(--border-color);
+    border-radius: 14px;
+    color: var(--text-secondary);
     text-align: center;
 }
 
 .empty-state h3 {
-    margin: 0 0 10px;
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--text-primary);
 }
 
 .empty-state p {
     margin: 0;
-    color: var(--muted);
+    color: var(--text-secondary);
 }
 
 .footer-actions {
@@ -270,3 +277,6 @@ tbody tr:hover {
         padding: 20px;
     }
 }
+
+/* thead navy de marca: encabezado siempre en blanco */
+thead th { color: #ffffff !important; }

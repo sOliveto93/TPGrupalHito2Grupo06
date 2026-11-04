@@ -3,6 +3,7 @@
     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unidades con Mayor Canon</title>
@@ -84,6 +85,7 @@
         </main>
 
     </div>
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 
 </html>

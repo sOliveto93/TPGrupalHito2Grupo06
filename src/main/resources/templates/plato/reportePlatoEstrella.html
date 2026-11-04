@@ -3,6 +3,7 @@
 
 
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <meta charset="UTF-8">
     <title>Reporte de platos estrella</title>
     <link rel="stylesheet" th:href="@{/css/platoEstrella.css}">
@@ -44,6 +45,7 @@
 
 
     </main>
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 
 </html>

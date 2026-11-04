@@ -6,8 +6,8 @@ body {
     margin: 0;
     padding: 40px 20px;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f4f6f9;
-    color: #263238;
+    background: #f8fafc;
+    color: #0f172a;
     line-height: 1.5;
 }
 
@@ -15,19 +15,24 @@ body {
     max-width: 760px;
     margin: 0 auto 24px;
     padding: 26px 24px;
-    background: #263b50;
+    background: var(--bg-header);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     text-align: center;
-    color: white;
+    color: var(--text-primary);
 }
 
-.page-heading h1 {
+.page-heading h1,
+.page-heading h2,
+.page-heading h3 {
     margin: 0 0 8px;
+    color: var(--text-primary);
 }
 
-.page-heading p {
+.page-heading p,
+.page-heading span {
     margin: 0;
-    color: #e2e8f0;
+    color: var(--text-secondary);
 }
 
 section,
@@ -35,21 +40,22 @@ form {
     max-width: 760px;
     margin: 0 auto 20px;
     padding: 26px;
-    background: white;
-    border: 1px solid #e1e7ed;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     box-shadow: 0 5px 20px rgba(25, 42, 62, 0.07);
 }
 
 h2 {
     margin: 0 0 18px;
-    color: #263b50;
+    color: #0f172a;
     font-size: 20px;
 }
 
 label {
     display: block;
     margin-bottom: 7px;
+    color: #0f172a;
     font-weight: 600;
 }
 
@@ -86,7 +92,7 @@ button:hover,
 }
 
 a {
-    color: #2878b5;
+    color: #1d4ed8;
 }
 
 .form-actions {
@@ -96,7 +102,7 @@ a {
     gap: 16px;
     margin-top: 28px;
     padding-top: 20px;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid var(--border-color);
 }
 
 .back-link {
@@ -143,4 +149,76 @@ form .alert {
         flex-direction: column;
         align-items: stretch;
     }
+}
+
+/* ============================================================
+   MODO CLARO — etiquetas y valores forzados a #0f172a
+   (la tarjeta es blanca #ffffff; nunca hereda texto claro)
+   ============================================================ */
+html:not(.dark):not([data-theme="dark"]):not([data-bs-theme="dark"])
+:is(section, form, .card, .card-body) :is(label, p:not([class]), span:not([class]), strong:not([class]), h1, h2, h3) {
+    color: #0f172a !important;
+}
+
+/* ============================================================
+   MODO OSCURO (clase .dark o atributo data-theme / data-bs-theme)
+   La vista de cuenta carga SOLO esta hoja: los paneles <section>
+   y <form> son sus "tarjetas" y deben verse #1e293b con texto claro.
+   ============================================================ */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) :is(section, form, .card, .card-body) {
+    background: #1e293b !important;
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+    color: #f8fafc !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"])
+:is(section, form, .card, .card-body) :is(label, p:not([class]), span:not([class]), strong:not([class]), h1, h2, h3) {
+    color: #f8fafc !important;
+}
+
+/* Enlaces de la cuenta -> azul claro legible sobre oscuro */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) a {
+    color: #93c5fd !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) a:hover {
+    color: #bfdbfe !important;
+}
+
+/* Línea superior de las acciones del formulario -> borde oscuro */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .form-actions {
+    border-top-color: #334155 !important;
+}
+
+/* Botones de la cuenta -> azul medio legible en oscuro */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) button,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .btn {
+    background: #1d5f91 !important;
+    color: #ffffff !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) button:hover,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .btn:hover {
+    background: #2878b5 !important;
+}
+
+/* Panel de error inline con style="color: red" -> rojo legible en oscuro */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) [style*="color: red"],
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) [style*="color:red"] {
+    color: #fca5a5 !important;
+}
+
+/* Indicación de error por campo (span.error) */
+.error {
+    display: block;
+    margin-top: 5px;
+    color: #b91c1c;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .error {
+    color: #fca5a5;
 }

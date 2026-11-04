@@ -1,7 +1,7 @@
 :root {
     --primary: #1e3a5f;
     --primary-dark: #152b46;
-    --background: #f4f6f9;
+    --background: var(--bg-main);
     --surface: #ffffff;
     --text: #263238;
     --muted: #64748b;
@@ -84,7 +84,7 @@ body {
 
 .eyebrow,
 .unit-label {
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: 0.76rem;
     font-weight: 800;
     letter-spacing: 1.4px;
@@ -153,12 +153,20 @@ body {
 .action-icon {
     display: grid;
     place-items: center;
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 10px;
-    background: #e8eef5;
-    color: var(--primary);
-    font-size: 1.5rem;
+    background: #eff6ff;             /* azul suave en modo claro */
+    border: 1px solid #dbeafe;
+    color: #1e293b;                  /* ícono oscuro en modo claro */
+    font-size: 1.4rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.action-card:hover .action-icon {
+    background: #dbeafe;
+    border-color: #93c5fd;
+    color: #1d4ed8;
 }
 
 .action-title {
@@ -195,8 +203,65 @@ body {
     gap: 8px;
     padding: 16px 20px;
     border-radius: 10px;
-    background: #e8eef5;
-    color: var(--primary-dark);
+    background: var(--surface-alt);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Sub-panel "Estado de caja" dentro de la tarjeta de unidad
+   (sin fondo secundario: la tarjeta mantiene un único fondo parejo) */
+.unit-caja {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 220px;
+    padding: 8px 4px;
+    background: transparent;
+    border: none;
+}
+
+.unit-caja > span:first-child,
+.unit-caja > strong {
+    color: var(--text-primary);
+}
+
+.unit-caja form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+}
+
+.unit-caja label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.unit-caja input {
+    border-color: #cbd5e1;               /* delimitación clara en modo claro */
+}
+
+.unit-caja .btn {
+    align-self: flex-start;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: #ffffff;
+    font-weight: 650;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.unit-caja .btn:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    color: #ffffff;
+}
+
+.unit-caja .btn:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
 }
 
 .unit-surface span {
@@ -228,7 +293,7 @@ body {
     padding: 6px 10px;
     border-radius: 20px;
     background: #e8eef5;
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: 0.8rem;
     font-weight: 700;
 }
@@ -267,12 +332,12 @@ body {
 
 .status-finished {
     background: #e5e7eb;
-    color: #475569;
+    color: var(--text-secondary);
 }
 
 .status-upcoming {
     background: #e8eef5;
-    color: var(--primary);
+    color: var(--text-primary);
 }
 
 .empty-state,
@@ -280,7 +345,7 @@ body {
     padding: 18px;
     border: 1px solid var(--border);
     border-radius: 10px;
-    background: white;
+    background: var(--bg-card);
     color: var(--muted);
 }
 
@@ -311,4 +376,48 @@ body {
     .unit-surface {
         align-items: flex-start;
     }
+}
+
+/* ============================================================
+   Modo oscuro — íconos y "Estado de caja"
+   ============================================================ */
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .action-icon {
+    background: #334155 !important;          /* contenedor pizarra en oscuro */
+    border-color: #475569 !important;
+    color: #ffffff !important;               /* glyph blanco: máximo contraste */
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .action-card:hover .action-icon {
+    background: #3b82f6 !important;
+    border-color: #60a5fa !important;
+    color: #ffffff !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-caja label {
+    color: #f8fafc !important;               /* "Total declarado al cierre" legible */
+}
+
+/* El input de total (texto/número) en oscuro: delimitado y legible */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-caja input {
+    background: #0f172a !important;
+    background-color: #0f172a !important;
+    border: 1px solid #334155 !important;
+    color: #f8fafc !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-caja .btn {
+    background: #2563eb;
+    border-color: #3b82f6;
+    color: #ffffff;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-caja .btn:hover {
+    background: #1d4ed8;
+    border-color: #60a5fa;
+    color: #ffffff;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-caja > strong {
+    color: #f8fafc !important;
 }

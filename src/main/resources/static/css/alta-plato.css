@@ -6,8 +6,8 @@ body {
     margin: 0;
     min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    color: #263238;
-    background-color: #f4f6f8;
+    color: var(--text-primary);
+    background-color: var(--bg-main);
 }
 
 /* Encabezado */
@@ -15,31 +15,44 @@ body {
 .page-heading {
     position: relative;
     padding: 28px 5%;
-    background-color: #263746;
-    color: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    background-color: var(--bg-header);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 1px 6px rgba(15, 23, 42, 0.06);
 }
 
 .page-heading h1 {
     margin: 12px 0 8px;
     font-size: 2rem;
+    color: var(--text-primary);
 }
 
 .page-heading p {
     margin: 0;
-    color: #d8e1e8;
+    color: var(--text-secondary);
     line-height: 1.5;
 }
 
 .btn-volver {
-    display: inline-block;
-    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    padding: 8px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-card);
+    color: var(--text-primary);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .btn-volver:hover {
-    text-decoration: underline;
+    background: var(--surface-alt);
+    border-color: var(--accent);
+    text-decoration: none;
 }
 
 /* Distribución principal */
@@ -59,8 +72,8 @@ body {
 .inventario-platos {
     min-width: 0;
     padding: 26px;
-    background-color: #ffffff;
-    border: 1px solid #e0e5e9;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     box-shadow: 0 4px 14px rgba(30, 45, 60, 0.06);
 }
@@ -71,7 +84,7 @@ body {
     padding-bottom: 14px;
     border-bottom: 1px solid #e8ecef;
     font-size: 1.35rem;
-    color: #263746;
+    color: var(--text-primary);
 }
 
 /* Formulario */
@@ -93,8 +106,8 @@ body {
     padding: 12px 13px;
     border: 1px solid #cbd3da;
     border-radius: 7px;
-    background-color: #ffffff;
-    color: #263238;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
     font: inherit;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -187,7 +200,7 @@ body {
 }
 
 .tabla-contenedor thead {
-    background-color: #edf2f6;
+    background-color: var(--surface-alt);
 }
 
 .tabla-contenedor th {

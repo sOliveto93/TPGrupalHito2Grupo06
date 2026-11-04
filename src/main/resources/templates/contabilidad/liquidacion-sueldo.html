@@ -4,6 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liquidaciones de haberes</title>
@@ -13,7 +14,7 @@
 <body>
 <div class="container">
 
-    <header class="header">
+    <header class="page-header">
         <div>
             <h1>Liquidaciones de haberes</h1>
             <p class="subtitle">
@@ -120,8 +121,8 @@
                         </a>
                         <form sec:authorize="hasRole('EMPLEADO')"
                               th:action="@{/liquidacion/{id}/enviar-mail(id=${liq.id})}"
-                              method="post" style="margin-top: 6px;">
-                            <button type="submit" class="btn btn-back" style="padding: 6px 10px; font-size: 12px;">
+                              method="post" class="accion-form">
+                            <button type="submit" class="accion-btn">
                                 Enviar por mail
                             </button>
                         </form>
@@ -133,5 +134,6 @@
     </main>
 
 </div>
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+    Fragmentos reutilizables del modo oscuro .
+    como usar en cada template:
+    En el <head> DESPUÉS de la apertura de la etiqueta:
+        <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
+    ANTES de </body>:
+        <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- ============ Fragment "head": anti-flicker + stylesheet ============ -->
+<th:block th:fragment="head">
+    <meta name="color-scheme" content="light dark">
+    <!-- Anti-flicker: lee localStorage ANTES del primer paint.
+         Aplica data-theme="dark" únicamente si el usuario lo había
+         activado antes.. en cualquier otro caso no setea nada
+         la vista se muestra en modo claro x default -->
+    <script>
+        (function () {
+            try {
+                var t = window.localStorage.getItem('theme');
+                if (t === 'dark') {
+                    var el = document.documentElement;
+                    el.setAttribute('data-theme', 'dark');
+                    el.setAttribute('data-bs-theme', 'dark');
+                }
+            } catch (e) {
+                /* modo claro x default */
+            }
+        })();
+    </script>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</th:block>
+
+<!-- ============ Fragment "toggle": botón flotante + script ============ -->
+<th:block th:fragment="toggle">
+    <!-- Botón de alternancia ☀️ / 🌙, fijo en la esquina inferior IZQUIERDA
+         (position: fixed; bottom: 20px; left: 20px; z-index: 1000) -->
+    <button id="themeToggle"
+            class="theme-toggle"
+            type="button"
+            aria-label="Cambiar a modo oscuro"
+            aria-pressed="false"
+            title="Cambiar a modo oscuro">
+        <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+    </button>
+    <script th:src="@{/js/darkmode.js}"></script>
+</th:block>
+
+</body>
+</html>
