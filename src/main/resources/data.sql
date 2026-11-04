@@ -44,12 +44,12 @@ VALUES  (1, 450.00,  8.00,  4000.00,  80000.00, 120000.00, 1500.00, 40000.00,  9
 -- 2. CARGA DE FESTIVALES
 -- =====================================================
 INSERT INTO `festival` (`id`, `nombre`, `temporada`, `fecha_inicio`, `fecha_fin`, `costos_id`)
-VALUES  (1, 'Festival Gourmet Primavera', 'PRIMAVERA', '2026-08-01', '2026-09-10', 1),
-        (2, 'Beer & Food Fest Verano',   'VERANO',    '2026-10-15', '2026-11-15', 2),
-        (3, 'Sabores de Otoño',          'OTONIO',    '2026-11-20', '2026-12-15', 3),
-        (4, 'Festival del Invierno',     'INVIERNO',  '2027-05-10', '2027-06-30', 4),
+VALUES  (1, 'Festival Gourmet ', 'INVIERNO', '2026-08-01', '2026-09-10', 1),
+        (2, 'Beer & Food Fest',   'PRIMAVERA',    '2026-10-15', '2026-11-15', 2),
+        (3, 'Sabores de Primavera',          'PRIMAVERA',    '2026-11-20', '2026-12-15', 3),
+        (4, 'Festival del OTONIO',     'OTONIO',  '2027-05-10', '2027-06-30', 4),
         (5, 'Buenos Aires Street Food',  'VERANO',    '2027-01-10', '2027-02-10', 5),
-        (6, 'Sabores Fest',              'VERANO',    '2027-03-01', '2027-04-01', 6);
+        (6, 'Sabores Fest',              'OTONIO',    '2027-03-01', '2027-04-01', 6);
 -- =====================================================
 -- 3. CARGA DE USUARIOS (Admin, Responsables y Empleados)
 -- Nota: Las contraseñas representan credenciales encriptadas o temporales.

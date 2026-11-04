@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <link rel="stylesheet" th:href="@{/css/cuenta.css}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,9 @@
 <div class="page-heading">
     <h1>Mi cuenta</h1>
 </div>
+
+<p th:if="${exito}" class="alert alert-success" th:text="${exito}"></p>
+<p th:if="${error}" class="alert alert-error" th:text="${error}"></p>
 
 <section>
     <h2>Datos de acceso</h2>
@@ -26,36 +30,46 @@
     </p>
 </section>
 
-<section th:if="${usuario.staff != null}">
+<section th:if="${!#authorization.expression('hasRole(''ADMINISTRADOR'')')}">
     <h2>Datos personales</h2>
 
-    <p>
-        Nombre:
-        <span th:text="${usuario.staff.name ?: 'Pendiente'}"></span>
+    <p th:if="${usuario.staff == null}">
+        Aún no completaste tus datos personales.
     </p>
 
-    <p>
-        Apellido:
-        <span th:text="${usuario.staff.apellido ?: 'Pendiente'}"></span>
-    </p>
+    <div th:if="${usuario.staff != null}">
+        <p>
+            Nombre:
+            <span th:text="${usuario.staff.name ?: 'Pendiente'}"></span>
+        </p>
+
+        <p>
+            Apellido:
+            <span th:text="${usuario.staff.apellido ?: 'Pendiente'}"></span>
+        </p>
+
+        <p>
+            DNI:
+            <span th:text="${usuario.staff.dni ?: 'Pendiente'}"></span>
+        </p>
+
+        <p>
+            Fecha de nacimiento:
+            <span th:text="${usuario.staff.fechaNac != null
+                ? #temporals.format(usuario.staff.fechaNac, 'dd/MM/yyyy')
+                : 'Pendiente'}"></span>
+        </p>
+
+        <p>
+            Fecha de ingreso:
+            <span th:text="${usuario.staff.fechaIngreso != null
+                ? #temporals.format(usuario.staff.fechaIngreso, 'dd/MM/yyyy')
+                : 'Pendiente'}"></span>
+        </p>
+    </div>
 
     <p>
-        DNI:
-        <span th:text="${usuario.staff.dni ?: 'Pendiente'}"></span>
-    </p>
-
-    <p>
-        Fecha de nacimiento:
-        <span th:text="${usuario.staff.fechaNac != null
-            ? #temporals.format(usuario.staff.fechaNac, 'dd/MM/yyyy')
-            : 'Pendiente'}"></span>
-    </p>
-
-    <p>
-        Fecha de ingreso:
-        <span th:text="${usuario.staff.fechaIngreso != null
-            ? #temporals.format(usuario.staff.fechaIngreso, 'dd/MM/yyyy')
-            : 'Pendiente'}"></span>
+        <a class="btn" th:href="@{/cuenta/editar}">Editar datos personales</a>
     </p>
 </section>
 
@@ -72,5 +86,6 @@
 </p>
 </p>
 
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 </html>

@@ -17,4 +17,11 @@ public interface UserRepository extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    /**
+     * Indica si ya existe otra persona registrándose con el DNI indicado,
+     * excluyendo al usuario con el id recibido.
+     */
+    @Query("SELECT COUNT(s) > 0 FROM Staff s WHERE s.dni = :dni AND s.usuario.id <> :id")
+    boolean existsByDniAndIdNot(@Param("dni") String dni, @Param("id") Long id);
 }

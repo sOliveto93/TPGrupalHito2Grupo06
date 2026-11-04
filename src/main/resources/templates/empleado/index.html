@@ -2,6 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Epicentro Gourmet | Inicio</title>
@@ -17,7 +18,7 @@
                 Iniciar sesión
             </a>
 
-            <a sec:authorize="isAuthenticated()"
+            <a sec:authorize="isAuthenticated() and !hasRole('ADMINISTRADOR')"
                th:href="@{/cuenta/perfil}"
                class="btn btn-outline">
                 Mi cuenta
@@ -180,6 +181,7 @@
     <footer class="footer">
         Epicentro Gourmet · Sistema de gestión de festivales
     </footer>
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 
 </html>
