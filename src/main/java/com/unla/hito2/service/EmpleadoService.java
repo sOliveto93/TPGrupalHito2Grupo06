@@ -258,4 +258,23 @@ public class EmpleadoService {
 
         staffRepository.save(staff);
     }
+
+    public List<EmpleadoDto> filtrarEmpleados(
+            Long idUnidad, String nombre, String apellido, String dni) {
+
+        List<Staff> empleados = staffRepository.filtrarEmpleados(
+                idUnidad,
+                nombre == null ? "" : nombre.trim(),
+                apellido == null ? "" : apellido.trim(),
+                dni == null ? "" : dni.trim());
+
+        List<EmpleadoDto> dtos = new ArrayList<>();
+
+        for (Staff staff : empleados) {
+            dtos.add(empleadoToDto(staff));
+        }
+
+        return dtos;
+    }
+
 }

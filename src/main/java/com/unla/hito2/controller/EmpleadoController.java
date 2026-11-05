@@ -127,6 +127,38 @@ public class EmpleadoController {
         return vista;
     }
 
+    @PreAuthorize("hasRole('RESPONSABLE')")
+    @GetMapping("/filtro")
+    public ModelAndView filtrarEmpleados(
+            @RequestParam Long idUnidad,
+            @RequestParam(defaultValue = "") String nombre,
+            @RequestParam(defaultValue = "") String apellido,
+            @RequestParam(defaultValue = "") String dni,
+            Authentication authentication) throws Exception {
+
+        UnidadDeVenta unidad = unidadDeVentaService.buscarPorId(idUnidad);
+
+        if (!unidad.getResponsable().getUsuario().getUsername()
+                .equals(authentication.getName())) {
+            throw new org.springframework.security.access.AccessDeniedException(
+                    "No tenés permiso para consultar esta unidad de venta");
+        }
+
+        ModelAndView vista = new ModelAndView("empleado/lista");
+
+        vista.addObject("unidad", unidad);
+        vista.addObject("empleados",
+                empleadoService.filtrarEmpleados(idUnidad, nombre, apellido, dni));
+
+        vista.addObject("filtroNombre", nombre);
+        vista.addObject("filtroApellido", apellido);
+        vista.addObject("filtroDni", dni);
+        vista.addObject("busquedaActiva", true);
+
+        return vista;
+    }
+
+
     @PreAuthorize("hasRole('EMPLEADO')")
     @GetMapping("/historial")
     public ModelAndView historial(Authentication authentication) {
