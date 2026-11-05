@@ -116,8 +116,8 @@ src/main/resources
 ---
 
 ## 🧩 Diagrama de clases
-![Diagrama de Clases](https://github.com/user-attachments/assets/9b14ea2e-92e0-4667-a6e6-33e7fde04bb9)
-[Ver diagrama de clases](https://github.com/user-attachments/assets/9b14ea2e-92e0-4667-a6e6-33e7fde04bb9)
+![Diagrama de Clases](https://github.com/user-attachments/files/34444625/Hito2-diag-clases.2.drawio)
+[Ver diagrama de clases](https://github.com/user-attachments/files/34444625/Hito2-diag-clases.2.drawio)
 
 ## Requisitos previos
 
