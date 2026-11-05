@@ -19,7 +19,7 @@
 }
 
 .filter-field label {
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: 0.85rem;
     font-weight: 700;
 }
@@ -31,7 +31,7 @@
     padding: 10px;
     border: 1px solid var(--border);
     border-radius: 7px;
-    background: white;
+    background: var(--bg-card);
     color: var(--text);
     font: inherit;
 }

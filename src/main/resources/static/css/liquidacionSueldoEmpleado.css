@@ -1,13 +1,17 @@
+/* ==========================================================================
+   Epicentro Gourmet · Liquidaciones de haberes / Historial de unidades
+   ========================================================================== */
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    padding: 32px;
+    padding: 28px 32px 40px;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f9;
-    color: #263238;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
 }
 
 .container {
@@ -15,94 +19,155 @@ body {
     margin: 0 auto;
 }
 
-.header {
+/* ============================================================
+   Encabezado integrado en el fondo de la página
+   (sin bloque masivo de color) + botonera secundaria limpia
+   ============================================================ */
+
+.page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.header h1 {
-    margin: 0 0 8px;
-    font-size: 28px;
-    color: #1f2937;
+.page-header h1 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    line-height: 1.25;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
 }
 
 .subtitle {
     margin: 0;
-    color: #64748b;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
 }
 
 .username {
     font-weight: bold;
-    color: #334155;
+    color: var(--text-primary);
 }
+
+/* Botonera general */
 
 .btn {
-    display: inline-block;
-    padding: 11px 18px;
-    border: none;
-    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--text-primary);
     text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
+/* "← Volver al inicio": botón secundario limpio */
 .btn-back {
-    background-color: #475569;
-    color: white;
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
 }
 
 .btn-back:hover {
-    background-color: #334155;
+    background: var(--surface-alt);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
+.btn-back:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* ============================================================
+   Tarjeta contenedora
+   ============================================================ */
+
 .card {
-    padding: 24px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.07);
+    padding: 22px 24px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.05);
 }
 
 .card h2 {
     margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 20px;
+    margin-bottom: 18px;
+    font-size: 1.15rem;
+    font-weight: 650;
+    color: var(--text-primary);
 }
+
+/* ============================================================
+   Tabla — jerarquía: th secundarios pequeños, td legibles,
+   filas separadas por un borde sutil y hover suave
+   ============================================================ */
 
 .table-wrapper {
     overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 0.9rem;
+    background: var(--bg-card);
 }
 
 thead {
-    background-color: #1e3a5f;
-    color: white;
+    background: transparent;
+}
+
+thead th {
+    padding: 11px 14px;
+    text-align: left;
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--border-color);
 }
 
 th,
 td {
-    padding: 14px 12px;
+    padding: 13px 14px;
     text-align: left;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border-color);
     white-space: nowrap;
 }
 
-th {
-    font-weight: 600;
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td {
+    color: var(--text-primary);
+}
+
+tbody tr {
+    transition: background-color 0.15s ease;
 }
 
 tbody tr:hover {
-    background-color: #f8fafc;
+    background-color: var(--surface-alt);
 }
 
 .amount {
@@ -115,35 +180,142 @@ tbody tr:hover {
     color: #166534;
 }
 
+/* Detalle de empleado: usuario en gris bajo el nombre */
+tbody small {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+}
+
+/* ============================================================
+   Empty state
+   ============================================================ */
+
 .empty {
-    padding: 24px;
+    padding: 34px 24px;
     text-align: center;
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    color: #64748b;
+    background: var(--bg-card);
+    border: 1.5px dashed var(--border-color);
+    border-radius: 14px;
+    color: var(--text-secondary);
 }
 
-.download {
-    color: #2563eb;
-    text-decoration: none;
+/* ============================================================
+   Columna de acciones — botones azules reales con aire entre ellos
+   ============================================================ */
+
+.download,
+.accion-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font: inherit;
+    font-size: 0.8rem;
     font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.download:hover {
-    text-decoration: underline;
+.download:hover,
+.accion-btn:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
+    color: #1e40af;
+    text-decoration: none;
+}
+
+.download:focus-visible,
+.accion-btn:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 2px;
+}
+
+.accion-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;                       /* gap vertical limpio de 8px */
+    margin-top: 8px;
 }
 
 @media (max-width: 600px) {
     body {
-        padding: 16px;
+        padding: 16px 12px;
     }
 
-    .header h1 {
-        font-size: 23px;
+    .page-header h1 {
+        font-size: 22px;
     }
 
     .card {
         padding: 16px;
     }
+}
+
+/* ============================================================
+   Modo oscuro — Liquidaciones de haberes / Historial de unidades
+   ============================================================ */
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .card {
+    background-color: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .card h2 {
+    color: #f8fafc;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) table,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .table-wrapper {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) thead {
+    background: #0f172a;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) thead th {
+    color: #94a3b8;                  /* th: fondo #0f172a + texto secundario */
+    border-bottom-color: #334155;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) td {
+    color: #f8fafc;                  /* td: texto claro */
+    border-bottom-color: #334155;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) tbody tr:hover {
+    background-color: #27364d;       /* hover suave */
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .download,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .accion-btn {
+    background: #1e3a5f;
+    border-color: #3b82f6;
+    color: #93c5fd;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .download:hover,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .accion-btn:hover {
+    background: #24466e;
+    border-color: #60a5fa;
+    color: #bfdbfe;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .empty {
+    background-color: #27364d;
+    border-color: #334155;
+    color: #cbd5e1;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .total {
+    color: #86efac;
 }

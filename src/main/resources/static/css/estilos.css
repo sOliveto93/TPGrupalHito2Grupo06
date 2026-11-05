@@ -1,0 +1,785 @@
+/* ==========================================================================
+   Epicentro Gourmet · Capa global de tema (Modo claro / Modo oscuro)
+   --------------------------------------------------------------------------
+   el archivo NO reemplaza a los CSS de cada página; se apila
+   con ellos. Fuente única de verdad para:
+   - Variables de color claro/oscuro.
+   - Reglas de contraste para textos, etiquetas, inputs y
+     tarjetas (evitar vistas rotas con texto blanco sobre fondo blanco,texto oscuro con fondo oscuro etc.).
+   Contrato de temas (la etiqueta <html> recibe el atributo):
+     - Modo claro (por defecto): sin atributo o data-theme="light"
+     - Modo oscuro:              data-theme="dark"  (+ data-bs-theme="dark")
+   ========================================================================== */
+
+html {
+    color-scheme: light;
+}
+
+body {
+    background: var(--bg-main);
+    color: var(--text-primary);
+}
+
+/* ==========================================================================
+   1) TEMA CLARO
+   ========================================================================== */
+
+:root {
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-header: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --border-color: #e2e8f0;
+    --header-bg: #1e293b;
+    --header-text: #ffffff;
+
+    --background: var(--bg-main);
+    --surface: var(--bg-card);
+    --surface-alt: #f1f5f9;
+    --border: var(--border-color);
+    --text: var(--text-primary);
+    --muted: var(--text-secondary);
+
+    --primary: #071940;
+    --primary-light: #1e3a6b;
+    --primary-dark: #152b46;
+    --accent: #2563eb;
+    --success-bg: #e8eef5;
+    --dm-shadow: 0 4px 14px rgba(7, 25, 64, 0.08);
+}
+
+/* ==========================================================================
+   2) TEMA CLARO — contraste obligatorio
+   Textos y etiquetas oscuros y legibles SIEMPRE que no haya tema oscuro.
+   ========================================================================== */
+
+label,
+p,
+h1, h2, h3, h4, h5, h6,
+span,
+td,
+th {
+    color: var(--text-primary);
+}
+
+/* Una excepcion: los contenidos sobre superficies de marca
+   (header / site-header / footer) deben permanecer claros. */
+:is(.header, .site-header, .footer),
+:is(.header, .site-header, .footer) :is(label, p, h1, h2, h3, h4, h5, h6, span, td, th, a) {
+    color: #f8fafc !important;
+}
+
+/* Tablas: texto y bordes siempre heredan los tokens de tema */
+table th,
+table td {
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Tarjetas y contenedores en claro */
+.card,
+.card-body {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* ==========================================================================
+   3) TEMA OSCURO
+   ========================================================================== */
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"], [data-theme="dark"], [data-bs-theme="dark"]) {
+    color-scheme: dark;
+
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-header: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --header-bg: #020617;
+    --header-text: #f8fafc;
+
+    --background: var(--bg-main);
+    --surface: var(--bg-card);
+    --surface-alt: #27364d;
+    --border: var(--border-color);
+    --text: var(--text-primary);
+    --muted: var(--text-secondary);
+
+    --primary: #12294a;
+    --primary-light: #93c5fd;
+    --primary-dark: #cfe1f5;
+    --accent: #3b82f6;
+    --success-bg: #24344d;
+    --dm-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+
+    --text-muted: #94a3b8;
+    --fondo: #0f172a;
+    --superficie: #1e293b;
+    --texto: #f8fafc;
+    --secundario: #94a3b8;
+    --borde: #334155;
+    --primario: #93c5fd;
+    --primario-claro: #1e3a5f;
+}
+
+/* ==========================================================================
+   4) TEMA OSCURO — contraste obligatorio
+   Texto claro/blanco ÚNICAMENTE cuando el tema oscuro está activo.
+   ========================================================================== */
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) body {
+    background: var(--bg-main);
+    color: var(--text-primary);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"])
+:is(label, p, h1, h2, h3, h4, h5, h6, span) {
+    color: var(--text-primary);
+}
+
+input,
+select,
+textarea {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 1;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.22);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) input:disabled,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) select:disabled,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) textarea:disabled {
+    background: var(--bg-header);
+    color: var(--text-secondary);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) input[type="checkbox"],
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) input[type="radio"] {
+    accent-color: var(--accent);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .card-body {
+    background: var(--surface);
+    color: #f8fafc;
+    border-color: var(--border);
+    box-shadow: var(--dm-shadow);
+}
+
+/* Superficies blancas clásicas del proyecto también se adaptan */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .login-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unidad-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-surface,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .accion-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .action-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .error-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .registro-section,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .panel,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .table-container,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .tabla-contenedor,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .table-wrapper,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .inventario-platos,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .formulario-plato,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .plato-layout,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unidad-detalle,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .personal-section,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .total-empleados,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .empty-state,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .empty,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .sin-datos {
+    background: var(--surface);
+    color: #f8fafc;
+    border-color: var(--border);
+    box-shadow: var(--dm-shadow);
+}
+
+/* ==========================================================================
+   5) TEMA OSCURO — chrome de página
+   ========================================================================== */
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .header,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .site-header,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .footer {
+    background: var(--primary);
+    box-shadow: var(--dm-shadow);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) th,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) td {
+    border-bottom-color: var(--border);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) tbody tr:hover,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .tabla-reporte tbody tr:hover {
+    background: var(--surface-alt);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .festival-header,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .festival-estado {
+    border-color: var(--border);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) table .btn-outline,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .filter-actions .btn-outline,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .btn-volver {
+    background: var(--surface-alt);
+    border-color: var(--border);
+    color: #dbeafe;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) table .btn-outline:hover,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .filter-actions .btn-outline:hover,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .btn-volver:hover {
+    background: #334155;
+    border-color: var(--accent);
+    color: #bfdbfe;
+}
+
+/* desplegables / menús */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .reportes-menu {
+    background: var(--surface);
+    border-color: var(--border);
+    box-shadow: var(--dm-shadow);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .reportes-menu a:hover {
+    background: var(--surface-alt);
+}
+
+/* Etiquetas pequeñas de sección que usaban var(--primary) como texto */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .section-label,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .page-eyebrow,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .eyebrow {
+    color: #9cc2f0;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .total-empleados {
+    background: var(--success-bg);
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .total-empleados strong {
+    color: #cfe1f5;
+}
+
+/* badges / estados / alertas — variantes suaves oscuras */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .status-active,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .estado-activo {
+    background: #064e3b;
+    color: #6ee7b7;
+    border-color: #065f46;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .status-upcoming,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .festival-temporada {
+    background: #1e3a5f;
+    color: #93c5fd;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .status-finished,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .estado-inactivo {
+    background: #27364d;
+    color: #94a3b8;
+    border-color: #334155;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .tipo-badge {
+    background: var(--success-bg);
+    color: #cfe1f5;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .error,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .alert-error,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .errores {
+    background: #3f1d1d;
+    color: #fca5a5;
+    border-color: #7f1d1d;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .success,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .message.success,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .alert-success {
+    background: #173a26;
+    color: #86efac;
+    border-color: #14532d;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .notice {
+    background: #2a2a1a;
+    color: #fde68a;
+    border-color: #713f12;
+}
+
+/* ==========================================================================
+   6) Botón flotante para alternar el modo
+   ========================================================================== */
+
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+
+    border: 1px solid var(--border, #e2e8f0);
+    border-radius: 50%;
+    background: var(--surface, #ffffff);
+    color: var(--text, #0f172a);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px) scale(1.06);
+}
+
+.theme-toggle:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.theme-toggle:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-toggle {
+        transition: none;
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle:active {
+        transform: none;
+    }
+}
+
+@media print {
+    .theme-toggle {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   7) CORRECCIÓN DE CONTRASTE EN FORMULARIOS (modo oscuro, !important)
+   --------------------------------------------------------------------------
+   Algunos formularios usan `background:#ffffff` fijo en el elemento <form>
+   (por ejemplo alta-empleado, completar-responsable, registro-unidad)
+   y en inputs concretos (.filter-field input, .formulario-plato input,
+   inputs de registro-unidad). Al activarse el tema oscuro, las etiquetas quedaban blancas con
+   fondo blanco, se usa !important para evitar eso..
+   ========================================================================== */
+
+/* 1) Tarjetas y contenedores blancos -> azul oscuro #1e293b */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .card-body,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) form,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .login-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unidad-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-surface,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .accion-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .action-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .error-card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .registro-section,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .panel,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .filters,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .table-container,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .tabla-contenedor,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .table-wrapper,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .inventario-platos,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .formulario-plato,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .plato-layout,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unidad-detalle,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .total-empleados,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .empty-state,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .empty,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .sin-datos,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .btn-volver {
+    background: #1e293b !important;
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+}
+
+/* 2) Etiquetas y encabezados en modo oscuro -> texto claro #cbd5e1 */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) label,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .form-label,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) h1,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) h2,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) h3,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) h4,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) h5 {
+    color: #cbd5e1 !important;
+}
+
+/* 3) Entradas en modo oscuro -> fondo #0f172a, texto #f8fafc, borde #334155 */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) input,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) select,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) textarea,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .filter-field input,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .filter-field select,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .formulario-plato input,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .formulario-plato select {
+    background: #0f172a !important;
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) input::placeholder,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) textarea::placeholder {
+    color: #94a3b8 !important;
+    opacity: 1 !important;
+}
+
+/* ==========================================================================
+   8) CONTRASTE — "Mis unidades de venta" y "Pedidos" (modo oscuro).
+   ========================================================================== */
+
+/* 1) Bloques de datos internos -> azul neutro #27364d + texto blanco */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .dato-unidad,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-surface {
+    background: #27364d !important;
+    background-color: #27364d !important;
+    border: 1px solid #334155 !important;
+    box-shadow: none !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .dato-unidad span,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .dato-unidad strong,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .dato-unidad .dato-label,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-surface span,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .unit-surface strong {
+    color: #f8fafc !important;
+}
+
+/* 2) Paginación — botones activos legibles, deshabilitados atenuados */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .paginacion a,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .paginacion nav a,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) nav a,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .paginacion .page-link {
+    color: #93c5fd !important;
+    background: #1e293b !important;
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .paginacion a:hover,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) nav a:hover {
+    color: #bfdbfe !important;
+    background: #27364d !important;
+    border-color: #3b82f6 !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .paginacion span,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .paginacion span span,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .paginacion span strong,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .paginacion .disabled,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .paginacion a[aria-disabled="true"],
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) nav span {
+    color: #64748b !important;
+}
+
+/* 3) Badge de código de unidad (.counter) -> azul #3b82f6, texto #ffffff */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .counter {
+    background: #3b82f6 !important;
+    background-color: #3b82f6 !important;
+    color: #ffffff !important;
+    border-color: #3b82f6 !important;
+}
+
+/* Complementos de legibilidad en vistas con tablas */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) section > p:last-child strong,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) section > p strong {
+    color: #f8fafc !important;
+}
+
+/* ==========================================================================
+   9) REGISTRO DE UNIDAD
+   ========================================================================== */
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .conditional-fields {
+    background: #16233a !important;
+    background-color: #16233a !important;
+    border: 1px solid #334155 !important;
+    border-radius: 10px !important;
+    padding: 18px 20px !important;
+    margin: 0 0 20px !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .conditional-fields p {
+    background: transparent !important;
+    margin: 0 0 14px !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .conditional-fields p:last-child {
+    margin-bottom: 0 !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .conditional-fields label {
+    color: #f8fafc !important;
+    font-weight: 600 !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #patente,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #cantidadCarpas,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #tiempoMontajeMinutos,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .conditional-fields input[type="text"],
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .conditional-fields input[type="number"] {
+    background: #0f172a !important;
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+    border: 1px solid #475569 !important;
+    border-radius: 8px !important;
+    caret-color: #f8fafc !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #patente::placeholder,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #cantidadCarpas::placeholder,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #tiempoMontajeMinutos::placeholder {
+    color: #94a3b8 !important;
+    opacity: 1 !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #patente:focus,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #cantidadCarpas:focus,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #tiempoMontajeMinutos:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35) !important;
+    outline: none !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .conditional-fields label:has(input[type="checkbox"]) {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    cursor: pointer !important;
+    user-select: none !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .conditional-fields input[type="checkbox"] {
+    accent-color: #3b82f6 !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 !important;
+    flex: 0 0 auto !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #tipoUnidadSelect {
+    background: #0f172a !important;
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+    border: 1px solid #475569 !important;
+    border-radius: 8px !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) #tipoUnidadSelect:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35) !important;
+    outline: none !important;
+}
+
+/* ==========================================================================
+   10) TARJETAS (.card / .card-body) — contraste en ambos temas
+   ========================================================================== */
+
+/* Modo oscuro: la tarjeta cambia SIEMPRE a azul oscuro #1e293b */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .card,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .card-body {
+    background: #1e293b !important;
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+    color: #f8fafc !important;
+}
+
+/* Modo oscuro: etiquetas y valores dentro de la tarjeta, en claro */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .card :is(label, p:not([class]), span:not([class]), strong:not([class]), h1, h2, h3, h4, h5, h6),
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .card-body :is(label, p:not([class]), span:not([class]), strong:not([class]), h1, h2, h3, h4, h5, h6) {
+    color: #f8fafc !important;
+}
+
+/* Modo claro: la tarjeta es blanca -> etiquetas y valores forzados a #0f172a */
+:is(html:not(.dark):not([data-theme="dark"]):not([data-bs-theme="dark"])) .card :is(label, p:not([class]), span:not([class]), strong:not([class]), h1, h2, h3, h4, h5, h6),
+:is(html:not(.dark):not([data-theme="dark"]):not([data-bs-theme="dark"])) .card-body :is(label, p:not([class]), span:not([class]), strong:not([class]), h1, h2, h3, h4, h5, h6) {
+    color: #0f172a !important;
+}
+
+/* ==========================================================================
+   11) ENLACES AZULES #2878b5 SIN CLASE -> legibles en modo oscuro
+   ========================================================================== */
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) a:not([class*="btn"]):not(.brand):not(.brand-text) {
+    color: #93c5fd !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) a:not([class*="btn"]):not(.brand):not(.brand-text):hover {
+    color: #bfdbfe !important;
+}
+
+/* ==========================================================================
+   12) COMPONENTES GLOBALES DE DISEÑO
+   ========================================================================== */
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.25;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-action:hover {
+    background: var(--surface-alt);
+    border-color: var(--accent);
+    color: var(--text-primary);
+}
+
+.btn-action:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Variante destructiva ("Desactivar") */
+.btn-action--danger {
+    border-color: #fecaca;
+    color: #b91c1c;
+}
+
+.btn-action--danger:hover {
+    background: #fef2f2;
+    border-color: #ef4444;
+    color: #991b1b;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .btn-action--danger {
+    border-color: #7f1d1d;
+    color: #fca5a5;
+    background: transparent;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .btn-action--danger:hover {
+    background: #3f1d1d;
+    border-color: #ef4444;
+    color: #fecaca;
+}
+
+.table-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.estado-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.22rem 0.7rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.estado-badge.is-activo,
+.estado-activo {
+    background: #dcfce7;
+    border-color: #bbf7d0;
+    color: #166534;
+}
+
+.estado-badge.is-inactivo,
+.estado-inactivo {
+    background: #f1f5f9;
+    border-color: #e2e8f0;
+    color: #475569;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .estado-badge.is-activo,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .estado-activo {
+    background: #064e3b;
+    border-color: #065f46;
+    color: #6ee7b7;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .estado-badge.is-inactivo,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .estado-inactivo {
+    background: #27364d;
+    border-color: #334155;
+    color: #94a3b8;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 44px 24px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-color);
+    border-radius: 14px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.empty-state h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.empty-state p {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.empty-state--compact {
+    padding: 32px 20px;
+}

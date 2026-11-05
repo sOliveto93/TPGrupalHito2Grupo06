@@ -2,6 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar contraseña</title>
@@ -38,6 +39,7 @@
         </p>
     </form>
 
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <link rel="stylesheet" th:href="@{/css/cuenta.css}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,5 +61,6 @@
     </p>
 </form>
 
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 </html>

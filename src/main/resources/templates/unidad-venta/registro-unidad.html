@@ -2,6 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Unidad de Venta | Epicentro Gourmet</title>
@@ -265,5 +266,6 @@
         });
     </script>
 
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 </html>

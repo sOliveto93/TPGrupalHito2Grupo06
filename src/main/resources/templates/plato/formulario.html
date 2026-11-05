@@ -2,6 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/alta-plato.css}">
@@ -63,9 +64,10 @@
         <section class="inventario-platos">
             <h2>Inventario de platos</h2>
 
-            <p th:if="${#lists.isEmpty(platos)}">
-                Todavía no hay platos registrados en esta unidad.
-            </p>
+            <div class="empty-state empty-state--compact" th:if="${#lists.isEmpty(platos)}">
+                <h3>No hay platos registrados</h3>
+                <p>Cuando registres el primer plato de esta unidad, aparecerá en este inventario.</p>
+            </div>
 
             <div class="tabla-contenedor" th:unless="${#lists.isEmpty(platos)}">
                 <table>
@@ -84,10 +86,10 @@
                             <td th:text="${plato.precio}"></td>
                             <td th:text="${plato.costo}"></td>
                             <td>
-                                <span th:if="${plato.activo}" class="estado-activo">
+                                <span th:if="${plato.activo}" class="estado-badge is-activo">
                                     Activo
                                 </span>
-                                <span th:unless="${plato.activo}" class="estado-inactivo">
+                                <span th:unless="${plato.activo}" class="estado-badge is-inactivo">
                                     Inactivo
                                 </span>
                             </td>
@@ -95,13 +97,13 @@
                                 <form th:if="${plato.activo}" th:action="@{/plato/{id}/desactivar(id=${plato.id})}"
                                     method="post">
                                     <input type="hidden" name="idUnidad" th:value="${idUnidad}">
-                                    <button type="submit">Desactivar</button>
+                                    <button type="submit" class="btn-action btn-action--danger">Desactivar</button>
                                 </form>
 
                                 <form th:unless="${plato.activo}" th:action="@{/plato/{id}/activar(id=${plato.id})}"
                                     method="post">
                                     <input type="hidden" name="idUnidad" th:value="${idUnidad}">
-                                    <button type="submit">Activar</button>
+                                    <button type="submit" class="btn-action">Activar</button>
                                 </form>
                             </td>
                         </tr>
@@ -112,6 +114,7 @@
 
     </main>
 
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empleados de la unidad - Epicentro Gourmet</title>
@@ -76,7 +77,9 @@
                             <td th:text="${empleado.dni}">DNI</td>
 
                             <td>
-                                <span th:text="${empleado.activo ? 'Activo' : 'Inactivo'}">
+                                <span class="estado-badge"
+                                      th:classappend="${empleado.activo} ? ' is-activo' : ' is-inactivo'"
+                                      th:text="${empleado.activo ? 'Activo' : 'Inactivo'}">
                                     Activo
                                 </span>
                             </td>
@@ -85,13 +88,13 @@
                                 <form th:if="${empleado.activo}" th:action="@{/empleado/desactivar}" method="post">
                                     <input type="hidden" name="idEmpleado" th:value="${empleado.id}">
                                     <input type="hidden" name="idUnidad" th:value="${unidad.id}">
-                                    <button type="submit">Desactivar</button>
+                                    <button type="submit" class="btn-action btn-action--danger">Desactivar</button>
                                 </form>
 
                                 <form th:unless="${empleado.activo}" th:action="@{/empleado/activar}" method="post">
                                     <input type="hidden" name="idEmpleado" th:value="${empleado.id}">
                                     <input type="hidden" name="idUnidad" th:value="${unidad.id}">
-                                    <button type="submit">Activar</button>
+                                    <button type="submit" class="btn-action">Activar</button>
                                 </form>
                             </td>
                         </tr>
@@ -106,6 +109,7 @@
 
     </main>
 
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 
 </html>

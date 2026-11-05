@@ -76,7 +76,7 @@ body {
 
 .page-heading h1 {
     margin: 0 0 10px;
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: clamp(1.8rem, 4vw, 2.4rem);
     line-height: 1.25;
     letter-spacing: -0.7px;
@@ -137,9 +137,9 @@ body {
 /* Botones de acciones en la tabla de festivales */
 
 table .btn-outline {
-    background: white;
+    background: var(--bg-card);
     border-color: var(--border);
-    color: var(--primary);
+    color: var(--text-primary);
 }
 
 table .btn-outline:hover {
@@ -173,7 +173,7 @@ table .btn-outline:hover {
 
 .section-heading h2 {
     margin: 0 0 5px;
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: 1.35rem;
 }
 
@@ -222,7 +222,7 @@ table .btn-outline:hover {
 
 .festival-header h3 {
     margin: 0;
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: 1.2rem;
     line-height: 1.4;
 }
@@ -385,9 +385,9 @@ table .btn-outline:hover {
     }
 }
 .filter-actions .btn-outline {
-    background: white;
+    background: var(--bg-card);
     border-color: var(--border);
-    color: var(--primary);
+    color: var(--text-primary);
 }
 
 .filter-actions .btn-outline:hover {
@@ -434,8 +434,8 @@ table .btn-outline:hover {
     gap: 4px;
     min-width: 200px;
     padding: 8px;
-    background: white;
-    border: 1px solid #ddd;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
 }
@@ -450,5 +450,5 @@ table .btn-outline:hover {
 }
 
 .reportes-menu a:hover {
-    background: #f3f4f6;
+    background: var(--bg-main);
 }

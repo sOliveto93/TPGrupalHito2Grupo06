@@ -111,7 +111,7 @@ table {
 }
 
 thead {
-    background: #f8f9fc;
+    background: var(--surface-alt);
 }
 
 th {
@@ -193,9 +193,9 @@ tbody tr:hover {
     gap: 8px;
     padding: 10px 16px;
     margin-bottom: 24px;
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: var(--bg-card);
     color: #374151;
     text-decoration: none;
     font-size: 14px;
@@ -204,7 +204,7 @@ tbody tr:hover {
 }
 
 .btn-volver:hover {
-    background-color: #f3f4f6;
+    background-color: var(--bg-main);
     border-color: #9ca3af;
 }
 

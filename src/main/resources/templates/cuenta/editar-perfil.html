@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/cuenta.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar mis datos | Epicentro Gourmet</title>
+</head>
+<body>
+
+<div class="page-heading">
+    <h1>Editar mis datos</h1>
+    <p>Actualizá tu nombre, apellido, DNI y fecha de nacimiento.</p>
+</div>
+
+<div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+<form th:action="@{/cuenta/editar}"
+      th:object="${perfilDto}"
+      method="post">
+
+    <div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
+        <ul>
+            <li th:each="err : ${#fields.errors('*')}"
+                th:text="${err}"></li>
+        </ul>
+    </div>
+
+    <p>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}"
+               autocomplete="given-name" maxlength="60" required>
+        <span class="error" th:if="${#fields.hasErrors('nombre')}"
+              th:errors="*{nombre}"></span>
+    </p>
+
+    <p>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" th:field="*{apellido}"
+               autocomplete="family-name" maxlength="60" required>
+        <span class="error" th:if="${#fields.hasErrors('apellido')}"
+              th:errors="*{apellido}"></span>
+    </p>
+
+    <p>
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" th:field="*{dni}"
+               inputmode="numeric" pattern="\d{7,8}" maxlength="8"
+               autocomplete="off" required>
+        <span class="error" th:if="${#fields.hasErrors('dni')}"
+              th:errors="*{dni}"></span>
+    </p>
+
+    <p>
+        <label for="fechaNacimiento">Fecha de nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento"
+               th:value="${perfilDto.fechaNacimiento != null ? #temporals.format(perfilDto.fechaNacimiento, 'yyyy-MM-dd') : ''}"
+               required>
+        <span class="error" th:if="${#fields.hasErrors('fechaNacimiento')}"
+              th:errors="*{fechaNacimiento}"></span>
+    </p>
+
+    <p class="form-actions">
+        <a th:href="@{/cuenta/perfil}">Volver a mi cuenta</a>
+        <button type="submit">Guardar cambios</button>
+    </p>
+</form>
+
+<th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
+</body>
+</html>
