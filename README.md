@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/34411196/README.md)
 # Epicentro Gourmet
 
 **Sistema de gestión de festivales gastronómicos**
