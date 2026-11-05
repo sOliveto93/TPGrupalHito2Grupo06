@@ -1,14 +1,17 @@
-* {
+{
     box-sizing: border-box;
 }
 
 body {
     font-family: Arial, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-primary, #0f172a);
+}
+
+.content-wrap {
     max-width: 850px;
-    margin: 40px auto;
-    padding: 0 20px;
-    background: #f8fafc;
-    color: #0f172a;
+    margin: 0 auto;
+    padding: 0 20px 40px;
 }
 
 .panel {
@@ -20,9 +23,11 @@ body {
     box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
 }
 
+/* Forzar color de títulos legible según el modo de forma segura */
 .panel h2,
-.panel h3 {
-    color: #0f172a;
+.panel h3,
+label {
+    color: var(--text-primary, #0f172a);
 }
 
 .selector {
@@ -35,7 +40,6 @@ body {
 label {
     display: block;
     margin-bottom: 6px;
-    color: #0f172a;
     font-weight: bold;
 }
 
@@ -46,8 +50,8 @@ input {
     padding: 10px;
     font-size: 1rem;
     color: #0f172a;
-    background: #f1f5f9;            /* diferenciado del panel blanco */
-    border: 1px solid #cbd5e1;      /* borde visible 1px solid */
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
     border-radius: 6px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -60,9 +64,9 @@ input:focus {
 }
 
 .selector .btn-primary {
-    width: auto;                 /* el botón no ocupa todo el alto disponible */
+    width: auto;
     min-height: 42px;
-    padding: 10px 18px;          /* padding adecuado */
+    padding: 10px 18px;
     border-radius: 6px;
 }
 
@@ -124,7 +128,7 @@ input:focus {
 .empty {
     margin: 0;
     padding: 14px 16px;
-    background: #f1f5f9;         /* franja distintiva dentro del resumen */
+    background: #f1f5f9;
     border: 1px dashed #cbd5e1;
     border-radius: 8px;
     color: var(--text-secondary);
@@ -136,6 +140,7 @@ input:focus {
     text-align: right;
     font-size: 1.2rem;
     font-weight: bold;
+    color: #0f172a;
 }
 
 .actions {
@@ -144,7 +149,7 @@ input:focus {
     gap: 12px;
     margin-top: 18px;
     padding-top: 16px;
-    border-top: 1px solid var(--border-color);   /* separador contenido en el panel */
+    border-top: 1px solid var(--border-color);
 }
 
 .actions button {
@@ -199,11 +204,11 @@ input:focus {
 }
 
 :is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .panel h2,
-:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .panel h3 {
-    color: #f8fafc;
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .panel h3,
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) label {
+    color: #f8fafc !important;
 }
 
-/* La tarjeta 1 mantiene fondo uniforme: nada de caja recortada visible */
 :is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .selector {
     background: transparent !important;
     background-color: transparent !important;
@@ -211,7 +216,6 @@ input:focus {
     box-shadow: none !important;
 }
 
-/* Selects e inputs en especificación exacta */
 :is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) select,
 :is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) input,
 :is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) textarea {

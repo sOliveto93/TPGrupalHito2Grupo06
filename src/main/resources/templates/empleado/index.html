@@ -10,10 +10,14 @@
 </head>
 
 <body>
-    <header class="header">
-        <a th:href="@{/}" class="brand">EPICENTRO <span>GOURMET</span></a>
+    <header class="site-header">
+        <div class="header-content">
+            <a th:href="@{/}" class="brand">
+                <span class="brand-icon">EG</span>
+                <span class="brand-text"><strong>EPICENTRO</strong><small>GOURMET</small></span>
+            </a>
 
-        <nav class="header-actions">
+            <nav class="header-actions">
             <a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-outline">
                 Iniciar sesión
             </a>
@@ -29,7 +33,8 @@
                     Cerrar sesión
                 </button>
             </form>
-        </nav>
+            </nav>
+        </div>
     </header>
 
     <main class="main">

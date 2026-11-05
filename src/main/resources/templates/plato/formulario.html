@@ -11,13 +11,20 @@
 
 <body>
 
-    <header class="page-heading" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
-        <div>
-            <h1>Alta de Plato</h1>
-            <p>Registrá un nuevo plato para ofrecer en tu unidad de venta.</p>
+    <header class="site-header">
+        <div class="header-content">
+            <a th:href="@{/}" class="brand">
+                <span class="brand-icon">EG</span>
+                <span class="brand-text"><strong>EPICENTRO</strong><small>GOURMET</small></span>
+            </a>
+            <a th:href="@{/home}" class="btn-home"><span aria-hidden="true">←</span> Volver al inicio</a>
         </div>
-        <a th:href="@{/home}" class="btn-volver">← Volver al inicio</a>
     </header>
+
+    <div class="page-heading">
+        <h1>Alta de Plato</h1>
+        <p>Registrá un nuevo plato para ofrecer en tu unidad de venta.</p>
+    </div>
 
     <main class="plato-layout">
 

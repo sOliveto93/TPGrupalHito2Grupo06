@@ -103,7 +103,7 @@ public class ContabilidadController {
 
             liquidaciones = contabilidadService
                     .obtenerLiquidacionesPorUnidadDeVenta(username, idUnidad);
-
+            model.addAttribute("idUnidad", idUnidad);
             model.addAttribute("festivales",
                     java.util.List.of(unidadSeleccionada.getFestival()));
             model.addAttribute("empleados", unidadSeleccionada.getEmpleados());
@@ -192,8 +192,10 @@ public class ContabilidadController {
             byte[] pdfBytes = bis.readAllBytes();
 
             String emailDestino = liquidacion.getEmpleado().getUsuario().getEmail();
-            String nombreEmpleado = (liquidacion.getEmpleado().getName() != null ? liquidacion.getEmpleado().getName() : "")
-                    + " " + (liquidacion.getEmpleado().getApellido() != null ? liquidacion.getEmpleado().getApellido() : "");
+            String nombreEmpleado = (liquidacion.getEmpleado().getName() != null ? liquidacion.getEmpleado().getName()
+                    : "")
+                    + " "
+                    + (liquidacion.getEmpleado().getApellido() != null ? liquidacion.getEmpleado().getApellido() : "");
 
             emailService.enviarLiquidacionPorMail(emailDestino, nombreEmpleado.trim(), pdfBytes, liquidacion.getId());
             redirectAttributes.addFlashAttribute("exito", "Liquidación enviada por mail correctamente");
@@ -204,7 +206,7 @@ public class ContabilidadController {
         return "redirect:/contabilidad/sueldo";
     }
 
-    //sacar admin de aca
+    // sacar admin de aca
     @PostMapping("/liquidacion/generar")
     @PreAuthorize("hasAnyRole('RESPONSABLE','ADMINISTRADOR')")
     public String generarLiquidacion(@RequestParam Long staffId,
@@ -217,5 +219,25 @@ public class ContabilidadController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
         return "redirect:/contabilidad/sueldo";
+    }
+
+    @PostMapping("/liquidacion/generar-unidad")
+    @PreAuthorize("hasRole('RESPONSABLE')")
+    public String generarLiquidacionesUnidad(
+            @RequestParam Long idUnidad,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+            int cantidad = liquidacionService.generarLiquidacionesPorUnidad(idUnidad);
+
+            redirectAttributes.addFlashAttribute(
+                    "exito",
+                    "Se generaron " + cantidad + " liquidaciones correctamente.");
+
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+
+        return "redirect:/contabilidad/sueldo?idUnidad=" + idUnidad;
     }
 }

@@ -37,6 +37,7 @@ public class LiquidacionHaberes {
     
     private LocalDate fecha;
     private int diasFestival;
+    private int diasTrabajados;
     private BigDecimal sueldo;
     private BigDecimal adicionalAplicado;
     private BigDecimal factorAplicado;

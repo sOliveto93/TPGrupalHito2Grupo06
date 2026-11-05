@@ -33,7 +33,7 @@ body {
     justify-content: space-between;
     gap: 20px;
     padding: 18px 6%;
-    background: var(--primary);
+    background: var(--chrome);          /* mismo color de marca que el header */
     color: white;
     box-shadow: 0 3px 12px rgba(15, 23, 42, 0.14);
 }
@@ -80,7 +80,7 @@ body {
 
 .subtitle {
     max-width: 700px;
-    margin: 0;
+    margin: 0 auto;
     color: var(--text-muted);
     font-size: 1.02rem;
 }
@@ -228,7 +228,7 @@ body {
 }
 
 .btn-primary {
-    background: var(--primary);
+    background: var(--chrome);          /* mismo color de marca que el header */
     color: white;
 }
 
@@ -268,9 +268,9 @@ body {
 
 .footer {
     padding: 22px 20px;
-    background: var(--bg-card);
+    background: var(--chrome);          /* mismo color de marca que el header */
     border-top: 1px solid var(--border);
-    color: var(--text-muted);
+    color: #dbeafe;
     font-size: 0.88rem;
     text-align: center;
 }

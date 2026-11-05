@@ -118,15 +118,25 @@ body {
    ============================================================ */
 
 .table-wrapper {
-    overflow-x: auto;
+    /* celdas en una sola línea; el scroll queda sin barra visible */
+    overflow-x: auto;                /* el scroll sigue disponible con trackpad / rueda */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;   /* momentum en iOS para scroll fluido */
+    scrollbar-width: none;           /* Firefox */
+    -ms-overflow-style: none;        /* IE / Edge Legacy */
     border: 1px solid var(--border-color);
     border-radius: 10px;
 }
 
+.table-wrapper::-webkit-scrollbar {
+    display: none;                   /* Chrome, Safari y Edge (Chromium) */
+}
+
 table {
-    width: 100%;
+    width: 100%;                 /* ocupa todo el ancho del contenedor */
+    table-layout: fixed;         /* reparto por el colgroup; sin desborde */
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: 0.85rem;          /* un punto más compacta para entrar completa en pantalla */
     background: var(--bg-card);
 }
 
@@ -142,7 +152,7 @@ thead th {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    white-space: nowrap;
+    white-space: nowrap;             /* encabezados en una sola línea, bien legibles */
     border-bottom: 2px solid var(--border-color);
 }
 
@@ -151,7 +161,27 @@ td {
     padding: 13px 14px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
-    white-space: nowrap;
+    white-space: nowrap;             /* una sola línea: no rompe números ni textos */
+}
+
+/* Columnas de texto largo (Empleado, Rol, Festival): recortan con "…"
+   sin empujar el layout; el valor completo queda en el title del td. */
+:is(th, td):nth-child(1),
+:is(th, td):nth-child(2),
+:is(th, td):nth-child(4) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Columnas numéricas/fechas: padding horizontal reducido para ganar espacio */
+th:nth-child(3),
+td:nth-child(3),                     /* Fecha */
+th:nth-child(5),
+td:nth-child(5),                     /* Días trabajados */
+th:nth-child(8),
+td:nth-child(8) {                    /* Factor */
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 tbody tr:last-child td {
@@ -240,7 +270,7 @@ tbody small {
 .accion-form {
     display: flex;
     flex-direction: column;
-    gap: 8px;                       /* gap vertical limpio de 8px */
+    gap: 8px;
     margin-top: 8px;
 }
 
@@ -318,4 +348,50 @@ tbody small {
 
 :is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .total {
     color: #86efac;
+}
+
+.reporte-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.reporte-header h1 {
+    margin: 0 0 6px;
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.25;
+}
+
+/* Título principal: alto contraste en tema claro */
+:is(html:not(.dark):not([data-theme="dark"]):not([data-bs-theme="dark"])) .reporte-header h1 {
+    color: #0f172a !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .reporte-header h1 {
+    color: #f8fafc !important;
+}
+
+/* Botón "Volver al inicio" en tema claro */
+:is(html:not(.dark):not([data-theme="dark"]):not([data-bs-theme="dark"])) .btn-back {
+    color: #0f172a !important;
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+:is(html:not(.dark):not([data-theme="dark"]):not([data-bs-theme="dark"])) .btn-back:hover {
+    color: #0f172a !important;
+    background: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+}
+
+/* botón en tema oscuro */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .btn-back {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
 }

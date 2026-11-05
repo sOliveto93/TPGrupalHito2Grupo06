@@ -12,10 +12,14 @@
 </head>
 
 <body>
-    <header class="header">
-        <a th:href="@{/}" class="brand">Epicentro Gourmet</a>
+    <header class="site-header">
+        <div class="header-content">
+            <a th:href="@{/}" class="brand">
+                <span class="brand-icon">EG</span>
+                <span class="brand-text"><strong>EPICENTRO</strong><small>GOURMET</small></span>
+            </a>
 
-        <div class="header-actions">
+            <div class="header-actions">
             <a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-outline">
                 Iniciar sesión
             </a>
@@ -31,13 +35,14 @@
                     Cerrar sesión
                 </button>
             </form>
+            </div>
         </div>
     </header>
 
     <main class="main">
         <section class="page-heading">
-            <h1>Festivales</h1>
-            <p class="subtitle">
+            <h1>Bienvenido Administrador</h1>
+            <p class="text-sm text-gray-400">
                 Consultá los festivales activos y próximos,
                 sus fechas y las unidades de venta disponibles.
             </p>
