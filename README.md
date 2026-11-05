@@ -15,7 +15,7 @@
 
 ---
 
-## 📖 Descripción
+## Descripción
 
 **Epicentro Gourmet** es una aplicación web para la gestión integral de festivales gastronómicos. Centraliza la administración de festivales, unidades de venta, empleados, platos, pedidos, caja y liquidaciones de sueldo en un único sistema con distintos niveles de acceso.
 
