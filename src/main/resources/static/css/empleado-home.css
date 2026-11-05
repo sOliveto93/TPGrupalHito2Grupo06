@@ -25,7 +25,7 @@ body {
     align-items: center;
     gap: 20px;
     padding: 18px 6%;
-    background: var(--primary);
+    background: var(--chrome);          /* mismo color de marca que el header */
     color: white;
 }
 
@@ -351,8 +351,9 @@ body {
 
 .footer {
     padding: 24px;
+    background: var(--chrome);          /* mismo color de marca que el header */
     border-top: 1px solid var(--border);
-    color: var(--muted);
+    color: #dbeafe;
     text-align: center;
     font-size: 0.9rem;
 }

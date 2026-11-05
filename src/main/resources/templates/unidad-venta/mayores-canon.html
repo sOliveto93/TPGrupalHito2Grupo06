@@ -11,18 +11,22 @@
 </head>
 
 <body>
-    <div class="container">
-
-        <header class="header">
-            <div>
-                <h1>Unidades con mayor canon</h1>
-                <p class="subtitle">Ranking de unidades de venta por canon</p>
-            </div>
-
-            <a th:href="@{/home}" class="btn btn-back">
-                ← Volver al inicio
+    <header class="site-header">
+        <div class="header-content">
+            <a th:href="@{/}" class="brand">
+                <span class="brand-icon">EG</span>
+                <span class="brand-text"><strong>EPICENTRO</strong><small>GOURMET</small></span>
             </a>
-        </header>
+            <a th:href="@{/home}" class="btn-home"><span aria-hidden="true">←</span> Volver al inicio</a>
+        </div>
+    </header>
+
+    <div class="page-heading">
+        <h1>Unidades con mayor canon</h1>
+        <p>Ranking de unidades de venta por canon</p>
+    </div>
+
+    <div class="container">
 
         <main class="card">
             <h2>Detalle del reporte</h2>

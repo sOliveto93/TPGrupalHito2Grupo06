@@ -10,19 +10,26 @@
 </head>
 
 <body>
+    <header class="site-header">
+        <div class="header-content">
+            <a th:href="@{/}" class="brand">
+                <span class="brand-icon">EG</span>
+                <span class="brand-text"><strong>EPICENTRO</strong><small>GOURMET</small></span>
+            </a>
+            <a th:href="@{/home}" class="btn-home"><span aria-hidden="true">←</span> Volver al inicio</a>
+        </div>
+    </header>
+
+    <div class="page-heading">
+        <span class="etiqueta">CONTABILIDAD</span>
+        <h1>Ranking de ingresos</h1>
+        <p class="subtitulo">
+            Festival:
+            <strong th:text="${festival.nombre}">Nombre del festival</strong>
+        </p>
+    </div>
+
     <main class="contenedor">
-        </a>
-        <a th:href="@{/home}" class=" btn-volver">
-            ← Volver
-        </a>
-        <header class="encabezado">
-            <span class="etiqueta">CONTABILIDAD</span>
-            <h1>Ranking de ingresos</h1>
-            <p class="subtitulo">
-                Festival:
-                <strong th:text="${festival.nombre}">Nombre del festival</strong>
-            </p>
-        </header>
 
         <section class="panel">
             <div class="panel-titulo">

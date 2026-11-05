@@ -2,6 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <th:block th:replace="~{fragments/darkmode :: head}"></th:block>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rentabilidad de la unidad de venta</title>
@@ -10,9 +11,19 @@
 
 <body>
 
-    <a th:href="@{/home}" class="btn-volver">Volver al inicio</a>
+    <header class="site-header">
+        <div class="header-content">
+            <a th:href="@{/}" class="brand">
+                <span class="brand-icon">EG</span>
+                <span class="brand-text"><strong>EPICENTRO</strong><small>GOURMET</small></span>
+            </a>
+            <a th:href="@{/}" class="btn-home"><span aria-hidden="true">←</span> Volver al inicio</a>
+        </div>
+    </header>
 
-    <h1>Rentabilidad de la unidad de venta</h1>
+    <div class="page-heading">
+        <h1>Rentabilidad de la unidad de venta</h1>
+    </div>
 
     <section>
         <label for="unidadId">Unidad de venta:</label>
@@ -211,6 +222,7 @@
         actualizarInfoFestival();
     </script>
 
+    <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 </html>
 
