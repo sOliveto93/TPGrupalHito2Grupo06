@@ -15,9 +15,8 @@
 
         <div class="header-actions">
 
-            <a sec:authorize="isAuthenticated() and !hasRole('ADMINISTRADOR')"
-               th:href="@{/cuenta/perfil}"
-               class="btn btn-outline">
+            <a sec:authorize="isAuthenticated() and !hasRole('ADMINISTRADOR')" th:href="@{/cuenta/perfil}"
+                class="btn btn-outline">
                 Mi cuenta
             </a>
 
@@ -157,11 +156,11 @@
                         <article class="accion-card">
                             <h4>Liquidaciones de sueldo</h4>
                             <p>
-                                Consultá las liquidaciones de los empleados
+                                Generá y consultá las liquidaciones de los empleados
                                 de tu unidad de venta.
                             </p>
                             <a th:href="@{/contabilidad/sueldo(idUnidad=${unidad.id})}" class="btn btn-primary">
-                                Ver liquidaciones
+                                Gestionar liquidaciones
                             </a>
                         </article>
                         <article class="accion-card">

@@ -319,3 +319,26 @@ tbody small {
 :is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .total {
     color: #86efac;
 }
+.btn-generar-liquidaciones {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 16px 0;
+}
+
+.btn-generar-liquidaciones:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.btn-generar-liquidaciones:active {
+    transform: translateY(0);
+    box-shadow: none;
+}

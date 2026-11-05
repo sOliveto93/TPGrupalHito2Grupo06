@@ -16,55 +16,106 @@ import java.time.Period;
 public class LiquidacionService {
 
     private final LiquidacionRepository liquidacionRepository;
-    private final CostosRepository costosRepository;
     private final StaffRepository staffRepository;
     private final FestivalRepository festivalRepository;
     private final PdfService pdfService;
     private final EmailService emailService;
+    private UnidadDeVentaRepository unidadDeVentaRepository;
 
     public LiquidacionService(LiquidacionRepository liquidacionRepository,
-                              CostosRepository costosRepository,
-                              StaffRepository staffRepository,
-                              FestivalRepository festivalRepository,
-                              PdfService pdfService,
-                              EmailService emailService) {
+            StaffRepository staffRepository,
+            FestivalRepository festivalRepository,
+            PdfService pdfService,
+            EmailService emailService, UnidadDeVentaRepository unidadDeVentaRepository) {
         this.liquidacionRepository = liquidacionRepository;
-        this.costosRepository = costosRepository;
         this.staffRepository = staffRepository;
         this.festivalRepository = festivalRepository;
         this.pdfService = pdfService;
         this.emailService = emailService;
+        this.unidadDeVentaRepository = unidadDeVentaRepository;
     }
 
     @Transactional
     public LiquidacionHaberes generarLiquidacion(Long staffId, Long festivalId) throws Exception {
+
         Staff empleado = staffRepository.findById(staffId)
                 .orElseThrow(() -> new Exception("Empleado no encontrado"));
+
         Festival festival = festivalRepository.findById(festivalId)
                 .orElseThrow(() -> new Exception("Festival no encontrado"));
 
-        Costos costos = costosRepository.findAll().stream().findFirst()
-                .orElseThrow(() -> new Exception("No hay costos configurados"));
-        //revisar sueldo bbase meterlo dentro de los iff con lso valores coorrespondientes
-        BigDecimal sueldoBase = costos.getSueldoBase() != null ? costos.getSueldoBase() : new BigDecimal("100000");
+        Costos costos = festival.getCostos();
+
+        if (costos == null) {
+            throw new IllegalStateException(
+                    "El festival no tiene costos configurados");
+        }
+
+        LocalDate fechaInicioFestival = festival.getFechaInicio();
+        LocalDate fechaFinFestival = festival.getFechaFin();
+
+        if (fechaInicioFestival == null || fechaFinFestival == null
+                || fechaFinFestival.isBefore(fechaInicioFestival)) {
+            throw new IllegalStateException("Las fechas del festival no son válidas");
+        }
+
+        if (empleado.getFechaIngreso() == null) {
+            throw new IllegalStateException("El empleado no tiene fecha de ingreso");
+        }
+
+        int diasFestival = (int) (fechaFinFestival.toEpochDay()
+                - fechaInicioFestival.toEpochDay()) + 1;
+        LocalDate fechaInicioTrabajo = empleado.getFechaIngreso().isAfter(fechaInicioFestival)
+        ? empleado.getFechaIngreso()
+        : fechaInicioFestival;
+        LocalDate fechaFinTrabajo = LocalDate.now().isBefore(fechaFinFestival)
+                ? LocalDate.now()
+                : fechaFinFestival;
+
+        int diasTrabajados = 0;
+
+        if (!fechaInicioTrabajo.isAfter(fechaFinTrabajo)) {
+            diasTrabajados = (int) (fechaFinTrabajo.toEpochDay()
+                    - fechaInicioTrabajo.toEpochDay()) + 1;
+        }
+        BigDecimal sueldoBase = costos.getSueldoBase() != null
+                ? costos.getSueldoBase()
+                : new BigDecimal("100000");
+
         BigDecimal adicional = BigDecimal.ZERO;
 
+        // Calcular adicionales según tipo de empleado
         if (empleado instanceof Cajero) {
-            if (empleado.getFechaIngreso() != null) {
-                int antiguedad = Period.between(empleado.getFechaIngreso(), LocalDate.now()).getYears();
-                if (antiguedad > 0 && costos.getPlusAnualAntiguedad() != null) {
-                    adicional = costos.getPlusAnualAntiguedad().multiply(BigDecimal.valueOf(antiguedad));
-                }
+            // en lugar de localdateNow considerar utilizar la fecha fin festival
+            // fechaFinFestival
+            int antiguedad = Period.between(
+                    empleado.getFechaIngreso(),
+                    LocalDate.now()).getYears();
+
+            if (antiguedad > 0 && costos.getPlusAnualAntiguedad() != null) {
+                adicional = costos.getPlusAnualAntiguedad()
+                        .multiply(BigDecimal.valueOf(antiguedad));
             }
+
         } else if (empleado instanceof Cocinero cocinero) {
+
             if (cocinero.getCategoria() != null) {
                 switch (cocinero.getCategoria()) {
                     case COCINERO ->
-                            adicional = costos.getPlusCocinero() != null ? costos.getPlusCocinero() : new BigDecimal("150000");
+                        adicional = costos.getPlusCocinero() != null
+                                ? costos.getPlusCocinero()
+                                : new BigDecimal("150000");
+
                     case AYUDANTE_COCINA ->
-                            adicional = costos.getPlusAyudanteCocina() != null ? costos.getPlusAyudanteCocina() : new BigDecimal("100000");
+                        adicional = costos.getPlusAyudanteCocina() != null
+                                ? costos.getPlusAyudanteCocina()
+                                : new BigDecimal("100000");
+
                     case LAVAPLATOS ->
-                            adicional = costos.getPlusLavaplatos() != null ? costos.getPlusLavaplatos() : new BigDecimal("50000");
+                        adicional = costos.getPlusLavaplatos() != null
+                                ? costos.getPlusLavaplatos()
+                                : new BigDecimal("50000");
+
                     default -> adicional = BigDecimal.ZERO;
                 }
             }
@@ -72,30 +123,40 @@ public class LiquidacionService {
 
         BigDecimal subtotal = sueldoBase.add(adicional);
 
-        int diasFestival = 0;
-        BigDecimal factor = BigDecimal.ONE;
-
-        if (festival.getFechaInicio() != null && festival.getFechaFin() != null) {
-            diasFestival = (int) (festival.getFechaFin().toEpochDay() - festival.getFechaInicio().toEpochDay()) + 1;
-        }
+        // Calcular factor según duración del festival
+        BigDecimal factor;
 
         if (diasFestival <= 15) {
             factor = new BigDecimal("0.50");
+
         } else if (diasFestival <= 30) {
-            factor = new BigDecimal("1.00");
+            factor = BigDecimal.ONE;
+
         } else {
-            // formula (int(diasDurFest / 15) + 1) * 0.50
             int multiplicador = (diasFestival / 15) + 1;
-            factor = new BigDecimal("0.50").multiply(BigDecimal.valueOf(multiplicador));
+            factor = new BigDecimal("0.50")
+                    .multiply(BigDecimal.valueOf(multiplicador));
         }
 
-        BigDecimal total = subtotal.multiply(factor).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal proporcion = BigDecimal.valueOf(diasTrabajados)
+                .divide(
+                        BigDecimal.valueOf(diasFestival),
+                        4,
+                        RoundingMode.HALF_UP);
 
+        BigDecimal total = subtotal
+                .multiply(factor)
+                .multiply(proporcion)
+                .setScale(2, RoundingMode.HALF_UP);
+
+        // Crear liquidación
         LiquidacionHaberes liquidacion = new LiquidacionHaberes();
+
         liquidacion.setEmpleado(empleado);
         liquidacion.setFestival(festival);
         liquidacion.setFecha(LocalDate.now());
         liquidacion.setDiasFestival(diasFestival);
+        liquidacion.setDiasTrabajados(diasTrabajados);
         liquidacion.setSueldo(sueldoBase.setScale(2, RoundingMode.HALF_UP));
         liquidacion.setAdicionalAplicado(adicional.setScale(2, RoundingMode.HALF_UP));
         liquidacion.setFactorAplicado(factor.setScale(2, RoundingMode.HALF_UP));
@@ -127,5 +188,35 @@ public class LiquidacionService {
         String emailDestino = empleado.getUsuario().getEmail();
 
         emailService.enviarLiquidacionPorMail(emailDestino, nombreCompleto, pdfBytes, liquidacion.getId());
+    }
+
+    @Transactional
+    public int generarLiquidacionesPorUnidad(Long idUnidad) throws Exception {
+
+        UnidadDeVenta unidad = unidadDeVentaRepository.findById(idUnidad)
+                .orElseThrow(() -> new Exception("Unidad de venta no encontrada"));
+
+        Festival festival = unidad.getFestival();
+
+        /*
+         * if (LocalDate.now().isBefore(festival.getFechaFin())) {
+         * throw new IllegalStateException(
+         * "Las liquidaciones solo pueden generarse cuando finaliza el festival");
+         * }
+         */
+
+        int generadas = 0;
+
+        for (Staff empleado : unidad.getEmpleados()) {
+
+            if (!liquidacionRepository.existsByEmpleado_IdAndFestival_Id(
+                    empleado.getId(), festival.getId())) {
+
+                generarLiquidacion(empleado.getId(), festival.getId());
+                generadas++;
+            }
+        }
+
+        return generadas;
     }
 }

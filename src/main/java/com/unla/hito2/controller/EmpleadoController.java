@@ -98,8 +98,18 @@ public class EmpleadoController {
 
             return "redirect:/empleado/lista?idUnidad=" + idUnidad;
 
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            model.addAttribute("error",
+                    "Ya existe un usuario registrado con ese email o DNI.");
+            model.addAttribute("categorias", CategoriaCocina.values());
+            model.addAttribute("turnos", Turno.values());
+            model.addAttribute("unidad", unidad);
+
+            return "empleado/formulario";
+
         } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
+            model.addAttribute("error",
+                    "No se pudo registrar el empleado. Verificá los datos e intentá nuevamente.");
             model.addAttribute("categorias", CategoriaCocina.values());
             model.addAttribute("turnos", Turno.values());
             model.addAttribute("unidad", unidad);
@@ -157,7 +167,6 @@ public class EmpleadoController {
 
         return vista;
     }
-
 
     @PreAuthorize("hasRole('EMPLEADO')")
     @GetMapping("/historial")

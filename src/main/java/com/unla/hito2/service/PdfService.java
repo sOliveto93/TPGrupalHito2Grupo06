@@ -84,7 +84,7 @@ public class PdfService {
                 document.add(new Paragraph("Festival: " + liquidacion.getFestival().getNombre(), infoFont));
             }
             document.add(new Paragraph("Fecha de Liquidacion: " + liquidacion.getFecha(), infoFont));
-            document.add(new Paragraph("Dias Trabajados: " + liquidacion.getDiasFestival(), infoFont));
+            document.add(new Paragraph("Dias Trabajados: " + liquidacion.getDiasTrabajados(), infoFont));
             document.add(new Paragraph(" "));
 
             PdfPTable table = new PdfPTable(2);
