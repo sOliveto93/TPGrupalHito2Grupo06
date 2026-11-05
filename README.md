@@ -117,7 +117,7 @@ src/main/resources
 ---
 
 ## 🧩 Diagrama de clases
-[Ver diagrama de clases](URL_DEL_DIAGRAMA)
+[Ver diagrama de clases](https://github.com/user-attachments/assets/9b14ea2e-92e0-4667-a6e6-33e7fde04bb9)
 
 ## Requisitos previos
 
