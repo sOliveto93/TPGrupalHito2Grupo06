@@ -212,3 +212,38 @@ tbody tr:hover {
     outline: 2px solid #2563eb;
     outline-offset: 3px;
 }
+
+/* Contraste — tema claro: texto #0f172a y borde #cbd5e1 */
+:is(html:not(.dark):not([data-theme="dark"]):not([data-bs-theme="dark"])) .btn-volver {
+    color: #0f172a !important;
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+:is(html:not(.dark):not([data-theme="dark"]):not([data-bs-theme="dark"])) .btn-volver:hover {
+    color: #0f172a !important;
+    background: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .btn-volver {
+    color: #f8fafc !important;
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+/* Contraste — píldora de código */
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .codigo {
+    background: #334155 !important;
+    color: #f8fafc !important;
+    border: 1px solid #475569 !important;
+}
+
+/* Contraste — título principal en tema claro */
+:is(html:not(.dark):not([data-theme="dark"]):not([data-bs-theme="dark"])) .encabezado h1 {
+    color: #0f172a !important;
+}
+
+:is(html.dark, html[data-theme="dark"], html[data-bs-theme="dark"]) .encabezado h1 {
+    color: #f8fafc !important;
+}

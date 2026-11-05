@@ -11,9 +11,21 @@
 </head>
 
 <body>
-    <a class="btn-secondary" th:href="@{/pedido/getPedidos-unidad-venta(id=${pedidoAlta.idUnidadDeVenta})}">
-        Volver a los pedidos
-    </a>
+    <header class="site-header">
+        <div class="header-content">
+            <a th:href="@{/}" class="brand">
+                <span class="brand-icon">EG</span>
+                <span class="brand-text"><strong>EPICENTRO</strong><small>GOURMET</small></span>
+            </a>
+            <a th:href="@{/home}" class="btn-home"><span aria-hidden="true">←</span> Volver al inicio</a>
+        </div>
+    </header>
+    <main class="content-wrap">
+    <div class="nav-links">
+        <a class="btn-secondary" th:href="@{/pedido/getPedidos-unidad-venta(id=${pedidoAlta.idUnidadDeVenta})}">
+            Volver a los pedidos
+        </a>
+    </div>
     <h1>Crear pedido</h1>
 
     <p class="error" th:if="${error}" th:text="${error}"></p>

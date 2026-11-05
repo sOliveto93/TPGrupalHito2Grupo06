@@ -12,15 +12,19 @@
 
 <body>
 
-    <header class="header">
-        <div class="header-content" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
-            <div>
-                <p class="header-subtitle">EPICENTRO GOURMET</p>
-                <h1>Personal de la unidad</h1>
-            </div>
-            <a th:href="@{/home}" class="btn btn-back">← Volver al inicio</a>
+    <header class="site-header">
+        <div class="header-content">
+            <a th:href="@{/}" class="brand">
+                <span class="brand-icon">EG</span>
+                <span class="brand-text"><strong>EPICENTRO</strong><small>GOURMET</small></span>
+            </a>
+            <a th:href="@{/}" class="btn-home"><span aria-hidden="true">←</span> Volver al inicio</a>
         </div>
     </header>
+
+    <div class="page-heading">
+        <h1>Personal de la unidad</h1>
+    </div>
 
     <main class="container">
 
@@ -80,7 +84,7 @@
                     <button type="submit" class="btn btn-primary">Filtrar activos</button>
 
                     <a th:href="@{/empleado/filtro(idUnidad=${unidad.id})}"
-                       class="btn btn-back">
+                       class="btn btn-secondary">
                         Limpiar
                     </a>
                 </div>
@@ -152,12 +156,7 @@
             </div>
         </section>
 
-        <div class="footer-actions">
-            <a th:href="@{/home}" class="btn btn-back">← Volver al inicio</a>
-        </div>
-
     </main>
-
     <th:block th:replace="~{fragments/darkmode :: toggle}"></th:block>
 </body>
 
