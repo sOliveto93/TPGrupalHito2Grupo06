@@ -64,4 +64,5 @@ List<LiquidacionHaberes> buscarLiquidacionesHistoricasPorUnidad(
         @Param("idUnidad") Long idUnidad,
         @Param("idFestival") Long idFestival
 );
+boolean existsByEmpleado_IdAndFestival_Id(Long empleadoId, Long festivalId);
 }
