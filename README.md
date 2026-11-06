@@ -1,4 +1,4 @@
-# Epicentro Gourmet
+# 🍽️ Epicentro Gourmet
 
 **Sistema de gestión de festivales gastronómicos**
 
@@ -14,7 +14,7 @@
 
 ---
 
-## Descripción
+## 📖 Descripción
 
 **Epicentro Gourmet** es una aplicación web para la gestión integral de festivales gastronómicos. Centraliza la administración de festivales, unidades de venta, empleados, platos, pedidos, caja y liquidaciones de sueldo en un único sistema con distintos niveles de acceso.
 
@@ -23,16 +23,16 @@
 
 ---
 
-## Características principales
+## ✨ Características principales
 
-### Autenticación y seguridad
+### 🔐 Autenticación y seguridad
 - Inicio de sesión con Spring Security y control de acceso por roles.
 - Roles diferenciados: administrador, responsable y empleados (cajeros y personal de cocina).
 - Recuperación de contraseña mediante enlace temporal enviado por correo.
 - Cambio de contraseña desde el perfil del usuario.
 - Edición de datos personales para responsables y staff.
 
-### Festivales y unidades de venta
+### 🎪 Festivales y unidades de venta
 - Visualización de los festivales disponibles en la página de inicio.
 - Registro de unidades de venta con asignación de un responsable.
 - Soporte para food trucks y puestos desarmables.
@@ -41,28 +41,28 @@
 - Reporte de unidades con mayor canon.
 - Cálculo de rentabilidad neta, general y entre fechas.
 
-### Gestión de empleados
+### 👥 Gestión de empleados
 - Alta de empleados con envío de credenciales por correo.
 - Listado y filtrado de empleados.
 - Activación y desactivación de empleados.
 - Historial de empleados y asignaciones a unidades de venta.
 
-### Gestión de platos
+### 🍴 Gestión de platos
 - Alta de platos con precio, costo y unidad de venta.
 - Activación y desactivación de platos.
 - Reporte de plato estrella.
 
-### Pedidos
+### 🧾 Pedidos
 - Registro de pedidos con validación de la unidad de venta y de la caja abierta.
 - Listado paginado de pedidos por unidad de venta.
 - Generación y descarga del ticket/comanda del pedido en PDF.
 
-### Caja
+### 💰 Caja
 - Apertura y cierre de caja exclusivo para cajeros.
 - Registro del total declarado al cierre.
 - Cálculo automático del total del sistema y de la diferencia de caja.
 
-### Contabilidad y reportes
+### 📊 Contabilidad y reportes
 - Cálculo de liquidaciones de sueldo.
 - Generación del recibo de sueldo en PDF.
 - Envío de liquidaciones por correo electrónico.
@@ -70,14 +70,14 @@
 - Ranking de unidades de venta por facturación.
 - Reportes de rentabilidad y mayor canon.
 
-### Interfaz
+### 🎨 Interfaz
 - Vistas server-side con Thymeleaf.
 - Diseño responsive.
 - Modo claro y modo oscuro.
 
 ---
 
-## Tecnologías utilizadas
+## 🛠️ Tecnologías utilizadas
 
 | Categoría | Tecnología |
 |-----------|------------|
@@ -96,7 +96,7 @@
 
 ---
 
-## Estructura del proyecto
+## 🧱 Estructura del proyecto
 
 ```text
 src/main/java/com/unla/hito2
@@ -113,13 +113,10 @@ src/main/resources
 ├── data.sql       # Datos iniciales
 └── pedidos.sql    # Pedidos de prueba
 ```
+
 ---
 
-## 🧩 Diagrama de clases
-![Diagrama de Clases](https://github.com/user-attachments/assets/9b14ea2e-92e0-4667-a6e6-33e7fde04bb9)
-[Ver diagrama de clases](https://github.com/user-attachments/assets/9b14ea2e-92e0-4667-a6e6-33e7fde04bb9)
-
-## Requisitos previos
+## ✅ Requisitos previos
 
 - **Java 17** o superior
 - **Git**
@@ -130,7 +127,7 @@ src/main/resources
 
 ---
 
-## Instalación
+## 🚀 Instalación
 
 ### 1. Clonar el repositorio
 
@@ -248,7 +245,7 @@ La aplicación usa `spring.jpa.hibernate.ddl-auto=create-drop` y carga automáti
 
 ---
 
-## Casos de uso implementados
+## 🧪 Casos de uso implementados
 
 | N.º | Caso de uso | Integrante |
 |:---:|-------------|------------|
@@ -276,7 +273,7 @@ La aplicación usa `spring.jpa.hibernate.ddl-auto=create-drop` y carga automáti
 | 22 | Perfil de usuario | Matías Torres de Lima |
 | 23 | Cambio de contraseña | Matías Torres de Lima |
 | 24 | Recuperación de contraseña | Matías Torres de Lima |
-| 25 | Filtrar empleado activo | Matías Torres de Lima |
+
 ---
 
 ## 👥 Integrantes
@@ -289,6 +286,12 @@ La aplicación usa `spring.jpa.hibernate.ddl-auto=create-drop` y carga automáti
 
 ---
 
-## Licencia
+## 📄 Licencia
 
 Proyecto académico desarrollado para la materia **Objetos 2** de la **Universidad Nacional de Lanús (UNLa)**.
+
+---
+
+## 📌 Estado del proyecto
+
+**Hito 2 — En desarrollo.**
