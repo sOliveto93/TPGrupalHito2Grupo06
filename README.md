@@ -253,30 +253,30 @@ La aplicación usa `spring.jpa.hibernate.ddl-auto=create-drop` y carga automáti
 | N.º | Caso de uso | Integrante |
 |:---:|-------------|------------|
 | 1 | Visualización de festivales en la página de inicio(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/3) | Patricio Anrrique |
-| 2 | Registro de unidad de venta con responsable | Patricio Anrrique |
-| 3 | Alta de empleado con envío de mail | Patricio Anrrique |
-| 4 | Ver liquidación de sueldo | Patricio Anrrique |
-| 5 | Calcular liquidación de sueldo y recibo en PDF | Patricio Anrrique |
-| 6 | Recibir liquidación por mail | Patricio Anrrique |
-| 7 | Editar perfil de usuario para Responsable y Staff | Patricio Anrrique |
-| 8 | Modo oscuro | Patricio Anrrique |
-| 9 | Alta de pedido | Sebastián Oliveto |
-| 10 | Vista de reporte para el Administrador | Sebastián Oliveto |
-| 11 | Listar unidades de venta por festival | Sebastián Oliveto |
-| 12 | Ranking de unidades de venta por facturación de pedidos | Sebastián Oliveto |
-| 13 | Reporte plato estrella | Sebastián Oliveto |
-| 14 | Reporte de venta por festival | Sebastián Oliveto |
-| 15 | Reporte mayor canon | Sebastián Oliveto |
-| 16 | Apertura y cierre de caja | Sebastián Oliveto |
-| 17 | Activar y desactivar platos | Sebastián Oliveto |
-| 18 | Activar y desactivar empleados | Sebastián Oliveto |
-| 19 | Rentabilidad neta entre fechas | Sebastián Oliveto |
-| 20 | Ticket de pedido en PDF | Sebastián Oliveto |
-| 21 | Alta de plato | Matías Torres de Lima |
-| 22 | Perfil de usuario | Matías Torres de Lima |
-| 23 | Cambio de contraseña | Matías Torres de Lima |
-| 24 | Recuperación de contraseña | Matías Torres de Lima |
-| 25 | Filtrar empleado activo | Matías Torres de Lima |
+| 2 | Registro de unidad de venta con responsable(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/3) | Patricio Anrrique |
+| 3 | Alta de empleado con envío de mail(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/4) | Patricio Anrrique |
+| 4 | Ver liquidación de sueldo(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/8) | Patricio Anrrique |
+| 5 | Calcular liquidación de sueldo y recibo en PDF(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/20)(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/26) | Patricio Anrrique |
+| 6 | Recibir liquidación por mail(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/27) | Patricio Anrrique |
+| 7 | Editar perfil de usuario para Responsable y Staff(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/32) | Patricio Anrrique |
+| 8 | Modo oscuro(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/32) | Patricio Anrrique |
+| 9 | Alta de pedido(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/9) | Sebastián Oliveto |
+| 10 | Vista de reporte para el Administrador(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/12) | Sebastián Oliveto |
+| 11 | Listar unidades de venta por festival(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/13) | Sebastián Oliveto |
+| 12 | Ranking de unidades de venta por facturación de pedidos(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/13) | Sebastián Oliveto |
+| 13 | Reporte plato estrella(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/14) | Sebastián Oliveto |
+| 14 | Reporte de venta por festival(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/17) | Sebastián Oliveto |
+| 15 | Reporte mayor canon(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/18) | Sebastián Oliveto |
+| 16 | Apertura y cierre de caja(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/23) | Sebastián Oliveto |
+| 17 | Activar y desactivar platos(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/24) | Sebastián Oliveto |
+| 18 | Activar y desactivar empleados(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/25) | Sebastián Oliveto |
+| 19 | Rentabilidad neta entre fechas(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/30) | Sebastián Oliveto |
+| 20 | Ticket de pedido en PDF(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/31) | Sebastián Oliveto |
+| 21 | Alta de plato(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/7) | Matías Torres de Lima |
+| 22 | Perfil de usuario(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/28) | Matías Torres de Lima |
+| 23 | Cambio de contraseña(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/28) | Matías Torres de Lima |
+| 24 | Recuperación de contraseña(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/29) | Matías Torres de Lima |
+| 25 | Filtrar empleado activo(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/33) | Matías Torres de Lima |
 ---
 
 ## 👥 Integrantes
