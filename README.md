@@ -285,7 +285,7 @@ La aplicación usa `spring.jpa.hibernate.ddl-auto=create-drop` y carga automáti
 |------------|:------------:|---------------|
 | **Patricio Anrrique** | 1 – 8 | Festivales, unidades de venta, empleados, liquidaciones, perfil y modo oscuro. |
 | **Sebastián Oliveto** | 9 – 20 | Pedidos, caja, reportes, rankings, rentabilidad y tickets PDF. |
-| **Matías Torres de Lima** | 21 – 24 | Platos, perfil de usuario, cambio y recuperación de contraseña. |
+| **Matías Torres de Lima** | 21 – 25 | Platos, perfil de usuario, cambio y recuperación de contraseña. |
 
 ---
 
