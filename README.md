@@ -252,7 +252,7 @@ La aplicación usa `spring.jpa.hibernate.ddl-auto=create-drop` y carga automáti
 
 | N.º | Caso de uso | Integrante |
 |:---:|-------------|------------|
-| 1 | Visualización de festivales en la página de inicio | Patricio Anrrique |
+| 1 | Visualización de festivales en la página de inicio(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/3) | Patricio Anrrique |
 | 2 | Registro de unidad de venta con responsable | Patricio Anrrique |
 | 3 | Alta de empleado con envío de mail | Patricio Anrrique |
 | 4 | Ver liquidación de sueldo | Patricio Anrrique |
