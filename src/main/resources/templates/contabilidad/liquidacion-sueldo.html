@@ -23,7 +23,12 @@
             </p>
         </div>
 
-        <a th:href="@{/home}" class="btn btn-back">
+        <a sec:authorize="hasRole('RESPONSABLE')"
+           th:href="@{/responsable/home}" class="btn btn-back">
+            ← Volver al inicio
+        </a>
+        <a sec:authorize="!hasRole('RESPONSABLE')"
+           th:href="@{/home}" class="btn btn-back">
             ← Volver al inicio
         </a>
     </header>
@@ -40,6 +45,15 @@
         <div class="empty" th:if="${#lists.isEmpty(liquidaciones)}">
             No hay liquidaciones disponibles para esta unidad de venta.
         </div>
+
+        <form sec:authorize="hasRole('RESPONSABLE')"
+              th:action="@{/contabilidad/liquidacion/generar-unidad}"
+              method="post">
+            <input type="hidden" name="idUnidad" th:value="${idUnidad}">
+            <button type="submit" class="accion-btn">
+                Generar liquidaciones
+            </button>
+        </form>
 
         <div class="table-wrapper"
              th:if="${!#lists.isEmpty(liquidaciones)}">
