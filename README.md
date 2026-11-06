@@ -1,4 +1,4 @@
-# 🍽️ Epicentro Gourmet
+# Epicentro Gourmet
 
 **Sistema de gestión de festivales gastronómicos**
 
@@ -14,7 +14,7 @@
 
 ---
 
-## 📖 Descripción
+## Descripción
 
 **Epicentro Gourmet** es una aplicación web para la gestión integral de festivales gastronómicos. Centraliza la administración de festivales, unidades de venta, empleados, platos, pedidos, caja y liquidaciones de sueldo en un único sistema con distintos niveles de acceso.
 
@@ -23,16 +23,16 @@
 
 ---
 
-## ✨ Características principales
+## Características principales
 
-### 🔐 Autenticación y seguridad
+### Autenticación y seguridad
 - Inicio de sesión con Spring Security y control de acceso por roles.
 - Roles diferenciados: administrador, responsable y empleados (cajeros y personal de cocina).
 - Recuperación de contraseña mediante enlace temporal enviado por correo.
 - Cambio de contraseña desde el perfil del usuario.
 - Edición de datos personales para responsables y staff.
 
-### 🎪 Festivales y unidades de venta
+### Festivales y unidades de venta
 - Visualización de los festivales disponibles en la página de inicio.
 - Registro de unidades de venta con asignación de un responsable.
 - Soporte para food trucks y puestos desarmables.
@@ -41,28 +41,28 @@
 - Reporte de unidades con mayor canon.
 - Cálculo de rentabilidad neta, general y entre fechas.
 
-### 👥 Gestión de empleados
+### Gestión de empleados
 - Alta de empleados con envío de credenciales por correo.
 - Listado y filtrado de empleados.
 - Activación y desactivación de empleados.
 - Historial de empleados y asignaciones a unidades de venta.
 
-### 🍴 Gestión de platos
+### Gestión de platos
 - Alta de platos con precio, costo y unidad de venta.
 - Activación y desactivación de platos.
 - Reporte de plato estrella.
 
-### 🧾 Pedidos
+### Pedidos
 - Registro de pedidos con validación de la unidad de venta y de la caja abierta.
 - Listado paginado de pedidos por unidad de venta.
 - Generación y descarga del ticket/comanda del pedido en PDF.
 
-### 💰 Caja
+### Caja
 - Apertura y cierre de caja exclusivo para cajeros.
 - Registro del total declarado al cierre.
 - Cálculo automático del total del sistema y de la diferencia de caja.
 
-### 📊 Contabilidad y reportes
+### Contabilidad y reportes
 - Cálculo de liquidaciones de sueldo.
 - Generación del recibo de sueldo en PDF.
 - Envío de liquidaciones por correo electrónico.
@@ -70,14 +70,14 @@
 - Ranking de unidades de venta por facturación.
 - Reportes de rentabilidad y mayor canon.
 
-### 🎨 Interfaz
+### Interfaz
 - Vistas server-side con Thymeleaf.
 - Diseño responsive.
 - Modo claro y modo oscuro.
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+## Tecnologías utilizadas
 
 | Categoría | Tecnología |
 |-----------|------------|
@@ -96,7 +96,7 @@
 
 ---
 
-## 🧱 Estructura del proyecto
+## Estructura del proyecto
 
 ```text
 src/main/java/com/unla/hito2
@@ -113,10 +113,13 @@ src/main/resources
 ├── data.sql       # Datos iniciales
 └── pedidos.sql    # Pedidos de prueba
 ```
-
 ---
 
-## ✅ Requisitos previos
+## 🧩 Diagrama de clases
+![Diagrama de Clases](https://github.com/user-attachments/assets/a5f79203-9c2c-48f3-b137-c99e884581ba)
+[Ver diagrama de clases](https://github.com/user-attachments/assets/a5f79203-9c2c-48f3-b137-c99e884581ba)
+
+## Requisitos previos
 
 - **Java 17** o superior
 - **Git**
@@ -127,7 +130,7 @@ src/main/resources
 
 ---
 
-## 🚀 Instalación
+## Instalación
 
 ### 1. Clonar el repositorio
 
@@ -245,35 +248,35 @@ La aplicación usa `spring.jpa.hibernate.ddl-auto=create-drop` y carga automáti
 
 ---
 
-## 🧪 Casos de uso implementados
+## Casos de uso implementados
 
 | N.º | Caso de uso | Integrante |
 |:---:|-------------|------------|
-| 1 | Visualización de festivales en la página de inicio | Patricio Anrrique |
-| 2 | Registro de unidad de venta con responsable | Patricio Anrrique |
-| 3 | Alta de empleado con envío de mail | Patricio Anrrique |
-| 4 | Ver liquidación de sueldo | Patricio Anrrique |
-| 5 | Calcular liquidación de sueldo y recibo en PDF | Patricio Anrrique |
-| 6 | Recibir liquidación por mail | Patricio Anrrique |
-| 7 | Editar perfil de usuario para Responsable y Staff | Patricio Anrrique |
-| 8 | Modo oscuro | Patricio Anrrique |
-| 9 | Alta de pedido | Sebastián Oliveto |
-| 10 | Vista de reporte para el Administrador | Sebastián Oliveto |
-| 11 | Listar unidades de venta por festival | Sebastián Oliveto |
-| 12 | Ranking de unidades de venta por facturación de pedidos | Sebastián Oliveto |
-| 13 | Reporte plato estrella | Sebastián Oliveto |
-| 14 | Reporte de venta por festival | Sebastián Oliveto |
-| 15 | Reporte mayor canon | Sebastián Oliveto |
-| 16 | Apertura y cierre de caja | Sebastián Oliveto |
-| 17 | Activar y desactivar platos | Sebastián Oliveto |
-| 18 | Activar y desactivar empleados | Sebastián Oliveto |
-| 19 | Rentabilidad neta entre fechas | Sebastián Oliveto |
-| 20 | Ticket de pedido en PDF | Sebastián Oliveto |
-| 21 | Alta de plato | Matías Torres de Lima |
-| 22 | Perfil de usuario | Matías Torres de Lima |
-| 23 | Cambio de contraseña | Matías Torres de Lima |
-| 24 | Recuperación de contraseña | Matías Torres de Lima |
-
+| 1 | Visualización de festivales en la página de inicio(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/3) | Patricio Anrrique |
+| 2 | Registro de unidad de venta con responsable(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/3) | Patricio Anrrique |
+| 3 | Alta de empleado con envío de mail(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/4) | Patricio Anrrique |
+| 4 | Ver liquidación de sueldo(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/8) | Patricio Anrrique |
+| 5 | Calcular liquidación de sueldo y recibo en PDF(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/20)(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/26) | Patricio Anrrique |
+| 6 | Recibir liquidación por mail(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/27) | Patricio Anrrique |
+| 7 | Editar perfil de usuario para Responsable y Staff(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/32) | Patricio Anrrique |
+| 8 | Modo oscuro(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/32) | Patricio Anrrique |
+| 9 | Alta de pedido(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/9) | Sebastián Oliveto |
+| 10 | Vista de reporte para el Administrador(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/12) | Sebastián Oliveto |
+| 11 | Listar unidades de venta por festival(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/13) | Sebastián Oliveto |
+| 12 | Ranking de unidades de venta por facturación de pedidos(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/13) | Sebastián Oliveto |
+| 13 | Reporte plato estrella(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/14) | Sebastián Oliveto |
+| 14 | Reporte de venta por festival(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/17) | Sebastián Oliveto |
+| 15 | Reporte mayor canon(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/18) | Sebastián Oliveto |
+| 16 | Apertura y cierre de caja(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/23) | Sebastián Oliveto |
+| 17 | Activar y desactivar platos(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/24) | Sebastián Oliveto |
+| 18 | Activar y desactivar empleados(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/25) | Sebastián Oliveto |
+| 19 | Rentabilidad neta entre fechas(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/30) | Sebastián Oliveto |
+| 20 | Ticket de pedido en PDF(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/31) | Sebastián Oliveto |
+| 21 | Alta de plato(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/7) | Matías Torres de Lima |
+| 22 | Perfil de usuario(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/28) | Matías Torres de Lima |
+| 23 | Cambio de contraseña(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/28) | Matías Torres de Lima |
+| 24 | Recuperación de contraseña(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/29) | Matías Torres de Lima |
+| 25 | Filtrar empleado activo(https://github.com/sOliveto93/TPGrupalHito2Grupo06/pull/33) | Matías Torres de Lima |
 ---
 
 ## 👥 Integrantes
@@ -282,16 +285,10 @@ La aplicación usa `spring.jpa.hibernate.ddl-auto=create-drop` y carga automáti
 |------------|:------------:|---------------|
 | **Patricio Anrrique** | 1 – 8 | Festivales, unidades de venta, empleados, liquidaciones, perfil y modo oscuro. |
 | **Sebastián Oliveto** | 9 – 20 | Pedidos, caja, reportes, rankings, rentabilidad y tickets PDF. |
-| **Matías Torres de Lima** | 21 – 24 | Platos, perfil de usuario, cambio y recuperación de contraseña. |
+| **Matías Torres de Lima** | 21 – 25 | Platos, perfil de usuario, cambio y recuperación de contraseña. |
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 Proyecto académico desarrollado para la materia **Objetos 2** de la **Universidad Nacional de Lanús (UNLa)**.
-
----
-
-## 📌 Estado del proyecto
-
-**Hito 2 — En desarrollo.**
